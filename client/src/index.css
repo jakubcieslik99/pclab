@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*-----CONFIG-----*/
+* {
+  @apply box-border m-0 p-0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  color-scheme: light dark; /*Device dependent theme*/
+  /*color-scheme: light; /*Light theme*/
+  /*color-scheme: dark; /*Dark theme*/
+}
+html {
+  height: -webkit-fill-available;
+}
+body {
+  @apply flex flex-col h-screen bg-gray-800 mx-auto my-0 overflow-y-scroll;
+  height: -webkit-fill-available;
+}
+#root {
+  @apply flex-1 flex flex-col; /*Scrollable pages*/
+  /*@apply fixed top-0 h-full; /*Fixed pages*/
+}
+#root > main {
+  /*height: calc(100% - 0px); /*Stretched content minus header height*/
+  /*height: calc(100% - 0px - 0px); /*Stretched content minus header & footer height*/
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/*-----COMPONENTS-----*/
+
+/*-----ELEMENTS-----*/
+.content {
+  @apply w-full h-full mx-auto xl:container;
+}
+
+/*-----BREAKPOINTS-----*/
+/*from sm*/
+@media (min-width: 640px) {
+}
+/*from md*/
+@media (min-width: 768px) {
+  #root > main {
+    /*height: calc(100% - 0px); /*Stretched content minus header height*/
+    /*height: calc(100% - 0px - 0px); /*Stretched content minus header & footer height*/
+  }
+}
+/*from lg*/
+@media (min-width: 1024px) {
+}
+/*from xl*/
+@media (min-width: 1280px) {
+}
