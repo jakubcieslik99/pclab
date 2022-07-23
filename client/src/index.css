@@ -40,7 +40,7 @@ body {
 
 /*-----ELEMENTS-----*/
 .content {
-  @apply w-full h-full mx-auto xl:container;
+  @apply w-full mx-auto px-3 sm:px-4 xl:container;
 }
 
 /*-----BREAKPOINTS-----*/
@@ -50,6 +50,7 @@ body {
 /*from md*/
 @media (min-width: 768px) {
   #root > main {
+    @apply flex-1 flex flex-col;
     /*height: calc(100% - 0px); /*Stretched content minus header height*/
     /*height: calc(100% - 0px - 0px); /*Stretched content minus header & footer height*/
   }
