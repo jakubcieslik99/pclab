@@ -20,14 +20,15 @@ html {
   height: -webkit-fill-available;
 }
 body {
-  @apply flex flex-col h-screen bg-gray-800 mx-auto my-0 overflow-y-scroll;
+  @apply flex flex-col h-screen mx-auto my-0 overflow-y-scroll gradient-body;
   height: -webkit-fill-available;
 }
 #root {
   @apply flex-1 flex flex-col; /*Scrollable pages*/
-  /*@apply fixed top-0 h-full; /*Fixed pages*/
+  /*@apply fixed top-0 w-full h-full; /*Fixed pages*/
 }
 #root > main {
+  /*For fixed pages*/
   /*height: calc(100% - 0px); /*Stretched content minus header height*/
   /*height: calc(100% - 0px - 0px); /*Stretched content minus header & footer height*/
 }
@@ -36,9 +37,30 @@ body {
   overflow: hidden;
 }
 
+.gradient-body {
+  background: linear-gradient(100deg, #051b41 0%, #301642 60%, #850b45 100%);
+}
+.gradient-navbar {
+  background: linear-gradient(45deg, #051b41 0%, #301642 66%, #850b45 100%), rgba(0, 0, 0, 0.2);
+  background-blend-mode: multiply;
+}
+.gradient-mobile-menu {
+  background: linear-gradient(280deg, #051b41 3%, #301642 32%, #850b45 97%), rgba(0, 0, 0, 0.2);
+  background-blend-mode: multiply;
+}
+
 /*-----COMPONENTS-----*/
 
 /*-----ELEMENTS-----*/
+.mobile-menu {
+  width: calc(100% - 16px);
+}
+.hero {
+  @apply w-full;
+  /*height: calc(100vh - 64px); /**/
+  height: calc(75vh - 48px); /**/
+  /*height: calc(50vh - 32px); /**/
+}
 .content {
   @apply w-full mx-auto px-3 sm:px-4 xl:container;
 }
@@ -50,9 +72,13 @@ body {
 /*from md*/
 @media (min-width: 768px) {
   #root > main {
-    @apply flex-1 flex flex-col;
+    /*For fixed pages*/
     /*height: calc(100% - 0px); /*Stretched content minus header height*/
     /*height: calc(100% - 0px - 0px); /*Stretched content minus header & footer height*/
+  }
+
+  .hero {
+    max-height: 512px;
   }
 }
 /*from lg*/
