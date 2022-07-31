@@ -20,12 +20,12 @@ html {
   height: -webkit-fill-available;
 }
 body {
-  @apply flex flex-col h-screen mx-auto my-0 overflow-y-scroll gradient-body;
+  @apply flex flex-col h-screen mx-auto my-0 overflow-y-scroll;
   height: -webkit-fill-available;
 }
 #root {
-  @apply flex-1 flex flex-col; /*Scrollable pages*/
-  /*@apply fixed top-0 w-full h-full; /*Fixed pages*/
+  @apply relative flex-1 flex flex-col gradient-root; /*Scrollable pages*/
+  /*@apply fixed top-0 w-full h-full gradient-root; /*Fixed pages*/
 }
 #root > main {
   /*For fixed pages*/
@@ -37,7 +37,7 @@ body {
   overflow: hidden;
 }
 
-.gradient-body {
+.gradient-root {
   background: linear-gradient(100deg, #051b41 0%, #301642 60%, #850b45 100%);
 }
 .gradient-navbar {
@@ -56,7 +56,7 @@ body {
   width: calc(100% - 16px);
 }
 .hero {
-  @apply w-full;
+  @apply flex items-center w-full;
   /*height: calc(100vh - 64px); /**/
   height: calc(75vh - 48px); /**/
   /*height: calc(50vh - 32px); /**/

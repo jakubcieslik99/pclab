@@ -4,8 +4,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        hero: "url('./assets/pattern-hero.png')",
-        test: "url('./assets/test.png')",
+        heropattern: "url('./assets/pattern-hero.png')",
       },
       colors: {
         'pclab-400': '#850b45',
