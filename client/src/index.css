@@ -26,6 +26,7 @@ body {
 #root {
   @apply relative flex-1 flex flex-col gradient-root; /*Scrollable pages*/
   /*@apply fixed top-0 w-full h-full gradient-root; /*Fixed pages*/
+  /*@apply mb-0; /*Footer visibility*/
 }
 #root > main {
   /*For fixed pages*/
@@ -46,6 +47,10 @@ body {
 }
 .gradient-mobile-menu {
   background: linear-gradient(280deg, #051b41 3%, #301642 32%, #850b45 97%), rgba(0, 0, 0, 0.2);
+  background-blend-mode: multiply;
+}
+.gradient-footer {
+  background: linear-gradient(85deg, #051b41 0%, #301642 44%, #850b45 100%), rgba(0, 0, 0, 0.2);
   background-blend-mode: multiply;
 }
 
@@ -71,6 +76,9 @@ body {
 }
 /*from md*/
 @media (min-width: 768px) {
+  #root {
+    @apply mb-14; /*Footer visibility*/
+  }
   #root > main {
     /*For fixed pages*/
     /*height: calc(100% - 0px); /*Stretched content minus header height*/

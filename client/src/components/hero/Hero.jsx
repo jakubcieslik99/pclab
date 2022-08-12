@@ -26,9 +26,9 @@ const Hero = () => {
               <span className="font-normal">jednej aplikacji</span>!
             </p>
             <h3 className="flex items-center justify-end mb-2 text-xl font-bold">
-              <BsCpuFill className="ml-1 mt-[1px]" />
-              <span className="mt-[2px] ml-1">PC</span>
-              <span className="mt-[2px] ml-[2px]">Lab</span>
+              <BsCpuFill className="ml-1" />
+              <span className="ml-1">PC</span>
+              <span className="ml-[2px]">Lab</span>
             </h3>
           </div>
         </div>
