@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
 import { BsCpuFill } from 'react-icons/bs'
-import { FaPlusCircle, FaGrinStars, FaComments, FaShoppingCart } from 'react-icons/fa'
+import { FaPlusCircle, FaGrinStars, FaComments, FaShoppingCart, FaCaretRight } from 'react-icons/fa'
 import Hero from '../components/hero/Hero'
+import Setup from '../components/setup/Setup'
 
 const HomeScreen = () => {
   return (
@@ -42,11 +44,40 @@ const HomeScreen = () => {
       </div>
 
       <div className="content">
-        <div>Najlepiej oceniane</div>
+        <div className="flex flex-col items-center mx-2 mb-7">
+          <Link to="/" className="flex items-center w-full mb-3 text-xl underline">
+            <FaCaretRight className="text-2xl" /> Najlepiej oceniane
+          </Link>
 
-        <div>Najczęściej kupowane</div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <Setup />
+            <Setup />
+            <Setup />
+            <Setup />
+          </div>
+        </div>
 
-        <div>Zobacz wszystkie</div>
+        <div className="flex flex-col items-center mx-2 mb-7">
+          <Link to="/" className="flex items-center w-full mb-3 text-xl underline">
+            <FaCaretRight className="text-2xl" /> Najczęściej kupowane
+          </Link>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <Setup />
+            <Setup />
+            <Setup />
+            <Setup />
+          </div>
+        </div>
+
+        <div className="flex justify-center mb-4 md:mb-6">
+          <Link
+            to="/store"
+            className="flex items-center justify-center h-12 p-1 text-white transition border border-white rounded-full w-44 drop-shadow-lg active:scale-95"
+          >
+            <div className="flex items-center justify-center w-full h-full rounded-full bg-pclab-500">Zobacz wszystkie</div>
+          </Link>
+        </div>
       </div>
     </main>
   )
