@@ -4,6 +4,11 @@ import Component from '../components/component/Component'
 import Comment from '../components/comment/Comment'
 
 const SetupScreen = () => {
+  const submitHandler = e => {
+    e.preventDefault()
+    console.log('submitHandler')
+  }
+
   return (
     <main className="flex-1">
       <div className="content">
@@ -57,7 +62,7 @@ const SetupScreen = () => {
           {false && <Component name="Dysk #3" />}
         </div>
 
-        <div className="mx-2 mb-4">
+        <div className="mx-2 mb-6">
           <h2 className="mb-[2px] text-xl font-bold">Opis:</h2>
 
           <div className="font-light">
@@ -70,7 +75,7 @@ const SetupScreen = () => {
           </div>
         </div>
 
-        <div className="mx-2 mb-4">
+        <div className="mx-2 mb-6">
           <h2 className="mb-[2px] text-xl font-bold">Podsumowanie:</h2>
 
           <div className="flex items-center gap-3">
@@ -82,22 +87,56 @@ const SetupScreen = () => {
               </div>
             </div>
             <div>
-              <button className="px-3 pt-[5px] pb-1 font-semibold text-pclab-600 bg-white rounded-xl transition active:scale-95 hover:bg-white/70">
+              <button
+                onClick={null}
+                className="px-3 pt-[5px] pb-1 font-semibold text-pclab-600 bg-white rounded-xl transition active:scale-95 hover:bg-white/70"
+              >
                 Kup teraz <FaCashRegister className="inline-flex ml-1" />
               </button>
             </div>
           </div>
         </div>
 
-        <div className="mx-2 mb-4 md:mb-6">
-          <h2 className="mb-[2px] text-xl font-bold">Komentarze:</h2>
+        <div className="mx-2 mb-20 md:mb-6">
+          <h2 className="mb-[5px] text-xl font-bold">Komentarze:</h2>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-[10px] mb-4">
             <Comment />
             <Comment />
             <Comment />
             <Comment />
           </div>
+
+          <form
+            onSubmit={submitHandler}
+            className="relative border rounded-xl border-white/[0.25] bg-white/[0.05] py-1 px-2 max-w-xl"
+          >
+            <textarea
+              rows="3"
+              name="comment"
+              placeholder="Dodaj komentarz..."
+              className="w-full bg-transparent resize-none outline-0 mt-[2px]"
+            />
+
+            <div className="flex items-center justify-between mb-[3px] gap-2">
+              <div className={`text-xs text-white/70 ${'visible'}`}>
+                Musisz się{' '}
+                <Link to="/login" className="underline">
+                  zalogować
+                </Link>
+                , aby dodać komentarz.
+              </div>
+
+              <button
+                type="submit"
+                disabled={true}
+                onClick={() => console.log('dupa')}
+                className="px-[12px] py-[6px] bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80 disabled:scale-100 disabled:bg-pclab-500/70 disabled:text-white/70"
+              >
+                Dodaj
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </main>

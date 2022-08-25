@@ -30,7 +30,7 @@ const Header = () => {
               <li>Zestawy</li>
             </Link>
 
-            <Link to={'/'} className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
+            <Link to="/compose" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
               <FaLaptopMedical />
               <li>Skomponuj</li>
             </Link>
@@ -99,7 +99,7 @@ const Header = () => {
           </Link>
 
           <Link
-            to={'/'}
+            to="/compose"
             onClick={() => setMenuIsOpen(false)}
             className="flex items-center p-3 transition-colors hover:bg-black/30"
           >

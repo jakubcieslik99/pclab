@@ -1,4 +1,4 @@
-import { FaLink } from 'react-icons/fa'
+import { FaLink, FaBoxOpen } from 'react-icons/fa'
 import noPhoto from '../../assets/no-photo.png'
 
 const Component = props => {
@@ -10,9 +10,14 @@ const Component = props => {
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2 mt-1">
-          <button className="w-[98px] px-0 pt-1 pb-[6px] text-sm border-2 border-white rounded-xl transition active:scale-95 hover:bg-white/10">
+          <a
+            href={'/'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-[98px] px-0 pt-1 pb-[6px] text-sm border-2 border-white rounded-xl transition active:scale-95 hover:bg-white/10 text-center"
+          >
             <FaLink className="inline-flex" /> Strona producenta
-          </button>
+          </a>
 
           <div>
             <div className="text-xs">Cena</div>
@@ -25,7 +30,12 @@ const Component = props => {
       </div>
 
       <div className="flex flex-col gap-[2px] flex-1 justify-center">
-        <h3 className="mx-2 mt-[5px] text-lg font-semibold truncate">{props.name}</h3>
+        <h3 className="mx-2 mt-[5px]  flex items-center gap-[5px]">
+          <div>
+            <FaBoxOpen />
+          </div>
+          <div className="text-lg font-semibold truncate">{props.name}</div>
+        </h3>
         <h4 className="mx-2 mb-[5px] text-lg leading-[1.45rem] break-all">
           {'OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO'}
         </h4>

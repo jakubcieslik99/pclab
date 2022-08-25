@@ -6,6 +6,7 @@ import Footer from './components/footer/Footer'
 import HomeScreen from './screens/HomeScreen'
 import StoreScreen from './screens/StoreScreen'
 import SetupScreen from './screens/SetupScreen'
+import ComposeScreen from './screens/ComposeScreen'
 
 const App = () => {
   const { ref: footerRef, inView: isFooterVisible } = useInView()
@@ -19,6 +20,8 @@ const App = () => {
         <Route path="/" element={<HomeScreen />} />
         <Route path="/store" element={<StoreScreen />} />
         <Route path="/setup/:id" element={<SetupScreen />} />
+        {/*RequireAuth*/}
+        <Route path="/compose" element={<ComposeScreen />} />
       </Routes>
 
       <Footer ref={footerRef} />
