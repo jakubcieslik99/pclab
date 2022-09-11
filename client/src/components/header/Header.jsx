@@ -32,7 +32,7 @@ const Header = () => {
 
             <Link to="/compose" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
               <FaLaptopMedical />
-              <li>Skomponuj</li>
+              <li>Stwórz</li>
             </Link>
 
             {false ? (
@@ -104,7 +104,7 @@ const Header = () => {
             className="flex items-center p-3 transition-colors hover:bg-black/30"
           >
             <FaLaptopMedical className="mr-2 text-xl" />
-            <li>Skomponuj</li>
+            <li>Stwórz</li>
           </Link>
 
           {false ? (

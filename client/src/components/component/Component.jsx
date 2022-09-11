@@ -3,7 +3,11 @@ import noPhoto from '../../assets/no-photo.png'
 
 const Component = props => {
   return (
-    <div className="rounded-xl border border-white/[0.25] overflow-hidden h-[229px] flex flex-col bg-white/[0.08]">
+    <div
+      className={`rounded-xl border border-white/[0.25] overflow-hidden flex flex-col bg-white/[0.08] ${
+        !props.composeButton ? 'h-[229px]' : 'h-auto'
+      }`}
+    >
       <div className="flex gap-3">
         <div className="aspect-[4/3] flex justify-center items-center max-w-[156px] rounded-br-xl border-r border-b border-white/[0.25] bg-white/[0.25] overflow-hidden">
           <img src={noPhoto} alt="No photo" className="object-contain" />
@@ -30,16 +34,47 @@ const Component = props => {
       </div>
 
       <div className="flex flex-col gap-[2px] flex-1 justify-center">
-        <h3 className="mx-2 mt-[5px]  flex items-center gap-[5px]">
+        <h3 className="mx-2 mt-[5px] flex items-center gap-[5px]">
           <div>
             <FaBoxOpen />
           </div>
           <div className="text-lg font-semibold truncate">{props.name}</div>
         </h3>
-        <h4 className="mx-2 mb-[5px] text-lg leading-[1.45rem] break-all">
+
+        <h4 className={`mx-2 mb-[5px] text-lg leading-[1.45rem] break-all`}>
           {'OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO'}
         </h4>
+
+        {props.composeButton && props.buttonClickHandler && (
+          <div className="-mt-[3px] mb-[10px] mx-2">
+            {
+              <div className="text-sm font-light">
+                Zgodn. z {'socketem procesora'}: <b>{'AM4'}</b>
+              </div>
+            }
+            {
+              <div className="text-sm font-light">
+                Zgodn. z {'typem pamięci RAM'}: <b>{'DDR4'}</b>
+              </div>
+            }
+          </div>
+        )}
       </div>
+
+      {props.composeButton && props.buttonClickHandler && (
+        <div className="mx-2 mb-2">
+          <button
+            className={`px-3 rounded-xl transition active:scale-95 ${
+              props.composeButton === 'select'
+                ? 'py-[2px] border-2 hover:bg-white/10'
+                : 'py-1 bg-pclab-400 hover:bg-pclab-400/70'
+            }`}
+            onClick={() => props.buttonClickHandler()}
+          >
+            {props.composeButton === 'select' ? 'Dodaj' : 'Usuń'}
+          </button>
+        </div>
+      )}
     </div>
   )
 }

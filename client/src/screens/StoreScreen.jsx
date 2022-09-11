@@ -39,7 +39,7 @@ const StoreScreen = () => {
           <h2 className="text-xl font-bold">ZNAJDŹ ZESTAW DLA SIEBIE</h2>
         </div>
 
-        <div className="grid gap-4 mx-2 mb-4 md:mb-6 md:grid-cols-6 lg:grid-cols-8">
+        <div className="grid gap-4 mx-2 mb-14 md:mb-6 md:grid-cols-6 lg:grid-cols-8">
           <div className="flex flex-col col-span-1 gap-2 mb-4 md:gap-5 md:col-span-2 md:mb-0 md:mr-3">
             <form onSubmit={searchingHandler}>
               <label htmlFor="searching" className="text-xs text-gray-400">
@@ -124,7 +124,7 @@ const StoreScreen = () => {
                 />
                 <button
                   type="submit"
-                  className="flex items-center justify-center flex-none ml-3 transition border-2 w-9 rounded-xl active:scale-90"
+                  className="flex items-center justify-center flex-none ml-3 transition border-2 w-9 rounded-xl hover:bg-white/10 active:scale-90"
                 >
                   <FaCaretRight className="text-2xl ml-[1px]" />
                 </button>

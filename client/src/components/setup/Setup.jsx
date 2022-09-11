@@ -65,7 +65,13 @@ const Setup = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-[2px] px-2 pt-1 pb-2 bg-white/[0.09]">
+      <div className="flex flex-col gap-[2px] px-2 pb-2 bg-white/[0.09]">
+        <div className="text-gray-300 truncate">
+          <span className="mr-2 font-semibold">Cena:</span>
+          <span className="mr-1 text-lg font-semibold">{'00000.00'}</span>
+          <span className="font-light">zł</span>
+        </div>
+
         <div className="text-gray-400 truncate">
           <span className="mr-2 font-semibold">Autor:</span>
           <Link to={`/user/${'2137'}`} className="underline">
