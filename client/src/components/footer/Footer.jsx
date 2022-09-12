@@ -5,7 +5,7 @@ const Footer = forwardRef((_props, ref) => {
   return (
     <footer ref={ref} className="relative h-[147.8px] p-4 -mb-[147.8px] gradient-footer -z-10 md:h-[87.8px] md:-mb-[87.8px]">
       <div className="flex flex-col items-center justify-center text-sm md:flex-row">
-        <p>Copyright © </p>
+        <p>Copyright © {new Date().getFullYear()}</p>
         <p className="hidden mx-3 font-extralight md:block">|</p>
         <p className="flex items-center my-[7px] text-xl font-bold md:text-base md:-my-[1px]">
           <BsCpuFill className="ml-1 mt-[1px]" />

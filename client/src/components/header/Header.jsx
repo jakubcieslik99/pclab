@@ -36,13 +36,16 @@ const Header = () => {
             </Link>
 
             {false ? (
-              <Link to={'/'} className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
+              <Link to="/login" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
                 <FaDoorOpen />
                 <li>Logowanie i rejestracja</li>
               </Link>
             ) : (
               <>
-                <Link to={'/'} className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
+                <Link
+                  to={`/profile/${'507f1f77bcf86cd799439011'}`}
+                  className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                >
                   <FaUserCircle />
                   <li>Konto</li>
                 </Link>
@@ -109,7 +112,7 @@ const Header = () => {
 
           {false ? (
             <Link
-              to={'/'}
+              to="/login"
               onClick={() => setMenuIsOpen(false)}
               className="flex items-center p-3 transition-colors hover:bg-black/30"
             >
@@ -119,7 +122,7 @@ const Header = () => {
           ) : (
             <>
               <Link
-                to={'/'}
+                to={`/profile/${'507f1f77bcf86cd799439011'}`}
                 onClick={() => setMenuIsOpen(false)}
                 className="flex items-center p-3 transition-colors hover:bg-black/30"
               >
