@@ -5,7 +5,7 @@ const Component = props => {
   return (
     <div
       className={`rounded-xl border border-white/[0.25] overflow-hidden flex flex-col bg-white/[0.08] ${
-        !props.composeButton ? 'h-[229px]' : 'h-auto'
+        !props.composeButton ? 'h-[277px]' : 'h-auto'
       }`}
     >
       <div className="flex gap-3">
@@ -34,31 +34,34 @@ const Component = props => {
       </div>
 
       <div className="flex flex-col gap-[2px] flex-1 justify-center">
-        <h3 className="mx-2 mt-[5px] flex items-center gap-[5px]">
+        <h3 className="px-2 pt-1 flex items-center gap-[5px]">
           <div>
             <FaBoxOpen />
           </div>
           <div className="text-lg font-semibold truncate">{props.name}</div>
         </h3>
 
-        <h4 className={`mx-2 mb-[5px] text-lg leading-[1.45rem] break-all`}>
+        <h4 className={`px-2 pb-[1px] text-lg leading-[1.39rem] break-all`}>
           {'OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO'}
         </h4>
 
-        {props.composeButton && props.buttonClickHandler && (
-          <div className="-mt-[3px] mb-[10px] mx-2">
-            {
-              <div className="text-sm font-light">
-                Zgodn. z {'socketem procesora'}: <b>{'AM4'}</b>
-              </div>
-            }
-            {
-              <div className="text-sm font-light">
-                Zgodn. z {'typem pamięci RAM'}: <b>{'DDR4'}</b>
-              </div>
-            }
-          </div>
-        )}
+        <div className="h-[54px] pb-[6px] px-2 flex flex-col justify-center">
+          {
+            <div className="text-xs font-light">
+              Zgodn. z {'typem obudowy'}: <span className="font-semibold">{'ITX i większe'}</span>
+            </div>
+          }
+          {
+            <div className="text-xs font-light">
+              Zgodn. z {'socketem procesora'}: <span className="font-semibold">{'AM4'}</span>
+            </div>
+          }
+          {
+            <div className="text-xs font-light">
+              Zgodn. z {'typem pamięci RAM'}: <span className="font-semibold">{'DDR4'}</span>
+            </div>
+          }
+        </div>
       </div>
 
       {props.composeButton && props.buttonClickHandler && (
