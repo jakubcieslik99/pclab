@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaCubes, FaHandPointer, FaSearch, FaCaretLeft, FaCaretRight } from 'react-icons/fa'
+import { FaCubes, FaHandPointer, FaCaretLeft, FaCaretRight, FaSearch, FaCube } from 'react-icons/fa'
 import { BsCpuFill } from 'react-icons/bs'
 import Component from '../components/component/Component'
 import Paginator from '../components/elements/Paginator'
@@ -130,11 +130,11 @@ const ComposeScreen = () => {
                     : ''}
                 </label>
 
-                {/*<div className="flex items-center justify-center gap-[6px] mt-5 mb-2">
-                  <span>Brak</span>
-                  <FaCube />
-                </div>/**/}
                 {<Component name="Obudowa" composeButton="delete" buttonClickHandler={() => console.log('delete')} /> /**/}
+                {/*<div className="flex items-center justify-center gap-[6px] mt-5 mb-2">
+                    <span>Brak</span>
+                    <FaCube />
+                  </div>/**/}
               </div>
             </div>
           )}
@@ -194,6 +194,10 @@ const ComposeScreen = () => {
                 <Component name="Dysk #3" />
               </div>
             )}
+            {/*<div className="flex items-center justify-center gap-[6px] mt-5 mb-2">
+                <span>Brak</span>
+                <FaCube />
+              </div>/**/}
 
             {step !== 8 && (
               <div className="flex justify-center">

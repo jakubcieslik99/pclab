@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BsCpuFill } from 'react-icons/bs'
+import { FaCubes } from 'react-icons/fa'
 import { FaPlusCircle, FaGrinStars, FaComments, FaShoppingCart, FaCaretRight } from 'react-icons/fa'
 import Hero from '../components/hero/Hero'
 import Setup from '../components/setup/Setup'
@@ -55,6 +56,10 @@ const HomeScreen = () => {
             <Setup />
             <Setup />
           </div>
+          {/*<div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
+              <span>Brak</span>
+              <FaCubes />
+            </div>/**/}
         </div>
 
         <div className="flex flex-col items-center mx-2 mb-7">
@@ -68,14 +73,18 @@ const HomeScreen = () => {
             <Setup />
             <Setup />
           </div>
+          {/*<div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
+              <span>Brak</span>
+              <FaCubes />
+            </div>/**/}
         </div>
 
         <div className="flex justify-center mb-4 md:mb-6">
           <Link
             to="/store"
-            className="flex items-center justify-center h-12 p-1 text-white transition border border-white rounded-full w-44 drop-shadow-lg active:scale-95"
+            className="flex items-center justify-center h-12 p-1 text-white transition border border-white rounded-full w-44 drop-shadow-lg active:scale-95 hover:bg-white/10"
           >
-            <div className="flex items-center justify-center w-full h-full rounded-full bg-pclab-500">Zobacz wszystkie</div>
+            <div className="flex items-center justify-center w-full h-full rounded-full">Zobacz wszystkie</div>
           </Link>
         </div>
       </div>

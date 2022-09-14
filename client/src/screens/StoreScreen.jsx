@@ -1,6 +1,6 @@
 import { useState, Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { FaSearch, FaAngleDown, FaCaretRight } from 'react-icons/fa'
+import { FaSearch, FaAngleDown, FaCaretRight, FaCubes } from 'react-icons/fa'
 import Setup from '../components/setup/Setup'
 import Paginator from '../components/elements/Paginator'
 
@@ -143,6 +143,10 @@ const StoreScreen = () => {
               <Setup />
               <Setup />
             </div>
+            {/*<div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
+                <span>Brak</span>
+                <FaCubes />
+              </div>/**/}
 
             <Paginator />
           </div>
