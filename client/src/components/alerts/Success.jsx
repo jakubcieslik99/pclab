@@ -1,9 +1,9 @@
 import { Transition } from '@headlessui/react'
 
-const Error = props => {
+const Success = props => {
   return (
     <Transition
-      className={`px-3 py-[3px] text-sm font-semibold text-red-600 bg-red-300 border-2 border-red-500 rounded-xl break-all leading-[1.12rem] ${
+      className={`px-3 py-[3px] text-sm font-semibold text-green-600 bg-green-300 border-2 border-green-500 rounded-xl break-all leading-[1.12rem] ${
         props.customStyle ? props.customStyle : ''
       }`}
       show={props.isOpen}
@@ -19,4 +19,4 @@ const Error = props => {
   )
 }
 
-export default Error
+export default Success

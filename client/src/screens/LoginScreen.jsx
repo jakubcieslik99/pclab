@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
+import ConfirmationModal from '../components/loginScreen/ConfirmationModal'
+import PasswordResetModal from '../components/loginScreen/PasswordResetModal'
 import Error from '../components/alerts/Error'
+import Success from '../components/alerts/Success'
 
 const LoginScreen = () => {
   const submitHandler = e => {
@@ -15,6 +18,9 @@ const LoginScreen = () => {
             <h1 className="text-3xl font-semibold">Logowanie</h1>
           </div>
 
+          <Error isOpen={true} message={'Test error'} />
+          <Success isOpen={true} message={'Test success'} />
+
           <div>
             <label htmlFor="loginEmail" className="text-sm">
               Podaj adres email:
@@ -24,10 +30,12 @@ const LoginScreen = () => {
               id="loginEmail"
               name="email"
               placeholder="Email"
-              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full"
+              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full focus:outline-none"
             />
 
-            <div className="flex flex-col gap-1 mt-[5px]">{/*<Error message="Test error" />*/}</div>
+            <div className="flex flex-col gap-1 mt-[5px]">
+              <Error isOpen={false} message={'Test error'} />
+            </div>
           </div>
 
           <div>
@@ -39,10 +47,12 @@ const LoginScreen = () => {
               id="loginPassword"
               name="password"
               placeholder="Hasło"
-              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full"
+              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full focus:outline-none"
             />
 
-            <div className="flex flex-col gap-1 mt-[5px]">{<Error message="Test error" />}</div>
+            <div className="flex flex-col gap-1 mt-[5px]">
+              <Error isOpen={true} message={'Test error'} />
+            </div>
           </div>
 
           <div className="flex justify-center mt-3">
@@ -55,7 +65,7 @@ const LoginScreen = () => {
           </div>
 
           <div className="flex justify-center mt-2">
-            <Link to="/login" className="text-sm font-light underline">
+            <Link to="/register" className="text-sm font-light underline">
               Nie masz konta? Zarejestruj się!
             </Link>
           </div>

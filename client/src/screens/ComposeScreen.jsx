@@ -98,7 +98,7 @@ const ComposeScreen = () => {
                     type="text"
                     name="searching"
                     placeholder="Szukaj"
-                    className="w-full py-1 pl-3 truncate bg-transparent border-2 pr-9 rounded-xl"
+                    className="w-full py-1 pl-3 truncate bg-transparent border-2 pr-9 rounded-xl focus:outline-none"
                     value={searching}
                     onChange={e => setSearching(e.target.value)}
                   />

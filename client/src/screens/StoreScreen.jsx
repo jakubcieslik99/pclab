@@ -51,7 +51,7 @@ const StoreScreen = () => {
                   type="text"
                   name="searching"
                   placeholder="Szukaj"
-                  className="w-full py-1 pl-3 truncate bg-transparent border-2 pr-9 rounded-xl"
+                  className="w-full py-1 pl-3 truncate bg-transparent border-2 pr-9 rounded-xl focus:outline-none"
                   value={searching}
                   onChange={e => setSearching(e.target.value)}
                 />
@@ -87,9 +87,9 @@ const StoreScreen = () => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <Listbox.Options className="absolute w-full overflow-hidden text-black bg-white cursor-pointer top-10 rounded-xl">
+                    <Listbox.Options className="absolute w-full overflow-hidden bg-gray-200 cursor-pointer text-pclab-600 top-10 rounded-xl">
                       {sortingOptions.map(option => (
-                        <Listbox.Option key={option.id} value={option} className="px-3 py-[6px] truncate hover:bg-black/30">
+                        <Listbox.Option key={option.id} value={option} className="px-3 py-[6px] truncate hover:bg-black/20">
                           {option.name}
                         </Listbox.Option>
                       ))}
@@ -109,7 +109,7 @@ const StoreScreen = () => {
                   type="number"
                   name="minPrice"
                   placeholder="0 zł"
-                  className="w-full px-3 py-1 truncate bg-transparent border-2 rounded-xl"
+                  className="w-full px-3 py-1 truncate bg-transparent border-2 rounded-xl focus:outline-none"
                   value={priceFiltering.minPrice}
                   onChange={e => setPriceFiltering({ ...priceFiltering, minPrice: e.target.value })}
                 />
@@ -118,7 +118,7 @@ const StoreScreen = () => {
                   type="number"
                   name="maxPrice"
                   placeholder="1000 zł"
-                  className="w-full px-3 py-1 truncate bg-transparent border-2 rounded-xl"
+                  className="w-full px-3 py-1 truncate bg-transparent border-2 rounded-xl focus:outline-none"
                   value={priceFiltering.maxPrice}
                   onChange={e => setPriceFiltering({ ...priceFiltering, maxPrice: e.target.value })}
                 />

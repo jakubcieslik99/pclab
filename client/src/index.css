@@ -17,16 +17,17 @@
   /*color-scheme: dark; /*Dark theme*/
 }
 html {
+  @apply overflow-x-hidden overflow-y-hidden;
   height: -webkit-fill-available;
 }
 body {
-  @apply flex flex-col h-screen mx-auto my-0 overflow-y-scroll;
+  @apply flex flex-col h-screen mx-auto my-0 overflow-x-hidden overflow-y-scroll scroll-smooth;
   height: -webkit-fill-available;
 }
 #root {
   @apply relative flex-1 flex flex-col gradient-root; /*Scrollable pages*/
   /*@apply fixed top-0 w-full h-full gradient-root; /*Fixed pages*/
-  /*@apply mb-0; /*Footer visibility*/
+  /*@apply mb-0 md:mb-0; /*Footer visibility*/
 }
 #root > main {
   /*For fixed pages*/
@@ -36,6 +37,21 @@ body {
 
 .no-scroll {
   overflow: hidden;
+}
+
+.internal-scroll {
+  overflow-x: none;
+  overflow-y: overlay;
+}
+.internal-scroll::-webkit-scrollbar {
+  @apply w-[10px];
+}
+.internal-scroll::-webkit-scrollbar-track,
+.internal-scroll::-webkit-scrollbar-corner {
+  @apply bg-transparent;
+}
+.internal-scroll::-webkit-scrollbar-thumb {
+  @apply bg-gray-200/10 hover:bg-gray-200/20 rounded-full;
 }
 
 .gradient-root {

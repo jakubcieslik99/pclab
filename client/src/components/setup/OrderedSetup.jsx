@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import noPhoto from '../../assets/no-photo.png'
 
-const Setup = props => {
+const OrderedSetup = () => {
   return (
     <div className="overflow-hidden border border-white/[0.25] rounded-xl max-w-[479.5px]">
       <div className="grid grid-cols-3 bg-white/[0.25]">
@@ -26,7 +25,7 @@ const Setup = props => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-[2px] p-2 text-lg bg-white/[0.09]">
+      <div className="flex flex-col gap-[2px] p-2 bg-white/[0.09]">
         <div className="truncate">
           <span className="mr-2 font-semibold">CPU:</span>
           <span>
@@ -67,73 +66,27 @@ const Setup = props => {
 
       <div className="flex flex-col gap-[2px] px-2 pb-2 bg-white/[0.09]">
         <div className="text-gray-300 truncate">
-          <span className="mr-2 font-semibold">Cena:</span>
-          <span className="mr-1 text-lg font-semibold">{'00000.00'}</span>
-          <span className="font-light">zł</span>
+          <span className="mr-2 text-lg font-semibold">Cena:</span>
+          <span className="mr-1 text-xl font-semibold">{'00000.00'}</span>
+          <span className="text-lg font-light">zł</span>
         </div>
 
-        {!props.setButton && (
-          <div className="text-gray-400 truncate">
-            <span className="mr-2 font-semibold">Autor:</span>
-            <Link to={`/user/${'2137'}`} className="underline">
-              {'John Doe'}
-            </Link>
-          </div>
-        )}
         <div className="text-gray-400 truncate">
-          <span className="mr-2 font-semibold">Dodano:</span>
+          <span className="mr-2 font-semibold">Zakupiono:</span>
           <span className="italic">{'18.08.2022, 21:37'}</span>
         </div>
       </div>
 
-      <div className="flex justify-between p-2 bg-white/[0.25]">
-        {!props.setButton ? (
-          <div className="flex items-center gap-2">
-            <Link
-              to={`/setup/${'2137'}`}
-              className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
-            >
-              Pokaż
-            </Link>
-            <button
-              onClick={null}
-              className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
-            >
-              Zakup
-            </button>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <Link
-              to={`/compose?id=${'2137'}`}
-              className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
-            >
-              Edytuj
-            </Link>
-            <button
-              onClick={() => console.log('delete')}
-              className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
-            >
-              Usuń
-            </button>
-          </div>
-        )}
-
-        <div className="flex flex-wrap items-center justify-center gap-1 ml-2">
-          <span className="text-lg">{'0000'}</span>
-          {true ? (
-            <button onClick={null}>
-              <FaHeart className="text-2xl text-red-500" />
-            </button>
-          ) : (
-            <button onClick={null}>
-              <FaRegHeart className="text-2xl text-red-500" />
-            </button>
-          )}
-        </div>
+      <div className="flex p-2 bg-white/[0.25]">
+        <Link
+          to={`/order/${'21372137'}`}
+          className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
+        >
+          Szczegóły zamówienia
+        </Link>
       </div>
     </div>
   )
 }
 
-export default Setup
+export default OrderedSetup

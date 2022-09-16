@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Error from '../components/alerts/Error'
+import Success from '../components/alerts/Success'
 
 const RegisterScreen = () => {
   const submitHandler = e => {
@@ -15,6 +16,9 @@ const RegisterScreen = () => {
             <h1 className="text-3xl font-semibold">Rejestracja</h1>
           </div>
 
+          <Error isOpen={true} message={'Test error'} />
+          <Success isOpen={true} message={'Test success'} />
+
           <div>
             <label htmlFor="registerEmail" className="text-sm">
               Podaj adres email:
@@ -24,10 +28,12 @@ const RegisterScreen = () => {
               id="registerEmail"
               name="email"
               placeholder="Email"
-              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full"
+              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full focus:outline-none"
             />
 
-            <div className="flex flex-col gap-1 mt-[5px]">{/*<Error message="Test error" />*/}</div>
+            <div className="flex flex-col gap-1 mt-[5px]">
+              <Error isOpen={false} message={'Test error'} />
+            </div>
           </div>
 
           <div>
@@ -39,10 +45,12 @@ const RegisterScreen = () => {
               id="registerNick"
               name="nick"
               placeholder="Nick"
-              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full"
+              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full focus:outline-none"
             />
 
-            <div className="flex flex-col gap-1 mt-[5px]">{/*<Error message="Test error" />*/}</div>
+            <div className="flex flex-col gap-1 mt-[5px]">
+              <Error isOpen={false} message={'Test error'} />
+            </div>
           </div>
 
           <div>
@@ -54,10 +62,12 @@ const RegisterScreen = () => {
               id="registerPassword"
               name="password"
               placeholder="Hasło"
-              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full"
+              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full focus:outline-none"
             />
 
-            <div className="flex flex-col gap-1 mt-[5px]">{<Error message="Test error" />}</div>
+            <div className="flex flex-col gap-1 mt-[5px]">
+              <Error isOpen={true} message={'Test error'} />
+            </div>
           </div>
 
           <div>
@@ -69,21 +79,25 @@ const RegisterScreen = () => {
               id="registerRepassword"
               name="repassword"
               placeholder="Powtórz hasło"
-              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full"
+              className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 w-full focus:outline-none"
             />
 
-            <div className="flex flex-col gap-1 mt-[5px]">{/*<Error message="Test error" />*/}</div>
+            <div className="flex flex-col gap-1 mt-[5px]">
+              <Error isOpen={false} message={'Test error'} />
+            </div>
           </div>
 
           <div className="mt-1">
             <div className="flex items-center gap-[10px]">
               <input type="checkbox" id="registerTerms" name="terms" />
-              <label htmlFor="registerTerms" className="leading-tight cursor-pointer">
+              <label htmlFor="registerTerms" className="leading-tight text-gray-200 cursor-pointer">
                 Potwierdź zapoznanie się z regulaminem
               </label>
             </div>
 
-            <div className="flex flex-col gap-1 mt-[6px]">{<Error message="Test error" />}</div>
+            <div className="flex flex-col gap-1 mt-[5px]">
+              <Error isOpen={true} message={'Test error'} />
+            </div>
           </div>
 
           <div className="flex justify-center mt-3">
