@@ -3,7 +3,7 @@ import { Transition } from '@headlessui/react'
 const Success = props => {
   return (
     <Transition
-      className={`px-3 py-[3px] text-sm font-semibold text-green-600 bg-green-300 border-2 border-green-500 rounded-xl break-all leading-[1.12rem] ${
+      className={`px-3 pt-1 pb-[3px] text-sm font-semibold text-green-700 bg-green-300 border-2 border-green-600 rounded-xl break-words leading-[1.12rem] ${
         props.customStyle ? props.customStyle : ''
       }`}
       show={props.isOpen}

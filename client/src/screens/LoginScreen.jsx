@@ -1,10 +1,20 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ConfirmationModal from '../components/loginScreen/ConfirmationModal'
 import PasswordResetModal from '../components/loginScreen/PasswordResetModal'
+import PasswordSetModal from '../components/loginScreen/PasswordSetModal'
 import Error from '../components/alerts/Error'
 import Success from '../components/alerts/Success'
 
 const LoginScreen = () => {
+  const [setParam] = useState(false)
+
+  const [passwordResetModalIsOpen, setPasswordResetModalIsOpen] = useState(false)
+  const [passwordSetModalIsOpen, setPasswordSetModalIsOpen] = useState(false)
+
+  useEffect(() => {
+    setParam && setPasswordSetModalIsOpen(true)
+  }, [])
+
   const submitHandler = e => {
     e.preventDefault()
     console.log('submitHandler')
@@ -20,6 +30,7 @@ const LoginScreen = () => {
 
           <Error isOpen={true} message={'Test error'} />
           <Success isOpen={true} message={'Test success'} />
+          <Success isOpen={true} message={'Potwierdzenie konta przebiegło pomyślnie! Możesz się zalogować.'} />
 
           <div>
             <label htmlFor="loginEmail" className="text-sm">
@@ -71,11 +82,14 @@ const LoginScreen = () => {
           </div>
 
           <div className="flex justify-center mt-1">
-            <button onClick={null} className="text-sm font-light underline">
+            <button type="button" onClick={() => setPasswordResetModalIsOpen(true)} className="text-sm font-light underline">
               Nie pamiętasz hasła?
             </button>
           </div>
         </form>
+
+        <PasswordResetModal isOpen={passwordResetModalIsOpen} setIsOpen={setPasswordResetModalIsOpen} />
+        <PasswordSetModal isOpen={passwordSetModalIsOpen} setIsOpen={setPasswordSetModalIsOpen} />
       </div>
     </main>
   )

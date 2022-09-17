@@ -96,6 +96,7 @@ const Setup = props => {
               Pokaż
             </Link>
             <button
+              type="button"
               onClick={null}
               className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
             >
@@ -111,6 +112,7 @@ const Setup = props => {
               Edytuj
             </Link>
             <button
+              type="button"
               onClick={() => console.log('delete')}
               className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
             >
@@ -122,11 +124,11 @@ const Setup = props => {
         <div className="flex flex-wrap items-center justify-center gap-1 ml-2">
           <span className="text-lg">{'0000'}</span>
           {true ? (
-            <button onClick={null}>
+            <button type="button" onClick={null}>
               <FaHeart className="text-2xl text-red-500" />
             </button>
           ) : (
-            <button onClick={null}>
+            <button type="button" onClick={null}>
               <FaRegHeart className="text-2xl text-red-500" />
             </button>
           )}

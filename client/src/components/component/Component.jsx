@@ -67,6 +67,7 @@ const Component = props => {
       {props.composeButton && props.buttonClickHandler && (
         <div className="mx-2 mb-2">
           <button
+            type="button"
             className={`px-3 rounded-xl transition active:scale-95 ${
               props.composeButton === 'select'
                 ? 'py-[2px] border-2 hover:bg-white/10'

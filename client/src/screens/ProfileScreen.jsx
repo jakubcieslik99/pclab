@@ -26,6 +26,7 @@ const ProfileScreen = () => {
 
               <div className="flex gap-3">
                 <button
+                  type="button"
                   onClick={() => setCredentialsModalIsOpen(true)}
                   className="flex items-center justify-center px-2 py-1 text-sm transition border-2 rounded-xl active:scale-95 hover:bg-white/10"
                 >
@@ -34,6 +35,7 @@ const ProfileScreen = () => {
                 <CredentialsModal isOpen={credentialsModalIsOpen} setIsOpen={setCredentialsModalIsOpen} />
 
                 <button
+                  type="button"
                   onClick={() => setDeleteModalIsOpen(true)}
                   className="flex items-center justify-center px-2 py-1 text-sm transition border-2 rounded-xl active:scale-95 hover:bg-white/10"
                 >

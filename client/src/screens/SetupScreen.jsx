@@ -39,11 +39,11 @@ const SetupScreen = () => {
         <div className="flex items-center gap-1 mx-2 mb-4 sm:justify-center">
           <span className="text-lg">{'0000'}</span>
           {true ? (
-            <button onClick={null}>
+            <button type="button" onClick={null}>
               <FaHeart className="text-2xl text-red-500" />
             </button>
           ) : (
-            <button onClick={null}>
+            <button type="button" onClick={null}>
               <FaRegHeart className="text-2xl text-red-500" />
             </button>
           )}
@@ -88,6 +88,7 @@ const SetupScreen = () => {
             </div>
             <div>
               <button
+                type="button"
                 onClick={null}
                 className="px-3 pt-[5px] pb-1 font-semibold text-pclab-600 bg-white rounded-xl transition active:scale-95 hover:bg-white/70"
               >

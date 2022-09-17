@@ -68,6 +68,7 @@ const ComposeScreen = () => {
           <div className="flex gap-2">
             <button
               disabled={step === 1}
+              type="button"
               onClick={() => (step > 1 ? setStep(step - 1) : null)}
               className="flex items-center gap-1 pl-[11px] pr-4 py-[6px] transition bg-pclab-400 border-pclab-400 rounded-xl active:scale-95 hover:bg-pclab-400/70 disabled:scale-100 disabled:bg-pclab-400/60 disabled:text-white/70"
             >
@@ -76,6 +77,7 @@ const ComposeScreen = () => {
             </button>
             <button
               disabled={false}
+              type="button"
               onClick={() => (step < 8 ? setStep(step + 1) : console.log('Add/Save'))}
               className="flex items-center gap-1 py-1 pl-4 pr-[11px] transition border-2 rounded-xl active:scale-95 hover:bg-white/10 disabled:scale-100 disabled:bg-transparent disabled:border-white/60 disabled:text-white/70"
             >

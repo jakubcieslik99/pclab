@@ -58,7 +58,7 @@ const Header = () => {
             )}
           </ul>
 
-          <button className="relative w-9 h-9 md:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
+          <button type="button" className="relative w-9 h-9 md:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
             <FaBars
               className={`w-9 h-9 p-[6px] absolute inset-0 transition-nav ${
                 !menuIsOpen ? 'opacity-1 rotate-180' : 'opacity-0 -rotate-180'

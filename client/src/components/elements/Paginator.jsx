@@ -16,8 +16,8 @@ const Paginator = () => {
         elements.push(
           <button
             key={-2}
-            onClick={() => navigate(`/store`)}
             type="button"
+            onClick={() => navigate(`/store`)}
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleDoubleLeft />
@@ -27,8 +27,8 @@ const Paginator = () => {
         elements.push(
           <button
             key={-1}
-            onClick={() => navigate(`/store`)}
             type="button"
+            onClick={() => navigate(`/store`)}
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleLeft />
@@ -40,8 +40,8 @@ const Paginator = () => {
             <button
               disabled={i === parameters.page ? true : false}
               key={i}
-              onClick={() => navigate(`/store`)}
               type="button"
+              onClick={() => navigate(`/store`)}
               className={i === parameters.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
             >
               {i}
@@ -54,8 +54,8 @@ const Paginator = () => {
             <button
               disabled={i === parameters.page ? true : false}
               key={i}
-              onClick={() => navigate(`/store`)}
               type="button"
+              onClick={() => navigate(`/store`)}
               className={i === parameters.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
             >
               {i}
@@ -68,8 +68,8 @@ const Paginator = () => {
             <button
               disabled={i === parameters.page ? true : false}
               key={i}
-              onClick={() => navigate(`/store`)}
               type="button"
+              onClick={() => navigate(`/store`)}
               className={i === parameters.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
             >
               {i}
@@ -81,8 +81,8 @@ const Paginator = () => {
         elements.push(
           <button
             key={-3}
-            onClick={() => navigate(`/store`)}
             type="button"
+            onClick={() => navigate(`/store`)}
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleRight />
@@ -92,8 +92,8 @@ const Paginator = () => {
         elements.push(
           <button
             key={-4}
-            onClick={() => navigate(`/store`)}
             type="button"
+            onClick={() => navigate(`/store`)}
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleDoubleRight />
@@ -105,8 +105,8 @@ const Paginator = () => {
           <button
             disabled={i === parameters.page ? true : false}
             key={i}
-            onClick={() => navigate(`/store`)}
             type="button"
+            onClick={() => navigate(`/store`)}
             className={i === parameters.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
           >
             {i}

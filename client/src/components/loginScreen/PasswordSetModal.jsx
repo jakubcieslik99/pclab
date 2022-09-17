@@ -4,7 +4,7 @@ import { FaTimes } from 'react-icons/fa'
 import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
-const PasswordResetModal = props => {
+const PasswordSetModal = props => {
   const closeHandler = () => {
     props.setIsOpen(false)
   }
@@ -39,7 +39,7 @@ const PasswordResetModal = props => {
                 <form className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md">
                   {/*modal header*/}
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-pclab-600">
-                    <h2>Zresetuj hasło</h2>
+                    <h2>Ustaw hasło</h2>
                     <button
                       type="button"
                       onClick={closeHandler}
@@ -55,14 +55,14 @@ const PasswordResetModal = props => {
                     <Success isOpen={true} message={'Test success'} />
 
                     <div>
-                      <label htmlFor="resetEmail" className="text-sm">
-                        <div className="leading-[1.33] mb-[2px]">Podaj adres email powiązany z Twoim kontem w serwisie:</div>
+                      <label htmlFor="setPassword" className="text-sm">
+                        Podaj nowe hasło:
                       </label>
                       <input
-                        type="text"
-                        id="resetEmail"
-                        name="email"
-                        placeholder="Adres email"
+                        type="password"
+                        id="setPassword"
+                        name="password"
+                        placeholder="Nowe hasło"
                         className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-pclab-600 focus:ring-transparent"
                       />
 
@@ -71,8 +71,21 @@ const PasswordResetModal = props => {
                       </div>
                     </div>
 
-                    <div className="text-center leading-[1.33] mb-[2px]">
-                      Na podany adres email zostanie wysłany link do zresetowania hasła.
+                    <div>
+                      <label htmlFor="setNewPassword" className="text-sm">
+                        Powtórz nowe hasło:
+                      </label>
+                      <input
+                        type="password"
+                        id="profileNewPassword"
+                        name="setNewPassword"
+                        placeholder="Powtórz nowe hasło"
+                        className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-pclab-600 focus:ring-transparent"
+                      />
+
+                      <div className="flex flex-col gap-1 mt-[5px]">
+                        <Error isOpen={false} message={'Test error'} />
+                      </div>
                     </div>
                   </div>
 
@@ -82,7 +95,7 @@ const PasswordResetModal = props => {
                       type="submit"
                       className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
                     >
-                      Wyślij
+                      Zapisz
                     </button>
                     <button
                       type="button"
@@ -102,4 +115,4 @@ const PasswordResetModal = props => {
   )
 }
 
-export default PasswordResetModal
+export default PasswordSetModal
