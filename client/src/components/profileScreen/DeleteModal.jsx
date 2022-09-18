@@ -54,7 +54,7 @@ const DeleteModal = props => {
                     <Error isOpen={true} message={'Test error'} customStyle="text-left" />
                     <Success isOpen={true} message={'Test success'} customStyle="text-left" />
 
-                    <div>Czy na pewno chcesz całkowicie usunąć swoje konto w aplikacji PC Lab? </div>
+                    <div>Czy na pewno chcesz całkowicie usunąć swoje konto w aplikacji PCLab? </div>
                     <div>Zostaną usunięte Twoje wszystkie stworzone zestawy, wystawione oceny i dodane komentarze.</div>
                     <div>
                       Pamiętaj, ta operacja jest <span className="font-bold">nieodwracalna</span>!

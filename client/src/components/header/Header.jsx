@@ -1,146 +1,142 @@
-import { useState } from 'react'
+import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { Transition } from '@headlessui/react'
+import { Transition, Menu } from '@headlessui/react'
 import { FaHome, FaBoxes, FaLaptopMedical, FaUserCircle, FaDoorOpen, FaBars, FaCaretDown } from 'react-icons/fa'
 import { BsCpuFill } from 'react-icons/bs'
 
 const Header = () => {
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
-
   return (
     <header className="sticky top-0 z-20 h-16 md:h-20">
-      <nav className="relative z-10 w-full h-16 shadow-lg md:h-20 gradient-navbar">
-        <div className="flex items-center justify-between h-full content top-">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center text-2xl font-bold drop-shadow-lg">
-              <BsCpuFill className="ml-1 mt-[3px]" />
-              <span className="mt-1 ml-1">PC</span>
-              <span className="mt-1 ml-[2px]">Lab</span>
-            </Link>
-          </div>
+      <Menu as="nav" className="relative z-10 w-full h-16 shadow-lg md:h-20 gradient-navbar">
+        {({ open }) => (
+          <>
+            <div className="flex items-center justify-between h-full content top-">
+              <div className="flex items-center">
+                <Link to="/" className="flex items-center text-2xl font-bold drop-shadow-lg">
+                  <BsCpuFill className="ml-1 mt-[3px]" />
+                  <span className="mt-1 ml-1">PC</span>
+                  <span className="mt-1 ml-[2px]">Lab</span>
+                </Link>
+              </div>
 
-          <ul className="hidden gap-1 md:flex">
-            <Link to="/" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
-              <FaHome />
-              <li>Strona główna</li>
-            </Link>
-
-            <Link to="store" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
-              <FaBoxes />
-              <li>Zestawy</li>
-            </Link>
-
-            <Link to="/compose" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
-              <FaLaptopMedical />
-              <li>Stwórz</li>
-            </Link>
-
-            {false ? (
-              <Link to="/login" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
-                <FaDoorOpen />
-                <li>Logowanie i rejestracja</li>
-              </Link>
-            ) : (
-              <>
-                <Link
-                  to={`/profile/${'507f1f77bcf86cd799439011'}`}
-                  className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
-                >
-                  <FaUserCircle />
-                  <li>Konto</li>
+              <ul className="hidden gap-1 md:flex">
+                <Link to="/" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
+                  <FaHome />
+                  <li>Strona główna</li>
                 </Link>
 
-                <div className="flex flex-col items-center justify-center px-2 py-1 transition cursor-pointer active:scale-95">
-                  <FaDoorOpen />
-                  <li>Wyloguj się</li>
-                </div>
-              </>
-            )}
-          </ul>
+                <Link to="store" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
+                  <FaBoxes />
+                  <li>Zestawy</li>
+                </Link>
 
-          <button type="button" className="relative w-9 h-9 md:hidden" onClick={() => setMenuIsOpen(!menuIsOpen)}>
-            <FaBars
-              className={`w-9 h-9 p-[6px] absolute inset-0 transition-nav ${
-                !menuIsOpen ? 'opacity-1 rotate-180' : 'opacity-0 -rotate-180'
-              }`}
-            />
-            <FaCaretDown
-              className={`w-9 h-9 absolute inset-0 transition-nav ${
-                !menuIsOpen ? 'opacity-0 rotate-90' : 'opacity-1 rotate-0'
-              }`}
-            />
-          </button>
-        </div>
-      </nav>
+                <Link
+                  to="/compose"
+                  className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                >
+                  <FaLaptopMedical />
+                  <li>Stwórz</li>
+                </Link>
 
-      <Transition
-        as="nav"
-        show={menuIsOpen}
-        className="absolute transition-transform -translate-x-1/2 rounded-lg verflow-hidden drop-shadow-lg left-1/2 top-16 md:hidden gradient-mobile-menu mobile-menu"
-        enterFrom="-translate-y-full"
-        enterTo="translate-y-2"
-        leaveFrom="translate-y-2"
-        leaveTo="-translate-y-full"
-      >
-        <ul>
-          <Link
-            to="/"
-            onClick={() => setMenuIsOpen(false)}
-            className="flex items-center p-3 transition-colors hover:bg-black/30"
-          >
-            <FaHome className="mr-2 text-xl" />
-            <li>Strona główna</li>
-          </Link>
+                {false ? (
+                  <Link
+                    to="/login"
+                    className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                  >
+                    <FaDoorOpen />
+                    <li>Logowanie i rejestracja</li>
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      to={`/profile/${'507f1f77bcf86cd799439011'}`}
+                      className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                    >
+                      <FaUserCircle />
+                      <li>Konto</li>
+                    </Link>
 
-          <Link
-            to="/store"
-            onClick={() => setMenuIsOpen(false)}
-            className="flex items-center p-3 transition-colors hover:bg-black/30"
-          >
-            <FaBoxes className="mr-2 text-xl" />
-            <li>Zestawy</li>
-          </Link>
+                    <div className="flex flex-col items-center justify-center px-2 py-1 transition cursor-pointer active:scale-95">
+                      <FaDoorOpen />
+                      <li>Wyloguj się</li>
+                    </div>
+                  </>
+                )}
+              </ul>
 
-          <Link
-            to="/compose"
-            onClick={() => setMenuIsOpen(false)}
-            className="flex items-center p-3 transition-colors hover:bg-black/30"
-          >
-            <FaLaptopMedical className="mr-2 text-xl" />
-            <li>Stwórz</li>
-          </Link>
+              <Menu.Button className="relative w-9 h-9 md:hidden focus:outline-none">
+                <FaBars
+                  className={`w-9 h-9 p-[6px] absolute inset-0 transition-nav ${
+                    !open ? 'opacity-1 rotate-180' : 'opacity-0 -rotate-180'
+                  }`}
+                />
+                <FaCaretDown
+                  className={`w-9 h-9 absolute inset-0 transition-nav ${
+                    !open ? 'opacity-0 rotate-90' : 'opacity-1 rotate-0'
+                  }`}
+                />
+              </Menu.Button>
+            </div>
 
-          {false ? (
-            <Link
-              to="/login"
-              onClick={() => setMenuIsOpen(false)}
-              className="flex items-center p-3 transition-colors hover:bg-black/30"
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
             >
-              <FaDoorOpen className="mr-2 text-xl" />
-              <li>Logowanie i rejestracja</li>
-            </Link>
-          ) : (
-            <>
-              <Link
-                to={`/profile/${'507f1f77bcf86cd799439011'}`}
-                onClick={() => setMenuIsOpen(false)}
-                className="flex items-center p-3 transition-colors hover:bg-black/30"
+              <Menu.Items
+                as="ul"
+                className="absolute mt-2 overflow-hidden -translate-x-1/2 rounded-lg left-1/2 gradient-mobile-menu mobile-menu focus:outline-none"
               >
-                <FaUserCircle className="mr-2 text-xl" />
-                <li>Konto</li>
-              </Link>
+                <Menu.Item as={Link} to="/" className="flex items-center p-3 transition-colors hover:bg-black/30">
+                  <FaHome className="mr-2 text-xl" />
+                  <li>Strona główna</li>
+                </Menu.Item>
 
-              <div
-                onClick={() => setMenuIsOpen(false)}
-                className="flex items-center p-3 transition-colors cursor-pointer hover:bg-black/30"
-              >
-                <FaDoorOpen className="mr-2 text-xl" />
-                <li>Wyloguj się</li>
-              </div>
-            </>
-          )}
-        </ul>
-      </Transition>
+                <Menu.Item as={Link} to="/store" className="flex items-center p-3 transition-colors hover:bg-black/30">
+                  <FaBoxes className="mr-2 text-xl" />
+                  <li>Zestawy</li>
+                </Menu.Item>
+
+                <Menu.Item as={Link} to="/compose" className="flex items-center p-3 transition-colors hover:bg-black/30">
+                  <FaLaptopMedical className="mr-2 text-xl" />
+                  <li>Stwórz</li>
+                </Menu.Item>
+
+                {false ? (
+                  <Menu.Item as={Link} to="/login" className="flex items-center p-3 transition-colors hover:bg-black/30">
+                    <FaDoorOpen className="mr-2 text-xl" />
+                    <li>Logowanie i rejestracja</li>
+                  </Menu.Item>
+                ) : (
+                  <>
+                    <Menu.Item
+                      as={Link}
+                      to={`/profile/${'507f1f77bcf86cd799439011'}`}
+                      className="flex items-center p-3 transition-colors hover:bg-black/30"
+                    >
+                      <FaUserCircle className="mr-2 text-xl" />
+                      <li>Konto</li>
+                    </Menu.Item>
+
+                    <Menu.Item
+                      as="button"
+                      type="button"
+                      className="flex items-center w-full p-3 transition-colors hover:bg-black/30"
+                    >
+                      <FaDoorOpen className="mr-2 text-xl" />
+                      <li>Wyloguj się</li>
+                    </Menu.Item>
+                  </>
+                )}
+              </Menu.Items>
+            </Transition>
+          </>
+        )}
+      </Menu>
     </header>
   )
 }
