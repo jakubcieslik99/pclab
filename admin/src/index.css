@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*-----CONFIG-----*/
+* {
+  @apply box-border m-0 p-0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  color-scheme: light dark; /*Device dependent theme*/
+  /*color-scheme: light; /*Light theme*/
+  /*color-scheme: dark; /*Dark theme*/
+}
+html {
+  @apply overflow-x-hidden overflow-y-hidden;
+  height: -webkit-fill-available;
+}
+body {
+  @apply flex flex-col h-screen mx-auto my-0 overflow-x-hidden overflow-y-scroll scroll-smooth;
+  height: -webkit-fill-available;
+}
+#root {
+  @apply relative flex-1 flex flex-col; /*Scrollable pages*/
+  /*@apply fixed top-0 w-full h-full; /*Fixed pages*/
+  /*@apply mb-0 md:mb-0; /*Footer visibility*/
+}
+#root > main {
+  /*For fixed pages*/
+  /*height: calc(100% - 0px); /*Stretched content minus header height*/
+  /*height: calc(100% - 0px - 0px); /*Stretched content minus header & footer height*/
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.internal-scroll {
+  overflow-x: none;
+  overflow-y: overlay;
+}
+.internal-scroll::-webkit-scrollbar {
+  @apply w-[10px];
+}
+.internal-scroll::-webkit-scrollbar-track,
+.internal-scroll::-webkit-scrollbar-corner {
+  @apply bg-transparent;
+}
+.internal-scroll::-webkit-scrollbar-thumb {
+  @apply bg-gray-200/10 hover:bg-gray-200/20 rounded-full;
+}
+
+/*-----COMPONENTS-----*/
+
+/*-----ELEMENTS-----*/
+.content {
+  @apply w-full mx-auto px-3 sm:px-4 xl:container;
+}
+
+/*-----BREAKPOINTS-----*/
+/*from sm*/
+@media (min-width: 640px) {
+}
+/*from md*/
+@media (min-width: 768px) {
+  #root {
+    @apply mb-14; /*Footer visibility*/
+  }
+  #root > main {
+    /*For fixed pages*/
+    /*height: calc(100% - 0px); /*Stretched content minus header height*/
+    /*height: calc(100% - 0px - 0px); /*Stretched content minus header & footer height*/
+  }
+}
+/*from lg*/
+@media (min-width: 1024px) {
+}
+/*from xl*/
+@media (min-width: 1280px) {
+}
