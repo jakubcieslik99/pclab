@@ -90,23 +90,22 @@ const Setup = props => {
         {!props.setButton ? (
           <div className="flex items-center gap-2">
             <Link
-              to={`/setup/${'2137'}`}
+              to={`/setup/${'21372137'}`}
               className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
             >
               Pokaż
             </Link>
-            <button
-              type="button"
-              onClick={null}
+            <Link
+              to={`/placeorder/${'21372137'}`}
               className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
             >
               Zakup
-            </button>
+            </Link>
           </div>
         ) : (
           <div className="flex items-center gap-2">
             <Link
-              to={`/compose?id=${'2137'}`}
+              to={`/compose?id=${'21372137'}`}
               className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
             >
               Edytuj

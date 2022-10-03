@@ -5,11 +5,15 @@ const Component = props => {
   return (
     <div
       className={`rounded-xl border border-white/[0.25] overflow-hidden flex flex-col bg-white/[0.08] ${
-        !props.composeButton ? 'h-[277px]' : 'h-auto'
+        props.order && !props.composeButton ? 'h-[256px]' : !props.composeButton ? 'h-[277px]' : 'h-auto'
       }`}
     >
       <div className="flex gap-3">
-        <div className="aspect-[4/3] flex justify-center items-center max-w-[156px] rounded-br-xl border-r border-b border-white/[0.25] bg-white/[0.25] overflow-hidden">
+        <div
+          className={`aspect-[4/3] flex justify-center items-center ${
+            props.order ? 'max-w-[134px]' : 'max-w-[156px]'
+          } rounded-br-xl border-r border-b border-white/[0.25] bg-white/[0.25] overflow-hidden`}
+        >
           <img src={noPhoto} alt="No photo" className="object-contain" />
         </div>
 
@@ -18,7 +22,9 @@ const Component = props => {
             href={'/'}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[98px] px-0 pt-1 pb-[6px] text-sm border-2 border-white rounded-xl transition active:scale-95 hover:bg-white/10 text-center"
+            className={`w-[98px] px-0 ${
+              props.order ? 'pt-[3px] pb-1 text-xs' : 'pt-1 pb-[6px] text-sm'
+            } border-2 border-white rounded-xl transition active:scale-95 hover:bg-white/10 text-center`}
           >
             <FaLink className="inline-flex" /> Strona producenta
           </a>
@@ -34,14 +40,16 @@ const Component = props => {
       </div>
 
       <div className="flex flex-col gap-[2px] flex-1 justify-center">
-        <h3 className="px-2 pt-1 flex items-center gap-[5px]">
+        <h3 className={`px-2 ${props.order ? 'pt-[2px]' : 'pt-1'} flex items-center gap-[5px]`}>
           <div>
             <FaBoxOpen />
           </div>
           <div className="text-lg font-semibold truncate">{props.name}</div>
         </h3>
 
-        <h4 className={`px-2 pb-[1px] text-lg leading-[1.39rem] break-all`}>
+        <h4
+          className={`px-2 pb-[1px] ${props.order ? 'text-base leading-[1.34rem]' : 'text-lg leading-[1.39rem]'} break-all`}
+        >
           {'OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO OOOOOOOOOO'}
         </h4>
 

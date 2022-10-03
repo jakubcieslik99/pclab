@@ -10,6 +10,8 @@ import RegisterScreen from './screens/RegisterScreen'
 import LoginScreen from './screens/LoginScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import ComposeScreen from './screens/ComposeScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
+import OrderScreen from './screens/OrderScreen'
 
 const App = () => {
   const { ref: footerRef, inView: isFooterVisible } = useInView()
@@ -32,6 +34,8 @@ const App = () => {
         <Route path="/profile/:id" element={<ProfileScreen />} />
         {/*RequireAuth*/}
         <Route path="/compose" element={<ComposeScreen />} />
+        <Route path="/placeorder/:id" element={<PlaceOrderScreen />} />
+        <Route path="/order/:id" element={<OrderScreen />} />
       </Routes>
 
       <Footer ref={footerRef} />
