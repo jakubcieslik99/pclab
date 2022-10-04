@@ -12,16 +12,20 @@ const PlaceOrderScreen = () => {
           {id && <h4 className="text-sm font-light">{id}</h4>}
         </div>
 
-        <div className="grid gap-4 mx-2 mb-4 sm:grid-cols-2 lg:grid-cols-3">
-          {true && <Component name="Obudowa" order />}
-          {true && <Component name="Procesor" order />}
-          {true && <Component name="Płyta główna" order />}
-          {true && <Component name="Pamięć RAM" order />}
-          {true && <Component name="Karta graficzna" order />}
-          {true && <Component name="Zasilacz" order />}
-          {true && <Component name="Dysk #1" order />}
-          {false && <Component name="Dysk #2" order />}
-          {false && <Component name="Dysk #3" order />}
+        <div className="mx-2 mb-6">
+          <h2 className="mb-[6px] text-xl font-bold">Komponenty:</h2>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {true && <Component name="Obudowa" order />}
+            {true && <Component name="Procesor" order />}
+            {true && <Component name="Płyta główna" order />}
+            {true && <Component name="Pamięć RAM" order />}
+            {true && <Component name="Karta graficzna" order />}
+            {true && <Component name="Zasilacz" order />}
+            {true && <Component name="Dysk #1" order />}
+            {false && <Component name="Dysk #2" order />}
+            {false && <Component name="Dysk #3" order />}
+          </div>
         </div>
 
         <div className="mx-2 mb-6">
