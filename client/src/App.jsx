@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { loadStripe } from '@stripe/stripe-js'
 import { useInView } from 'react-intersection-observer'
 import Header from './components/header/Header'
 import HeaderButton from './components/header/HeaderButton'
@@ -13,10 +14,11 @@ import ComposeScreen from './screens/ComposeScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
 
-const App = () => {
-  const { ref: footerRef, inView: isFooterVisible } = useInView()
+const stripePromise = loadStripe(import.meta.env.VITE_API_STRIPE)
 
+const App = () => {
   const location = window.location.href.substring(window.location.href.lastIndexOf('/'))
+  const { ref: footerRef, inView: isFooterVisible } = useInView()
 
   return (
     <BrowserRouter>
@@ -34,7 +36,7 @@ const App = () => {
         <Route path="/profile/:id" element={<ProfileScreen />} />
         {/*RequireAuth*/}
         <Route path="/compose" element={<ComposeScreen />} />
-        <Route path="/placeorder/:id" element={<PlaceOrderScreen />} />
+        <Route path="/placeorder/:id" element={<PlaceOrderScreen stripePromise={stripePromise} />} />
         <Route path="/order/:id" element={<OrderScreen />} />
       </Routes>
 
