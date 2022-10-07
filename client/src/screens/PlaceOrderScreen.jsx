@@ -11,7 +11,13 @@ const PlaceOrderScreen = props => {
   const stripeOptions = {
     clientSecret: 'pi_3LEYnSJtbJWEJlni0fCsj5Hr_secret_FJr5evFCIkDlPu2O9pvoI0oxQ',
     locale: 'pl',
+    fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap' }],
     appearance,
+  }
+
+  const submitHandler = e => {
+    e.preventDefault()
+    console.log('submitHandler')
   }
 
   return (
@@ -39,7 +45,7 @@ const PlaceOrderScreen = props => {
             </div>
           </div>
 
-          <form className="grid mx-2 mb-20 md:gap-6 md:grid-cols-5 md:mb-6">
+          <form onSubmit={submitHandler} className="grid mx-2 mb-20 md:gap-9 md:grid-cols-5 md:mb-6">
             <div className="mb-6 md:mb-0 md:col-span-3">
               <h2 className="mb-[5px] text-xl font-bold">Wysyłka:</h2>
 
@@ -240,13 +246,13 @@ const PlaceOrderScreen = props => {
               </div>
 
               <div>
-                <h2 className="mb-[2px] text-xl font-bold">Płatność:</h2>
+                <h2 className="mb-[5px] text-xl font-bold">Płatność:</h2>
 
                 <div>
                   <PaymentElement />
                   <button
                     type="submit"
-                    className="px-3 py-[6px] text-lg font-semibold border-2 rounded-xl transition active:scale-95 hover:bg-white/10"
+                    className="px-3 py-[6px] text-lg font-semibold border-2 rounded-xl transition active:scale-95 hover:bg-white/10 mt-4"
                   >
                     Zapłać
                   </button>

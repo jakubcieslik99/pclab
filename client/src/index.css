@@ -85,6 +85,10 @@ body {
 .content {
   @apply w-full mx-auto px-3 sm:px-4 xl:container;
 }
+option {
+  color: #000 !important;
+  background-color: red !important;
+}
 
 /*-----BREAKPOINTS-----*/
 /*from sm*/

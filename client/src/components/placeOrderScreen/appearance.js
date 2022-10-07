@@ -4,12 +4,31 @@ const appearance = {
     fontFamily: 'Poppins, sans-serif',
   },
   rules: {
-    '.Tab': {
-      border: '1px solid #E0E6EB',
-      boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 6px rgba(18, 42, 66, 0.02)',
-    },
     '.Label': {
       color: '#FFFFFF',
+      fontSize: '14px',
+    },
+    '.Input': {
+      color: '#FFFFFF',
+      border: '2px solid #FFFFFF',
+      borderRadius: '12px',
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      paddingTop: '11px',
+      paddingBottom: '11px',
+      paddingLeft: '12px',
+      paddingRight: '12px',
+    },
+    '.Input::placeholder': {
+      color: '#9CA3A6',
+    },
+    '.Input:focus': {
+      outline: 'none',
+    },
+    '.Input::selection': {
+      color: '#000',
+    },
+    '.RedirectText': {
+      color: '#9CA3A6',
     },
   },
 }
