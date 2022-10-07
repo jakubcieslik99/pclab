@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { Elements, PaymentElement } from '@stripe/react-stripe-js'
-import { FaCheckCircle } from 'react-icons/fa'
+import { FaTruck, FaCheckCircle, FaCashRegister } from 'react-icons/fa'
 import Component from '../components/component/Component'
 import Error from '../components/alerts/Error'
 import appearance from '../components/placeOrderScreen/appearance'
 
 const PlaceOrderScreen = props => {
-  const [id, setId] = useState('507f1f77bcf86cd799439011')
-
   const stripeOptions = {
     clientSecret: 'pi_3LEYnSJtbJWEJlni0fCsj5Hr_secret_FJr5evFCIkDlPu2O9pvoI0oxQ',
     locale: 'pl',
     fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap' }],
     appearance,
   }
+
+  const [id, setId] = useState('507f1f77bcf86cd799439011')
 
   const submitHandler = e => {
     e.preventDefault()
@@ -156,7 +156,7 @@ const PlaceOrderScreen = props => {
                   </div>
                 </div>
 
-                <div className="grid mb-6 md:gap-3 md:grid-cols-5">
+                <div className="grid mb-7 md:gap-3 md:grid-cols-5">
                   <div className="md:col-span-2">
                     <label htmlFor="placeOrderPostal" className="text-sm">
                       Podaj kod pocztowy*:
@@ -193,26 +193,46 @@ const PlaceOrderScreen = props => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-                  <button type="button" className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative">
-                    <p className="mb-1 text-sm truncate">Kurier DPD</p>
+                  <button
+                    type="button"
+                    onClick={null}
+                    className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative flex flex-col justify-center items-center"
+                  >
+                    <FaTruck />
+                    <p className="mt-[3px] mb-1 text-sm truncate">Kurier DPD</p>
                     <p className="text-xs">0000.00 PLN</p>
                     {true && <FaCheckCircle className="absolute -top-[1px] -right-[1px]" />}
                   </button>
 
-                  <button type="button" className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative">
-                    <p className="mb-1 text-sm">Kurier InPost</p>
+                  <button
+                    type="button"
+                    onClick={null}
+                    className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative flex flex-col justify-center items-center"
+                  >
+                    <FaTruck />
+                    <p className="mt-[3px] mb-1 text-sm">Kurier InPost</p>
                     <p className="text-xs">0000.00 PLN</p>
                     {true && <FaCheckCircle className="absolute -top-[1px] -right-[1px]" />}
                   </button>
 
-                  <button type="button" className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative">
-                    <p className="mb-1 text-sm">Kurier DPD</p>
+                  <button
+                    type="button"
+                    onClick={null}
+                    className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative flex flex-col justify-center items-center"
+                  >
+                    <FaTruck />
+                    <p className="mt-[3px] mb-1 text-sm">Kurier DPD</p>
                     <p className="text-xs">0000.00 PLN</p>
                     {true && <FaCheckCircle className="absolute -top-[1px] -right-[1px]" />}
                   </button>
 
-                  <button type="button" className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative">
-                    <p className="mb-1 text-sm">Kurier InPost</p>
+                  <button
+                    type="button"
+                    onClick={null}
+                    className="border-2 rounded-xl bg-white/[0.05] py-2 px-3 relative flex flex-col justify-center items-center"
+                  >
+                    <FaTruck />
+                    <p className="mt-[3px] mb-1 text-sm">Kurier InPost</p>
                     <p className="text-xs">0000.00 PLN</p>
                     {true && <FaCheckCircle className="absolute -top-[1px] -right-[1px]" />}
                   </button>
@@ -224,7 +244,7 @@ const PlaceOrderScreen = props => {
               <div className="mb-6">
                 <h2 className="mb-[3px] text-xl font-bold">Podsumowanie:</h2>
 
-                <div>
+                <div className="px-3 pb-[9px] pt-[10px] bg-[#412851] rounded-xl border border-[#725e7d] sm:max-w-[170px]">
                   <div className="text-xs text-white/80">Cena zestawu</div>
                   <div className="font-semibold text-white/80">
                     <span className="mr-1 text-lg">{'00000.00'}</span>
@@ -248,12 +268,13 @@ const PlaceOrderScreen = props => {
               <div>
                 <h2 className="mb-[5px] text-xl font-bold">Płatność:</h2>
 
-                <div>
+                <div className="px-3 pb-[13px] pt-[10px] bg-[#412851] rounded-xl border border-[#725e7d]">
                   <PaymentElement />
                   <button
                     type="submit"
-                    className="px-3 py-[6px] text-lg font-semibold border-2 rounded-xl transition active:scale-95 hover:bg-white/10 mt-4"
+                    className="flex justify-center items-center gap-2 px-3 mt-4 py-[6px] text-lg font-semibold border-2 rounded-xl transition active:scale-95 hover:bg-white/10"
                   >
+                    <FaCashRegister />
                     Zapłać
                   </button>
                 </div>
