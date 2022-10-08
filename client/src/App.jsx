@@ -36,8 +36,8 @@ const App = () => {
         <Route path="/profile/:id" element={<ProfileScreen />} />
         {/*RequireAuth*/}
         <Route path="/compose" element={<ComposeScreen />} />
-        <Route path="/placeorder/:id" element={<PlaceOrderScreen stripePromise={stripePromise} />} />
-        <Route path="/order/:id" element={<OrderScreen />} />
+        <Route path="/placeorder/:id" element={<PlaceOrderScreen />} />
+        <Route path="/order/:id" element={<OrderScreen stripePromise={stripePromise} />} />
       </Routes>
 
       <Footer ref={footerRef} />
