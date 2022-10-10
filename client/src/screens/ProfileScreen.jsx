@@ -6,6 +6,7 @@ import OrderedSetup from '../components/setup/OrderedSetup'
 import Setup from '../components/setup/Setup'
 
 const ProfileScreen = () => {
+  //variables
   const [logged] = useState(true)
 
   const [credentialsModalIsOpen, setCredentialsModalIsOpen] = useState(false)

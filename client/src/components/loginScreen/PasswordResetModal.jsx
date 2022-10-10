@@ -5,6 +5,7 @@ import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
 const PasswordResetModal = props => {
+  //handlers
   const closeHandler = () => {
     props.setIsOpen(false)
   }

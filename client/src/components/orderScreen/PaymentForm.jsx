@@ -3,11 +3,13 @@ import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 import { FaCashRegister } from 'react-icons/fa'
 
 const PaymentForm = () => {
+  //variables
   const [errorMessage, setErrorMessage] = useState(null)
 
   const stripe = useStripe()
   const elements = useElements()
 
+  //handlers
   const submitHandler = async e => {
     e.preventDefault()
 

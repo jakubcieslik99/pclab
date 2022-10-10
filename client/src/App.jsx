@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { loadStripe } from '@stripe/stripe-js'
 import { useInView } from 'react-intersection-observer'
+import ScrollTop from './components/universal/ScrollTop'
 import Header from './components/header/Header'
 import HeaderButton from './components/header/HeaderButton'
 import Footer from './components/footer/Footer'
@@ -27,6 +28,7 @@ const App = () => {
         <HeaderButton position={isFooterVisible ? 'absolute' : 'fixed'} />
       )}
 
+      <ScrollTop />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/store" element={<StoreScreen />} />

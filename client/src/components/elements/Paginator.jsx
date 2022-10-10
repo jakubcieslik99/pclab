@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from 'react-icons/fa'
 
 const Paginator = () => {
+  //variables
   const parameters = { page: 1, count: 500 }
 
   const navigate = useNavigate()

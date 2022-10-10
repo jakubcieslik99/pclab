@@ -3,6 +3,7 @@ import Error from '../components/alerts/Error'
 import Success from '../components/alerts/Success'
 
 const RegisterScreen = () => {
+  //handlers
   const submitHandler = e => {
     e.preventDefault()
     console.log('submitHandler')

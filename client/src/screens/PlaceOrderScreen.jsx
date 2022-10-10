@@ -4,8 +4,10 @@ import Component from '../components/component/Component'
 import Error from '../components/alerts/Error'
 
 const PlaceOrderScreen = () => {
+  //variables
   const [id, setId] = useState('507f1f77bcf86cd799439011')
 
+  //handlers
   const submitHandler = e => {
     e.preventDefault()
     console.log('submitHandler')

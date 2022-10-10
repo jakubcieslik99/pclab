@@ -5,6 +5,7 @@ import Component from '../components/component/Component'
 import Paginator from '../components/elements/Paginator'
 
 const ComposeScreen = () => {
+  //variables
   const [step, setStep] = useState(1)
 
   const [id, setId] = useState('507f1f77bcf86cd799439011')
@@ -20,6 +21,7 @@ const ComposeScreen = () => {
   const [driveFourComponent, setDriveFourComponent] = useState(null)
   const [searching, setSearching] = useState('')
 
+  //handlers
   const searchingHandler = e => {
     e.preventDefault()
     console.log('searching')

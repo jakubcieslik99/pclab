@@ -6,19 +6,22 @@ import Error from '../components/alerts/Error'
 import Success from '../components/alerts/Success'
 
 const LoginScreen = () => {
+  //variables
   const [setParam] = useState(false)
 
   const [passwordResetModalIsOpen, setPasswordResetModalIsOpen] = useState(false)
   const [passwordSetModalIsOpen, setPasswordSetModalIsOpen] = useState(false)
 
-  useEffect(() => {
-    setParam && setPasswordSetModalIsOpen(true)
-  }, [])
-
+  //handlers
   const submitHandler = e => {
     e.preventDefault()
     console.log('submitHandler')
   }
+
+  //useEffects
+  useEffect(() => {
+    setParam && setPasswordSetModalIsOpen(true)
+  }, [])
 
   return (
     <main className="flex-1">

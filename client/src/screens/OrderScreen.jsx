@@ -8,6 +8,7 @@ import PaymentForm from '../components/orderScreen/PAymentForm'
 import stripeOptions from '../components/orderScreen/stripeOptions'
 
 const OrderScreen = props => {
+  //variables
   const stripeOptionsLocal = {
     clientSecret: 'pi_3LEYnSJtbJWEJlni0fCsj5Hr_secret_FJr5evFCIkDlPu2O9pvoI0oxQ',
     ...stripeOptions,
@@ -36,20 +37,21 @@ const OrderScreen = props => {
           </button>
 
           <div
-            className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden transition-components ${
-              !componentsIsOpen ? 'max-h-0 opacity-0' : 'max-h-[1904px] opacity-1'
+            className={`overflow-hidden transition-components ${
+              !componentsIsOpen ? 'max-h-0 opacity-0' : 'max-h-[1896px] opacity-1'
             }`}
           >
-            <div className="w-full h-0" />
-            {true && <Component name="Obudowa" order />}
-            {true && <Component name="Procesor" order />}
-            {true && <Component name="Płyta główna" order />}
-            {true && <Component name="Pamięć RAM" order />}
-            {true && <Component name="Karta graficzna" order />}
-            {true && <Component name="Zasilacz" order />}
-            {true && <Component name="Dysk #1" order />}
-            {false && <Component name="Dysk #2" order />}
-            {false && <Component name="Dysk #3" order />}
+            <div className="grid gap-4 mt-2 sm:grid-cols-2 lg:grid-cols-3">
+              {true && <Component name="Obudowa" order />}
+              {true && <Component name="Procesor" order />}
+              {true && <Component name="Płyta główna" order />}
+              {true && <Component name="Pamięć RAM" order />}
+              {true && <Component name="Karta graficzna" order />}
+              {true && <Component name="Zasilacz" order />}
+              {true && <Component name="Dysk #1" order />}
+              {false && <Component name="Dysk #2" order />}
+              {false && <Component name="Dysk #3" order />}
+            </div>
           </div>
         </div>
 
@@ -112,15 +114,38 @@ const OrderScreen = props => {
           <div>
             <h2 className="mb-[5px] text-xl font-bold">Status zamówienia:</h2>
 
-            <div className="px-3 pb-[9px] pt-[10px] bg-[#412851] rounded-xl border border-[#725e7d] sm:w-[284px] lg:w-[384px]">
-              <div className="mb-2">
-                <div className="mb-1 text-sm">Czas na opłacenie zamówienia:</div>
-                <Timer orderId={'507f1f77bcf86cd799439011'} time={null} />
-              </div>
+            <div className="px-3 pt-[9px] pb-[11px] bg-[#412851] rounded-xl border border-[#725e7d] sm:w-[284px] lg:w-[384px]">
+              {true && (
+                <div className="mb-2">
+                  <div className="mb-1 text-sm">Czas na opłacenie zamówienia:</div>
+                  <Timer orderId={'507f1f77bcf86cd799439011'} time={null} />
+                </div>
+              )}
 
-              <div>
+              <div className="flex flex-col items-start">
                 <div className="mb-1 text-sm">Status zamówienia:</div>
-                <div>Nieopłacono</div>
+                {
+                  <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-red-700 bg-red-300 border-2 border-red-600 rounded-xl leading-[1.12rem]">
+                    Nieopłacono
+                  </div>
+                }
+                {
+                  <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-yellow-700 bg-yellow-200 border-2 border-yellow-700 rounded-xl leading-[1.12rem]">
+                    Oczekuje na wysyłkę
+                  </div>
+                }
+                {
+                  <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-green-700 bg-green-300 border-2 border-green-600 rounded-xl leading-[1.12rem]">
+                    Wysłano
+                  </div>
+                }
+
+                {
+                  <div className="mt-[6px]">
+                    <div className="mb-[2px] text-sm">Numer śledzenia {'InPost'}:</div>
+                    <div className="text-sm font-semibold break-all">{'2390576926345923794672394'}</div>
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -134,7 +159,12 @@ const OrderScreen = props => {
               </Elements>
             ) : (
               <div className="px-3 pb-[9px] pt-[10px] bg-[#412851] rounded-xl border border-[#725e7d] sm:w-[284px] lg:w-[384px]">
-                Pomoc
+                W przypadku chęci dokonania <span className="font-semibold">zwrotu</span> lub{' '}
+                <span className="font-semibold">reklamacji</span> prosimy o kontakt na adres email:{' '}
+                <a href="mailto:contact@jakubcieslik.com" className="font-semibold">
+                  contact@jakubcieslik.com
+                </a>
+                .
               </div>
             )}
           </div>

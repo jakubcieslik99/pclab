@@ -16,10 +16,12 @@ const sortingOptions = [
 ]
 
 const StoreScreen = () => {
+  //variables
   const [searching, setSearching] = useState('')
   const [sorting, setSorting] = useState(sortingOptions[0])
   const [priceFiltering, setPriceFiltering] = useState({ minPrice: '', maxPrice: '' })
 
+  //handlers
   const searchingHandler = e => {
     e.preventDefault()
     console.log('searching')

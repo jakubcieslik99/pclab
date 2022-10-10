@@ -21,7 +21,7 @@ html {
   height: -webkit-fill-available;
 }
 body {
-  @apply flex flex-col h-screen mx-auto my-0 overflow-x-hidden overflow-y-scroll scroll-smooth;
+  @apply flex flex-col h-screen mx-auto my-0 overflow-x-hidden overflow-y-scroll;
   height: -webkit-fill-available;
 }
 #root {

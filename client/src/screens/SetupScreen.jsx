@@ -4,6 +4,7 @@ import Component from '../components/component/Component'
 import Comment from '../components/comment/Comment'
 
 const SetupScreen = () => {
+  //handlers
   const submitHandler = e => {
     e.preventDefault()
     console.log('submitHandler')

@@ -1,10 +1,22 @@
-import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, Fragment } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Transition, Menu } from '@headlessui/react'
 import { FaHome, FaBoxes, FaLaptopMedical, FaUserCircle, FaDoorOpen, FaBars, FaCaretDown } from 'react-icons/fa'
 import { BsCpuFill } from 'react-icons/bs'
 
 const Header = () => {
+  //variables
+  const navigate = useNavigate()
+  const { pathname, state } = useLocation()
+  const locationLoginRequired = state?.loginRequired || false
+
+  //useEffects
+  useEffect(() => {
+    if (locationLoginRequired) {
+      navigate(pathname, { replace: true })
+    }
+  }, [pathname, locationLoginRequired, navigate])
+
   return (
     <header className="sticky top-0 z-20 h-16 md:h-20">
       <Menu as="nav" className="relative z-10 w-full h-16 shadow-lg md:h-20 gradient-navbar">
