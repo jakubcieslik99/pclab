@@ -2,8 +2,8 @@ import { useState } from 'react'
 import Countdown from 'react-countdown'
 
 const Timer = props => {
-  //const [time] = useState(Date.now() + 15 * 60 * 1000)
-  const [time] = useState(Date.now() + 3000)
+  const [time] = useState(Date.now() + 15 * 60 * 1000)
+  //const [time] = useState(Date.now() + 3000)
 
   const countdownRenderer = ({ minutes, seconds, completed }) => {
     if (completed) {

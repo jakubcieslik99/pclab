@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Elements } from '@stripe/react-stripe-js'
+import { BiCaretLeftCircle } from 'react-icons/bi'
 import { FaEnvelope, FaPhoneAlt, FaTruck } from 'react-icons/fa'
 import Component from '../components/component/Component'
 import Timer from '../components/orderScreen/Timer'
@@ -13,6 +14,7 @@ const OrderScreen = props => {
   }
 
   const [id, setId] = useState('507f1f77bcf86cd799439011')
+  const [componentsIsOpen, setComponentsIsOpen] = useState(false)
 
   return (
     <main className="flex-1">
@@ -25,7 +27,20 @@ const OrderScreen = props => {
         <div className="mx-2 mb-6">
           <h2 className="mb-[6px] text-xl font-bold">Komponenty:</h2>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <button
+            onClick={() => setComponentsIsOpen(!componentsIsOpen)}
+            className="px-3 py-2 bg-[#412851] rounded-xl border border-[#725e7d] flex items-center gap-1"
+          >
+            <span>Pokaż</span>
+            <BiCaretLeftCircle className={`w-5 h-5 transition-transform ${!componentsIsOpen ? 'rotate-0' : '-rotate-90'}`} />
+          </button>
+
+          <div
+            className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden transition-components ${
+              !componentsIsOpen ? 'max-h-0 opacity-0' : 'max-h-[1904px] opacity-1'
+            }`}
+          >
+            <div className="w-full h-0" />
             {true && <Component name="Obudowa" order />}
             {true && <Component name="Procesor" order />}
             {true && <Component name="Płyta główna" order />}

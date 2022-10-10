@@ -13,6 +13,7 @@ module.exports = {
       },
       transitionProperty: {
         nav: 'transform, opacity',
+        components: 'max-height, opacity',
       },
     },
   },
