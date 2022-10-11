@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ScrollTop from './components/universal/ScrollTop'
 import Header from './components/header/Header'
 import Footer from './components/footer/Footer'
 import LoginScreen from './screens/LoginScreen'
@@ -14,6 +15,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
 
+      <ScrollTop />
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
         {/*RequireAuth*/}
@@ -21,8 +23,8 @@ const App = () => {
         <Route path="/orders" element={<OrdersScreen />} />
         <Route path="/delivery-methods" element={<DeliveryMethodsScreen />} />
         <Route path="/components" element={<ComponentsScreen />} />
-        <Route path="/configs" element={<ConfigsScreen />} />
         <Route path="/users" element={<UsersScreen />} />
+        <Route path="/configs" element={<ConfigsScreen />} />
       </Routes>
 
       <Footer />
