@@ -22,7 +22,7 @@ const Header = () => {
       <Menu as="nav" className="relative z-10 w-full h-16 shadow-lg md:h-20 gradient-navbar">
         {({ open }) => (
           <>
-            <div className="flex items-center justify-between h-full content top-">
+            <div className="flex items-center justify-between h-full content">
               <div className="flex items-center">
                 <Link to="/" className="flex items-center text-2xl font-bold drop-shadow-lg">
                   <BsCpuFill className="ml-1 mt-[3px]" />
@@ -33,12 +33,12 @@ const Header = () => {
 
               <ul className="hidden gap-1 md:flex">
                 <Link to="/" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
-                  <FaHome />
+                  <FaHome className="text-2xl" />
                   <li>Strona główna</li>
                 </Link>
 
-                <Link to="store" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
-                  <FaBoxes />
+                <Link to="/store" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
+                  <FaBoxes className="text-2xl" />
                   <li>Zestawy</li>
                 </Link>
 
@@ -46,7 +46,7 @@ const Header = () => {
                   to="/compose"
                   className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
                 >
-                  <FaLaptopMedical />
+                  <FaLaptopMedical className="text-2xl" />
                   <li>Stwórz</li>
                 </Link>
 
@@ -55,7 +55,7 @@ const Header = () => {
                     to="/login"
                     className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
                   >
-                    <FaDoorOpen />
+                    <FaDoorOpen className="text-2xl" />
                     <li>Logowanie i rejestracja</li>
                   </Link>
                 ) : (
@@ -64,12 +64,12 @@ const Header = () => {
                       to={`/profile/${'507f1f77bcf86cd799439011'}`}
                       className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
                     >
-                      <FaUserCircle />
+                      <FaUserCircle className="text-2xl" />
                       <li>Konto</li>
                     </Link>
 
                     <div className="flex flex-col items-center justify-center px-2 py-1 transition cursor-pointer active:scale-95">
-                      <FaDoorOpen />
+                      <FaDoorOpen className="text-2xl" />
                       <li>Wyloguj się</li>
                     </div>
                   </>

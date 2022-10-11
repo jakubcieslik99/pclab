@@ -27,7 +27,7 @@ body {
 #root {
   @apply relative flex-1 flex flex-col gradient-root; /*Scrollable pages*/
   /*@apply fixed top-0 w-full h-full gradient-root; /*Fixed pages*/
-  /*@apply mb-0 md:mb-0; /*Footer visibility*/
+  /*@apply mb-0; /*Footer visibility*/
 }
 #root > main {
   /*For fixed pages*/
