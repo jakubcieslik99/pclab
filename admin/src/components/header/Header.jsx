@@ -1,20 +1,7 @@
 import { useEffect, Fragment } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Transition, Menu } from '@headlessui/react'
-import {
-  FaBoxes,
-  FaLaptopMedical,
-  FaUserCircle,
-  FaBars,
-  FaCaretDown,
-  FaHome,
-  FaDolly,
-  FaTruckLoading,
-  FaMemory,
-  FaUsers,
-  FaCog,
-  FaDoorOpen,
-} from 'react-icons/fa'
+import { FaBars, FaCaretDown, FaHome, FaDolly, FaTruckLoading, FaMemory, FaCog, FaUsers, FaDoorOpen } from 'react-icons/fa'
 import { BsCpuFill } from 'react-icons/bs'
 
 const Header = () => {
@@ -22,6 +9,11 @@ const Header = () => {
   const navigate = useNavigate()
   const { pathname, state } = useLocation()
   const locationLoginRequired = state?.loginRequired || false
+
+  //handlers
+  const logoutHandler = () => {
+    console.log('logout')
+  }
 
   //useEffects
   useEffect(() => {
@@ -53,61 +45,67 @@ const Header = () => {
                 {false ? (
                   <Link
                     to="/login"
-                    className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                    className="flex flex-col items-center justify-center px-[6px] py-1 transition active:scale-95"
                   >
                     <FaDoorOpen className="text-2xl" />
-                    <li className="text-[9px] mt-[2px]">Logowanie</li>
+                    <li className="text-[10px] mt-[2px]">Logowanie</li>
                   </Link>
                 ) : (
                   <>
-                    <Link to="/" className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95">
+                    <Link
+                      to="/"
+                      className="flex flex-col items-center justify-center px-[6px] py-1 transition active:scale-95"
+                    >
                       <FaHome className="text-2xl" />
-                      <li className="text-[9px] mt-[2px]">Strona główna</li>
+                      <li className="text-[10px] mt-[2px]">Strona główna</li>
                     </Link>
 
                     <Link
                       to="/orders"
-                      className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                      className="flex flex-col items-center justify-center px-[6px] py-1 transition active:scale-95"
                     >
                       <FaDolly className="text-2xl" />
-                      <li className="text-[9px] mt-[2px]">Zamówienia</li>
+                      <li className="text-[10px] mt-[2px]">Zamówienia</li>
                     </Link>
 
                     <Link
                       to="/delivery-methods"
-                      className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                      className="flex flex-col items-center justify-center px-[6px] py-1 transition active:scale-95"
                     >
                       <FaTruckLoading className="text-2xl" />
-                      <li className="text-[9px] mt-[2px]">Dostawy</li>
+                      <li className="text-[10px] mt-[2px]">Dostawy</li>
                     </Link>
 
                     <Link
                       to="/components"
-                      className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                      className="flex flex-col items-center justify-center px-[6px] py-1 transition active:scale-95"
                     >
                       <FaMemory className="text-2xl" />
-                      <li className="text-[9px] mt-[2px]">Komponenty</li>
+                      <li className="text-[10px] mt-[2px]">Komponenty</li>
+                    </Link>
+
+                    <Link
+                      to="/setups"
+                      className="flex flex-col items-center justify-center px-[6px] py-1 transition active:scale-95"
+                    >
+                      <FaCog className="text-2xl" />
+                      <li className="text-[10px] mt-[2px]">Zestawy</li>
                     </Link>
 
                     <Link
                       to="/users"
-                      className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                      className="flex flex-col items-center justify-center px-[6px] py-1 transition active:scale-95"
                     >
                       <FaUsers className="text-2xl" />
-                      <li className="text-[9px] mt-[2px]">Użytkownicy</li>
+                      <li className="text-[10px] mt-[2px]">Użytkownicy</li>
                     </Link>
 
-                    <Link
-                      to="/configs"
-                      className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
+                    <div
+                      onClick={logoutHandler}
+                      className="flex flex-col items-center justify-center px-[6px] py-1 transition cursor-pointer active:scale-95"
                     >
-                      <FaCog className="text-2xl" />
-                      <li className="text-[9px] mt-[2px]">Ustawienia</li>
-                    </Link>
-
-                    <div className="flex flex-col items-center justify-center px-2 py-1 transition cursor-pointer active:scale-95">
                       <FaDoorOpen className="text-2xl" />
-                      <li className="text-[9px] mt-[2px]">Wyloguj się</li>
+                      <li className="text-[10px] mt-[2px]">Wyloguj się</li>
                     </div>
                   </>
                 )}
@@ -175,19 +173,20 @@ const Header = () => {
                       <li>Komponenty</li>
                     </Menu.Item>
 
+                    <Menu.Item as={Link} to="/setups" className="flex items-center p-3 transition-colors hover:bg-black/30">
+                      <FaCog className="mr-2 text-xl" />
+                      <li>Zestawy</li>
+                    </Menu.Item>
+
                     <Menu.Item as={Link} to="/users" className="flex items-center p-3 transition-colors hover:bg-black/30">
                       <FaUsers className="mr-2 text-xl" />
                       <li>Użytkownicy</li>
                     </Menu.Item>
 
-                    <Menu.Item as={Link} to="/configs" className="flex items-center p-3 transition-colors hover:bg-black/30">
-                      <FaCog className="mr-2 text-xl" />
-                      <li>Ustawienia</li>
-                    </Menu.Item>
-
                     <Menu.Item
                       as="button"
                       type="button"
+                      onClick={logoutHandler}
                       className="flex items-center w-full p-3 transition-colors hover:bg-black/30"
                     >
                       <FaDoorOpen className="mr-2 text-xl" />
