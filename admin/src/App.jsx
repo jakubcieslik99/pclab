@@ -23,8 +23,8 @@ const App = () => {
         <Route path="/orders" element={<OrdersScreen />} />
         <Route path="/delivery-methods" element={<DeliveryMethodsScreen />} />
         <Route path="/components" element={<ComponentsScreen />} />
-        <Route path="/users" element={<UsersScreen />} />
         <Route path="/configs" element={<ConfigsScreen />} />
+        <Route path="/users" element={<UsersScreen />} />
       </Routes>
 
       <Footer />

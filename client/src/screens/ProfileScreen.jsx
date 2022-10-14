@@ -98,7 +98,7 @@ const ProfileScreen = () => {
             {
               <div
                 className={`grid md:grid-cols-2 ${
-                  logged ? 'lg:grid-cols-1 max-w-[479.5px] max-h-[650px] internal-scroll' : 'lg:grid-cols-3'
+                  logged ? 'lg:grid-cols-1 max-w-[479.5px] md:max-w-full max-h-[650px] internal-scroll' : 'lg:grid-cols-3'
                 } gap-5 rounded-xl`}
               >
                 <Setup setButton="edit" buttonClickHandler={() => console.log('edit')} />

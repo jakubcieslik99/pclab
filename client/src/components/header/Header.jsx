@@ -10,6 +10,11 @@ const Header = () => {
   const { pathname, state } = useLocation()
   const locationLoginRequired = state?.loginRequired || false
 
+  //handlers
+  const logoutHandler = () => {
+    console.log('logout')
+  }
+
   //useEffects
   useEffect(() => {
     if (locationLoginRequired) {
@@ -68,7 +73,10 @@ const Header = () => {
                       <li>Konto</li>
                     </Link>
 
-                    <div className="flex flex-col items-center justify-center px-2 py-1 transition cursor-pointer active:scale-95">
+                    <div
+                      onClick={logoutHandler}
+                      className="flex flex-col items-center justify-center px-2 py-1 transition cursor-pointer active:scale-95"
+                    >
                       <FaDoorOpen className="text-2xl" />
                       <li>Wyloguj się</li>
                     </div>
@@ -137,6 +145,7 @@ const Header = () => {
                     <Menu.Item
                       as="button"
                       type="button"
+                      onClick={logoutHandler}
                       className="flex items-center w-full p-3 transition-colors hover:bg-black/30"
                     >
                       <FaDoorOpen className="mr-2 text-xl" />
