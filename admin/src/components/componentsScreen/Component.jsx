@@ -58,10 +58,10 @@ const Component = props => {
 
       <td className="pr-3">
         <div className="flex items-center justify-center gap-[6px]">
-          <button className="px-[6px] py-[3px] text-sm border-2 border-white rounded-xl bg-white/10 hover:bg-white/20">
+          <button className="px-[6px] py-[3px] text-sm border-2 border-white rounded-xl bg-white/10 transition hover:bg-white/20 active:scale-90">
             Edytuj
           </button>
-          <button className="px-[6px] py-[3px] text-sm text-red-500 border-2 border-red-500 rounded-xl bg-red-500/10 hover:bg-red-500/20">
+          <button className="px-[6px] py-[3px] text-sm text-red-500 border-2 border-red-500 rounded-xl bg-red-500/10 transition hover:bg-red-500/20 active:scale-90">
             Usuń
           </button>
         </div>
