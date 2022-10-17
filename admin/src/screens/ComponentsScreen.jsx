@@ -1,7 +1,9 @@
 import { useState, Fragment } from 'react'
 import { Listbox, Combobox, Transition } from '@headlessui/react'
-import { FaSearch, FaAngleDown, FaCaretRight, FaCubes } from 'react-icons/fa'
+import { FaSearch, FaAngleDown } from 'react-icons/fa'
 import Component from '../components/componentsScreen/Component'
+import EditComponentModal from '../components/componentsScreen/EditComponentModal'
+import DeleteModal from '../components/universal/DeleteModal'
 import Paginator from '../components/universal/Paginator'
 
 const sortingOptions = [
@@ -30,11 +32,24 @@ const ComponentsScreen = () => {
   const [sorting, setSorting] = useState(sortingOptions[0])
   const [filtering, setFiltering] = useState([filteringOptions[0]])
 
+  const [editComponent, setEditComponent] = useState(null)
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false)
+  const [deleteComponent, setDeleteComponent] = useState(null)
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
+
   //handlers
   const searchingHandler = e => {
     e.preventDefault()
     console.log('searching')
     console.log(searching)
+  }
+  const editComponentHandler = component => {
+    setEditComponent(component)
+    setEditModalIsOpen(true)
+  }
+  const deleteComponentHandler = component => {
+    setDeleteComponent(component)
+    setDeleteModalIsOpen(true)
   }
 
   return (
@@ -94,13 +109,14 @@ const ComponentsScreen = () => {
 
               <Combobox value={filtering} onChange={setFiltering} multiple>
                 <div name="filtering" className="relative h-9 md:w-full md:max-w-[234px]">
-                  <div className="absolute flex items-center justify-between w-full py-1 pl-3 border-2 rounded-xl">
+                  <div className="absolute flex items-center w-full py-1 pl-3 border-2 pr-9 rounded-xl">
                     <Combobox.Input
+                      readOnly
                       displayValue={filteringOptions => filteringOptions.map(option => option.name).join(', ')}
-                      className="truncate bg-transparent focus:outline-none"
+                      className="truncate bg-transparent cursor-default focus:outline-none"
                     />
-                    <Combobox.Button className="flex items-center justify-center flex-none transition w-9 active:scale-90">
-                      <FaAngleDown className="text-xl ml-[1px] mt-[1px]" />
+                    <Combobox.Button className="absolute top-0 right-0 flex items-center justify-end flex-none w-full h-8 pr-[7px]">
+                      <FaAngleDown className="text-xl ml-[1px] mt-[1px] transition active:scale-90" />
                     </Combobox.Button>
                   </div>
 
@@ -134,10 +150,24 @@ const ComponentsScreen = () => {
             <div>
               <button
                 type="button"
+                onClick={() => editComponentHandler(null)}
                 className="px-2 py-1 transition border-2 border-white md:ml-6 rounded-xl bg-white/10 hover:bg-white/20 active:scale-90"
               >
                 Dodaj
               </button>
+
+              <EditComponentModal
+                editElement={editComponent}
+                setEditElement={setEditComponent}
+                isOpen={editModalIsOpen}
+                setIsOpen={setEditModalIsOpen}
+              />
+              <DeleteModal
+                deleteElement={deleteComponent}
+                setDeleteElement={setDeleteComponent}
+                isOpen={deleteModalIsOpen}
+                setIsOpen={setDeleteModalIsOpen}
+              />
             </div>
           </div>
         </div>
@@ -157,21 +187,21 @@ const ComponentsScreen = () => {
 
             {
               <tbody>
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
-                <Component />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
+                <Component editHandler={editComponentHandler} deleteHandler={deleteComponentHandler} />
               </tbody>
             }
           </table>

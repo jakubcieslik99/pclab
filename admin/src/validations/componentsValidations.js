@@ -1,0 +1,3 @@
+const editComponentErrors = {}
+
+export { editComponentErrors }
