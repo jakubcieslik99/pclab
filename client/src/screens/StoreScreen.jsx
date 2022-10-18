@@ -2,7 +2,7 @@ import { useState, Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { FaSearch, FaAngleDown, FaCaretRight, FaCubes } from 'react-icons/fa'
 import Setup from '../components/setup/Setup'
-import Paginator from '../components/elements/Paginator'
+import Paginator from '../components/universal/Paginator'
 
 const sortingOptions = [
   { id: 1, name: 'Od najnowszych', value: 'newest' },
@@ -89,7 +89,7 @@ const StoreScreen = () => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <Listbox.Options className="absolute w-full overflow-hidden bg-gray-200 cursor-pointer text-pclab-600 top-10 rounded-xl">
+                    <Listbox.Options className="absolute z-10 w-full overflow-hidden bg-gray-200 cursor-pointer text-pclab-600 top-10 rounded-xl">
                       {sortingOptions.map(option => (
                         <Listbox.Option key={option.id} value={option} className="px-3 py-[6px] truncate hover:bg-black/20">
                           {option.name}

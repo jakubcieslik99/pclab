@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FaCubes, FaHandPointer, FaCaretLeft, FaCaretRight, FaSearch, FaCube } from 'react-icons/fa'
 import { BsCpuFill } from 'react-icons/bs'
 import Component from '../components/component/Component'
-import Paginator from '../components/elements/Paginator'
+import Paginator from '../components/universal/Paginator'
 
 const ComposeScreen = () => {
   //variables
