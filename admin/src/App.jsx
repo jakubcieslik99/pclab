@@ -7,7 +7,7 @@ import HomeScreen from './screens/HomeScreen'
 import OrdersScreen from './screens/OrdersScreen'
 import DeliveryMethodsScreen from './screens/DeliveryMethodsScreen'
 import ComponentsScreen from './screens/ComponentsScreen'
-import ConfigsScreen from './screens/ConfigsScreen'
+import SetupsScreen from './screens/SetupsScreen'
 import UsersScreen from './screens/UsersScreen'
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/orders" element={<OrdersScreen />} />
         <Route path="/delivery-methods" element={<DeliveryMethodsScreen />} />
         <Route path="/components" element={<ComponentsScreen />} />
-        <Route path="/configs" element={<ConfigsScreen />} />
+        <Route path="/setups" element={<SetupsScreen />} />
         <Route path="/users" element={<UsersScreen />} />
       </Routes>
 
