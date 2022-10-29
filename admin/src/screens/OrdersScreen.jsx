@@ -17,6 +17,7 @@ const filteringOptions = [
   { id: 2, name: 'Wysłane', value: 'sent' },
   { id: 3, name: 'Oczekujące', value: 'waiting' },
   { id: 4, name: 'Nieopłacone', value: 'unpaid' },
+  { id: 5, name: 'Zwrócone', value: 'returned' },
 ]
 
 const OrdersScreen = () => {
@@ -148,6 +149,8 @@ const OrdersScreen = () => {
             <thead>
               <tr className="text-gray-300 bg-gray-600">
                 <th className="py-2 pl-3 pr-3 text-center">Nr</th>
+                <th className="py-2 pr-3 text-left">Dane</th>
+                <th className="py-2 pr-3 text-center">Status</th>
                 <th className="py-2 pr-3 text-center">Zarządzaj</th>
               </tr>
             </thead>

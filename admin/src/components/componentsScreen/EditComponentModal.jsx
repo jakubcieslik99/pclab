@@ -9,6 +9,11 @@ const maxFilesAmount = 1
 
 const EditComponentModal = props => {
   //variables
+  const [type, setType] = useState('')
+  const [moboCompat, setMoboCompat] = useState('')
+  const [cpuCompat, setCpuCompat] = useState('')
+  const [caseCompat, setCaseCompat] = useState('')
+  const [ramCompat, setRamCompat] = useState('')
   const [fetchedFiles, setFetchedFiles] = useState([])
   const [selectedFiles, setSelectedFiles] = useState([])
 
@@ -33,8 +38,21 @@ const EditComponentModal = props => {
     props.setIsOpen(false)
     setTimeout(() => {
       props.setEditElement(null)
+
+      setType('')
+      setFetchedFiles([])
+      setSelectedFiles([])
     }, 250)
   }
+
+  const selectTypeHandler = value => {
+    setType(value)
+    setMoboCompat('')
+    setCpuCompat('')
+    setCaseCompat('')
+    setRamCompat('')
+  }
+
   const deleteImageHandler = number => {
     fetchedFiles.splice(number, 1)
     setFetchedFiles(() => [...fetchedFiles])
@@ -161,6 +179,185 @@ const EditComponentModal = props => {
                       </div>
                     </div>
 
+                    <div className="flex flex-col">
+                      <label htmlFor="componentType" className="text-sm mb-[2px]">
+                        Wybierz typ komponentu*:
+                      </label>
+                      <select
+                        id="componentType"
+                        name="type"
+                        value={type}
+                        onChange={e => selectTypeHandler(e.target.value)}
+                        className={`border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full h-[44px] transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-gray-800 focus:ring-transparent ${
+                          type === '' && ' text-gray-400'
+                        }`}
+                      >
+                        <option value="" disabled hidden>
+                          Typ komponentu*
+                        </option>
+                        <option value="case" className="text-gray-800">
+                          Obudowa
+                        </option>
+                        <option value="cpu" className="text-gray-800">
+                          Procesor
+                        </option>
+                        <option value="mobo" className="text-gray-800">
+                          Płyta główna
+                        </option>
+                        <option value="ram" className="text-gray-800">
+                          Pamięć RAM
+                        </option>
+                        <option value="gpu" className="text-gray-800">
+                          Karta graficzna
+                        </option>
+                        <option value="psu" className="text-gray-800">
+                          Zasilacz
+                        </option>
+                        <option value="drive" className="text-gray-800">
+                          Dysk
+                        </option>
+                      </select>
+
+                      <div className="flex flex-col gap-1 mt-[5px]">
+                        <Error isOpen={true} message={'Test error'} />
+                      </div>
+                    </div>
+
+                    {type === 'case' && (
+                      <div className="flex flex-col">
+                        <label htmlFor="componentMoboCompat" className="text-sm mb-[2px]">
+                          Wybierz kompat. płyty gł.*:
+                        </label>
+                        <select
+                          id="componentMoboCompat"
+                          name="moboCompat"
+                          value={moboCompat}
+                          onChange={e => setMoboCompat(e.target.value)}
+                          className={`border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full h-[44px] transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-gray-800 focus:ring-transparent ${
+                            moboCompat === '' && ' text-gray-400'
+                          }`}
+                        >
+                          <option value="" disabled hidden>
+                            Kompat. płyty gł.*
+                          </option>
+                          <option value="atx" className="text-gray-800">
+                            ATX i mniejsze
+                          </option>
+                          <option value="matx" className="text-gray-800">
+                            mATX i mniejsze
+                          </option>
+                          <option value="itx" className="text-gray-800">
+                            ITX
+                          </option>
+                        </select>
+                      </div>
+                    )}
+
+                    {(type === 'cpu' || type === 'mobo') && (
+                      <div className="flex flex-col">
+                        <label htmlFor="componentCpuCompat" className="text-sm mb-[2px]">
+                          Wybierz kompat. socketu*:
+                        </label>
+                        <select
+                          id="componentCpuCompat"
+                          name="cpuCompat"
+                          value={cpuCompat}
+                          onChange={e => setCpuCompat(e.target.value)}
+                          className={`border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full h-[44px] transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-gray-800 focus:ring-transparent ${
+                            cpuCompat === '' && ' text-gray-400'
+                          }`}
+                        >
+                          <option value="" disabled hidden>
+                            Kompat. socketu*
+                          </option>
+                          <option value="am5" className="text-gray-800">
+                            AM5
+                          </option>
+                          <option value="am4" className="text-gray-800">
+                            AM4
+                          </option>
+                          <option value="lga1150" className="text-gray-800">
+                            LGA 1150
+                          </option>
+                        </select>
+
+                        <div className="flex flex-col gap-1 mt-[5px]">
+                          <Error isOpen={false} message={'Test error'} />
+                        </div>
+                      </div>
+                    )}
+
+                    {type === 'mobo' && (
+                      <div className="flex flex-col">
+                        <label htmlFor="componentCaseCompat" className="text-sm mb-[2px]">
+                          Wybierz kompat. obudowy*:
+                        </label>
+                        <select
+                          id="componentCaseCompat"
+                          name="caseCompat"
+                          value={caseCompat}
+                          onChange={e => setCaseCompat(e.target.value)}
+                          className={`border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full h-[44px] transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-gray-800 focus:ring-transparent ${
+                            caseCompat === '' && ' text-gray-400'
+                          }`}
+                        >
+                          <option value="" disabled hidden>
+                            Kompat. obudowy*
+                          </option>
+                          <option value="itx" className="text-gray-800">
+                            ITX i większe
+                          </option>
+                          <option value="matx" className="text-gray-800">
+                            mATX i większe
+                          </option>
+                          <option value="atx" className="text-gray-800">
+                            ATX
+                          </option>
+                        </select>
+
+                        <div className="flex flex-col gap-1 mt-[5px]">
+                          <Error isOpen={false} message={'Test error'} />
+                        </div>
+                      </div>
+                    )}
+
+                    {(type === 'cpu' || type === 'mobo' || type === 'ram') && (
+                      <div className="flex flex-col">
+                        <label htmlFor="componentRamCompat" className="text-sm mb-[2px]">
+                          Wybierz kompat. pam. RAM*:
+                        </label>
+                        <select
+                          id="componentRamCompat"
+                          name="ramCompat"
+                          value={ramCompat}
+                          onChange={e => setRamCompat(e.target.value)}
+                          className={`border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full h-[44px] transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-gray-800 focus:ring-transparent ${
+                            ramCompat === '' && ' text-gray-400'
+                          }`}
+                        >
+                          <option value="" disabled hidden>
+                            Kompat. pam. RAM*
+                          </option>
+                          <option value="ddr5" className="text-gray-800">
+                            DDR5
+                          </option>
+                          <option value="ddr4" className="text-gray-800">
+                            DDR4
+                          </option>
+                          <option value="ddr3" className="text-gray-800">
+                            DDR3
+                          </option>
+                          <option value="ddr2" className="text-gray-800">
+                            DDR2
+                          </option>
+                        </select>
+
+                        <div className="flex flex-col gap-1 mt-[5px]">
+                          <Error isOpen={false} message={'Test error'} />
+                        </div>
+                      </div>
+                    )}
+
                     <div>
                       <label htmlFor="componentURL" className="text-sm">
                         Podaj URL komponentu*:
@@ -186,7 +383,7 @@ const EditComponentModal = props => {
                         type="text"
                         id="componentPrice"
                         name="price"
-                        placeholder="0000,00 zł*"
+                        placeholder="0000.00 zł*"
                         className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-gray-800 focus:ring-transparent"
                       />
 
