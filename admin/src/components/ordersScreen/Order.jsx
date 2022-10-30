@@ -6,13 +6,18 @@ const Order = props => {
       </td>
 
       <td className="py-1 pr-2">
-        <div className="flex flex-col gap-[4px] min-w-[348px] max-w-[348px] md:max-w-[411px] lg:max-w-[598px]">
+        <div className="flex flex-col gap-1 min-w-[348px] max-w-[348px] md:max-w-[411px] lg:max-w-[598px]">
           <p className="mb-[2px] truncate text-[14px] md:text-[15px] font-light">{'testuser123@gmail.com'}</p>
 
           <div className="flex gap-[10px] text-[12px] md:text-[13px] text-gray-400">
             <div className="flex gap-1">
               <p>Zestaw:</p>
-              <a href={'http://localhost:3000/setups/507f1f77bcf86cd799439011'} className="text-gray-200 underline">
+              <a
+                href={'http://localhost:3000/setups/507f1f77bcf86cd799439011'}
+                target="_blank"
+                rel="noreferrer"
+                className="text-gray-200 underline"
+              >
                 {'507f1f77bcf86cd799439011'}
               </a>
             </div>
@@ -41,7 +46,7 @@ const Order = props => {
       </td>
 
       <td className="pr-3">
-        <div className="flex flex-col justify-center mx-auto min-w-[168px] max-w-[168px]">
+        <div className="flex flex-col justify-center mx-auto w-[168px]">
           {/*
             <div className="px-2 pt-1 pb-[3px] text-sm font-semibold text-red-700 bg-red-300 border-2 border-red-600 rounded-xl leading-[1.12rem]">
               Nieopłacono

@@ -59,11 +59,11 @@ const DeleteModal = props => {
                     <Success isOpen={true} message={'Test success'} customStyle="text-left" />
 
                     <div>
-                      Czy na pewno chcesz całkowicie usunąć wybrany komponent{' '}
+                      {'Czy na pewno chcesz całkowicie usunąć wybrany komponent'}{' '}
                       <span className="font-bold">{props.deleteElement?.name}</span>?
                     </div>
                     <div>
-                      Zostaną również całkowicie usunięte wszystkie zestawy użytkowników zawierające wybrany komponent!
+                      {'Zostaną również całkowicie usunięte wszystkie zestawy użytkowników zawierające wybrany komponent!'}
                     </div>
                     <div>
                       Pamiętaj, ta operacja jest <span className="font-bold">nieodwracalna</span>!
