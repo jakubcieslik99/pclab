@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FaHeart, FaRegHeart, FaCashRegister } from 'react-icons/fa'
 import Component from '../components/component/Component'
-import Comment from '../components/comment/Comment'
+import Comment from '../components/setupScreen/Comment'
 
 const SetupScreen = () => {
   //handlers

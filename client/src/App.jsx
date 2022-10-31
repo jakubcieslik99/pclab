@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { loadStripe } from '@stripe/stripe-js'
 import { useInView } from 'react-intersection-observer'
 import ScrollTop from './components/universal/ScrollTop'
+import RequireAuth from './components/universal/RequireAuth'
+import NotFound from './components/universal/NotFound'
 import Header from './components/header/Header'
 import HeaderButton from './components/header/HeaderButton'
 import Footer from './components/footer/Footer'
@@ -36,10 +38,14 @@ const App = () => {
         <Route path="/register" element={<RegisterScreen />} />
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/profile/:id" element={<ProfileScreen />} />
-        {/*RequireAuth*/}
-        <Route path="/compose" element={<ComposeScreen />} />
-        <Route path="/placeorder/:id" element={<PlaceOrderScreen />} />
-        <Route path="/order/:id" element={<OrderScreen stripePromise={stripePromise} />} />
+
+        <Route element={<RequireAuth />}>
+          <Route path="/compose" element={<ComposeScreen />} />
+          <Route path="/placeorder/:id" element={<PlaceOrderScreen />} />
+          <Route path="/order/:id" element={<OrderScreen stripePromise={stripePromise} />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer ref={footerRef} />

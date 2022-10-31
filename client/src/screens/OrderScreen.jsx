@@ -21,7 +21,7 @@ const OrderScreen = props => {
     <main className="flex-1">
       <div className="content">
         <div className="mx-2 my-4">
-          <h2 className="text-xl font-bold">ZAMÓWIONY ZESTAW</h2>
+          <h2 className="text-xl font-bold">ZAMÓWIENIE</h2>
           {id && <h4 className="text-sm font-light">{id}</h4>}
         </div>
 
@@ -137,6 +137,11 @@ const OrderScreen = props => {
                 {
                   <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-green-700 bg-green-300 border-2 border-green-600 rounded-xl leading-[1.12rem]">
                     Wysłano
+                  </div>
+                }
+                {
+                  <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-blue-700 bg-blue-300 border-2 border-blue-600 rounded-xl leading-[1.12rem]">
+                    Zwrócono
                   </div>
                 }
 

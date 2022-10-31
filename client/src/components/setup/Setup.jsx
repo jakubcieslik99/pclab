@@ -72,10 +72,16 @@ const Setup = props => {
           <span className="font-light">zł</span>
         </div>
 
+        <div className="text-gray-400 truncate">
+          <span className="mr-2 text-sm font-semibold">Zakupiono:</span>
+          <span className="mr-[3px] font-semibold">{'0000'}</span>
+          <span className="text-sm font-light">razy</span>
+        </div>
+
         {!props.setButton && (
           <div className="text-gray-400 truncate">
             <span className="mr-2 font-semibold">Autor:</span>
-            <Link to={`/user/${'2137'}`} className="underline">
+            <Link to={`/profile/${'2137'}`} className="underline">
               {'John Doe'}
             </Link>
           </div>

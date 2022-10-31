@@ -7,6 +7,7 @@ import Paginator from '../components/universal/Paginator'
 const ComposeScreen = () => {
   //variables
   const [step, setStep] = useState(1)
+  const [submitLock, setSubmitLock] = useState(true)
 
   const [id, setId] = useState('507f1f77bcf86cd799439011')
   const [caseComponent, setCaseComponent] = useState(null)
@@ -19,6 +20,8 @@ const ComposeScreen = () => {
   const [driveTwoComponent, setDriveTwoComponent] = useState(null)
   const [driveThreeComponent, setDriveThreeComponent] = useState(null)
   const [driveFourComponent, setDriveFourComponent] = useState(null)
+  const [description, setDescription] = useState('')
+
   const [searching, setSearching] = useState('')
 
   //handlers
@@ -26,6 +29,20 @@ const ComposeScreen = () => {
     e.preventDefault()
     console.log('searching')
     console.log(searching)
+  }
+
+  const setStepHandler = nextStep => {
+    setStep(step + nextStep)
+    if (step + nextStep === 8) {
+      setTimeout(() => {
+        setSubmitLock(false)
+      }, 200)
+    } else if (step + nextStep === 7 || submitLock) setSubmitLock(true)
+  }
+
+  const submitHandler = e => {
+    e.preventDefault()
+    console.log('add/save')
   }
 
   return (
@@ -36,58 +53,82 @@ const ComposeScreen = () => {
           {id && <h4 className="text-sm font-light">{id}</h4>}
         </div>
 
-        <div className="flex flex-col items-center justify-center pb-[14px] mx-2 mb-[14px] border-b md:flex-row md:gap-5 gap-3">
-          <div className="text-lg">
-            <div className="flex items-center justify-center gap-2 mb-1">
-              <FaCubes />
-              <div className="ms-2">Krok {step}/8</div>
-            </div>
+        <form onSubmit={submitHandler} className="flex flex-col pb-4 mx-2 mb-[14px] border-b gap-5">
+          <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:gap-5">
+            <div className="text-lg">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <FaCubes />
+                <div className="ms-2">Krok {step}/8</div>
+              </div>
 
-            <div className="flex items-center justify-center gap-2">
-              <FaHandPointer />
-              <div className="ms-2">
-                {step == '1'
-                  ? 'Wybierz obudowę*:'
-                  : step == '2'
-                  ? 'Wybierz procesor'
-                  : step == '3'
-                  ? 'Wybierz płytę główną'
-                  : step == '4'
-                  ? 'Wybierz pamięć RAM'
-                  : step == '5'
-                  ? 'Wybierz kartę graficzną'
-                  : step == '6'
-                  ? 'Wybierz zasilacz'
-                  : step == '7'
-                  ? 'Wybierz dyski'
-                  : step == '8'
-                  ? 'Podsumowanie'
-                  : ''}
+              <div className="flex items-center justify-center gap-2">
+                <FaHandPointer />
+                <div className="ms-2">
+                  {step == '1'
+                    ? 'Wybierz obudowę*:'
+                    : step == '2'
+                    ? 'Wybierz procesor'
+                    : step == '3'
+                    ? 'Wybierz płytę główną'
+                    : step == '4'
+                    ? 'Wybierz pamięć RAM'
+                    : step == '5'
+                    ? 'Wybierz kartę graficzną'
+                    : step == '6'
+                    ? 'Wybierz zasilacz'
+                    : step == '7'
+                    ? 'Wybierz dyski'
+                    : step == '8'
+                    ? 'Podsumowanie'
+                    : ''}
+                </div>
               </div>
             </div>
+
+            <div className="flex gap-2">
+              <button
+                disabled={step === 1}
+                type="button"
+                onClick={() => (step > 1 ? setStepHandler(-1) : null)}
+                className="flex items-center gap-1 pl-[11px] pr-4 py-[6px] transition bg-pclab-400 border-pclab-400 rounded-xl active:scale-95 hover:bg-pclab-400/70 disabled:scale-100 disabled:bg-pclab-400/60 disabled:text-white/70"
+              >
+                <FaCaretLeft />
+                Wstecz
+              </button>
+              {step < 8 ? (
+                <button
+                  disabled={false}
+                  type="button"
+                  onClick={() => (step < 8 ? setStepHandler(1) : null)}
+                  className="flex items-center gap-1 py-1 pl-4 pr-[11px] transition border-2 rounded-xl active:scale-95 hover:bg-white/10 disabled:scale-100 disabled:bg-transparent disabled:border-white/60 disabled:text-white/70"
+                >
+                  Dalej
+                  <FaCaretRight />
+                </button>
+              ) : (
+                <button
+                  disabled={submitLock}
+                  type="submit"
+                  className="flex items-center gap-1 py-1 pl-4 pr-[11px] transition border-2 rounded-xl active:scale-95 hover:bg-white/10 disabled:scale-100 disabled:bg-transparent disabled:border-white/60 disabled:text-white/70"
+                >
+                  {true ? 'Dodaj' : 'Zapisz'}
+                  <FaCaretRight />
+                </button>
+              )}
+            </div>
           </div>
 
-          <div className="flex gap-2">
-            <button
-              disabled={step === 1}
-              type="button"
-              onClick={() => (step > 1 ? setStep(step - 1) : null)}
-              className="flex items-center gap-1 pl-[11px] pr-4 py-[6px] transition bg-pclab-400 border-pclab-400 rounded-xl active:scale-95 hover:bg-pclab-400/70 disabled:scale-100 disabled:bg-pclab-400/60 disabled:text-white/70"
-            >
-              <FaCaretLeft />
-              Wstecz
-            </button>
-            <button
-              disabled={false}
-              type="button"
-              onClick={() => (step < 8 ? setStep(step + 1) : console.log('Add/Save'))}
-              className="flex items-center gap-1 py-1 pl-4 pr-[11px] transition border-2 rounded-xl active:scale-95 hover:bg-white/10 disabled:scale-100 disabled:bg-transparent disabled:border-white/60 disabled:text-white/70"
-            >
-              {true && step === 8 ? 'Dodaj' : false ? 'Zapisz' : 'Dalej'}
-              <FaCaretRight />
-            </button>
-          </div>
-        </div>
+          {step === 8 && (
+            <div className="w-full max-w-xl self-center px-2 py-1 border rounded-xl border-white/[0.25] bg-white/[0.05]">
+              <textarea
+                rows="3"
+                name="comment"
+                placeholder="Dodaj opis zestawu..."
+                className="w-full bg-transparent resize-none outline-0 mt-[2px]"
+              />
+            </div>
+          )}
+        </form>
 
         <div className="grid mx-2 mb-14 md:mb-6 md:grid-cols-5 xl:grid-cols-4 md:gap-6">
           {step !== 8 && (
