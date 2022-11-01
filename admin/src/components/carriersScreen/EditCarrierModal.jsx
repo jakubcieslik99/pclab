@@ -1,17 +1,10 @@
-import { useState, Fragment } from 'react'
+import { Fragment } from 'react'
 import { Transition, Dialog } from '@headlessui/react'
 import { FaTimes } from 'react-icons/fa'
 import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
-const EditDeliveryMethodModal = props => {
-  //variables
-  const [type, setType] = useState('')
-  const [moboCompat, setMoboCompat] = useState('')
-  const [cpuCompat, setCpuCompat] = useState('')
-  const [caseCompat, setCaseCompat] = useState('')
-  const [ramCompat, setRamCompat] = useState('')
-
+const EditCarrierModal = props => {
   //handlers
   const closeHandler = () => {
     props.setIsOpen(false)
@@ -20,14 +13,6 @@ const EditDeliveryMethodModal = props => {
 
       setType('')
     }, 250)
-  }
-
-  const selectTypeHandler = value => {
-    setType(value)
-    setMoboCompat('')
-    setCpuCompat('')
-    setCaseCompat('')
-    setRamCompat('')
   }
 
   return (
@@ -61,7 +46,7 @@ const EditDeliveryMethodModal = props => {
                   {/*modal header*/}
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-gray-800">
                     <h2 className="flex flex-col">
-                      <span>{props.editElement ? 'Edytuj metodę dostawy' : 'Dodaj metodę dostawy'}</span>
+                      <span>{props.editElement ? 'Edytuj przewoźnika' : 'Dodaj przewoźnika'}</span>
                       {props.editElement && (
                         <span className="text-sm italic font-normal text-gray-700">{'507f1f77bcf86cd799439011'}</span>
                       )}
@@ -83,13 +68,13 @@ const EditDeliveryMethodModal = props => {
 
                     <div>
                       <label htmlFor="deliveryMethodName" className="text-sm">
-                        Podaj nazwę metody dostawy*:
+                        Podaj nazwę przewoźnika*:
                       </label>
                       <input
                         type="text"
                         id="deliveryMethodName"
                         name="name"
-                        placeholder="Nazwa metody dostawy*"
+                        placeholder="Nazwa przewoźnika*"
                         className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-gray-800 focus:ring-transparent"
                       />
 
@@ -142,4 +127,4 @@ const EditDeliveryMethodModal = props => {
   )
 }
 
-export default EditDeliveryMethodModal
+export default EditCarrierModal

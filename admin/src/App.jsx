@@ -1,11 +1,12 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import ScrollTop from './components/universal/ScrollTop'
+import RequireAuth from './components/universal/RequireAuth'
+import NotFound from './components/universal/NotFound'
 import Header from './components/header/Header'
 import Footer from './components/footer/Footer'
 import LoginScreen from './screens/LoginScreen'
-import HomeScreen from './screens/HomeScreen'
 import OrdersScreen from './screens/OrdersScreen'
-import DeliveryMethodsScreen from './screens/DeliveryMethodsScreen'
+import CarriersScreen from './screens/CarriersScreen'
 import ComponentsScreen from './screens/ComponentsScreen'
 import SetupsScreen from './screens/SetupsScreen'
 import UsersScreen from './screens/UsersScreen'
@@ -18,13 +19,17 @@ const App = () => {
       <ScrollTop />
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
-        {/*RequireAuth*/}
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/orders" element={<OrdersScreen />} />
-        <Route path="/delivery-methods" element={<DeliveryMethodsScreen />} />
-        <Route path="/components" element={<ComponentsScreen />} />
-        <Route path="/setups" element={<SetupsScreen />} />
-        <Route path="/users" element={<UsersScreen />} />
+
+        <Route element={<RequireAuth />}>
+          <Route path="/" element={<Navigate to="/orders" replace />} />
+          <Route path="/orders" element={<OrdersScreen />} />
+          <Route path="/carriers" element={<CarriersScreen />} />
+          <Route path="/components" element={<ComponentsScreen />} />
+          <Route path="/setups" element={<SetupsScreen />} />
+          <Route path="/users" element={<UsersScreen />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />

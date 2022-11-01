@@ -8,7 +8,7 @@ import Paginator from '../components/universal/Paginator'
 
 const sortingOptions = [
   { id: 1, name: 'Ostatnio dodane', value: 'newest' },
-  { id: 2, name: 'Najpóźniej dodane', value: 'oldest' },
+  { id: 2, name: 'Najwcześniej dodane', value: 'oldest' },
   { id: 3, name: 'Ilość (od najmniejszej)', value: 'amount_lowest' },
   { id: 4, name: 'Ilość (od największej)', value: 'amount_highest' },
   { id: 5, name: 'Cena (od najniższej)', value: 'price_lowest' },

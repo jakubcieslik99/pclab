@@ -1,5 +1,5 @@
 import { useState, Fragment } from 'react'
-import { Listbox, Combobox, Transition } from '@headlessui/react'
+import { Listbox, Transition } from '@headlessui/react'
 import { FaSearch, FaAngleDown } from 'react-icons/fa'
 import Setup from '../components/setupsScreen/Setup'
 import DeleteModal from '../components/universal/DeleteModal'
@@ -7,7 +7,7 @@ import Paginator from '../components/universal/Paginator'
 
 const sortingOptions = [
   { id: 1, name: 'Ostatnio dodane', value: 'newest' },
-  { id: 2, name: 'Najpóźniej dodane', value: 'oldest' },
+  { id: 2, name: 'Najwcześniej dodane', value: 'oldest' },
   { id: 3, name: 'Najlepiej oceniane', value: 'best_rating' },
   { id: 4, name: 'Najgorzej oceniane', value: 'worst_rating' },
   { id: 5, name: 'Najchętniej kupowane', value: 'most_popular' },

@@ -1,8 +1,8 @@
 import { useState, Fragment } from 'react'
-import { Listbox, Combobox, Transition } from '@headlessui/react'
+import { Listbox, Transition } from '@headlessui/react'
 import { FaSearch, FaAngleDown } from 'react-icons/fa'
-import DeliveryMethod from '../components/deliveryMethodsScreen/DeliveryMethod'
-import EditDeliveryMethodModal from '../components/deliveryMethodsScreen/EditDeliveryMethodModal'
+import Carrier from '../components/carriersScreen/Carrier'
+import EditCarrierModal from '../components/carriersScreen/EditCarrierModal'
 import DeleteModal from '../components/universal/DeleteModal'
 import Paginator from '../components/universal/Paginator'
 
@@ -15,14 +15,14 @@ const sortingOptions = [
   { id: 6, name: 'Cena (od najwyższej)', value: 'price_highest' },
 ]
 
-const DeliveryMethodsScreen = () => {
+const CarriersScreen = () => {
   //variables
   const [searching, setSearching] = useState('')
   const [sorting, setSorting] = useState(sortingOptions[0])
 
-  const [editDeliveryMethod, setEditDeliveryMethod] = useState(null)
+  const [editCarrier, setEditCarrier] = useState(null)
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
-  const [deleteDeliveryMethod, setDeleteDeliveryMethod] = useState(null)
+  const [deleteCarrier, setDeleteCarrier] = useState(null)
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
 
   //handlers
@@ -31,12 +31,12 @@ const DeliveryMethodsScreen = () => {
     console.log('searching')
     console.log(searching)
   }
-  const editDeliveryMethodHandler = deliveryMethod => {
-    setEditDeliveryMethod(deliveryMethod)
+  const editCarrierHandler = carrier => {
+    setEditCarrier(carrier)
     setEditModalIsOpen(true)
   }
-  const deleteDeliveryMethodHandler = deliveryMethod => {
-    setDeleteDeliveryMethod(deliveryMethod)
+  const deleteCarrierHandler = carrier => {
+    setDeleteCarrier(carrier)
     setDeleteModalIsOpen(true)
   }
 
@@ -44,7 +44,7 @@ const DeliveryMethodsScreen = () => {
     <main className="flex-1">
       <div className="content">
         <div className="px-3 pt-2 pb-3 mt-3 mb-3 bg-gray-800 rounded-xl">
-          <h2 className="mb-2 text-xl font-bold">Dostawy</h2>
+          <h2 className="mb-2 text-xl font-bold">Przewoźnicy</h2>
 
           <div className="flex flex-col gap-4 md:items-center md:flex-row md:justify-between md:gap-0">
             <div className="flex flex-col gap-2 md:grow md:items-center md:flex-row md:gap-4">
@@ -99,21 +99,21 @@ const DeliveryMethodsScreen = () => {
             <div>
               <button
                 type="button"
-                onClick={() => editDeliveryMethodHandler(null)}
+                onClick={() => editCarrierHandler(null)}
                 className="px-2 py-1 transition border-2 border-white md:ml-6 rounded-xl bg-white/10 hover:bg-white/20 active:scale-90"
               >
                 Dodaj
               </button>
 
-              <EditDeliveryMethodModal
-                editElement={editDeliveryMethod}
-                setEditElement={setEditDeliveryMethod}
+              <EditCarrierModal
+                editElement={editCarrier}
+                setEditElement={setEditCarrier}
                 isOpen={editModalIsOpen}
                 setIsOpen={setEditModalIsOpen}
               />
               <DeleteModal
-                deleteElement={deleteDeliveryMethod}
-                setDeleteElement={setDeleteDeliveryMethod}
+                deleteElement={deleteCarrier}
+                setDeleteElement={setDeleteCarrier}
                 isOpen={deleteModalIsOpen}
                 setIsOpen={setDeleteModalIsOpen}
               />
@@ -134,21 +134,21 @@ const DeliveryMethodsScreen = () => {
 
             {
               <tbody>
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
-                <DeliveryMethod editHandler={editDeliveryMethodHandler} deleteHandler={deleteDeliveryMethodHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
+                <Carrier editHandler={editCarrierHandler} deleteHandler={deleteCarrierHandler} />
               </tbody>
             }
           </table>
@@ -164,4 +164,4 @@ const DeliveryMethodsScreen = () => {
   )
 }
 
-export default DeliveryMethodsScreen
+export default CarriersScreen

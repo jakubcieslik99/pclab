@@ -1,4 +1,4 @@
-const DeliveryMethod = props => {
+const Carrier = props => {
   return (
     <tr className="border-t border-gray-600">
       <td className="pl-3 pr-3">
@@ -7,7 +7,7 @@ const DeliveryMethod = props => {
 
       <td className="py-[6px] pr-2">
         <div className="flex flex-col min-w-[384px] max-w-[384px] md:max-w-[459px] lg:max-w-[598px]">
-          <p className="mb-[2px] truncate">{'Obudowa Cooler Master NR200P'}</p>
+          <p className="mb-[2px] truncate">{'Kurier InPost'}</p>
           <div className="flex gap-1 text-sm text-gray-500">
             <p>ID:</p>
             <p>{'507f1f77bcf86cd799439011'}</p>
@@ -42,4 +42,4 @@ const DeliveryMethod = props => {
   )
 }
 
-export default DeliveryMethod
+export default Carrier
