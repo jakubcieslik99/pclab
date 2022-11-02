@@ -1,0 +1,39 @@
+{
+  "name": "pclab-server",
+  "version": "1.0.0",
+  "description": "PCLab",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --watch src --exec babel-node src/server.js",
+    "dev-win": "nodemon --watch src --exec ./node_modules/.bin/babel-node src/server.js",
+    "build": "babel src -d dist",
+    "prod": "node dist/server.js"
+  },
+  "author": "Jakub Cieślik",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
+    "@babel/node": "^7.20.0",
+    "@babel/preset-env": "^7.19.4",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-rate-limit": "^6.6.0",
+    "express-slow-down": "^1.5.0",
+    "helmet": "^6.0.0",
+    "http-errors": "^2.0.0",
+    "joi": "^17.6.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.0",
+    "nodemailer": "^6.8.0",
+    "pino": "^8.7.0",
+    "pino-pretty": "^9.1.1"
+  }
+}
