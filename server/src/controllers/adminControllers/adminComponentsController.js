@@ -44,7 +44,7 @@ const getComponents = async (req, res) => {
 }
 //GET - /admin/components/getComponent/:id
 const getComponent = async (req, res) => {
-  const listedComponent = await Component.findById(req.params.id).populate.exec()
+  const listedComponent = await Component.findById(req.params.id).exec()
   if (!listedComponent) throw createError(404, 'Podany komponent nie istnieje.')
 
   return res.status(200).send({ component: listedComponent })
