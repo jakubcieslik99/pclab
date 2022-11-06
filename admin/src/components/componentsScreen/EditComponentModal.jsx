@@ -276,6 +276,27 @@ const EditComponentModal = props => {
                           <option value="am4" className="text-gray-800">
                             AM4
                           </option>
+                          <option value="am3+" className="text-gray-800">
+                            AM3+
+                          </option>
+                          <option value="lga2066" className="text-gray-800">
+                            LGA 2066
+                          </option>
+                          <option value="lga1700" className="text-gray-800">
+                            LGA 1700
+                          </option>
+                          <option value="lga1200" className="text-gray-800">
+                            LGA 1200
+                          </option>
+                          <option value="lga1156" className="text-gray-800">
+                            LGA 1156
+                          </option>
+                          <option value="lga1155" className="text-gray-800">
+                            LGA 1155
+                          </option>
+                          <option value="lga1151" className="text-gray-800">
+                            LGA 1151
+                          </option>
                           <option value="lga1150" className="text-gray-800">
                             LGA 1150
                           </option>
@@ -418,7 +439,7 @@ const EditComponentModal = props => {
                         {renderFilesHandler()}
                       </div>
 
-                      <p className="text-[11px] text-gray-600">Maksymalna wielkość zdjęcia (.png/.jpg/.jpeg) to 5 MB.</p>
+                      <p className="text-[11px] text-gray-600">Maksymalna wielkość zdjęcia (.png/.jpg/.jpeg) to 3 MB.</p>
                     </div>
                   </div>
 

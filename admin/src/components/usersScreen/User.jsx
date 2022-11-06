@@ -6,9 +6,12 @@ const User = props => {
       </td>
 
       <td className="py-[7px] pr-3">
-        <div className="flex flex-col gap-[5px] min-w-[384px] max-w-[384px] md:max-w-[389px] lg:max-w-[459px]">
+        <div className="flex flex-col gap-[5px] min-w-[384px] max-w-[384px] md:max-w-[410px] lg:max-w-[459px]">
           <div className="flex gap-1 text-[13px] md:text-[14px] text-gray-400">
-            <p>Użytkownik:</p>
+            <p>
+              {true ? <span>Użytkownik</span> : <span className="font-semibold text-red-400">Admin</span>}
+              <span>:</span>
+            </p>
             <a
               href={'http://localhost:3000/profile/2137'}
               target="_blank"
@@ -59,6 +62,12 @@ const User = props => {
 
       <td className="pr-3">
         <div className="flex items-center justify-center gap-[6px]">
+          <button
+            onClick={() => props.editHandler({ id: '507f1f77bcf86cd799439011', name: 'johndoe99' })}
+            className="px-[6px] py-[3px] text-sm border-2 border-white rounded-xl bg-white/10 transition hover:bg-white/20 active:scale-90"
+          >
+            Edytuj
+          </button>
           <button
             onClick={() => props.deleteHandler({ id: '507f1f77bcf86cd799439011', name: 'johndoe99' })}
             className="px-[6px] py-[3px] text-sm text-red-500 border-2 border-red-500 rounded-xl bg-red-500/10 transition hover:bg-red-500/20 active:scale-90"

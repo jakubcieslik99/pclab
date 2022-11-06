@@ -2,18 +2,21 @@ import { useState, Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { FaSearch, FaAngleDown } from 'react-icons/fa'
 import User from '../components/usersScreen/User'
+import EditUserModal from '../components/usersScreen/EditUserModal'
 import DeleteModal from '../components/universal/DeleteModal'
 import Paginator from '../components/universal/Paginator'
 
 const sortingOptions = [
   { id: 1, name: 'Ostatnio zarejestrowani', value: 'newest' },
   { id: 2, name: 'Najwcześniej zarejestrowani', value: 'oldest' },
-  { id: 3, name: 'A-Z', value: 'a_z' },
-  { id: 4, name: 'Z-A', value: 'z_a' },
-  { id: 5, name: 'Najwięcej komentarzy', value: 'most_comments' },
-  { id: 6, name: 'Najmniej komentarzy', value: 'least_comments' },
-  { id: 7, name: 'Najwięcej zestawów', value: 'most_setups' },
-  { id: 8, name: 'Najmniej zestawów', value: 'least_setups' },
+  { id: 3, name: 'Od administratorów', value: 'from_admins' },
+  { id: 4, name: 'Od użytkowników', value: 'from_users' },
+  { id: 5, name: 'A-Z', value: 'a_z' },
+  { id: 6, name: 'Z-A', value: 'z_a' },
+  { id: 7, name: 'Najwięcej komentarzy', value: 'most_comments' },
+  { id: 8, name: 'Najmniej komentarzy', value: 'least_comments' },
+  { id: 9, name: 'Najwięcej zestawów', value: 'most_setups' },
+  { id: 10, name: 'Najmniej zestawów', value: 'least_setups' },
 ]
 
 const UsersScreen = () => {
@@ -21,6 +24,8 @@ const UsersScreen = () => {
   const [searching, setSearching] = useState('')
   const [sorting, setSorting] = useState(sortingOptions[0])
 
+  const [editUser, setEditUser] = useState(null)
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false)
   const [deleteUser, setDeleteUser] = useState(null)
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
 
@@ -29,6 +34,10 @@ const UsersScreen = () => {
     e.preventDefault()
     console.log('searching')
     console.log(searching)
+  }
+  const editUserHandler = user => {
+    setEditUser(user)
+    setEditModalIsOpen(true)
   }
   const deleteUserHandler = user => {
     setDeleteUser(user)
@@ -91,6 +100,12 @@ const UsersScreen = () => {
               </Listbox>
             </div>
 
+            <EditUserModal
+              editElement={editUser}
+              setEditElement={setEditUser}
+              isOpen={editModalIsOpen}
+              setIsOpen={setEditModalIsOpen}
+            />
             <DeleteModal
               deleteElement={deleteUser}
               setDeleteElement={setDeleteUser}
@@ -113,21 +128,21 @@ const UsersScreen = () => {
 
             {
               <tbody>
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
-                <User deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
+                <User editHandler={editUserHandler} deleteHandler={deleteUserHandler} />
               </tbody>
             }
           </table>
