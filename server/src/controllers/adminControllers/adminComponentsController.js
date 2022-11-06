@@ -102,6 +102,7 @@ const createComponent = async (req, res) => {
     ramCompat: validationResult.ramCompat,
     url: validationResult.url,
     price: validationResult.price,
+    amount: validationResult.amount,
     images: [],
   })
 
