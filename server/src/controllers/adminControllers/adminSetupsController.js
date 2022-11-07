@@ -1,5 +1,6 @@
 import createError from 'http-errors'
 import Setup from '../../models/setupModel.js'
+import User from '../../models/userModel.js'
 
 //GET - /admin/setups/getSetups
 const getSetups = async (req, res) => {
@@ -9,8 +10,10 @@ const getSetups = async (req, res) => {
   let sort = {}
   if (req.query.sorting && req.query.sorting === 'price_highest') sort = { price: -1 }
   else if (req.query.sorting && req.query.sorting === 'price_lowest') sort = { price: 1 }
-  else if (req.query.sorting && req.query.sorting === 'amount_highest') sort = { amount: -1 }
-  else if (req.query.sorting && req.query.sorting === 'amount_lowest') sort = { amount: 1 }
+  else if (req.query.sorting && req.query.sorting === 'least_popular') sort = { amount: 1 }
+  else if (req.query.sorting && req.query.sorting === 'most_popular') sort = { amount: -1 }
+  else if (req.query.sorting && req.query.sorting === 'worst_rating') sort = { amount: 1 }
+  else if (req.query.sorting && req.query.sorting === 'best_rating') sort = { amount: -1 }
   else if (req.query.sorting && req.query.sorting === 'oldest') sort = { createdAt: 1 }
   else if (req.query.sorting && req.query.sorting === 'newest') sort = { createdAt: -1 }
   else sort = { createdAt: -1 }
@@ -69,7 +72,13 @@ const deleteSetup = async (req, res) => {
   const deletedSetup = await Setup.findById(req.params.id).exec()
   if (!deletedSetup) throw createError(404, 'Podana konfiguracja nie istnieje.')
 
-  //find and delete setup from every user's liked setups
+  if (deletedSetup.likes > 0) {
+    const users = await User.find({ likedSetups: deletedSetup.id }).exec()
+    for (const user of users) {
+      user.likedSetups = user.likedSetups.filter(setup => setup.toString() !== deletedSetup.id)
+      await user.save()
+    }
+  }
 
   await deletedSetup.remove()
 

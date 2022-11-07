@@ -1,5 +1,15 @@
 import { Schema, model } from 'mongoose'
 
+const commentSchema = new Schema(
+  {
+    addedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    comment: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+)
+
 const setupSchema = new Schema(
   {
     addedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -13,6 +23,9 @@ const setupSchema = new Schema(
     driveTwo: { type: Schema.Types.ObjectId, ref: 'Component' },
     driveThree: { type: Schema.Types.ObjectId, ref: 'Component' },
     description: { type: String },
+    likes: { type: Number, default: 0 },
+    comments: [commentSchema],
+    bought: { type: Number, default: 0 },
   },
   {
     timestamps: true,

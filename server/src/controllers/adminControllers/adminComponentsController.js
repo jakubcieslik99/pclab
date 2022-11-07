@@ -1,6 +1,8 @@
 import createError from 'http-errors'
 import { createDirectory, removeDirectory, saveFiles, filterFiles } from '../../functions/manageUploads'
 import Component from '../../models/componentModel'
+import Setup from '../../models/setupModel'
+import User from '../../models/userModel'
 import {
   getComponentsValidation,
   createComponentValidation,
@@ -183,12 +185,80 @@ const deleteComponent = async (req, res) => {
   if (!deletedComponent) throw createError(404, 'Podany komponent nie istnieje.')
 
   //find and delete every setup containing deleted component
+  switch (deletedComponent.type) {
+    case 'case': {
+      const deletedSetups = await Setup.find({ case: deletedComponent.id }).exec()
+      for (const deletedSetup of deletedSetups) {
+        if (deletedSetup.likes > 0) {
+          const users = await User.find({ likedSetups: deletedSetup.id }).exec()
+          for (const user of users) {
+            user.likedSetups = user.likedSetups.filter(setup => setup.toString() !== deletedSetup.id)
+            await user.save()
+          }
+        }
+        await deletedSetup.remove()
+      }
+    }
+    case 'cpu': {
+      const setups = await Setup.find({ cpu: deletedComponent.id }).exec()
+      for (const setup of setups) {
+        setup.cpu = null
+        await setup.save()
+      }
+    }
+    case 'mobo': {
+      const setups = await Setup.find({ mobo: deletedComponent.id }).exec()
+      for (const setup of setups) {
+        setup.mobo = null
+        await setup.save()
+      }
+    }
+    case 'ram': {
+      const setups = await Setup.find({ ram: deletedComponent.id }).exec()
+      for (const setup of setups) {
+        setup.ram = null
+        await setup.save()
+      }
+    }
+    case 'gpu': {
+      const setups = await Setup.find({ gpu: deletedComponent.id }).exec()
+      for (const setup of setups) {
+        setup.gpu = null
+        await setup.save()
+      }
+    }
+    case 'psu': {
+      const setups = await Setup.find({ psu: deletedComponent.id }).exec()
+      for (const setup of setups) {
+        setup.psu = null
+        await setup.save()
+      }
+    }
+    case 'drive': {
+      const setupsOne = await Setup.find({ driveOne: deletedComponent.id }).exec()
+      for (const setup of setupsOne) {
+        setup.driveOne = null
+        await setup.save()
+      }
+      const setupsTwo = await Setup.find({ driveTwo: deletedComponent.id }).exec()
+      for (const setup of setupsTwo) {
+        setup.driveTwo = null
+        await setup.save()
+      }
+      const setupsThree = await Setup.find({ driveThree: deletedComponent.id }).exec()
+      for (const setup of setupsThree) {
+        setup.driveThree = null
+        await setup.save()
+      }
+    }
+    default:
+  }
 
   await removeDirectory(`components/${deletedComponent.id}`)
 
   await deletedComponent.remove()
 
-  return res.status(200).send({ message: 'Usunięto komponent.' })
+  return res.status(200).send({ message: 'Usunięto komponent i zaktualizowano odpowiednie zestawy.' })
 }
 
 export { getComponents, getComponent, createComponent, updateComponent, deleteComponent }
