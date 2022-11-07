@@ -14,6 +14,8 @@ const userSchema = new Schema(
     nick: { type: String, required: true },
     password: { type: String, required: true },
     likedSetups: [{ type: Schema.Types.ObjectId, ref: 'Setup' }],
+    setupsCount: { type: Number, default: 0 },
+    commentsCount: { type: Number, default: 0 },
     isAdmin: { type: Boolean, default: false },
     token: { type: String /* | null*/ },
     confirmed: { type: Boolean, default: false },
