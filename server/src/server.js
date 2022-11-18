@@ -16,6 +16,7 @@ import adminCarriersRoute from './routes/adminRoutes/adminCarriersRoute'
 import adminComponentsRoute from './routes/adminRoutes/adminComponentsRoute'
 import adminSetupsRoute from './routes/adminRoutes/adminSetupsRoute'
 import adminUsersRoute from './routes/adminRoutes/adminUsersRoute'
+import authRoute from './routes/authRoute'
 
 const app = express()
 app.set('trust proxy', `loopback, ${config.IP}`)
@@ -37,6 +38,7 @@ app.use('/admin/components', adminComponentsRoute)
 app.use('/admin/setups', adminSetupsRoute)
 app.use('/admin/users', adminUsersRoute)
 //routes
+app.use('/auth', authRoute)
 
 //404 error
 app.all('*', (_req, _res, next) => next(createError(404, 'Podany zasób nie istnieje.')))
