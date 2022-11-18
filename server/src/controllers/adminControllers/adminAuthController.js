@@ -3,12 +3,12 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import User from '../../models/userModel'
 import { config } from '../../config/utilities'
-import { loginValidation } from '../../validations/adminAuthValidation'
+import { loginValidation } from '../../validations/adminValidations/adminAuthValidation'
 import { getAccessToken, getRefreshToken } from '../../functions/generateTokens'
 
 //POST - /admin/auth/login
 const login = async (req, res) => {
-  if (req.cookies?.refreshToken) throw createError(409, 'Użytkownik jest zalogowany.')
+  if (req.cookies?.refreshTokenAdmin) throw createError(409, 'Użytkownik jest zalogowany.')
 
   const validationResult = await loginValidation.validateAsync(req.body)
 
@@ -22,15 +22,18 @@ const login = async (req, res) => {
 
   const accessToken = await getAccessToken(loggedAdmin.id, loggedAdmin.email, loggedAdmin.nick, loggedAdmin.isAdmin)
   if (!accessToken) throw createError(500, 'Błąd serwera.')
-  const refreshToken = await getRefreshToken(loggedAdmin.id, loggedAdmin.email, loggedAdmin.nick, loggedAdmin.isAdmin)
-  if (!refreshToken) throw createError(500, 'Błąd serwera.')
+  const refreshTokenAdmin = await getRefreshToken(loggedAdmin.id, loggedAdmin.email, loggedAdmin.nick, loggedAdmin.isAdmin)
+  if (!refreshTokenAdmin) throw createError(500, 'Błąd serwera.')
 
-  loggedAdmin.refreshTokens = loggedAdmin.refreshTokens.filter(element => element.expirationDate > Date.now())
-  loggedAdmin.refreshTokens.push({ refreshToken, expirationDate: Date.now() + 90 * 24 * 3600 * 1000 })
+  loggedAdmin.refreshTokensAdmin = loggedAdmin.refreshTokensAdmin.filter(element => element.expirationDate > Date.now())
+  loggedAdmin.refreshTokensAdmin.push({
+    refreshToken: refreshTokenAdmin,
+    expirationDate: Date.now() + 90 * 24 * 3600 * 1000,
+  })
   await loggedAdmin.save()
 
   return res
-    .cookie('refreshToken', refreshToken, {
+    .cookie('refreshTokenAdmin', refreshTokenAdmin, {
       httpOnly: true,
       sameSite: 'none',
       secure: config.ENV !== 'test' ? true : false,
@@ -51,12 +54,15 @@ const login = async (req, res) => {
 
 //GET - /admin/auth/refreshAccessToken
 const refreshAccessToken = async (req, res) => {
-  if (!req.cookies?.refreshToken) throw createError(401, 'Błąd autoryzacji.')
+  if (!req.cookies?.refreshTokenAdmin) throw createError(401, 'Błąd autoryzacji.')
 
-  const checkedAdmin = await User.findOne({ 'refreshTokens.refreshToken': req.cookies.refreshToken, isAdmin: true }).exec()
+  const checkedAdmin = await User.findOne({
+    'refreshTokensAdmin.refreshToken': req.cookies.refreshTokenAdmin,
+    isAdmin: true,
+  }).exec()
   if (!checkedAdmin) throw createError(401, 'Błąd autoryzacji.')
 
-  jwt.verify(req.cookies.refreshToken, config.JWT_REFRESH_TOKEN_SECRET, async (error, decode) => {
+  jwt.verify(req.cookies.refreshTokenAdmin, config.JWT_REFRESH_TOKEN_SECRET, async (error, decode) => {
     if (error || checkedAdmin.id !== decode.id) throw createError(401, 'Błąd autoryzacji.')
 
     const accessToken = await getAccessToken(decode.id, decode.email)
@@ -67,43 +73,25 @@ const refreshAccessToken = async (req, res) => {
 }
 //GET - /admin/auth/logout
 const logout = async (req, res) => {
-  if (!req.cookies?.refreshToken) return res.sendStatus(204)
+  if (!req.cookies?.refreshTokenAdmin) return res.sendStatus(204)
 
-  const checkedAdmin = await User.findOne({ 'refreshTokens.refreshToken': req.cookies.refreshToken, isAdmin: true }).exec()
+  const checkedAdmin = await User.findOne({
+    'refreshTokensAdmin.refreshToken': req.cookies.refreshTokenAdmin,
+    isAdmin: true,
+  }).exec()
   if (!checkedAdmin)
     return res
-      .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
+      .clearCookie('refreshTokenAdmin', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
       .sendStatus(204)
 
-  checkedAdmin.refreshTokens = checkedAdmin.refreshTokens.filter(
-    element => element.refreshToken !== req.cookies.refreshToken
+  checkedAdmin.refreshTokensAdmin = checkedAdmin.refreshTokensAdmin.filter(
+    element => element.refreshToken !== req.cookies.refreshTokenAdmin
   )
   await checkedAdmin.save()
 
   return res
-    .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
+    .clearCookie('refreshTokenAdmin', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
     .sendStatus(204)
 }
 
-//temporary controller for testing purposes (GET - /admin/auth/tempRegister)
-const tempRegister = async (_req, res) => {
-  const salt = await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash('admin123', salt)
-
-  const registerUser = new User({
-    email: 'admin@gmail.com',
-    nick: 'Administrator',
-    password: hashedPassword,
-    isAdmin: true,
-    token: null,
-    confirmed: true,
-  })
-  await registerUser.save()
-
-  console.log('Zarejestrowano pomyślnie.')
-  return res.status(201).send({
-    message: 'Zarejestrowano pomyślnie.',
-  })
-}
-
-export { login, refreshAccessToken, logout, tempRegister }
+export { login, refreshAccessToken, logout }

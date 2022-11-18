@@ -20,6 +20,7 @@ const userSchema = new Schema(
     token: { type: String /* | null*/ },
     confirmed: { type: Boolean, default: false },
     refreshTokens: [refreshTokenSchema],
+    refreshTokensAdmin: [refreshTokenSchema],
   },
   {
     timestamps: true,

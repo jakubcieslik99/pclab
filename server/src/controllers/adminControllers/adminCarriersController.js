@@ -1,6 +1,6 @@
 import createError from 'http-errors'
 import Carrier from '../../models/carrierModel'
-import { createCarrierValidation, updateCarrierValidation } from '../../validations/adminCarriersValidation'
+import { createCarrierValidation, updateCarrierValidation } from '../../validations/adminValidations/adminCarriersValidation'
 
 //GET - /admin/carriers/getCarriers
 const getCarriers = async (req, res) => {

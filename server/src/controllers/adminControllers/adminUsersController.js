@@ -1,7 +1,7 @@
 import createError from 'http-errors'
 import User from '../../models/userModel.js'
 import Setup from '../../models/setupModel.js'
-import { updateUserValidation } from '../../validations/adminUsersValidation.js'
+import { updateUserValidation } from '../../validations/adminValidations/adminUsersValidation.js'
 
 //GET - /admin/users/getUsers
 const getUsers = async (req, res) => {

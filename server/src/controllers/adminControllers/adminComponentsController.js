@@ -7,7 +7,7 @@ import {
   getComponentsValidation,
   createComponentValidation,
   updateComponentValidation,
-} from '../../validations/adminComponentsValidation'
+} from '../../validations/adminValidations/adminComponentsValidation'
 
 //GET - /admin/components/getComponents
 const getComponents = async (req, res) => {
