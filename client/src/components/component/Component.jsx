@@ -14,7 +14,7 @@ const Component = props => {
             props.order ? 'max-w-[134px]' : 'max-w-[156px]'
           } rounded-br-xl border-r border-b border-white/[0.25] bg-white/[0.25] overflow-hidden`}
         >
-          <img src={noPhoto} alt="No photo" className="object-contain" />
+          <img src={noPhoto} alt="Not found" className="object-contain" />
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2 mt-1">
@@ -45,6 +45,13 @@ const Component = props => {
             <FaBoxOpen />
           </div>
           <div className="text-lg font-semibold truncate">{props.name}</div>
+
+          {true && (
+            <div className="flex gap-[3px] ml-3 items-baseline">
+              <span className="text-xs font-light">rozmiar:</span>
+              <span className="text-sm font-semibold">{'mATX'}</span>
+            </div>
+          )}
         </h3>
 
         <h4
@@ -55,9 +62,15 @@ const Component = props => {
 
         <div className="h-[54px] pb-[6px] px-2 flex flex-col justify-center">
           {
-            <div className="text-xs font-light">
-              Zgodn. z {'typem obudowy'}: <span className="font-semibold">{'ITX i większe'}</span>
-            </div>
+            /*type==='case' ? 1 : 2*/ true ? (
+              <div className="text-xs font-light">
+                Zgodn. z {'rozm. płyty gł.'}: <span className="font-semibold">{'mATX i mniejsze'}</span>
+              </div>
+            ) : (
+              <div className="text-xs font-light">
+                Zgodn. z {'rozm. obudowy'}: <span className="font-semibold">{'mATX i większe'}</span>
+              </div>
+            )
           }
           {
             <div className="text-xs font-light">
