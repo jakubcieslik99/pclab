@@ -9,7 +9,7 @@ const Component = props => {
 
       <td className="pr-3">
         <div className="aspect-[4/3] flex justify-center items-center mx-auto w-[70px] bg-white/[0.25] overflow-hidden rounded-lg">
-          <img src={noPhoto} alt="No photo" className="object-contain" />
+          <img src={noPhoto} alt="Not found" className="object-contain" />
         </div>
       </td>
 
@@ -21,8 +21,8 @@ const Component = props => {
 
             {
               <div className="flex items-baseline gap-[3px]">
-                <p className="text-[10px] font-light">{'Typ case:'}</p>
-                <p className="text-[11px] font-semibold">{'mATX i większe'} </p>
+                <p className="text-[10px] font-light">Rozmiar {true ? 'case' : 'MOBO'}:</p>
+                <p className="text-[11px] font-semibold">{'mATX'} </p>
               </div>
             }
             {

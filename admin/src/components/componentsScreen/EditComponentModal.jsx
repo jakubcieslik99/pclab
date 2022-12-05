@@ -226,7 +226,7 @@ const EditComponentModal = props => {
                     {type === 'case' && (
                       <div className="flex flex-col">
                         <label htmlFor="componentMoboCompat" className="text-sm mb-[2px]">
-                          Wybierz kompat. płyty gł.*:
+                          Wybierz rozmiar obudowy*:
                         </label>
                         <select
                           id="componentMoboCompat"
@@ -238,13 +238,13 @@ const EditComponentModal = props => {
                           }`}
                         >
                           <option value="" disabled hidden>
-                            Kompat. płyty gł.*
+                            Rozmiar obudowy*
                           </option>
                           <option value="atx" className="text-gray-800">
-                            ATX i mniejsze
+                            ATX
                           </option>
                           <option value="matx" className="text-gray-800">
-                            mATX i mniejsze
+                            mATX
                           </option>
                           <option value="itx" className="text-gray-800">
                             ITX
@@ -311,7 +311,7 @@ const EditComponentModal = props => {
                     {type === 'mobo' && (
                       <div className="flex flex-col">
                         <label htmlFor="componentCaseCompat" className="text-sm mb-[2px]">
-                          Wybierz kompat. obudowy*:
+                          Wybierz rozmiar płyty głównej*:
                         </label>
                         <select
                           id="componentCaseCompat"
@@ -323,13 +323,13 @@ const EditComponentModal = props => {
                           }`}
                         >
                           <option value="" disabled hidden>
-                            Kompat. obudowy*
+                            Rozmiar płyty głównej*
                           </option>
                           <option value="itx" className="text-gray-800">
-                            ITX i większe
+                            ITX
                           </option>
                           <option value="matx" className="text-gray-800">
-                            mATX i większe
+                            mATX
                           </option>
                           <option value="atx" className="text-gray-800">
                             ATX
