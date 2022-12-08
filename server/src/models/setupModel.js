@@ -22,7 +22,7 @@ const setupSchema = new Schema(
     driveOne: { type: Schema.Types.ObjectId, ref: 'Component' },
     driveTwo: { type: Schema.Types.ObjectId, ref: 'Component' },
     driveThree: { type: Schema.Types.ObjectId, ref: 'Component' },
-    description: { type: String },
+    description: { type: String, default: '' },
     likes: { type: Number, default: 0 },
     comments: [commentSchema],
     bought: { type: Number, default: 0 },
