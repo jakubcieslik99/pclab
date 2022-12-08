@@ -69,22 +69,22 @@ const createComponent = async (req, res) => {
   })
 
   if (validationResult.type === 'case') {
-    if (validationResult.moboCompat === '') throw createError(400, 'Kompatybilność z płytą główną jest wymagana.')
+    if (validationResult.moboCompat === '') throw createError(400, 'Rozmiar obudowy jest wymagany.') //Compatibility with a mobo size is required.
     validationResult.cpuCompat = ''
     validationResult.caseCompat = ''
     validationResult.ramCompat = ''
   } else if (validationResult.type === 'cpu') {
-    if (validationResult.cpuCompat === '') throw createError(400, 'Kompatybilność z socketem procesora jest wymagana.')
-    if (validationResult.ramCompat === '') throw createError(400, 'Kompatybilność z pamięcią RAM jest wymagana.')
+    if (validationResult.cpuCompat === '') throw createError(400, 'Zgodność z socketem procesora jest wymagana.')
+    if (validationResult.ramCompat === '') throw createError(400, 'Zgodność z pamięcią RAM jest wymagana.')
     validationResult.moboCompat = ''
     validationResult.caseCompat = ''
   } else if (validationResult.type === 'mobo') {
-    if (validationResult.cpuCompat === '') throw createError(400, 'Kompatybilność z socketem procesora jest wymagana.')
-    if (validationResult.caseCompat === '') throw createError(400, 'Kompatybilność z obudową jest wymagana.')
-    if (validationResult.ramCompat === '') throw createError(400, 'Kompatybilność z pamięcią RAM jest wymagana.')
+    if (validationResult.cpuCompat === '') throw createError(400, 'Zgodność z socketem procesora jest wymagana.')
+    if (validationResult.caseCompat === '') throw createError(400, 'Rozmiar płyty głównej jest wymagany.') //Compatibility with a case size is required.
+    if (validationResult.ramCompat === '') throw createError(400, 'Zgodność z pamięcią RAM jest wymagana.')
     validationResult.moboCompat = ''
   } else if (validationResult.type === 'ram') {
-    if (validationResult.ramCompat === '') throw createError(400, 'Kompatybilność z pamięcią RAM jest wymagana.')
+    if (validationResult.ramCompat === '') throw createError(400, 'Zgodność z pamięcią RAM jest wymagana.')
     validationResult.moboCompat = ''
     validationResult.cpuCompat = ''
     validationResult.caseCompat = ''
@@ -198,6 +198,7 @@ const deleteComponent = async (req, res) => {
         }
         await deletedSetup.remove()
       }
+      break
     }
     case 'cpu': {
       const setups = await Setup.find({ cpu: deletedComponent.id }).exec()
@@ -205,6 +206,7 @@ const deleteComponent = async (req, res) => {
         setup.cpu = null
         await setup.save()
       }
+      break
     }
     case 'mobo': {
       const setups = await Setup.find({ mobo: deletedComponent.id }).exec()
@@ -212,6 +214,7 @@ const deleteComponent = async (req, res) => {
         setup.mobo = null
         await setup.save()
       }
+      break
     }
     case 'ram': {
       const setups = await Setup.find({ ram: deletedComponent.id }).exec()
@@ -219,6 +222,7 @@ const deleteComponent = async (req, res) => {
         setup.ram = null
         await setup.save()
       }
+      break
     }
     case 'gpu': {
       const setups = await Setup.find({ gpu: deletedComponent.id }).exec()
@@ -226,6 +230,7 @@ const deleteComponent = async (req, res) => {
         setup.gpu = null
         await setup.save()
       }
+      break
     }
     case 'psu': {
       const setups = await Setup.find({ psu: deletedComponent.id }).exec()
@@ -233,6 +238,7 @@ const deleteComponent = async (req, res) => {
         setup.psu = null
         await setup.save()
       }
+      break
     }
     case 'drive': {
       const setupsOne = await Setup.find({ driveOne: deletedComponent.id }).exec()
@@ -250,6 +256,7 @@ const deleteComponent = async (req, res) => {
         setup.driveThree = null
         await setup.save()
       }
+      break
     }
     default:
   }

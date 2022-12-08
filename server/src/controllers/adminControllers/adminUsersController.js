@@ -47,7 +47,7 @@ const getUsers = async (req, res) => {
 }
 //GET - /admin/users/getUser/:id
 const getUser = async (req, res) => {
-  const listedUser = await User.findById(req.params.id).select('-password -token -refreshTokens').exec()
+  const listedUser = await User.findById(req.params.id).select('-password -token -refreshTokens -refreshTokensAdmin').exec()
   if (!listedUser) throw createError(404, 'Podany użytkownik nie istnieje.')
 
   return res.status(200).send({ user: listedUser })

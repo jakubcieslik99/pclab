@@ -7,7 +7,7 @@ const getComponentsValidation = Joi.object({
 const createComponentValidation = Joi.object({
   title: Joi.string().required().max(60),
   type: Joi.string().valid('case', 'cpu', 'mobo', 'ram', 'gpu', 'psu', 'drive'),
-  moboCompat: Joi.string().valid('', 'atx', 'matx', 'itx'),
+  moboCompat: Joi.string().valid('', 'atx', 'matx', 'itx'), //ATX-, mATX-, ITX
   cpuCompat: Joi.string().valid(
     '',
     'am5',
@@ -21,7 +21,7 @@ const createComponentValidation = Joi.object({
     'lga1151',
     'lga1150'
   ),
-  caseCompat: Joi.string().valid('', 'itx', 'matx', 'atx'),
+  caseCompat: Joi.string().valid('', 'itx', 'matx', 'atx'), //ITX+, mATX+, ATX
   ramCompat: Joi.string().valid('', 'ddr5', 'ddr4', 'ddr3', 'ddr2'),
   url: Joi.string()
     .required()
@@ -36,7 +36,7 @@ const createComponentValidation = Joi.object({
 const updateComponentValidation = Joi.object({
   title: Joi.string().required().max(60),
   type: Joi.string().valid('case', 'cpu', 'mobo', 'ram', 'gpu', 'psu', 'drive'),
-  moboCompat: Joi.string().valid('', 'atx', 'matx', 'itx'),
+  moboCompat: Joi.string().valid('', 'atx', 'matx', 'itx'), //ATX-, mATX-, ITX
   cpuCompat: Joi.string().valid(
     '',
     'am5',
@@ -50,7 +50,7 @@ const updateComponentValidation = Joi.object({
     'lga1151',
     'lga1150'
   ),
-  caseCompat: Joi.string().valid('', 'itx', 'matx', 'atx'),
+  caseCompat: Joi.string().valid('', 'itx', 'matx', 'atx'), //ITX+, mATX+, ATX
   ramCompat: Joi.string().valid('', 'ddr5', 'ddr4', 'ddr3', 'ddr2'),
   url: Joi.string()
     .required()
