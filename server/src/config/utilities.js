@@ -19,6 +19,9 @@ const config = {
   /*------------------------------------------------------------------------------------------*/
   CRYPTO_SECRET: process.env.CRYPTO_SECRET || 'CRYPTO_SECRET',
   /*------------------------------------------------------------------------------------------*/
+  STRIPE_SECRET: process.env.STRIPE_SECRET,
+  STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET,
+  /*------------------------------------------------------------------------------------------*/
   GMAIL_ADDRESS: process.env.GMAIL_ADDRESS,
   GMAIL_PASSWORD: process.env.GMAIL_PASSWORD,
   NOREPLY_ADDRESS: process.env.NOREPLY_ADDRESS || 'noreply@pclab.com',

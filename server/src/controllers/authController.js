@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import User from '../models/userModel'
 import Setup from '../models/setupModel'
+import Order from '../models/orderModel'
 import { config } from '../config/utilities'
 import {
   registerValidation,
@@ -165,6 +166,14 @@ const deleteMe = async (req, res) => {
 
   const deletedUser = await User.findById(authenticatedUser.id).exec()
   if (!deletedUser) throw createError(404, 'Podany użytkownik nie istnieje.')
+
+  const unfinishedOrders = await Order.find({
+    buyer: authenticatedUser.id,
+    status: { $ne: 'returned' },
+    updatedAt: { $lt: new Date(new Date.getTime() - 14 * 24 * 3600 * 1000) }, //14 days back
+  }).exec()
+  if (unfinishedOrders.length > 0)
+    throw createError(402, 'Posiadasz zamówienie w realizacji. Twoje konto będzie można usunąć po jego zakończeniu.')
 
   for (const likedSetup of deletedUser.likedSetups) {
     const setup = await Setup.findById(likedSetup).exec()

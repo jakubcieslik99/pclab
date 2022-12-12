@@ -1,6 +1,6 @@
 import createError from 'http-errors'
 import User from '../models/userModel.js'
-//import Order from '../models/orderModel.js'
+import Order from '../models/orderModel.js'
 import Setup from '../models/setupModel.js'
 
 //GET - /user/getUser/:id
@@ -16,19 +16,24 @@ const getUser = async (req, res) => {
 const getMe = async (req, res) => {
   const { authenticatedUser } = res.locals
 
-  //const orders = await Order.find({ user: authenticatedUser.id })
-  const user = await User.findById(authenticatedUser.id).populate('likedSetups', '-comments').exec()
+  const orders = await Order.find({ buyer: authenticatedUser.id }).select('orderedComponents totalPrice createdAt').exec()
+
+  const user = await User.findById(authenticatedUser.id)
+    .populate([{ path: 'likedSetups', select: '-comments' }])
+    .select('likedSetups')
+    .exec()
 
   let likedSetupsFiltered = []
   for (let likedSetup of user.likedSetups) {
     const creator = await User.findById(likedSetup.addedBy).select('nick').exec()
     //likedSetupsFiltered.push({ ...likedSetup._doc, addedBy: creator.nick })
-    creator
+    likedSetupsFiltered.push({ ...likedSetup, addedBy: creator.nick })
+    /*creator
       ? likedSetupsFiltered.push({ ...likedSetup, addedBy: creator.nick })
-      : likedSetupsFiltered.push({ ...likedSetup, addedBy: undefined })
+      : likedSetupsFiltered.push({ ...likedSetup, addedBy: undefined })*/
   }
 
-  return res.status(200).send({ orders: {}, likedSetups: likedSetupsFiltered })
+  return res.status(200).send({ orders, likedSetups: likedSetupsFiltered })
 }
 
 export { getUser, getMe }

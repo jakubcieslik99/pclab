@@ -1,6 +1,7 @@
 import createError from 'http-errors'
 import User from '../../models/userModel.js'
 import Setup from '../../models/setupModel.js'
+import Order from '../../models/orderModel.js'
 import { updateUserValidation } from '../../validations/adminValidations/adminUsersValidation.js'
 
 //GET - /admin/users/getUsers
@@ -71,6 +72,13 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const deletedUser = await User.findById(req.params.id).exec()
   if (!deletedUser) throw createError(404, 'Podany użytkownik nie istnieje.')
+
+  const unfinishedOrders = await Order.find({
+    buyer: req.params.id,
+    status: { $ne: 'returned' },
+    updatedAt: { $lt: new Date(new Date.getTime() - 14 * 24 * 3600 * 1000) }, //14 days back
+  }).exec()
+  if (unfinishedOrders.length > 0) throw createError(402, 'Podany użytkownik posiada zamówienie w realizacji.')
 
   for (const likedSetup of deletedUser.likedSetups) {
     const setup = await Setup.findById(likedSetup).exec()

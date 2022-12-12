@@ -9,6 +9,7 @@ import { config, log } from './config/utilities'
 import databaseConnect from './config/databaseConnect'
 import corsOptions from './config/corsOptions'
 import { rateLimiter, speedLimiter } from './config/limitOptions'
+import bodyParser from './middlewares/parserMiddleware'
 import { isError } from './middlewares/errorMiddleware'
 import adminAuthRoute from './routes/adminRoutes/adminAuthRoute'
 import adminOrdersRoute from './routes/adminRoutes/adminOrdersRoute'
@@ -26,7 +27,7 @@ app.set('trust proxy', `loopback, ${config.IP}`)
 databaseConnect(app)
 
 app.use(express.urlencoded({ extended: false }))
-app.use(express.json({ limit: '3mb' }))
+app.use(bodyParser)
 app.use(cookieParser())
 app.use(helmet())
 app.use(cors(corsOptions))
