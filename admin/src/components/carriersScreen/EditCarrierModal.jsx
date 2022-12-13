@@ -10,8 +10,6 @@ const EditCarrierModal = props => {
     props.setIsOpen(false)
     setTimeout(() => {
       props.setEditElement(null)
-
-      setType('')
     }, 250)
   }
 

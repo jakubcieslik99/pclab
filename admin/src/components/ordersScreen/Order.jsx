@@ -52,6 +52,16 @@ const Order = props => {
               Nieopłacono
             </div>
           */}
+          {/*
+            <div className="px-2 pt-1 pb-[3px] text-sm font-semibold text-orange-700 bg-orange-300 border-2 border-orange-600 rounded-xl leading-[1.12rem]">
+              W trakcie płatności
+            </div>
+          */}
+          {/*
+            <div className="px-2 pt-1 pb-[3px] text-sm font-semibold text-red-700 bg-red-300 border-2 border-red-600 rounded-xl leading-[1.12rem]">
+              Anulowano
+            </div>
+          */}
           {
             <div className="px-2 pt-1 pb-[3px] text-sm font-semibold text-yellow-700 bg-yellow-200 border-2 border-yellow-700 rounded-xl leading-[1.12rem]">
               Oczekuje na wysyłkę

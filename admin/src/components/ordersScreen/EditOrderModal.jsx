@@ -84,16 +84,21 @@ const EditOrderModal = props => {
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-semibold">Metoda płatności:</h3>
-                        <div>{'Przelew'}</div>
-                      </div>
-
-                      <div>
                         <h3 className="text-lg font-semibold">Status zamówienia:</h3>
                         <div className="flex flex-col max-w-[168px]">
                           {/*
                             <div className="px-2 pt-1 pb-[3px] text-sm font-semibold text-red-700 bg-red-300 border-2 border-red-600 rounded-xl leading-[1.12rem]">
                               Nieopłacono
+                            </div>
+                          */}
+                          {/*
+                            <div className="px-2 pt-1 pb-[3px] text-sm font-semibold text-orange-700 bg-orange-300 border-2 border-orange-600 rounded-xl leading-[1.12rem]">
+                              W trakcie płatności
+                            </div>
+                          */}
+                          {/*
+                            <div className="px-2 pt-1 pb-[3px] text-sm font-semibold text-red-700 bg-red-300 border-2 border-red-600 rounded-xl leading-[1.12rem]">
+                              Anulowano
                             </div>
                           */}
                           {
@@ -129,7 +134,13 @@ const EditOrderModal = props => {
                         <option value="unpaid" disabled hidden>
                           Nieopłacono
                         </option>
-                        <option value="waiting" className="text-gray-800">
+                        <option value="paying" disabled hidden>
+                          W trakcie płatności
+                        </option>
+                        <option value="canceled" disabled hidden>
+                          Anulowane
+                        </option>
+                        <option value="awaiting" className="text-gray-800">
                           Oczekuje na wysyłkę
                         </option>
                         <option value="sent" className="text-gray-800">
@@ -145,7 +156,7 @@ const EditOrderModal = props => {
                       </div>
                     </div>
 
-                    {(status === 'waiting' || status === 'sent' || status === 'returned') && (
+                    {(status === 'awaiting' || status === 'sent') && (
                       <div>
                         <label htmlFor="orderTracking" className="text-sm">
                           Podaj numer śledzenia przesyłki*:

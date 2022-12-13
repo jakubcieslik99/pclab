@@ -8,16 +8,18 @@ import Paginator from '../components/universal/Paginator'
 const sortingOptions = [
   { id: 1, name: 'Najnowsze', value: 'newest' },
   { id: 2, name: 'Najstarsze', value: 'oldest' },
-  { id: 3, name: 'Suma (od najniższej)', value: 'price_lowest' },
-  { id: 4, name: 'Suma (od najwyższej)', value: 'price_highest' },
+  { id: 3, name: 'Suma (od najniższej)', value: 'total_price_lowest' },
+  { id: 4, name: 'Suma (od najwyższej)', value: 'total_price_highest' },
 ]
 
 const filteringOptions = [
   { id: 1, name: 'Wszystkie', value: 'all' },
-  { id: 2, name: 'Wysłane', value: 'sent' },
-  { id: 3, name: 'Oczekujące', value: 'waiting' },
+  { id: 2, name: 'Oczekujące', value: 'awaiting' },
+  { id: 3, name: 'Wysłane', value: 'sent' },
   { id: 4, name: 'Nieopłacone', value: 'unpaid' },
-  { id: 5, name: 'Zwrócone', value: 'returned' },
+  { id: 5, name: 'W trakcie płatności', value: 'paying' },
+  { id: 6, name: 'Anulowane', value: 'canceled' },
+  { id: 7, name: 'Zwrócone', value: 'returned' },
 ]
 
 const OrdersScreen = () => {
