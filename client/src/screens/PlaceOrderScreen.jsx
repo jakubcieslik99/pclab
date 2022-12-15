@@ -1,17 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaTruck, FaCheckCircle, FaHandPointRight, FaInfo } from 'react-icons/fa'
 import Component from '../components/component/Component'
 import Error from '../components/alerts/Error'
 
 const PlaceOrderScreen = () => {
   //variables
-  const [id, setId] = useState('507f1f77bcf86cd799439011')
+  const [id, setId] = useState('')
 
   //handlers
   const submitHandler = e => {
     e.preventDefault()
     console.log('submitHandler')
   }
+
+  //useEffects
+  useEffect(() => {
+    setId('638e4ad246891501366930f5')
+  }, [])
 
   return (
     <main className="flex-1">

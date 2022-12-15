@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Elements } from '@stripe/react-stripe-js'
 import { BiCaretLeftCircle } from 'react-icons/bi'
 import { FaEnvelope, FaPhoneAlt, FaTruck } from 'react-icons/fa'
@@ -9,13 +9,19 @@ import stripeOptions from '../components/orderScreen/stripeOptions'
 
 const OrderScreen = props => {
   //variables
-  const stripeOptionsLocal = {
-    clientSecret: 'pi_3LEYnSJtbJWEJlni0fCsj5Hr_secret_FJr5evFCIkDlPu2O9pvoI0oxQ',
+  const stripeOptionsAll = {
+    //clientSecret: '',
+    clientSecret: 'pi_3ME0kCJtbJWEJlni11bt4EZc_secret_zDXyzMcLr0nNwBWvII2bMGz5L',
     ...stripeOptions,
   }
 
-  const [id, setId] = useState('507f1f77bcf86cd799439011')
+  const [id, setId] = useState('')
   const [componentsIsOpen, setComponentsIsOpen] = useState(false)
+
+  //useEffects
+  useEffect(() => {
+    setId('638e4ad246891501366930f5')
+  }, [])
 
   return (
     <main className="flex-1">
@@ -128,21 +134,37 @@ const OrderScreen = props => {
                   <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-red-700 bg-red-300 border-2 border-red-600 rounded-xl leading-[1.12rem]">
                     Nieopłacono
                   </div>
+                  //unpaid/paying
+                }
+                {
+                  <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-orange-700 bg-orange-300 border-2 border-orange-600 rounded-xl leading-[1.12rem]">
+                    Przetwarzanie płatności
+                  </div>
+                  //paying
+                }
+                {
+                  <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-red-700 bg-red-300 border-2 border-red-600 rounded-xl leading-[1.12rem]">
+                    Anulowano
+                  </div>
+                  //canceled
                 }
                 {
                   <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-yellow-700 bg-yellow-200 border-2 border-yellow-700 rounded-xl leading-[1.12rem]">
                     Oczekuje na wysyłkę
                   </div>
+                  //awaiting
                 }
                 {
                   <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-green-700 bg-green-300 border-2 border-green-600 rounded-xl leading-[1.12rem]">
                     Wysłano
                   </div>
+                  //sent
                 }
                 {
                   <div className="px-3 pt-1 pb-[3px] text-sm font-semibold text-blue-700 bg-blue-300 border-2 border-blue-600 rounded-xl leading-[1.12rem]">
                     Zwrócono
                   </div>
+                  //returned
                 }
 
                 {
@@ -156,10 +178,12 @@ const OrderScreen = props => {
           </div>
 
           <div>
-            <h2 className="mb-[5px] text-xl font-bold">{true ? 'Płatność:' : 'Pomoc:'}</h2>
+            <h2 className="mb-[5px] text-xl font-bold">
+              {stripeOptionsAll.clientSecret && stripeOptionsAll.clientSecret !== 'finalized' ? 'Płatność:' : 'Pomoc:'}
+            </h2>
 
-            {true ? (
-              <Elements stripe={props.stripePromise} options={stripeOptionsLocal}>
+            {stripeOptionsAll.clientSecret && stripeOptionsAll.clientSecret !== 'finalized' ? (
+              <Elements stripe={props.stripePromise} options={stripeOptionsAll}>
                 <PaymentForm />
               </Elements>
             ) : (
