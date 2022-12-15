@@ -7,11 +7,7 @@ const Hero = () => {
       <div className="flex flex-col items-center h-full overflow-hidden md:flex-row-reverse content">
         <div className="flex items-center justify-center w-full h-[45%] pt-5 md:w-1/2 md:h-full md:justify-start md:m-0 md:pl-4 md:py-6 lg:pl-20">
           <div className="flex max-h-full aspect-square max-w-[350px] md:max-w-[430px] drop-shadow-lg">
-            <img
-              src={heroImage}
-              alt="Hero image"
-              className="object-cover max-w-full p-3 border-2 border-white rounded-full"
-            />
+            <img src={heroImage} alt="" className="object-cover max-w-full p-3 border-2 border-white rounded-full" />
           </div>
         </div>
 

@@ -14,7 +14,7 @@ const Component = props => {
             props.order ? 'max-w-[134px]' : 'max-w-[156px]'
           } rounded-br-xl border-r border-b border-white/[0.25] bg-white/[0.25] overflow-hidden`}
         >
-          <img src={noPhoto} alt="Not found" className="object-contain" />
+          <img src={noPhoto} alt="" className="object-contain" />
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2 mt-1">

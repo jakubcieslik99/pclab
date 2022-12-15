@@ -21,7 +21,7 @@ const LoginScreen = () => {
   //useEffects
   useEffect(() => {
     setParam && setPasswordSetModalIsOpen(true)
-  }, [])
+  }, [setParam])
 
   return (
     <main className="flex-1">

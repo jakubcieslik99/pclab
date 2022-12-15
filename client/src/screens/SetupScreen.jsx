@@ -88,13 +88,12 @@ const SetupScreen = () => {
               </div>
             </div>
             <div>
-              <button
-                type="button"
-                onClick={null}
+              <Link
+                to={`/placeorder/${'21372137'}`}
                 className="px-3 pt-[5px] pb-1 font-semibold text-pclab-600 bg-white rounded-xl transition active:scale-95 hover:bg-white/70"
               >
                 Kup teraz <FaCashRegister className="inline-flex ml-1" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
