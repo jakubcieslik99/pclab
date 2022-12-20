@@ -114,6 +114,7 @@ const SetupScreen = () => {
           >
             <textarea
               rows="3"
+              id="setupComment"
               name="comment"
               placeholder="Dodaj komentarz..."
               className="w-full bg-transparent resize-none outline-0 mt-[2px]"

@@ -78,8 +78,8 @@ const PasswordSetModal = props => {
                       </label>
                       <input
                         type="password"
-                        id="profileNewPassword"
-                        name="setNewPassword"
+                        id="setRepassword"
+                        name="repassword"
                         placeholder="Powtórz nowe hasło"
                         className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-pclab-600 focus:ring-transparent"
                       />

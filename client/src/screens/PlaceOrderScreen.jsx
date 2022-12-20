@@ -120,7 +120,7 @@ const PlaceOrderScreen = () => {
               </div>
 
               <div>
-                <label htmlFor="registerEmail" className="text-sm">
+                <label htmlFor="placeOrderAddress" className="text-sm">
                   Podaj adres*:
                 </label>
                 <input

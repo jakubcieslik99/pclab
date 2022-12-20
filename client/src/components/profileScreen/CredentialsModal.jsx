@@ -57,13 +57,13 @@ const CredentialsModal = props => {
 
                     <div>
                       <label htmlFor="profileEmail" className="text-sm">
-                        Podaj aktualny adres email*:
+                        Podaj adres email*:
                       </label>
                       <input
                         type="text"
                         id="profileEmail"
                         name="email"
-                        placeholder="Aktualny email*"
+                        placeholder="Adres email*"
                         className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-pclab-600 focus:ring-transparent"
                       />
 
@@ -73,14 +73,14 @@ const CredentialsModal = props => {
                     </div>
 
                     <div>
-                      <label htmlFor="profileNewEmail" className="text-sm">
-                        Podaj nowy adres email:
+                      <label htmlFor="profileNick" className="text-sm">
+                        Podaj nick*:
                       </label>
                       <input
                         type="text"
-                        id="profileNewEmail"
-                        name="newEmail"
-                        placeholder="Nowy email"
+                        id="profileNick"
+                        name="nick"
+                        placeholder="Nick*"
                         className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-pclab-600 focus:ring-transparent"
                       />
 
@@ -107,13 +107,13 @@ const CredentialsModal = props => {
                     </div>
 
                     <div>
-                      <label htmlFor="profileNewPassword" className="text-sm">
+                      <label htmlFor="profileNewpassword" className="text-sm">
                         Podaj nowe hasło:
                       </label>
                       <input
                         type="password"
-                        id="profileNewPassword"
-                        name="newPassword"
+                        id="profileNewpassword"
+                        name="newpassword"
                         placeholder="Nowe hasło"
                         className="border-2 border-gray-400/70 rounded-xl bg-white/[0.05] py-2 px-3 w-full transition-colors transition-duration-250 focus:outline-none focus:ring focus:border-pclab-600 focus:ring-transparent"
                       />
