@@ -4,10 +4,19 @@ import manageAccountReducer from './authSlices/manageAccount'
 import confirmAccountReducer from './authSlices/confirmAccount'
 import sendPasswordResetReducer from './authSlices/sendPasswordReset'
 import resetPasswordReducer from './authSlices/resetPassword'
-import getOrderSlice from './ordersSlices/getOrder'
-import placeOrderSlice from './ordersSlices/placeOrder'
-import getUserSlice from './userSlices/getUser'
-import getLoggedUserSlice from './userSlices/getLoggedUser'
+import getOrderReducer from './ordersSlices/getOrder'
+import placeOrderReducer from './ordersSlices/placeOrder'
+import getSetupsReducer from './setupsSlices/getSetups'
+import getSetupReducer from './setupsSlices/getSetup'
+import likeSetupReducer from './setupsSlices/likeSetup'
+import unlikeSetupReducer from './setupsSlices/unlikeSetup'
+import createCommentReducer from './setupsSlices/createComment'
+import getComponentsReducer from './setupsSlices/getComponents'
+import createSetupReducer from './setupsSlices/createSetup'
+import updateSetupReducer from './setupsSlices/updateSetup'
+import deleteSetupReducer from './setupsSlices/deleteSetup'
+import getUserReducer from './userSlices/getUser'
+import getLoggedUserReducer from './userSlices/getLoggedUser'
 
 const store = configureStore({
   reducer: {
@@ -17,12 +26,21 @@ const store = configureStore({
     sendPasswordReset: sendPasswordResetReducer,
     resetPassword: resetPasswordReducer,
     //ordersSlices
-    getOrder: getOrderSlice,
-    placeOrder: placeOrderSlice,
+    getOrder: getOrderReducer,
+    placeOrder: placeOrderReducer,
     //setupsSlice
+    getSetups: getSetupsReducer,
+    getSetup: getSetupReducer,
+    likeSetup: likeSetupReducer,
+    unlikeSetup: unlikeSetupReducer,
+    createComment: createCommentReducer,
+    getComponents: getComponentsReducer,
+    createSetup: createSetupReducer,
+    updateSetup: updateSetupReducer,
+    deleteSetup: deleteSetupReducer,
     //userSlice
-    getUser: getUserSlice,
-    getLoggedUser: getLoggedUserSlice,
+    getUser: getUserReducer,
+    getLoggedUser: getLoggedUserReducer,
   },
   devTools: import.meta.env.VITE_APP_ENV === 'prod' ? false : true,
 })

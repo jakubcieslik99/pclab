@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axiosPublic from '../../api/axiosPublic'
 import axiosProtected from '../../api/axiosProtected'
 
-const register = createAsyncThunk('/auth/register', async (sendData, thunkAPI) => {
+const registerAccount = createAsyncThunk('/auth/register', async (sendData, thunkAPI) => {
   try {
     const { data } = await axiosPublic.post(
       `/auth/register`,
@@ -85,7 +85,7 @@ const logout = createAsyncThunk('/auth/logout', async (_sendData, thunkAPI) => {
   }
 })
 
-export { register, login, updateAccount, deleteAccount, logout }
+export { registerAccount, login, updateAccount, deleteAccount, logout }
 
 const userInfo = localStorage.getItem('userInfo')
 
@@ -118,17 +118,17 @@ export const manageAccountSlice = createSlice({
   },
   extraReducers: builder => {
     //register
-    builder.addCase(register.pending, state => {
+    builder.addCase(registerAccount.pending, state => {
       state.loading = true
       state.success = false
       state.error = false
     })
-    builder.addCase(register.fulfilled, (state, action) => {
+    builder.addCase(registerAccount.fulfilled, (state, action) => {
       state.loading = false
       state.success = true
       state.successMessage = action.payload.message
     })
-    builder.addCase(register.rejected, (state, action) => {
+    builder.addCase(registerAccount.rejected, (state, action) => {
       state.loading = false
       if (action.payload) {
         state.error = true
