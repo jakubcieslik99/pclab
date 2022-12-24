@@ -95,7 +95,11 @@ const PasswordResetModal = props => {
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-pclab-600">
                     <h2 className="relative">
                       Zresetuj hasło
-                      <Loading isOpen={loading} customStyle="top-[3px] -right-[38px]" />
+                      <Loading
+                        isOpen={loading}
+                        customStyle="top-[3px] -right-[30px]"
+                        customLoadingStyle="w-[23px] h-[23px] border-pclab-600/20 border-t-pclab-600"
+                      />
                     </h2>
                     <button
                       type="button"

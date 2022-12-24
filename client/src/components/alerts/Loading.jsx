@@ -12,7 +12,11 @@ const Loading = props => {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="loading" />
+      <div
+        className={`loading ${
+          props.customLoadingStyle ? props.customLoadingStyle : 'w-[30px] h-[30px] border-white/20 border-t-white'
+        }`}
+      />
     </Transition>
   )
 }
