@@ -1,9 +1,15 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FaHeart, FaRegHeart, FaCashRegister } from 'react-icons/fa'
+import { useAppSelector } from '../features/store'
 import Component from '../components/component/Component'
 import Comment from '../components/setupScreen/Comment'
 
 const SetupScreen = () => {
+  //variables
+  const { userInfo } = useAppSelector(state => state.manageAccount)
+
+  const { pathname } = useLocation()
+
   //handlers
   const submitHandler = e => {
     e.preventDefault()
@@ -120,20 +126,22 @@ const SetupScreen = () => {
               className="w-full bg-transparent resize-none outline-0 mt-[2px]"
             />
 
-            <div className="flex items-center justify-between mb-[3px] gap-2">
-              <div className={`text-xs text-white/70 ${'visible'}`}>
-                Musisz się{' '}
-                <Link to="/login" className="underline">
-                  zalogować
-                </Link>
-                , aby dodać komentarz.
-              </div>
+            <div className={`flex items-center mb-[3px] gap-2 ${!userInfo ? 'justify-between' : 'justify-end'}`}>
+              {!userInfo && (
+                <div className="text-xs text-white/70">
+                  Musisz się{' '}
+                  <Link to="/login" state={{ from: pathname }} className="underline">
+                    zalogować
+                  </Link>
+                  , aby dodać komentarz.
+                </div>
+              )}
 
               <button
                 type="submit"
-                disabled={true}
+                disabled={!userInfo}
                 onClick={() => console.log('dupa')}
-                className="px-[12px] py-[6px] bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80 disabled:scale-100 disabled:bg-pclab-500/70 disabled:text-white/70"
+                className="justify-self-end px-[12px] py-[6px] bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80 disabled:scale-100 disabled:bg-pclab-500/70 disabled:text-white/70"
               >
                 Dodaj
               </button>

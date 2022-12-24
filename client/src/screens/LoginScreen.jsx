@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAppSelector, useAppDispatch } from '../features/store'
 import { successReset, errorReset, login } from '../features/authSlices/manageAccount'
@@ -46,6 +46,8 @@ const LoginScreen = () => {
   })
 
   const navigate = useNavigate()
+  const { state } = useLocation()
+  const locationFrom = state?.from || '/'
   const [searchParams] = useSearchParams()
 
   //handlers
@@ -59,9 +61,9 @@ const LoginScreen = () => {
 
   //useEffects
   useEffect(() => {
-    if (!success && userInfo) navigate('/')
+    if (!success && userInfo) navigate(locationFrom, { replace: true })
     else if (success && userInfo) setTimeout(() => dispatch(successReset()), 3000)
-  }, [success, userInfo, navigate, dispatch])
+  }, [success, userInfo, locationFrom, navigate, dispatch])
 
   useEffect(() => {
     const confirmToken = searchParams.get('confirmToken')
@@ -99,7 +101,11 @@ const LoginScreen = () => {
           <div className="flex justify-center mb-2">
             <h1 className="relative text-3xl font-semibold">
               Logowanie
-              <Loading isOpen={loading || loading2} customStyle="top-[3px] -right-[38px]" />
+              <Loading
+                isOpen={loading || loading2}
+                customStyle="top-[3px] -right-[40px]"
+                customLoadingStyle="w-[30px] h-[30px] border-white/20 border-t-white"
+              />
             </h1>
           </div>
 

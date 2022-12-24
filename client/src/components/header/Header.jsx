@@ -1,26 +1,25 @@
-import { useEffect, Fragment } from 'react'
+import { Fragment } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Transition, Menu } from '@headlessui/react'
 import { FaHome, FaBoxes, FaLaptopMedical, FaUserCircle, FaDoorOpen, FaBars, FaCaretDown } from 'react-icons/fa'
+import { useAppSelector, useAppDispatch } from '../../features/store'
+import { userInfoReset, logout } from '../../features/authSlices/manageAccount'
 import { BsCpuFill } from 'react-icons/bs'
 
 const Header = () => {
   //variables
+  const { userInfo } = useAppSelector(state => state.manageAccount)
+  const dispatch = useAppDispatch()
+
   const navigate = useNavigate()
-  const { pathname, state } = useLocation()
-  const locationLoginRequired = state?.loginRequired || false
+  const { pathname } = useLocation()
 
   //handlers
   const logoutHandler = () => {
-    console.log('logout')
+    dispatch(userInfoReset())
+    dispatch(logout())
+    navigate(pathname || '/', { replace: true })
   }
-
-  //useEffects
-  useEffect(() => {
-    if (locationLoginRequired) {
-      navigate(pathname, { replace: true })
-    }
-  }, [pathname, locationLoginRequired, navigate])
 
   return (
     <header className="sticky top-0 z-20 h-16 md:h-20">
@@ -55,7 +54,7 @@ const Header = () => {
                   <li>Stwórz</li>
                 </Link>
 
-                {false ? (
+                {!userInfo ? (
                   <Link
                     to="/login"
                     className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
@@ -66,7 +65,7 @@ const Header = () => {
                 ) : (
                   <>
                     <Link
-                      to={`/profile/${'507f1f77bcf86cd799439011'}`}
+                      to={`/profile/${userInfo.id}`}
                       className="flex flex-col items-center justify-center px-2 py-1 transition active:scale-95"
                     >
                       <FaUserCircle className="text-2xl" />
@@ -126,7 +125,7 @@ const Header = () => {
                   <li>Stwórz</li>
                 </Menu.Item>
 
-                {false ? (
+                {!userInfo ? (
                   <Menu.Item as={Link} to="/login" className="flex items-center p-3 transition-colors hover:bg-black/30">
                     <FaDoorOpen className="mr-2 text-xl" />
                     <li>Logowanie i rejestracja</li>
@@ -135,7 +134,7 @@ const Header = () => {
                   <>
                     <Menu.Item
                       as={Link}
-                      to={`/profile/${'507f1f77bcf86cd799439011'}`}
+                      to={`/profile/${userInfo.id}`}
                       className="flex items-center p-3 transition-colors hover:bg-black/30"
                     >
                       <FaUserCircle className="mr-2 text-xl" />

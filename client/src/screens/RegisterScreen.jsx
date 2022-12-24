@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAppSelector, useAppDispatch } from '../features/store'
 import { successReset, errorReset, registerAccount } from '../features/authSlices/manageAccount'
@@ -32,6 +32,8 @@ const RegisterScreen = () => {
   })
 
   const navigate = useNavigate()
+  const { state } = useLocation()
+  const locationFrom = state?.from || '/'
 
   //handlers
   const submitHandler = data => {
@@ -49,8 +51,8 @@ const RegisterScreen = () => {
 
   //useEffects
   useEffect(() => {
-    userInfo && navigate('/')
-  }, [userInfo, navigate])
+    userInfo && navigate(locationFrom, { replace: true })
+  }, [userInfo, locationFrom, navigate])
 
   useEffect(() => {
     return () => {
@@ -72,7 +74,11 @@ const RegisterScreen = () => {
           <div className="flex justify-center mb-2">
             <h1 className="relative text-3xl font-semibold">
               Rejestracja
-              <Loading isOpen={loading} customStyle="top-[3px] -right-[38px]" />
+              <Loading
+                isOpen={loading}
+                customStyle="top-[3px] -right-[40px]"
+                customLoadingStyle="w-[30px] h-[30px] border-white/20 border-t-white"
+              />
             </h1>
           </div>
 
