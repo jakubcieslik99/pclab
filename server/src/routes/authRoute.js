@@ -4,8 +4,8 @@ import { errorHandler } from '../middlewares/errorMiddleware'
 import {
   register,
   login,
-  updateMe,
-  deleteMe,
+  updateAccount,
+  deleteAccount,
   refreshAccessToken,
   logout,
   confirmAccount,
@@ -18,9 +18,9 @@ const router = express.Router()
 router.post('/register', errorHandler(register))
 router.post('/login', errorHandler(login))
 
-router.put('/updateMe', isAuth, errorHandler(updateMe))
+router.put('/updateAccount', isAuth, errorHandler(updateAccount))
 
-router.delete('/deleteMe', isAuth, errorHandler(deleteMe))
+router.delete('/deleteAccount', isAuth, errorHandler(deleteAccount))
 
 router.get('/refreshAccessToken', errorHandler(refreshAccessToken))
 router.get('/logout', errorHandler(logout))

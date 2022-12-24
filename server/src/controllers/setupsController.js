@@ -380,7 +380,7 @@ const updateSetup = async (req, res) => {
 
   await updatedSetup.save()
 
-  res.status(200).json({ message: 'Konfiguracja została zaktualizowana.' /*, setup: updatedSetup*/ })
+  res.status(200).json({ message: 'Zaktualizowano konfigurację.' /*, setup: updatedSetup*/ })
 }
 
 //DELETE - /setups/deleteSetup/:id

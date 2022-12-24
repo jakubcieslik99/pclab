@@ -80,7 +80,7 @@ const login = async (req, res) => {
     })
     .status(200)
     .send({
-      message: 'Zalogowano pomyślnie. Nastąpi przekierowanie do profilu.',
+      message: 'Zalogowano pomyślnie. Nastąpi automatyczne przekierowanie.',
       userInfo: {
         id: loggedUser.id,
         email: loggedUser.email,
@@ -91,8 +91,8 @@ const login = async (req, res) => {
     })
 }
 
-//PUT - /auth/updateMe
-const updateMe = async (req, res) => {
+//PUT - /auth/updateAccount
+const updateAccount = async (req, res) => {
   const { authenticatedUser } = res.locals
 
   const validationResult = await updateMeValidation.validateAsync({
@@ -160,8 +160,8 @@ const updateMe = async (req, res) => {
     })
 }
 
-//DELETE - /auth/deleteMe
-const deleteMe = async (req, res) => {
+//DELETE - /auth/deleteAccount
+const deleteAccount = async (req, res) => {
   const { authenticatedUser } = res.locals
 
   const deletedUser = await User.findById(authenticatedUser.id).exec()
@@ -294,4 +294,14 @@ const resetPassword = async (req, res) => {
   return res.status(200).send({ message: 'Zmieniono hasło pomyślnie. Teraz możesz się zalogować.' })
 }
 
-export { register, login, updateMe, deleteMe, refreshAccessToken, logout, confirmAccount, sendPasswordReset, resetPassword }
+export {
+  register,
+  login,
+  updateAccount,
+  deleteAccount,
+  refreshAccessToken,
+  logout,
+  confirmAccount,
+  sendPasswordReset,
+  resetPassword,
+}

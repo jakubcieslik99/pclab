@@ -9,13 +9,13 @@ const registerMessage = (to, nick, token) => {
       Witaj ${nick}! 
       Dziękujemy za rejestrację w PCLab. 
       Proszę skopiuj i wklej w przeglądarce poniższy link w celu potwierdzenia swojego konta w serwisie.
-      ${config.WEBAPP_URL}/confirm?token=${token}
+      ${config.WEBAPP_URL}/login?confirmToken=${token}
     `,
     html: `
       <h1>Witaj ${nick}!</h1>
       <h4>Dziękujemy za rejestrację w PCLab.</h4>
       <p>Proszę kliknij poniższy link w celu potwierdzenia swojego konta w serwisie.</p>
-      <a href="${config.WEBAPP_URL}/confirm?token=${token}">Potwierdź</a>
+      <a href="${config.WEBAPP_URL}/login?confirmToken=${token}">Potwierdź</a>
     `,
   }
 }
@@ -29,13 +29,13 @@ const sendPasswordResetMessage = (to, nick, token) => {
       Witaj ${nick}!
       Na Twoim koncie została wygenerowana prośba o zresetowanie hasła. Jeśli prośba nie została wygenerowana przez Ciebie, zignoruj tą wiadomość.
       Proszę skopiuj i wklej w przeglądarce poniższy link w celu zresetowania swojego hasła w serwisie.
-      ${config.WEBAPP_URL}/reset?token=${token}
+      ${config.WEBAPP_URL}/login?resetToken=${token}
     `,
     html: `
       <h1>Witaj ${nick}!</h1>
       <h4>Na Twoim koncie została wygenerowana prośba o zresetowanie hasła. Jeśli prośba nie została wygenerowana przez Ciebie, zignoruj tą wiadomość. </h4>
       <p>Proszę kliknij poniższy link w celu zresetowania swojego hasła w serwisie.</p>
-      <a href="${config.WEBAPP_URL}/reset?token=${token}">Ustaw nowe hasło</a>
+      <a href="${config.WEBAPP_URL}/login?resetToken=${token}">Ustaw nowe hasło</a>
     `,
   }
 }

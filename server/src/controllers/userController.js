@@ -12,8 +12,8 @@ const getUser = async (req, res) => {
 
   return res.status(200).send({ user: listedUser.nick, setups: listedUserSetups })
 }
-//GET - /user/getMe
-const getMe = async (req, res) => {
+//GET - /user/getLoggedUser
+const getLoggedUser = async (req, res) => {
   const { authenticatedUser } = res.locals
 
   const orders = await Order.find({ buyer: authenticatedUser.id }).select('orderedComponents totalPrice createdAt').exec()
@@ -36,4 +36,4 @@ const getMe = async (req, res) => {
   return res.status(200).send({ orders, likedSetups: likedSetupsFiltered })
 }
 
-export { getUser, getMe }
+export { getUser, getLoggedUser }
