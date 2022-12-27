@@ -29,10 +29,6 @@ const confirmAccountSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.successMessage = ''
-      state.errorMessage = ''
-    },
   },
   extraReducers: builder => {
     builder.addCase(confirmAccount.pending, state => {
@@ -55,5 +51,5 @@ const confirmAccountSlice = createSlice({
   },
 })
 
-export const { successReset, errorReset, messageReset } = confirmAccountSlice.actions
+export const { successReset, errorReset } = confirmAccountSlice.actions
 export default confirmAccountSlice.reducer

@@ -29,10 +29,6 @@ const createCommentSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.successMessage = ''
-      state.errorMessage = ''
-    },
   },
   extraReducers: builder => {
     builder.addCase(createComment.pending, state => {
@@ -55,5 +51,5 @@ const createCommentSlice = createSlice({
   },
 })
 
-export const { successReset, errorReset, messageReset } = createCommentSlice.actions
+export const { successReset, errorReset } = createCommentSlice.actions
 export default createCommentSlice.reducer

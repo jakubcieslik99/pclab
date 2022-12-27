@@ -26,9 +26,6 @@ export const getLoggedUserSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.errorMessage = ''
-    },
     getLoggedUserReset: state => {
       state.orders = []
       state.likedSetups = []
@@ -54,5 +51,5 @@ export const getLoggedUserSlice = createSlice({
   },
 })
 
-export const { errorReset, messageReset, getLoggedUserReset } = getLoggedUserSlice.actions
+export const { errorReset, getLoggedUserReset } = getLoggedUserSlice.actions
 export default getLoggedUserSlice.reducer

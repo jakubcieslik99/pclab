@@ -29,9 +29,6 @@ export const placeOrderSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.errorMessage = ''
-    },
     placeOrderReset: state => {
       state.orderId = ''
     },
@@ -55,5 +52,5 @@ export const placeOrderSlice = createSlice({
   },
 })
 
-export const { errorReset, messageReset, placeOrderReset } = placeOrderSlice.actions
+export const { errorReset, placeOrderReset } = placeOrderSlice.actions
 export default placeOrderSlice.reducer

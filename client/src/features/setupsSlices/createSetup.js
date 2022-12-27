@@ -40,10 +40,6 @@ const createSetupSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.successMessage = ''
-      state.errorMessage = ''
-    },
   },
   extraReducers: builder => {
     builder.addCase(createSetup.pending, state => {
@@ -66,5 +62,5 @@ const createSetupSlice = createSlice({
   },
 })
 
-export const { successReset, errorReset, messageReset } = createSetupSlice.actions
+export const { successReset, errorReset } = createSetupSlice.actions
 export default createSetupSlice.reducer

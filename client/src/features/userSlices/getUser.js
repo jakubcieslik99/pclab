@@ -26,9 +26,6 @@ export const getUserSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.errorMessage = ''
-    },
     getUserReset: state => {
       state.user = ''
       state.setups = []
@@ -54,5 +51,5 @@ export const getUserSlice = createSlice({
   },
 })
 
-export const { errorReset, messageReset, getUserReset } = getUserSlice.actions
+export const { errorReset, getUserReset } = getUserSlice.actions
 export default getUserSlice.reducer

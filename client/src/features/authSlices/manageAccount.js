@@ -106,10 +106,6 @@ export const manageAccountSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.successMessage = ''
-      state.errorMessage = ''
-    },
     userInfoReset: state => {
       state.userInfo = null
       localStorage.removeItem('userInfo')

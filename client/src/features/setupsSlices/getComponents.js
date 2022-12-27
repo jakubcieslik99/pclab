@@ -30,9 +30,6 @@ export const getComponentsSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.errorMessage = ''
-    },
     getComponentsReset: state => {
       state.count = 0
       state.components = []
@@ -58,5 +55,5 @@ export const getComponentsSlice = createSlice({
   },
 })
 
-export const { errorReset, messageReset, getComponentsReset } = getComponentsSlice.actions
+export const { errorReset, getComponentsReset } = getComponentsSlice.actions
 export default getComponentsSlice.reducer

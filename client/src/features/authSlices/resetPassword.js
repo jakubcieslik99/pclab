@@ -33,10 +33,6 @@ const resetPasswordSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.successMessage = ''
-      state.errorMessage = ''
-    },
   },
   extraReducers: builder => {
     builder.addCase(resetPassword.pending, state => {
@@ -59,5 +55,5 @@ const resetPasswordSlice = createSlice({
   },
 })
 
-export const { successReset, errorReset, messageReset } = resetPasswordSlice.actions
+export const { successReset, errorReset } = resetPasswordSlice.actions
 export default resetPasswordSlice.reducer

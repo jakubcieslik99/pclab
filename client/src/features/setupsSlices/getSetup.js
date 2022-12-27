@@ -25,9 +25,6 @@ export const getSetupSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.errorMessage = ''
-    },
     getSetupReset: state => {
       state.setup = null
     },
@@ -51,5 +48,5 @@ export const getSetupSlice = createSlice({
   },
 })
 
-export const { errorReset, messageReset, getSetupReset } = getSetupSlice.actions
+export const { errorReset, getSetupReset } = getSetupSlice.actions
 export default getSetupSlice.reducer

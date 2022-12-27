@@ -26,9 +26,6 @@ export const getOrderSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.errorMessage = ''
-    },
     getOrderReset: state => {
       state.order = null
       state.paymentKey = ''
@@ -54,5 +51,5 @@ export const getOrderSlice = createSlice({
   },
 })
 
-export const { errorReset, messageReset, getOrderReset } = getOrderSlice.actions
+export const { errorReset, getOrderReset } = getOrderSlice.actions
 export default getOrderSlice.reducer
