@@ -18,7 +18,23 @@ const getSetups = createAsyncThunk('/setups/getSetups', async (sendData, thunkAP
   }
 })
 
-export { getSetups }
+const getHomeScreenSetups = createAsyncThunk('/setups/getHSSetups', async (_sendData, thunkAPI) => {
+  try {
+    const sortingTopRated = '?sorting=best_rating'
+    const sortingMostPopular = '?sorting=most_popular'
+    const limit = '&limit=4'
+
+    const { data: dataTopRated } = await axiosPublic.get(`/setups/getSetups${sortingTopRated}${limit}`)
+    const { data: dataMostPopular } = await axiosPublic.get(`/setups/getSetups${sortingMostPopular}${limit}`)
+
+    return { dataTopRated: dataTopRated.setups, dataMostPopular: dataMostPopular.setups }
+  } catch (error) {
+    const message = error?.response?.data?.message || error?.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export { getSetups, getHomeScreenSetups }
 
 export const getSetupsSlice = createSlice({
   name: 'getSetups',
@@ -26,6 +42,8 @@ export const getSetupsSlice = createSlice({
     loading: false,
     count: 0,
     setups: [],
+    topRatedSetups: [],
+    mostPopularSetups: [],
     error: false,
     errorMessage: '',
   },
@@ -33,15 +51,57 @@ export const getSetupsSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    messageReset: state => {
-      state.errorMessage = ''
-    },
-    getSetupsReset: state => {
+    /*getSetupsReset: state => {
       state.count = 0
       state.setups = []
     },
+    getHomeScreenSetupsReset: state => {
+      state.topRatedSetups = []
+      state.mostPopularSetups = []
+    },*/
+    addLike: (state, action) => {
+      for (let setup of state.setups) {
+        if (setup._id === action.payload) {
+          setup.likes += 1
+          break
+        }
+      }
+      for (let setup of state.topRatedSetups) {
+        if (setup._id === action.payload) {
+          setup.likes += 1
+          break
+        }
+      }
+      for (let setup of state.mostPopularSetups) {
+        if (setup._id === action.payload) {
+          setup.likes += 1
+          break
+        }
+      }
+    },
+    removeLike: (state, action) => {
+      for (let setup of state.setups) {
+        if (setup._id === action.payload) {
+          setup.likes -= 1
+          break
+        }
+      }
+      for (let setup of state.topRatedSetups) {
+        if (setup._id === action.payload) {
+          setup.likes -= 1
+          break
+        }
+      }
+      for (let setup of state.mostPopularSetups) {
+        if (setup._id === action.payload) {
+          setup.likes -= 1
+          break
+        }
+      }
+    },
   },
   extraReducers: builder => {
+    //getSetups
     builder.addCase(getSetups.pending, state => {
       state.loading = true
       state.error = false
@@ -58,8 +118,25 @@ export const getSetupsSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
+    //getHomeScreenSetups
+    builder.addCase(getHomeScreenSetups.pending, state => {
+      state.loading = true
+      state.error = false
+    })
+    builder.addCase(getHomeScreenSetups.fulfilled, (state, action) => {
+      state.loading = false
+      state.topRatedSetups = action.payload.dataTopRated
+      state.mostPopularSetups = action.payload.dataMostPopular
+    })
+    builder.addCase(getHomeScreenSetups.rejected, (state, action) => {
+      state.loading = false
+      if (action.payload) {
+        state.error = true
+        state.errorMessage = action.payload
+      }
+    })
   },
 })
 
-export const { errorReset, messageReset, getSetupsReset } = getSetupsSlice.actions
+export const { errorReset, addLike, removeLike } = getSetupsSlice.actions
 export default getSetupsSlice.reducer

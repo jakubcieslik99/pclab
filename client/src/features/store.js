@@ -8,8 +8,7 @@ import getOrderReducer from './ordersSlices/getOrder'
 import placeOrderReducer from './ordersSlices/placeOrder'
 import getSetupsReducer from './setupsSlices/getSetups'
 import getSetupReducer from './setupsSlices/getSetup'
-import likeSetupReducer from './setupsSlices/likeSetup'
-import unlikeSetupReducer from './setupsSlices/unlikeSetup'
+import manageLikedSetupsReducer from './setupsSlices/manageLikedSetups'
 import createCommentReducer from './setupsSlices/createComment'
 import getComponentsReducer from './setupsSlices/getComponents'
 import createSetupReducer from './setupsSlices/createSetup'
@@ -31,8 +30,7 @@ const store = configureStore({
     //setupsSlice
     getSetups: getSetupsReducer,
     getSetup: getSetupReducer,
-    likeSetup: likeSetupReducer,
-    unlikeSetup: unlikeSetupReducer,
+    manageLikedSetups: manageLikedSetupsReducer,
     createComment: createCommentReducer,
     getComponents: getComponentsReducer,
     createSetup: createSetupReducer,

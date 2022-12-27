@@ -1,11 +1,42 @@
+import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BsCpuFill } from 'react-icons/bs'
 import { FaCubes } from 'react-icons/fa'
 import { FaPlusCircle, FaGrinStars, FaComments, FaShoppingCart, FaCaretRight } from 'react-icons/fa'
+import { useAppSelector, useAppDispatch } from '../features/store'
+import { addLike, removeLike, getHomeScreenSetups } from '../features/setupsSlices/getSetups'
+import { getLikedSetups } from '../features/setupsSlices/manageLikedSetups'
 import Hero from '../components/hero/Hero'
 import Setup from '../components/setup/Setup'
+import Loading from '../components/alerts/Loading'
 
 const HomeScreen = () => {
+  //variables
+  const getLikedSetupsAbort = useRef()
+
+  const { userInfo } = useAppSelector(state => state.manageAccount)
+  const { loading, topRatedSetups, mostPopularSetups } = useAppSelector(state => state.getSetups)
+  const { like, unlike } = useAppSelector(state => state.manageLikedSetups)
+  const dispatch = useAppDispatch()
+
+  //useEffects
+  useEffect(() => {
+    const getHomeScreenSetupsPromise = dispatch(getHomeScreenSetups())
+    if (userInfo) {
+      const getLikedSetupsPromise = dispatch(getLikedSetups())
+      getLikedSetupsAbort.current = getLikedSetupsPromise.abort
+    }
+    return () => {
+      getHomeScreenSetupsPromise.abort()
+      getLikedSetupsAbort.current && getLikedSetupsAbort.current()
+    }
+  }, [userInfo, dispatch])
+
+  useEffect(() => {
+    if (like) dispatch(addLike(like))
+    else if (unlike) dispatch(removeLike(unlike))
+  }, [like, unlike, dispatch])
+
   return (
     <main className="flex flex-col flex-1">
       <Hero />
@@ -46,37 +77,57 @@ const HomeScreen = () => {
 
       <div className="content">
         <div className="flex flex-col items-center mx-2 mb-7">
-          <Link to="/" className="flex items-center w-full mb-3 text-xl underline">
-            <FaCaretRight className="text-2xl" /> Najlepiej oceniane
-          </Link>
+          <div className="relative flex items-center w-full mb-3">
+            <Link to="/store?sorting=best_rating" className="flex items-center text-xl underline">
+              <FaCaretRight className="text-2xl" /> Najlepiej oceniane
+            </Link>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Setup />
-            <Setup />
-            <Setup />
-            <Setup />
+            <Loading
+              isOpen={loading}
+              customStyle="top-[3px] left-[220px]"
+              customLoadingStyle="w-[24px] h-[24px] border-white/20 border-t-white"
+            />
           </div>
-          {/*<div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
+
+          {topRatedSetups.length ? (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {topRatedSetups.map(setup => (
+                <Setup key={setup._id} setup={setup} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
               <span>Brak</span>
               <FaCubes />
-            </div>/**/}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col items-center mx-2 mb-7">
-          <Link to="/" className="flex items-center w-full mb-3 text-xl underline">
-            <FaCaretRight className="text-2xl" /> Najczęściej kupowane
-          </Link>
+          <div className="relative flex items-center w-full mb-3">
+            <Link to="/store?sorting=most_popular" className="flex items-center text-xl underline">
+              <FaCaretRight className="text-2xl" /> Najczęściej kupowane
+            </Link>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Setup />
-            <Setup />
-            <Setup />
-            <Setup />
+            <Loading
+              isOpen={loading}
+              customStyle="top-[3px] left-[256px]"
+              customLoadingStyle="w-[24px] h-[24px] border-white/20 border-t-white"
+            />
           </div>
-          {/*<div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
+
+          {mostPopularSetups.length ? (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {mostPopularSetups.map(setup => (
+                <Setup key={setup._id} setup={setup} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
               <span>Brak</span>
               <FaCubes />
-            </div>/**/}
+            </div>
+          )}
         </div>
 
         <div className="flex justify-center mb-4 md:mb-6">

@@ -1,94 +1,160 @@
+import { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Moment from 'moment'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import { useAppSelector, useAppDispatch } from '../../features/store'
+import { likeSetup, unlikeSetup } from '../../features/setupsSlices/manageLikedSetups'
 import noPhoto from '../../assets/no-photo.png'
 
 const Setup = props => {
+  //variables
+  const likeSetupReject = useRef()
+  const unlikeSetupReject = useRef()
+
+  const { userInfo } = useAppSelector(state => state.manageAccount)
+  const { loading, likedSetups } = useAppSelector(state => state.manageLikedSetups)
+  const dispatch = useAppDispatch()
+
+  const setup = props.setup
+
+  let setupPrice = props.setup?.case.price
+  setupPrice += props.setup?.cpu?.price || 0
+  setupPrice += props.setup?.mobo?.price || 0
+  setupPrice += props.setup?.ram?.price || 0
+  setupPrice += props.setup?.gpu?.price || 0
+  setupPrice += props.setup?.psu?.price || 0
+  setupPrice += props.setup?.driveOne?.price || 0
+  setupPrice += props.setup?.driveTwo?.price || 0
+  setupPrice += props.setup?.driveThree?.price || 0
+  setupPrice = (setupPrice / 100).toFixed(2)
+
+  const setupDate = Moment(props.setup?.createdAt).format('DD.MM.YYYY, HH:mm')
+
+  const setupLiked = userInfo && likedSetups.includes(props.setup?._id) ? true : false
+
+  const setupComponentImage = `${import.meta.env.VITE_APP_API_URL}/static/components`
+
+  //handlers
+  const likeHandler = () => {
+    if (userInfo && !likedSetups.includes(props.setup?._id)) {
+      const likeSetupPromise = dispatch(likeSetup({ id: props.setup?._id }))
+      likeSetupReject.current = likeSetupPromise.abort
+    }
+  }
+
+  const unlikeHandler = () => {
+    if (userInfo && likedSetups.includes(props.setup?._id)) {
+      const unlikeSetupPromise = dispatch(unlikeSetup({ id: props.setup?._id }))
+      unlikeSetupReject.current = unlikeSetupPromise.abort
+    }
+  }
+
+  const deleteHandler = () => {
+    props.buttonClickHandler()
+  }
+
+  //useEffects
+  useEffect(() => {
+    return () => {
+      likeSetupReject.current && likeSetupReject.current()
+      unlikeSetupReject.current && unlikeSetupReject.current()
+    }
+  }, [])
+
   return (
     <div className="overflow-hidden border border-white/[0.25] rounded-xl max-w-[479.5px]">
       <div className="grid grid-cols-3 bg-white/[0.25]">
         <div className="aspect-[4/3] flex justify-center items-center">
-          <img src={noPhoto} alt="" className="object-contain" />
+          <img
+            src={setup?.case.images ? `${setupComponentImage}/${setup.case.images[0]}` : noPhoto}
+            alt=""
+            className="object-contain"
+          />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
-          <img src={noPhoto} alt="" className="object-contain" />
+          <img
+            src={setup?.cpu?.images ? `${setupComponentImage}/${setup.cpu.images[0]}` : noPhoto}
+            alt=""
+            className="object-contain"
+          />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
-          <img src={noPhoto} alt="" className="object-contain" />
+          <img
+            src={setup?.mobo?.images ? `${setupComponentImage}/${setup.mobo.images[0]}` : noPhoto}
+            alt=""
+            className="object-contain"
+          />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
-          <img src={noPhoto} alt="" className="object-contain" />
+          <img
+            src={setup?.ram?.images ? `${setupComponentImage}/${setup.ram.images[0]}` : noPhoto}
+            alt=""
+            className="object-contain"
+          />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
-          <img src={noPhoto} alt="" className="object-contain" />
+          <img
+            src={setup?.gpu?.images ? `${setupComponentImage}/${setup.gpu.images[0]}` : noPhoto}
+            alt=""
+            className="object-contain"
+          />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
-          <img src={noPhoto} alt="" className="object-contain" />
+          <img
+            src={setup?.psu?.images ? `${setupComponentImage}/${setup.psu.images[0]}` : noPhoto}
+            alt=""
+            className="object-contain"
+          />
         </div>
       </div>
 
       <div className="flex flex-col gap-[2px] p-2 text-lg bg-white/[0.09]">
         <div className="truncate">
           <span className="mr-2 font-semibold">CPU:</span>
-          <span>
-            {
-              'Infooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'
-            }
-          </span>
+          <span>{setup?.cpu?.title || <span className="text-sm font-light">brak</span>}</span>
         </div>
         <div className="truncate">
           <span className="mr-2 font-semibold">MBO:</span>
-          <span className="text-sm font-light ">brak</span>
+          <span>{setup?.mobo?.title || <span className="text-sm font-light">brak</span>}</span>
         </div>
         <div className="truncate">
           <span className="mr-2 font-semibold">RAM:</span>
-          <span>
-            {
-              'Infooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'
-            }
-          </span>
+          <span>{setup?.ram?.title || <span className="text-sm font-light">brak</span>}</span>
         </div>
         <div className="truncate">
           <span className="mr-2 font-semibold">GPU:</span>
-          <span>
-            {
-              'Infooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'
-            }
-          </span>
+          <span>{setup?.gpu?.title || <span className="text-sm font-light">brak</span>}</span>
         </div>
         <div className="truncate">
           <span className="mr-2 font-semibold">PSU:</span>
-          <span>
-            {
-              'Infooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'
-            }
-          </span>
+          <span>{setup?.psu?.title || <span className="text-sm font-light">brak</span>}</span>
         </div>
       </div>
 
       <div className="flex flex-col gap-[2px] px-2 pb-2 bg-white/[0.09]">
         <div className="text-gray-300 truncate">
           <span className="mr-2 font-semibold">Cena:</span>
-          <span className="mr-1 text-lg font-semibold">{'00000.00'}</span>
+          <span className="mr-1 text-lg font-semibold">{setupPrice}</span>
           <span className="font-light">zł</span>
         </div>
 
         <div className="text-gray-400 truncate">
           <span className="mr-2 text-sm font-semibold">Zakupiono:</span>
-          <span className="mr-[3px] font-semibold">{'0000'}</span>
+          <span className="mr-[3px] font-semibold">{setup?.bought}</span>
           <span className="text-sm font-light">razy</span>
         </div>
 
         {!props.setButton && (
           <div className="text-gray-400 truncate">
             <span className="mr-2 font-semibold">Autor:</span>
-            <Link to={`/profile/${'2137'}`} className="underline">
-              {'John Doe'}
+            <Link to={`/profile/${setup?.addedBy._id}`} className="underline">
+              {setup?.addedBy.nick}
             </Link>
           </div>
         )}
         <div className="text-gray-400 truncate">
           <span className="mr-2 font-semibold">Dodano:</span>
-          <span className="italic">{'18.08.2022, 21:37'}</span>
+          <span className="italic">{setupDate}</span>
         </div>
       </div>
 
@@ -96,13 +162,13 @@ const Setup = props => {
         {!props.setButton ? (
           <div className="flex items-center gap-2">
             <Link
-              to={`/setup/${'21372137'}`}
+              to={`/setup/${setup?._id}`}
               className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
             >
               Pokaż
             </Link>
             <Link
-              to={`/placeorder/${'21372137'}`}
+              to={`/placeorder/${setup?._id}`}
               className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
             >
               Zakup
@@ -111,14 +177,14 @@ const Setup = props => {
         ) : (
           <div className="flex items-center gap-2">
             <Link
-              to={`/compose?id=${'21372137'}`}
+              to={`/compose?id=${setup?._id}`}
               className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
             >
               Edytuj
             </Link>
             <button
               type="button"
-              onClick={() => console.log('delete')}
+              onClick={() => deleteHandler()}
               className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
             >
               Usuń
@@ -127,13 +193,13 @@ const Setup = props => {
         )}
 
         <div className="flex flex-wrap items-center justify-center gap-1 ml-2">
-          <span className="text-lg">{'0000'}</span>
-          {true ? (
-            <button type="button" onClick={null}>
+          <span className="text-lg">{setup?.likes}</span>
+          {setupLiked ? (
+            <button disabled={loading} type="button" onClick={() => unlikeHandler()}>
               <FaHeart className="text-2xl text-red-500" />
             </button>
           ) : (
-            <button type="button" onClick={null}>
+            <button disabled={loading} type="button" onClick={() => likeHandler()}>
               <FaRegHeart className="text-2xl text-red-500" />
             </button>
           )}
