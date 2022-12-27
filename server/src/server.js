@@ -26,14 +26,16 @@ const app = express()
 app.set('trust proxy', `loopback, ${config.IP}`)
 databaseConnect(app)
 
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser)
 app.use(cookieParser())
 app.use(helmet())
 app.use(cors(corsOptions))
-app.use(rateLimit(rateLimiter))
-app.use(slowDown(speedLimiter))
+//app.use(rateLimit(rateLimiter))
+//app.use(slowDown(speedLimiter))
 
+//static files
+app.use('/static/components/', express.static('uploads/components'))
 //admin routes
 app.use('/admin/auth', adminAuthRoute)
 app.use('/admin/orders', adminOrdersRoute)
