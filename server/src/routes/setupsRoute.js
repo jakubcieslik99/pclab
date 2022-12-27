@@ -5,6 +5,7 @@ import { errorHandler } from '../middlewares/errorMiddleware'
 import {
   getSetups,
   getSetup,
+  getLikedSetups,
   likeSetup,
   unlikeSetup,
   createComment,
@@ -18,6 +19,8 @@ const router = express.Router()
 
 router.get('/getSetups', errorHandler(getSetups))
 router.get('/getSetup/:id', isValidId('id', null), errorHandler(getSetup))
+
+router.get('/getLikedSetups', isAuth, errorHandler(getLikedSetups))
 
 router.post('/likeSetup/:id', isAuth, isValidId('id', null), errorHandler(likeSetup))
 

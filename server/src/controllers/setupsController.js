@@ -99,6 +99,15 @@ const getSetup = async (req, res) => {
   return res.status(200).send({ setup })
 }
 
+//GET - /setups/getLikedSetups
+const getLikedSetups = async (req, res) => {
+  const { authenticatedUser } = res.locals
+
+  const user = await User.findById(authenticatedUser.id).select('likedSetups').exec()
+
+  return res.status(200).send({ likedSetups: user.likedSetups })
+}
+
 //POST - /setups/likeSetup/:id
 const likeSetup = async (req, res) => {
   const { authenticatedUser } = res.locals
@@ -115,7 +124,7 @@ const likeSetup = async (req, res) => {
   likedSetup.likes++
   await likedSetup.save()
 
-  return res.status(200).send({ message: 'Dodano konfigurację do ulubionych.' })
+  return res.status(200).send({ likedSetups: authenticatedUser.likedSetups })
 }
 
 //DELETE - /setups/unlikeSetup/:id
@@ -135,7 +144,7 @@ const unlikeSetup = async (req, res) => {
   unlikedSetup.likes--
   await unlikedSetup.save()
 
-  return res.status(200).send({ message: 'Usunięto konfigurację z ulubionych.' })
+  return res.status(200).send({ likedSetups: authenticatedUser.likedSetups })
 }
 
 //POST - /setups/createComment/:id
@@ -406,4 +415,15 @@ const deleteSetup = async (req, res) => {
   return res.status(200).send({ message: 'Usunięto konfigurację.' })
 }
 
-export { getSetups, getSetup, likeSetup, unlikeSetup, createComment, getComponents, createSetup, updateSetup, deleteSetup }
+export {
+  getSetups,
+  getSetup,
+  getLikedSetups,
+  likeSetup,
+  unlikeSetup,
+  createComment,
+  getComponents,
+  createSetup,
+  updateSetup,
+  deleteSetup,
+}
