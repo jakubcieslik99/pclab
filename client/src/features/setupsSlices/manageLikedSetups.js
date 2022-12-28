@@ -47,9 +47,9 @@ const manageLikedSetupsSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    /*likedSetupsReset: state => {
+    likedSetupsReset: state => {
       state.likedSetups = []
-    },*/
+    },
     likeUnlikeReset: state => {
       state.like = ''
       state.unlike = ''
@@ -109,5 +109,5 @@ const manageLikedSetupsSlice = createSlice({
   },
 })
 
-export const { successReset, errorReset, likeUnlikeReset } = manageLikedSetupsSlice.actions
+export const { errorReset, likedSetupsReset, likeUnlikeReset } = manageLikedSetupsSlice.actions
 export default manageLikedSetupsSlice.reducer

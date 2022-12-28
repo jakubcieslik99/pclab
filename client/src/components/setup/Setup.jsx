@@ -8,8 +8,8 @@ import noPhoto from '../../assets/no-photo.png'
 
 const Setup = props => {
   //variables
-  const likeSetupReject = useRef()
-  const unlikeSetupReject = useRef()
+  const likeSetupAbort = useRef()
+  const unlikeSetupAbort = useRef()
 
   const { userInfo } = useAppSelector(state => state.manageAccount)
   const { loading, likedSetups } = useAppSelector(state => state.manageLikedSetups)
@@ -38,14 +38,14 @@ const Setup = props => {
   const likeHandler = () => {
     if (userInfo && !likedSetups.includes(props.setup?._id)) {
       const likeSetupPromise = dispatch(likeSetup({ id: props.setup?._id }))
-      likeSetupReject.current = likeSetupPromise.abort
+      likeSetupAbort.current = likeSetupPromise.abort
     }
   }
 
   const unlikeHandler = () => {
     if (userInfo && likedSetups.includes(props.setup?._id)) {
       const unlikeSetupPromise = dispatch(unlikeSetup({ id: props.setup?._id }))
-      unlikeSetupReject.current = unlikeSetupPromise.abort
+      unlikeSetupAbort.current = unlikeSetupPromise.abort
     }
   }
 
@@ -56,8 +56,8 @@ const Setup = props => {
   //useEffects
   useEffect(() => {
     return () => {
-      likeSetupReject.current && likeSetupReject.current()
-      unlikeSetupReject.current && unlikeSetupReject.current()
+      likeSetupAbort.current && likeSetupAbort.current()
+      unlikeSetupAbort.current && unlikeSetupAbort.current()
     }
   }, [])
 

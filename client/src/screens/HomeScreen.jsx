@@ -1,36 +1,26 @@
-import { useRef, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BsCpuFill } from 'react-icons/bs'
 import { FaCubes } from 'react-icons/fa'
 import { FaPlusCircle, FaGrinStars, FaComments, FaShoppingCart, FaCaretRight } from 'react-icons/fa'
 import { useAppSelector, useAppDispatch } from '../features/store'
 import { addLike, removeLike, getHomeScreenSetups } from '../features/setupsSlices/getSetups'
-import { getLikedSetups } from '../features/setupsSlices/manageLikedSetups'
 import Hero from '../components/hero/Hero'
 import Setup from '../components/setup/Setup'
 import Loading from '../components/alerts/Loading'
+import Error from '../components/alerts/Error'
 
 const HomeScreen = () => {
   //variables
-  const getLikedSetupsAbort = useRef()
-
-  const { userInfo } = useAppSelector(state => state.manageAccount)
-  const { loading, topRatedSetups, mostPopularSetups } = useAppSelector(state => state.getSetups)
+  const { loading, topRatedSetups, mostPopularSetups, error, errorMessage } = useAppSelector(state => state.getSetups)
   const { like, unlike } = useAppSelector(state => state.manageLikedSetups)
   const dispatch = useAppDispatch()
 
   //useEffects
   useEffect(() => {
     const getHomeScreenSetupsPromise = dispatch(getHomeScreenSetups())
-    if (userInfo) {
-      const getLikedSetupsPromise = dispatch(getLikedSetups())
-      getLikedSetupsAbort.current = getLikedSetupsPromise.abort
-    }
-    return () => {
-      getHomeScreenSetupsPromise.abort()
-      getLikedSetupsAbort.current && getLikedSetupsAbort.current()
-    }
-  }, [userInfo, dispatch])
+    return () => getHomeScreenSetupsPromise.abort()
+  }, [dispatch])
 
   useEffect(() => {
     if (like) dispatch(addLike(like))
@@ -76,12 +66,19 @@ const HomeScreen = () => {
       </div>
 
       <div className="content">
+        <div className="px-2">
+          <Error
+            isOpen={error && errorMessage !== '' ? true : false}
+            message={errorMessage}
+            customStyle="w-full mb-4 pr-4"
+          />
+        </div>
+
         <div className="flex flex-col items-center mx-2 mb-7">
           <div className="relative flex items-center w-full mb-3">
             <Link to="/store?sorting=best_rating" className="flex items-center text-xl underline">
               <FaCaretRight className="text-2xl" /> Najlepiej oceniane
             </Link>
-
             <Loading
               isOpen={loading}
               customStyle="top-[3px] left-[220px]"
@@ -108,7 +105,6 @@ const HomeScreen = () => {
             <Link to="/store?sorting=most_popular" className="flex items-center text-xl underline">
               <FaCaretRight className="text-2xl" /> Najczęściej kupowane
             </Link>
-
             <Loading
               isOpen={loading}
               customStyle="top-[3px] left-[256px]"

@@ -1,8 +1,15 @@
-import { useState, Fragment } from 'react'
+import { useState, useEffect, Fragment } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Listbox, Transition } from '@headlessui/react'
 import { FaSearch, FaAngleDown, FaCaretRight, FaCubes } from 'react-icons/fa'
+import { useAppSelector, useAppDispatch } from '../features/store'
+import { addLike, removeLike, getSetups } from '../features/setupsSlices/getSetups'
 import Setup from '../components/setup/Setup'
 import Paginator from '../components/universal/Paginator'
+import Loading from '../components/alerts/Loading'
+import Error from '../components/alerts/Error'
+
+let URL = {}
 
 const sortingOptions = [
   { id: 1, name: 'Od najnowszych', value: 'newest' },
@@ -17,28 +24,91 @@ const sortingOptions = [
 
 const StoreScreen = () => {
   //variables
-  const [searching, setSearching] = useState('')
-  const [sorting, setSorting] = useState(sortingOptions[0])
-  const [priceFiltering, setPriceFiltering] = useState({ minPrice: '', maxPrice: '' })
+  const { loading, count, setups, error, errorMessage } = useAppSelector(state => state.getSetups)
+  const { like, unlike } = useAppSelector(state => state.manageLikedSetups)
+  const dispatch = useAppDispatch()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searching, setSearching] = useState(searchParams.get('searching') || '')
+  const [sorting, setSorting] = useState(searchParams.get('sorting') || sortingOptions[0].value)
+  const [sortingOption, setSortingOption] = useState(sortingOptions[0])
+  const [priceFiltering, setPriceFiltering] = useState({
+    minPrice: searchParams.get('minPrice') || '',
+    maxPrice: searchParams.get('maxPrice') || '',
+  })
+  const [page, setPage] = useState(searchParams.get('page') || 1)
 
   //handlers
+  const filterURL = (searchingFilter, sortingFilter, priceFilteringFilter, pageFilter) => {
+    if (searchingFilter !== '') URL.searching = searchingFilter
+    else if (URL.searching) delete URL.searching
+
+    if (sortingFilter !== 'newest') URL.sorting = sortingFilter
+    else if (URL.sorting) delete URL.sorting
+
+    if (priceFilteringFilter.minPrice !== '') URL.minPrice = priceFilteringFilter.minPrice
+    else if (URL.minPrice) delete URL.minPrice
+
+    if (priceFilteringFilter.maxPrice !== '') URL.maxPrice = priceFilteringFilter.maxPrice
+    else if (URL.maxPrice) delete URL.maxPrice
+
+    if (pageFilter !== 1) URL.page = pageFilter
+    else if (URL.page) delete URL.page
+
+    setSearchParams({ ...URL })
+  }
+
   const searchingHandler = e => {
     e.preventDefault()
-    console.log('searching')
-    console.log(searching)
+    setPage(1)
+    filterURL(searching, sorting, priceFiltering, 1)
+  }
+  const sortingHandler = option => {
+    setSorting(option.value)
+    setSortingOption(option)
+    filterURL(searching, option.value, priceFiltering, page)
   }
   const priceFilteringHandler = e => {
     e.preventDefault()
-    console.log('filtering price')
-    console.log(priceFiltering.minPrice)
-    console.log(priceFiltering.maxPrice)
+    setPage(1)
+    filterURL(searching, sorting, priceFiltering, 1)
   }
+  const pageHandler = page => {
+    setPage(page)
+    filterURL(searching, sorting, priceFiltering, page)
+  }
+
+  //useEffects
+  useEffect(() => {
+    const getSetupsPromise = dispatch(
+      getSetups({
+        searching: searchParams.get('searching') || '',
+        sorting: searchParams.get('sorting') || 'newest',
+        priceFrom: searchParams.get('minPrice') || '',
+        priceTo: searchParams.get('maxPrice') || '',
+        page: searchParams.get('page') || '',
+      })
+    )
+    return () => getSetupsPromise.abort()
+  }, [searchParams, dispatch])
+
+  useEffect(() => {
+    if (like) dispatch(addLike(like))
+    else if (unlike) dispatch(removeLike(unlike))
+  }, [like, unlike, dispatch])
 
   return (
     <main className="flex-1">
       <div className="content">
-        <div className="mx-2 my-4">
-          <h2 className="text-xl font-bold">ZNAJDŹ ZESTAW DLA SIEBIE</h2>
+        <div className="flex mx-2 my-4">
+          <h2 className="relative text-xl font-bold">
+            ZNAJDŹ ZESTAW DLA SIEBIE
+            <Loading
+              isOpen={loading}
+              customStyle="top-[2px] -right-[33px]"
+              customLoadingStyle="w-[24px] h-[24px] border-white/20 border-t-white"
+            />
+          </h2>
         </div>
 
         <div className="grid gap-4 mx-2 mb-14 md:mb-6 md:grid-cols-6 lg:grid-cols-8">
@@ -71,10 +141,10 @@ const StoreScreen = () => {
                 Sortowanie
               </label>
 
-              <Listbox value={sorting} onChange={setSorting}>
+              <Listbox value={sortingOption} onChange={option => sortingHandler(option)}>
                 <div name="sorting" className="relative h-9">
                   <Listbox.Button className="absolute flex items-center justify-between w-full py-1 pl-3 border-2 rounded-xl">
-                    <div className="truncate">{sorting.name}</div>
+                    <div className="truncate">{sortingOption.name}</div>
                     <div className="flex items-center justify-center flex-none transition w-9 active:scale-90">
                       <FaAngleDown className="text-xl ml-[1px] mt-[1px]" />
                     </div>
@@ -135,22 +205,22 @@ const StoreScreen = () => {
           </div>
 
           <div className="flex flex-col items-center md:col-span-4 lg:col-span-6">
-            <div className="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3 xl-grid-cols-4">
-              <Setup />
-              <Setup />
-              <Setup />
-              <Setup />
-              <Setup />
-              <Setup />
-              <Setup />
-              <Setup />
-            </div>
-            {/*<div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
+            <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} customStyle="w-full mb-4" />
+
+            {setups.length ? (
+              <div className="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3 xl-grid-cols-4">
+                {setups.map(setup => (
+                  <Setup key={setup._id} setup={setup} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
                 <span>Brak</span>
                 <FaCubes />
-              </div>/**/}
+              </div>
+            )}
 
-            <Paginator />
+            <Paginator count={count} page={page} pageHandler={pageHandler} />
           </div>
         </div>
       </div>

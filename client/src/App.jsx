@@ -1,6 +1,9 @@
+import { useRef, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { loadStripe } from '@stripe/stripe-js'
 import { useInView } from 'react-intersection-observer'
+import { useAppSelector, useAppDispatch } from './features/store'
+import { getLikedSetups } from './features/setupsSlices/manageLikedSetups'
 import ScrollTop from './components/universal/ScrollTop'
 import RequireAuth from './components/universal/RequireAuth'
 import NotFound from './components/universal/NotFound'
@@ -20,8 +23,23 @@ import OrderScreen from './screens/OrderScreen'
 const stripePromise = loadStripe(import.meta.env.VITE_API_STRIPE)
 
 const App = () => {
+  //variables
+  const getLikedSetupsAbort = useRef()
+
+  const { userInfo } = useAppSelector(state => state.manageAccount)
+  const dispatch = useAppDispatch()
+
   const location = window.location.href.substring(window.location.href.lastIndexOf('/'))
   const { ref: footerRef, inView: isFooterVisible } = useInView()
+
+  //useEffects
+  useEffect(() => {
+    if (userInfo) {
+      const getLikedSetupsPromise = dispatch(getLikedSetups())
+      getLikedSetupsAbort.current = getLikedSetupsPromise.abort
+    }
+    return () => getLikedSetupsAbort.current && getLikedSetupsAbort.current()
+  }, [userInfo, dispatch])
 
   return (
     <BrowserRouter>
