@@ -38,8 +38,8 @@ const setupsAggregation = (priceFrom, priceTo) => {
     {
       $match: {
         price: {
-          $gte: !isNaN(parseInt(priceFrom)) ? parseInt(priceFrom) : 0,
-          $lte: !isNaN(parseInt(priceTo)) ? parseInt(priceTo) : 999999,
+          $gte: !isNaN(parseInt(priceFrom)) ? parseInt(priceFrom) * 100 : 0,
+          $lte: !isNaN(parseInt(priceTo)) ? parseInt(priceTo) * 100 : 999999,
         },
       },
     },

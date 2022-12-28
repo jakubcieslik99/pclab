@@ -1,15 +1,15 @@
 import createError from 'http-errors'
 import { isValidObjectId } from 'mongoose'
-import Setup from '../models/setupModel.js'
-import User from '../models/userModel.js'
-import Component from '../models/componentModel.js'
+import Setup from '../models/setupModel'
+import User from '../models/userModel'
+import Component from '../models/componentModel'
 import { createCommentValidation, createSetupValidation, updateSetupValidation } from '../validations/setupsValidation'
-import { setupsAggregation, setupsPriceComparision } from '../functions/getSetups.js'
+import { setupsAggregation, setupsPriceComparision } from '../functions/getSetups'
 
 //GET - /setups/getSetups
 const getSetups = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
-  const limit = req.query.limit ? req.query.limit : 15
+  const limit = req.query.limit ? req.query.limit : 12
 
   let sort = {}
   if (req.query.sorting && req.query.sorting === 'least_popular') sort = { bought: 1 }
