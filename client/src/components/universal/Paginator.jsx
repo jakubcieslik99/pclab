@@ -3,7 +3,7 @@ import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from
 const Paginator = props => {
   //handlers
   const listPagesHandler = () => {
-    const limit = 12
+    const limit = props.limit || 12
     const pages = Math.ceil(props.count / limit)
 
     let elements = []

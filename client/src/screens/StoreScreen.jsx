@@ -208,19 +208,21 @@ const StoreScreen = () => {
             <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} customStyle="w-full mb-4" />
 
             {setups.length ? (
-              <div className="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3 xl-grid-cols-4">
-                {setups.map(setup => (
-                  <Setup key={setup._id} setup={setup} />
-                ))}
-              </div>
+              <>
+                <div className="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3 xl-grid-cols-4">
+                  {setups.map(setup => (
+                    <Setup key={setup._id} setup={setup} />
+                  ))}
+                </div>
+
+                <Paginator count={count} page={page} pageHandler={pageHandler} />
+              </>
             ) : (
               <div className="flex items-center justify-center gap-[6px] mt-6 mb-3">
                 <span>Brak</span>
                 <FaCubes />
               </div>
             )}
-
-            <Paginator count={count} page={page} pageHandler={pageHandler} />
           </div>
         </div>
       </div>

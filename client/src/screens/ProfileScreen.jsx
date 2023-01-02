@@ -101,10 +101,10 @@ const ProfileScreen = () => {
                   logged ? 'lg:grid-cols-1 max-w-[479.5px] md:max-w-full max-h-[650px] internal-scroll' : 'lg:grid-cols-3'
                 } gap-5 rounded-xl`}
               >
-                <Setup setButton="edit" buttonClickHandler={() => console.log('edit')} />
-                <Setup setButton="edit" buttonClickHandler={() => console.log('edit')} />
-                <Setup setButton="edit" buttonClickHandler={() => console.log('edit')} />
-                <Setup setButton="edit" buttonClickHandler={() => console.log('edit')} />
+                <Setup setButton="delete" buttonClickHandler={() => console.log('delete')} />
+                <Setup setButton="delete" buttonClickHandler={() => console.log('delete')} />
+                <Setup setButton="delete" buttonClickHandler={() => console.log('delete')} />
+                <Setup setButton="delete" buttonClickHandler={() => console.log('delete')} />
               </div> /**/
             }
             {/*<div className="flex items-center justify-center gap-[6px] mt-6 mb-3 max-w-[479.5px]">

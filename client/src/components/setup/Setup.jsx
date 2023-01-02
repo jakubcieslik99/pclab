@@ -66,44 +66,50 @@ const Setup = props => {
       <div className="grid grid-cols-3 bg-white/[0.25]">
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
-            src={setup?.case.images ? `${setupComponentImage}/${setup.case.images[0]}` : noPhoto}
+            crossOrigin="anonymous"
+            src={setup?.case.images && setup.case.images[0] ? `${setupComponentImage}/${setup.case.images[0]}` : noPhoto}
             alt=""
-            className="object-contain"
+            className="object-contain w-full h-full"
           />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
-            src={setup?.cpu?.images ? `${setupComponentImage}/${setup.cpu.images[0]}` : noPhoto}
+            crossOrigin="anonymous"
+            src={setup?.cpu?.images && setup.cpu.images[0] ? `${setupComponentImage}/${setup.cpu.images[0]}` : noPhoto}
             alt=""
-            className="object-contain"
+            className="object-contain w-full h-full"
           />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
-            src={setup?.mobo?.images ? `${setupComponentImage}/${setup.mobo.images[0]}` : noPhoto}
+            crossOrigin="anonymous"
+            src={setup?.mobo?.images && setup.mobo.images[0] ? `${setupComponentImage}/${setup.mobo.images[0]}` : noPhoto}
             alt=""
-            className="object-contain"
+            className="object-contain w-full h-full"
           />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
-            src={setup?.ram?.images ? `${setupComponentImage}/${setup.ram.images[0]}` : noPhoto}
+            crossOrigin="anonymous"
+            src={setup?.ram?.images && setup.ram.images[0] ? `${setupComponentImage}/${setup.ram.images[0]}` : noPhoto}
             alt=""
-            className="object-contain"
+            className="object-contain w-full h-full"
           />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
-            src={setup?.gpu?.images ? `${setupComponentImage}/${setup.gpu.images[0]}` : noPhoto}
+            crossOrigin="anonymous"
+            src={setup?.gpu?.images && setup.gpu.images[0] ? `${setupComponentImage}/${setup.gpu.images[0]}` : noPhoto}
             alt=""
-            className="object-contain"
+            className="object-contain w-full h-full"
           />
         </div>
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
-            src={setup?.psu?.images ? `${setupComponentImage}/${setup.psu.images[0]}` : noPhoto}
+            crossOrigin="anonymous"
+            src={setup?.psu?.images && setup.psu.images[0] ? `${setupComponentImage}/${setup.psu.images[0]}` : noPhoto}
             alt=""
-            className="object-contain"
+            className="object-contain w-full h-full"
           />
         </div>
       </div>

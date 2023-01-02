@@ -8,7 +8,7 @@ const getSetups = createAsyncThunk('/setups/getSetups', async (sendData, thunkAP
     const priceFrom = `&priceFrom=${sendData.priceFrom}`
     const priceTo = `&priceTo=${sendData.priceTo}`
     const page = `&page=${sendData.page}`
-    const limit = `&limit=${12}`
+    const limit = `&limit=${sendData.limit || 12}`
 
     const { data } = await axiosPublic.get(`/setups/getSetups${searching}${sorting}${priceFrom}${priceTo}${page}${limit}`)
     return data
