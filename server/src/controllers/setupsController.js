@@ -64,15 +64,15 @@ const getSetups = async (req, res) => {
   let listedSetups = await Setup.find(query)
     .populate([
       { path: 'addedBy', select: 'id nick' },
-      { path: 'case', select: 'id title price amount' },
-      { path: 'cpu', select: 'id title price amount' },
-      { path: 'mobo', select: 'id title price amount' },
-      { path: 'ram', select: 'id title price amount' },
-      { path: 'gpu', select: 'id title price amount' },
-      { path: 'psu', select: 'id title price amount' },
-      { path: 'driveOne', select: 'id title price amount' },
-      { path: 'driveTwo', select: 'id title price amount' },
-      { path: 'driveThree', select: 'id title price amount' },
+      { path: 'case', select: 'id title price amount images' },
+      { path: 'cpu', select: 'id title price amount images' },
+      { path: 'mobo', select: 'id title price amount images' },
+      { path: 'ram', select: 'id title price amount images' },
+      { path: 'gpu', select: 'id title price amount images' },
+      { path: 'psu', select: 'id title price amount images' },
+      { path: 'driveOne', select: 'id title price amount images' },
+      { path: 'driveTwo', select: 'id title price amount images' },
+      { path: 'driveThree', select: 'id title price amount images' },
     ])
     .select('-comments')
     .sort(sort)
@@ -91,6 +91,15 @@ const getSetup = async (req, res) => {
   const setup = await Setup.findById(req.params.id)
     .populate([
       { path: 'addedBy', select: 'nick' },
+      { path: 'case' },
+      { path: 'cpu' },
+      { path: 'mobo' },
+      { path: 'ram' },
+      { path: 'gpu' },
+      { path: 'psu' },
+      { path: 'driveOne' },
+      { path: 'driveTwo' },
+      { path: 'driveThree' },
       { path: 'comments.addedBy', select: 'nick' },
     ])
     .exec()
@@ -299,7 +308,7 @@ const createSetup = async (req, res) => {
 
   await newSetup.save()
 
-  return res.status(201).send({ message: 'Dodano nową konfigurację.' /*, setup: newSetup*/ })
+  return res.status(201).send({ message: 'Dodano nową konfigurację.', setup: newSetup })
 }
 
 //PUT - /setups/updateSetup/:id
@@ -389,7 +398,7 @@ const updateSetup = async (req, res) => {
 
   await updatedSetup.save()
 
-  res.status(200).json({ message: 'Zaktualizowano konfigurację.' /*, setup: updatedSetup*/ })
+  res.status(200).json({ message: 'Zaktualizowano konfigurację.', setup: updatedSetup })
 }
 
 //DELETE - /setups/deleteSetup/:id
