@@ -11,8 +11,7 @@ import getSetupReducer from './setupsSlices/getSetup'
 import manageLikedSetupsReducer from './setupsSlices/manageLikedSetups'
 import createCommentReducer from './setupsSlices/createComment'
 import getComponentsReducer from './setupsSlices/getComponents'
-import createSetupReducer from './setupsSlices/createSetup'
-import updateSetupReducer from './setupsSlices/updateSetup'
+import saveSetupReducer from './setupsSlices/saveSetup'
 import deleteSetupReducer from './setupsSlices/deleteSetup'
 import getUserReducer from './userSlices/getUser'
 import getLoggedUserReducer from './userSlices/getLoggedUser'
@@ -33,8 +32,7 @@ const store = configureStore({
     manageLikedSetups: manageLikedSetupsReducer,
     createComment: createCommentReducer,
     getComponents: getComponentsReducer,
-    createSetup: createSetupReducer,
-    updateSetup: updateSetupReducer,
+    saveSetup: saveSetupReducer,
     deleteSetup: deleteSetupReducer,
     //userSlice
     getUser: getUserReducer,

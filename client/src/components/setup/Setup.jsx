@@ -67,7 +67,11 @@ const Setup = props => {
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
             crossOrigin="anonymous"
-            src={setup?.case.images && setup.case.images[0] ? `${setupComponentImage}/${setup.case.images[0]}` : noPhoto}
+            src={
+              setup?.case.images && setup.case.images[0]
+                ? `${setupComponentImage}/${setup.case._id}/${setup.case.images[0]}`
+                : noPhoto
+            }
             alt=""
             className="object-contain w-full h-full"
           />
@@ -75,7 +79,11 @@ const Setup = props => {
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
             crossOrigin="anonymous"
-            src={setup?.cpu?.images && setup.cpu.images[0] ? `${setupComponentImage}/${setup.cpu.images[0]}` : noPhoto}
+            src={
+              setup?.cpu?.images && setup.cpu.images[0]
+                ? `${setupComponentImage}/${setup.cpu._id}/${setup.cpu.images[0]}`
+                : noPhoto
+            }
             alt=""
             className="object-contain w-full h-full"
           />
@@ -83,7 +91,11 @@ const Setup = props => {
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
             crossOrigin="anonymous"
-            src={setup?.mobo?.images && setup.mobo.images[0] ? `${setupComponentImage}/${setup.mobo.images[0]}` : noPhoto}
+            src={
+              setup?.mobo?.images && setup.mobo.images[0]
+                ? `${setupComponentImage}/${setup.mobo._id}/${setup.mobo.images[0]}`
+                : noPhoto
+            }
             alt=""
             className="object-contain w-full h-full"
           />
@@ -91,7 +103,11 @@ const Setup = props => {
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
             crossOrigin="anonymous"
-            src={setup?.ram?.images && setup.ram.images[0] ? `${setupComponentImage}/${setup.ram.images[0]}` : noPhoto}
+            src={
+              setup?.ram?.images && setup.ram.images[0]
+                ? `${setupComponentImage}/${setup.ram._id}/${setup.ram.images[0]}`
+                : noPhoto
+            }
             alt=""
             className="object-contain w-full h-full"
           />
@@ -99,7 +115,11 @@ const Setup = props => {
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
             crossOrigin="anonymous"
-            src={setup?.gpu?.images && setup.gpu.images[0] ? `${setupComponentImage}/${setup.gpu.images[0]}` : noPhoto}
+            src={
+              setup?.gpu?.images && setup.gpu.images[0]
+                ? `${setupComponentImage}/${setup.gpu._id}/${setup.gpu.images[0]}`
+                : noPhoto
+            }
             alt=""
             className="object-contain w-full h-full"
           />
@@ -107,7 +127,11 @@ const Setup = props => {
         <div className="aspect-[4/3] flex justify-center items-center">
           <img
             crossOrigin="anonymous"
-            src={setup?.psu?.images && setup.psu.images[0] ? `${setupComponentImage}/${setup.psu.images[0]}` : noPhoto}
+            src={
+              setup?.psu?.images && setup.psu.images[0]
+                ? `${setupComponentImage}/${setup.psu._id}/${setup.psu.images[0]}`
+                : noPhoto
+            }
             alt=""
             className="object-contain w-full h-full"
           />
