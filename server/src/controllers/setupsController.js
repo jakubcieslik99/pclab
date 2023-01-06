@@ -3,7 +3,12 @@ import { isValidObjectId } from 'mongoose'
 import Setup from '../models/setupModel'
 import User from '../models/userModel'
 import Component from '../models/componentModel'
-import { createCommentValidation, createSetupValidation, updateSetupValidation } from '../validations/setupsValidation'
+import {
+  createCommentValidation,
+  getComponentsValidation,
+  createSetupValidation,
+  updateSetupValidation,
+} from '../validations/setupsValidation'
 import { setupsAggregation, setupsPriceComparision } from '../functions/getSetups'
 
 //GET - /setups/getSetups
@@ -213,6 +218,17 @@ const getComponents = async (req, res) => {
   if (req.query.searching) {
     query = { ...query, ...{ title: { $regex: req.query.searching, $options: 'i' } } }
   }
+
+  const validationResult = await getComponentsValidation.validateAsync({
+    moboCompat: req.query.moboCompat || '',
+    cpuCompat: req.query.cpuCompat || '',
+    caseCompat: req.query.caseCompat || '',
+    ramCompat: req.query.ramCompat || '',
+  })
+  if (validationResult.moboCompat) query = { ...query, ...{ moboCompat: validationResult.moboCompat } }
+  if (validationResult.cpuCompat) query = { ...query, ...{ cpuCompat: validationResult.cpuCompat } }
+  if (validationResult.caseCompat) query = { ...query, ...{ caseCompat: validationResult.caseCompat } }
+  if (validationResult.ramCompat) query = { ...query, ...{ ramCompat: validationResult.ramCompat } }
 
   const count = await Component.find(query).countDocuments().exec()
   const listedComponents = await Component.find(query)
