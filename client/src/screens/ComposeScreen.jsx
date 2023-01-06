@@ -18,6 +18,11 @@ const ComposeScreen = () => {
   const getSetupAbort = useRef()
   const getComponentsAbort = useRef()
 
+  const moboCompat = useRef('')
+  const cpuCompat = useRef('')
+  const caseCompat = useRef('')
+  const ramCompat = useRef('')
+
   const { loading, setup, error, errorMessage } = useAppSelector(state => state.getSetup)
   const {
     loading: loading2,
@@ -90,16 +95,48 @@ const ComposeScreen = () => {
   const setComponentHandler = component => {
     switch (step) {
       case 1:
-        component.type === 'case' && setCaseComponent(component)
+        if (component.type === 'case') {
+          setCaseComponent(component)
+          moboCompat.current = component.moboCompat
+
+          component.moboCompat === 'matx' && moboComponent?.caseCompat === 'atx' && setMoboComponent(null)
+          component.moboCompat === 'itx' && moboComponent?.caseCompat !== 'itx' && setMoboComponent(null)
+        }
         break
       case 2:
-        component.type === 'cpu' && setCpuComponent(component)
+        if (component.type === 'cpu') {
+          setCpuComponent(component)
+          cpuCompat.current = component.cpuCompat
+          ramCompat.current = component.ramCompat
+
+          moboComponent?.cpuCompat !== component.cpuCompat && setMoboComponent(null)
+          ramComponent?.ramCompat !== component.ramCompat && setRamComponent(null)
+        }
         break
       case 3:
-        component.type === 'mobo' && setMoboComponent(component)
+        if (component.type === 'mobo') {
+          if (component.caseCompat === 'matx' && caseComponent?.moboCompat === 'itx') {
+          } else if (component.caseCompat === 'atx' && caseComponent?.moboCompat !== 'atx') {
+          } else {
+            setMoboComponent(component)
+            cpuCompat.current = component.cpuCompat
+            caseCompat.current = component.caseCompat
+            ramCompat.current = component.ramCompat
+
+            cpuComponent?.cpuCompat !== component.cpuCompat && setCpuComponent(null)
+            cpuComponent?.ramCompat !== component.ramCompat && setCpuComponent(null)
+            ramComponent?.ramCompat !== component.ramCompat && setRamComponent(null)
+          }
+        }
         break
       case 4:
-        component.type === 'ram' && setRamComponent(component)
+        if (component.type === 'ram') {
+          setRamComponent(component)
+          ramCompat.current = component.ramCompat
+
+          cpuComponent?.ramCompat !== component.ramCompat && setCpuComponent(null)
+          moboComponent?.ramCompat !== component.ramCompat && setMoboComponent(null)
+        }
         break
       case 5:
         component.type === 'gpu' && setGpuComponent(component)
@@ -219,6 +256,7 @@ const ComposeScreen = () => {
           getComponents({
             searching: searchParams.get('searching') || '',
             type: 'case',
+            moboCompat: moboCompat.current,
             page: searchParams.get('page') || '',
           })
         )
@@ -228,6 +266,8 @@ const ComposeScreen = () => {
           getComponents({
             searching: searchParams.get('searching') || '',
             type: 'cpu',
+            cpuCompat: cpuCompat.current,
+            ramCompat: ramCompat.current,
             page: searchParams.get('page') || '',
           })
         )
@@ -237,6 +277,9 @@ const ComposeScreen = () => {
           getComponents({
             searching: searchParams.get('searching') || '',
             type: 'mobo',
+            cpuCompat: cpuCompat.current,
+            caseCompat: caseCompat.current,
+            ramCompat: ramCompat.current,
             page: searchParams.get('page') || '',
           })
         )
@@ -246,6 +289,7 @@ const ComposeScreen = () => {
           getComponents({
             searching: searchParams.get('searching') || '',
             type: 'ram',
+            ramCompat: ramCompat.current,
             page: searchParams.get('page') || '',
           })
         )
@@ -457,25 +501,40 @@ const ComposeScreen = () => {
                   <Component
                     component={caseComponent}
                     composeButton="delete"
-                    buttonClickHandler={() => setCaseComponent(null)}
+                    buttonClickHandler={() => {
+                      setCaseComponent(null)
+                      moboCompat.current = ''
+                    }}
                   />
                 ) : step === 2 && cpuComponent ? (
                   <Component
                     component={cpuComponent}
                     composeButton="delete"
-                    buttonClickHandler={() => setCpuComponent(null)}
+                    buttonClickHandler={() => {
+                      setCpuComponent(null)
+                      if (!moboComponent) cpuCompat.current = ''
+                      if (!moboComponent && !ramComponent) ramCompat.current = ''
+                    }}
                   />
                 ) : step === 3 && moboComponent ? (
                   <Component
                     component={moboComponent}
                     composeButton="delete"
-                    buttonClickHandler={() => setMoboComponent(null)}
+                    buttonClickHandler={() => {
+                      setMoboComponent(null)
+                      if (!cpuComponent) cpuCompat.current = ''
+                      caseCompat.current = ''
+                      if (!cpuComponent && !ramComponent) ramCompat.current = ''
+                    }}
                   />
                 ) : step === 4 && ramComponent ? (
                   <Component
                     component={ramComponent}
                     composeButton="delete"
-                    buttonClickHandler={() => setRamComponent(null)}
+                    buttonClickHandler={() => {
+                      setRamComponent(null)
+                      if (!cpuComponent && !moboComponent) ramCompat.current = ''
+                    }}
                   />
                 ) : step === 5 && gpuComponent ? (
                   <Component

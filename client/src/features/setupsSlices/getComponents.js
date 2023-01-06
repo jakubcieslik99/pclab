@@ -7,7 +7,14 @@ const getComponents = createAsyncThunk('/setups/getComponents', async (sendData,
     const type = `&type=${sendData.type}`
     const page = `&page=${sendData.page}`
 
-    const { data } = await axiosProtected.get(`/setups/getComponents${searching}${type}${page}`)
+    const { data } = await axiosProtected.get(`/setups/getComponents${searching}${type}${page}`, {
+      params: {
+        moboCompat: sendData.moboCompat || '',
+        cpuCompat: sendData.cpuCompat || '',
+        caseCompat: sendData.caseCompat || '',
+        ramCompat: sendData.ramCompat || '',
+      },
+    })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()
