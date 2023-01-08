@@ -58,6 +58,13 @@ const getOrder = async (req, res) => {
   return res.status(200).send({ order, paymentKey })
 }
 
+//GET - /orders/getCarriers
+const getCarriers = async (req, res) => {
+  const listedCarriers = await Carrier.find().select('name price').exec()
+
+  return res.status(200).send({ carriers: listedCarriers })
+}
+
 //POST - /orders/placeOrder
 const placeOrder = async (req, res) => {
   const { authenticatedUser } = res.locals
@@ -251,4 +258,4 @@ const placeOrder = async (req, res) => {
   return res.status(200).send({ orderId: newOrder.id })
 }
 
-export { getOrder, placeOrder }
+export { getOrder, getCarriers, placeOrder }

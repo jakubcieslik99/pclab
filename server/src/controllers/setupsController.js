@@ -167,7 +167,7 @@ const createComment = async (req, res) => {
 
   const validationResult = await createCommentValidation.validateAsync(req.body)
 
-  const setup = await Setup.findById(req.params.id).exec()
+  const setup = await Setup.findById(req.params.id).select('comments').exec()
   if (!setup) throw createError(404, 'Podana konfiguracja nie istnieje.')
 
   setup.comments.push({
@@ -177,7 +177,12 @@ const createComment = async (req, res) => {
 
   await setup.save()
 
-  return res.status(200).send({ message: 'Dodano komentarz.' })
+  const setupComments = await Setup.findById(req.params.id)
+    .populate([{ path: 'comments.addedBy', select: 'nick' }])
+    .select('comments')
+    .exec()
+
+  return res.status(200).send({ setupComments })
 }
 
 //GET - /setups/getComponents
