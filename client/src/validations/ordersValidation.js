@@ -100,6 +100,12 @@ const placeOrderErrors = {
       message: 'Niepoprawny format miejscowości.',
     },
   },
+  placeOrderCarrier: {
+    required: {
+      value: true,
+      message: 'Pole wymagane.',
+    },
+  },
 }
 
 export { placeOrderErrors }

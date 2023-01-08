@@ -5,6 +5,7 @@ import confirmAccountReducer from './authSlices/confirmAccount'
 import sendPasswordResetReducer from './authSlices/sendPasswordReset'
 import resetPasswordReducer from './authSlices/resetPassword'
 import getOrderReducer from './ordersSlices/getOrder'
+import getCarriersReducer from './ordersSlices/getCarriers'
 import placeOrderReducer from './ordersSlices/placeOrder'
 import getSetupsReducer from './setupsSlices/getSetups'
 import getSetupReducer from './setupsSlices/getSetup'
@@ -25,6 +26,7 @@ const store = configureStore({
     resetPassword: resetPasswordReducer,
     //ordersSlices
     getOrder: getOrderReducer,
+    getCarriers: getCarriersReducer,
     placeOrder: placeOrderReducer,
     //setupsSlice
     getSetups: getSetupsReducer,
