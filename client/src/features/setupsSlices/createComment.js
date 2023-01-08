@@ -17,8 +17,7 @@ const createCommentSlice = createSlice({
   name: 'createComment',
   initialState: {
     loading: false,
-    success: false,
-    successMessage: '',
+    setupComments: null,
     error: false,
     errorMessage: '',
   },
@@ -29,17 +28,18 @@ const createCommentSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
+    setupCommentsReset: state => {
+      state.setupComments = null
+    },
   },
   extraReducers: builder => {
     builder.addCase(createComment.pending, state => {
       state.loading = true
-      state.success = false
       state.error = false
     })
     builder.addCase(createComment.fulfilled, (state, action) => {
       state.loading = false
-      state.success = true
-      state.successMessage = action.payload.message
+      state.setupComments = action.payload.setupComments
     })
     builder.addCase(createComment.rejected, (state, action) => {
       state.loading = false
@@ -51,5 +51,5 @@ const createCommentSlice = createSlice({
   },
 })
 
-export const { successReset, errorReset } = createCommentSlice.actions
+export const { successReset, errorReset, setupCommentsReset } = createCommentSlice.actions
 export default createCommentSlice.reducer

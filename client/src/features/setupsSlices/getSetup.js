@@ -25,8 +25,17 @@ export const getSetupSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    getSetupReset: state => {
+    /*getSetupReset: state => {
       state.setup = null
+    },*/
+    addLike: (state, action) => {
+      if (state.setup._id === action.payload) state.setup.likes += 1
+    },
+    removeLike: (state, action) => {
+      if (state.setup._id === action.payload) state.setup.likes -= 1
+    },
+    addComment: (state, action) => {
+      if (state.setup._id === action.payload._id) state.setup.comments = action.payload.comments
     },
   },
   extraReducers: builder => {
@@ -48,5 +57,5 @@ export const getSetupSlice = createSlice({
   },
 })
 
-export const { errorReset, getSetupReset } = getSetupSlice.actions
+export const { errorReset, getSetupReset, addLike, removeLike, addComment } = getSetupSlice.actions
 export default getSetupSlice.reducer
