@@ -1,7 +1,8 @@
 import axios from 'axios'
 import axiosPublic from './axiosPublic'
 import { logout, userInfoReset } from '../features/authSlices/manageAccount'
-import { likedSetupsReset, likeUnlikeReset } from '../features/setupsSlices/manageLikedSetups'
+import { likedSetupsReset, likeReset, unlikeReset } from '../features/setupsSlices/manageLikedSetups'
+import { setupCommentsReset } from '../features/setupsSlices/createComment'
 
 let store
 export const injectStore = _store => {
@@ -55,7 +56,10 @@ const resIntercept = axiosProtected.interceptors.response.use(
         prevRequest.headers['Authorization'] = `Bearer ${payload.accessToken}`
         return axiosProtected(prevRequest)
       } else {
-        store.dispatch(likeUnlikeReset())
+        store.dispatch(likeReset())
+        store.dispatch(unlikeReset())
+        store.dispatch(setupCommentsReset())
+
         store.dispatch(likedSetupsReset())
         store.dispatch(userInfoReset())
         store.dispatch(logout())

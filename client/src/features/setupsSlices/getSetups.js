@@ -18,7 +18,7 @@ const getSetups = createAsyncThunk('/setups/getSetups', async (sendData, thunkAP
   }
 })
 
-const getHomeScreenSetups = createAsyncThunk('/setups/getHSSetups', async (_sendData, thunkAPI) => {
+const getHomeScreenSetups = createAsyncThunk('/setups/getHomeScreenSetups', async (_sendData, thunkAPI) => {
   try {
     const sortingTopRated = '?sorting=best_rating'
     const sortingMostPopular = '?sorting=most_popular'

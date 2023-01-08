@@ -5,6 +5,7 @@ import { FaCubes } from 'react-icons/fa'
 import { FaPlusCircle, FaGrinStars, FaComments, FaShoppingCart, FaCaretRight } from 'react-icons/fa'
 import { useAppSelector, useAppDispatch } from '../features/store'
 import { addLike, removeLike, getHomeScreenSetups } from '../features/setupsSlices/getSetups'
+import { likeReset, unlikeReset } from '../features/setupsSlices/manageLikedSetups'
 import Hero from '../components/hero/Hero'
 import Setup from '../components/setup/Setup'
 import Loading from '../components/alerts/Loading'
@@ -25,6 +26,10 @@ const HomeScreen = () => {
   useEffect(() => {
     if (like) dispatch(addLike(like))
     else if (unlike) dispatch(removeLike(unlike))
+    return () => {
+      like && dispatch(likeReset())
+      unlike && dispatch(unlikeReset())
+    }
   }, [like, unlike, dispatch])
 
   return (

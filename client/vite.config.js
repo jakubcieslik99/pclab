@@ -8,7 +8,6 @@ export default defineConfig({
   server: {
     host: true,
     port: 3000,
-    //port: process.env.PORT === undefined ? 3000 : +process.env.PORT,
     strictPort: true,
   },
 })
