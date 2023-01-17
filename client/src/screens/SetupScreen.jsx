@@ -195,11 +195,11 @@ const SetupScreen = () => {
             </div>
 
             <div className="mx-2 mb-20 md:mb-6">
-              <h2 className="mb-[5px] text-xl font-bold flex items-center left-">
+              <h2 className="mb-[5px] text-xl font-bold flex items-center relative">
                 Komentarze:
                 <Loading
                   isOpen={loading3}
-                  customStyle="left-[161px]"
+                  customStyle="left-[138px]"
                   customLoadingStyle="w-[24px] h-[24px] border-white/20 border-t-white"
                 />
               </h2>

@@ -123,14 +123,14 @@ const PlaceOrderScreen = () => {
     <main className="flex-1">
       <div className="content">
         <div className="mx-2 my-4">
-          <div className="flex items-center">
-            <h2 className="text-xl font-bold">ZAKUP ZESTAW</h2>
+          <h2 className="relative text-xl font-bold">
+            ZAKUP ZESTAW
             <Loading
               isOpen={loading}
-              customStyle="left-[180px] sm:left-[184px]"
+              customStyle="top-[2px] left-[160px]"
               customLoadingStyle="w-[24px] h-[24px] border-white/20 border-t-white"
             />
-          </div>
+          </h2>
 
           <h4 className="text-sm font-light">{params.id || '-'}</h4>
 
@@ -482,14 +482,22 @@ const PlaceOrderScreen = () => {
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={loading || loading2 || loading3}
-                  className="flex justify-center items-center gap-2 px-3 mt-3 mb-4 py-[6px] text-lg font-semibold border-2 rounded-xl transition active:scale-95 hover:bg-white/10"
-                >
-                  <FaHandPointRight />
-                  Złóż zamówienie
-                </button>
+                <div className="relative">
+                  <button
+                    type="submit"
+                    disabled={loading || loading2 || loading3}
+                    className="flex justify-center items-center gap-2 px-3 mt-3 mb-4 py-[6px] text-lg font-semibold border-2 rounded-xl transition active:scale-95 hover:bg-white/10"
+                  >
+                    <FaHandPointRight />
+                    Złóż zamówienie
+                  </button>
+
+                  <Loading
+                    isOpen={loading3}
+                    customStyle="bottom-[7px] left-[212px]"
+                    customLoadingStyle="w-[30px] h-[30px] border-white/20 border-t-white"
+                  />
+                </div>
 
                 <Error
                   isOpen={error3 && errorMessage3 !== '' ? true : false}

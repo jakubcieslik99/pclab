@@ -88,7 +88,7 @@ const loginErrors = {
   },
 }
 
-const updateMeErrors = {
+const updateAccountErrors = {
   profileEmail: {
     required: {
       value: true,
@@ -185,4 +185,4 @@ const resetPasswordErrors = {
   },
 }
 
-export { registerErrors, loginErrors, updateMeErrors, sendPasswordResetErrors, resetPasswordErrors }
+export { registerErrors, loginErrors, updateAccountErrors, sendPasswordResetErrors, resetPasswordErrors }

@@ -2,7 +2,9 @@ import { FaLink, FaBoxOpen } from 'react-icons/fa'
 import noPhoto from '../../assets/no-photo.png'
 
 const Component = props => {
-  const componentImage = `${import.meta.env.VITE_APP_API_URL}/static/components/${props.component?._id}`
+  const componentImage = `${import.meta.env.VITE_APP_API_URL}/static/components/${
+    !props.order ? props.component?._id : props.component?.componentId
+  }`
   const componentPrice = (props.component?.price / 100).toFixed(2) || (0 / 100).toFixed(2)
 
   return (
@@ -15,7 +17,7 @@ const Component = props => {
         <div
           className={`aspect-[4/3] flex justify-center items-center ${
             props.order ? 'max-w-[134px]' : 'max-w-[156px]'
-          } rounded-br-xl border-r border-b border-white/[0.25] bg-white/[0.25] overflow-hidden`}
+          } rounded-br-xl border-r border-b border-white/[0.25] bg-white/[0.25] overflow-hidden relative`}
         >
           <img
             crossOrigin="anonymous"
@@ -27,6 +29,13 @@ const Component = props => {
             alt=""
             className="object-contain w-full h-full"
           />
+
+          {!props.order && props.component?.amount && (
+            <div className="absolute flex items-center justify-center px-[5px] text-xs text-pclab-600 bg-white rounded-lg pt-[2px] pb-[1px] left-[3px] bottom-1 gap-[2px]">
+              <span className="font-bold">{props.component.amount}</span>
+              <span className="font-semibold">szt.</span>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2 mt-1">
