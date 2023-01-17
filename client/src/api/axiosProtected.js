@@ -1,6 +1,7 @@
 import axios from 'axios'
 import axiosPublic from './axiosPublic'
-import { logout, userInfoReset } from '../features/authSlices/manageAccount'
+import { userInfoReset, logout } from '../features/authSlices/manageAccount'
+import { getLoggedUserReset } from '../features/userSlices/getLoggedUser'
 import { likedSetupsReset, likeReset, unlikeReset } from '../features/setupsSlices/manageLikedSetups'
 import { setupCommentsReset } from '../features/setupsSlices/createComment'
 
@@ -56,11 +57,14 @@ const resIntercept = axiosProtected.interceptors.response.use(
         prevRequest.headers['Authorization'] = `Bearer ${payload.accessToken}`
         return axiosProtected(prevRequest)
       } else {
-        store.dispatch(likeReset())
-        store.dispatch(unlikeReset())
         store.dispatch(setupCommentsReset())
 
+        store.dispatch(unlikeReset())
+        store.dispatch(likeReset())
         store.dispatch(likedSetupsReset())
+
+        store.dispatch(getLoggedUserReset())
+
         store.dispatch(userInfoReset())
         store.dispatch(logout())
         return Promise.reject(payload)

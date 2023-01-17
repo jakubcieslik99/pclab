@@ -4,6 +4,9 @@ import { Transition, Menu } from '@headlessui/react'
 import { FaHome, FaBoxes, FaLaptopMedical, FaUserCircle, FaDoorOpen, FaBars, FaCaretDown } from 'react-icons/fa'
 import { useAppSelector, useAppDispatch } from '../../features/store'
 import { userInfoReset, logout } from '../../features/authSlices/manageAccount'
+import { getLoggedUserReset } from '../../features/userSlices/getLoggedUser'
+import { likedSetupsReset, likeReset, unlikeReset } from '../../features/setupsSlices/manageLikedSetups'
+import { setupCommentsReset } from '../../features/setupsSlices/createComment'
 import { BsCpuFill } from 'react-icons/bs'
 
 const Header = () => {
@@ -16,8 +19,17 @@ const Header = () => {
 
   //handlers
   const logoutHandler = () => {
+    dispatch(setupCommentsReset())
+
+    dispatch(unlikeReset())
+    dispatch(likeReset())
+    dispatch(likedSetupsReset())
+
+    dispatch(getLoggedUserReset())
+
     dispatch(userInfoReset())
     dispatch(logout())
+
     navigate(pathname || '/', { replace: true })
   }
 

@@ -1,16 +1,20 @@
-import { useState } from 'react'
+import { useRef, useEffect } from 'react'
 import Countdown from 'react-countdown'
+import { useAppDispatch } from '../../features/store'
+import { getOrder } from '../../features/ordersSlices/getOrder'
 
 const Timer = props => {
   //variables
-  const [time] = useState(Date.now() + 15 * 60 * 1000)
-  //const [time] = useState(Date.now() + 3000)
+  const getOrderAbort = useRef()
+
+  const dispatch = useAppDispatch()
 
   //handlers
   const countdownRenderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       setTimeout(() => {
-        console.log(`Fetch order ${props.orderId}`)
+        const getOrderPromise = dispatch(getOrder({ id: props.orderId }))
+        getOrderAbort.current = getOrderPromise.abort
       }, 2000)
 
       return <div className="text-xl font-medium">Czas na opłacenie zamówienia minął!</div>
@@ -25,7 +29,12 @@ const Timer = props => {
       )
   }
 
-  return <Countdown date={props.time ? props.time : time} renderer={countdownRenderer} />
+  //useEffects
+  useEffect(() => {
+    return () => getOrderAbort.current && getOrderAbort.current()
+  }, [])
+
+  return <Countdown date={props.time} renderer={countdownRenderer} />
 }
 
 export default Timer
