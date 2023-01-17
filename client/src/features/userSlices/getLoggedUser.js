@@ -30,6 +30,9 @@ export const getLoggedUserSlice = createSlice({
       state.orders = []
       state.likedSetups = []
     },
+    removeLike: (state, action) => {
+      state.likedSetups = state.likedSetups.filter(likedSetup => likedSetup._id !== action.payload)
+    },
   },
   extraReducers: builder => {
     builder.addCase(getLoggedUser.pending, state => {
@@ -51,5 +54,5 @@ export const getLoggedUserSlice = createSlice({
   },
 })
 
-export const { errorReset, getLoggedUserReset } = getLoggedUserSlice.actions
+export const { errorReset, getLoggedUserReset, removeLike } = getLoggedUserSlice.actions
 export default getLoggedUserSlice.reducer

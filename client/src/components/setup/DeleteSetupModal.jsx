@@ -1,71 +1,63 @@
 import { useRef, useEffect, Fragment } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Transition, Dialog } from '@headlessui/react'
 import { FaTimes } from 'react-icons/fa'
 import { useAppSelector, useAppDispatch } from '../../features/store'
-import { errorReset, userInfoReset, deleteAccount } from '../../features/authSlices/manageAccount'
-import { getLoggedUserReset } from '../../features/userSlices/getLoggedUser'
-import { likedSetupsReset, likeReset, unlikeReset } from '../../features/setupsSlices/manageLikedSetups'
-import { setupCommentsReset } from '../../features/setupsSlices/createComment'
+import { successReset, errorReset, deleteSetup } from '../../features/setupsSlices/deleteSetup'
+import { getUser } from '../../features/userSlices/getUser'
 import Loading from '../alerts/Loading'
 import Error from '../alerts/Error'
+import Success from '../alerts/Success'
 
 const DeleteModal = props => {
   //variables
-  const deleteAccountAbort = useRef()
+  const deleteSetupAbort = useRef()
+  const getUserAbort = useRef()
 
-  const { loading, success, successMessage, error, errorMessage } = useAppSelector(state => state.manageAccount)
+  const { loading, success, successMessage, error, errorMessage } = useAppSelector(state => state.deleteSetup)
   const dispatch = useAppDispatch()
 
   const params = useParams()
-  const navigate = useNavigate()
 
   //handlers
   const submitHandler = e => {
     e.preventDefault()
-    const deleteAccountPromise = dispatch(deleteAccount({ id: params.id }))
-    deleteAccountAbort.current = deleteAccountPromise.abort
+    const deleteSetupPromise = dispatch(deleteSetup({ id: props.setupId }))
+    deleteSetupAbort.current = deleteSetupPromise.abort
   }
 
   const closeHandler = () => {
-    if (!loading) {
-      props.setIsOpen(false)
-      setTimeout(() => {
-        if (deleteAccountAbort.current) {
-          deleteAccountAbort.current()
-          deleteAccountAbort.current = undefined
-          dispatch(errorReset())
-        }
-      }, 200)
-    }
+    props.setIsOpen(false)
+    setTimeout(() => {
+      props.setSetupId('')
+      if (deleteSetupAbort.current) {
+        deleteSetupAbort.current()
+        deleteSetupAbort.current = undefined
+        dispatch(successReset())
+        dispatch(errorReset())
+      }
+    }, 200)
   }
 
   //useEffects
   useEffect(() => {
     return () => {
-      if (deleteAccountAbort.current) {
-        deleteAccountAbort.current()
-        deleteAccountAbort.current = undefined
+      if (deleteSetupAbort.current) {
+        deleteSetupAbort.current()
+        deleteSetupAbort.current = undefined
+        dispatch(successReset())
         dispatch(errorReset())
       }
     }
   }, [dispatch])
 
   useEffect(() => {
-    if (success && successMessage === 'Usunięto konto z serwisu.') {
-      dispatch(setupCommentsReset())
-
-      dispatch(unlikeReset())
-      dispatch(likeReset())
-      dispatch(likedSetupsReset())
-
-      dispatch(getLoggedUserReset())
-
-      dispatch(userInfoReset())
-
-      navigate('/login', { replace: true })
+    if (success) {
+      const getUserPromise = dispatch(getUser({ id: params.id }))
+      getUserAbort.current = getUserPromise.abort
     }
-  }, [success, successMessage, dispatch, navigate])
+    return () => getUserAbort.current && getUserAbort.current()
+  }, [success, params.id, dispatch])
 
   return (
     <Transition as={Fragment} appear show={props.isOpen}>
@@ -101,7 +93,7 @@ const DeleteModal = props => {
                   {/*modal header*/}
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-pclab-600">
                     <h2 className="relative">
-                      Usuwanie konta
+                      Usuwanie zestawu
                       <Loading
                         isOpen={loading}
                         customStyle="top-[3px] -right-[30px]"
@@ -124,11 +116,20 @@ const DeleteModal = props => {
                       message={errorMessage}
                       customStyle="text-left"
                     />
+                    <Success
+                      isOpen={success && successMessage !== '' ? true : false}
+                      message={successMessage}
+                      customStyle="text-left"
+                    />
 
                     <div>
-                      Czy na pewno chcesz całkowicie <span className="font-bold">usunąć</span> swoje konto w aplikacji PCLab?{' '}
+                      Czy na pewno chcesz całkowicie usunąć zestaw o numerze id{' '}
+                      <span className="font-bold">{props.setupId}</span>?
                     </div>
-                    <div>Zostaną usunięte Twoje wszystkie stworzone zestawy, wystawione oceny i dodane komentarze.</div>
+                    <div>
+                      Zostanie on usunięty z listy ulubionych każdego użytkownika, który go do niej dodał i nie będzie on
+                      więcej dostępny do kupienia w serwisie PCLab.
+                    </div>
                     <div>
                       Pamiętaj, ta operacja jest <span className="font-bold">nieodwracalna</span>!
                     </div>
@@ -136,19 +137,21 @@ const DeleteModal = props => {
 
                   {/*modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
-                    <button
-                      disabled={loading}
-                      type="submit"
-                      className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
-                    >
-                      Usuń
-                    </button>
+                    {!success && (
+                      <button
+                        disabled={loading}
+                        type="submit"
+                        className="px-[14px] py-2 bg-pclab-400 rounded-xl transition active:scale-95 hover:bg-pclab-400/70"
+                      >
+                        Usuń
+                      </button>
+                    )}
                     <button
                       type="button"
                       onClick={closeHandler}
                       className="px-[14px] py-2 bg-pclab-500 rounded-xl transition active:scale-95 hover:bg-pclab-500/80"
                     >
-                      Anuluj
+                      {!success ? 'Anuluj' : 'Zamknij'}
                     </button>
                   </div>
                 </form>

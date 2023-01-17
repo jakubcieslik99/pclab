@@ -44,16 +44,12 @@ const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
 
 const updateAccount = createAsyncThunk('/auth/updateAccount', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.put(
-      `/auth/updateAccount`,
-      {
-        email: sendData.email,
-        nick: sendData.nick,
-        password: sendData.password,
-        newpassword: sendData.newpassword,
-      },
-      { withCredentials: true }
-    )
+    const { data } = await axiosProtected.put(`/auth/updateAccount`, {
+      email: sendData.email,
+      nick: sendData.nick,
+      password: sendData.password,
+      newpassword: sendData.newpassword,
+    })
 
     data?.userInfo && localStorage.setItem('userInfo', JSON.stringify(data.userInfo))
     data?.accessToken && localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
@@ -95,9 +91,9 @@ export const manageAccountSlice = createSlice({
     loading: false,
     success: false,
     successMessage: '',
+    userInfo: userInfo ? JSON.parse(userInfo) : null,
     error: false,
     errorMessage: '',
-    userInfo: userInfo ? JSON.parse(userInfo) : null,
   },
   reducers: {
     successReset: state => {
