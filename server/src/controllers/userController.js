@@ -1,14 +1,29 @@
 import createError from 'http-errors'
-import User from '../models/userModel.js'
-import Order from '../models/orderModel.js'
-import Setup from '../models/setupModel.js'
+import User from '../models/userModel'
+import Order from '../models/orderModel'
+import Setup from '../models/setupModel'
 
 //GET - /user/getUser/:id
 const getUser = async (req, res) => {
   const listedUser = await User.findById(req.params.id).select('nick').exec()
   if (!listedUser) throw createError(404, 'Podany użytkownik nie istnieje.')
 
-  const listedUserSetups = await Setup.find({ user: req.params.id }).select('-addedBy -comments').exec()
+  const listedUserSetups = await Setup.find({ addedBy: req.params.id })
+    .populate([
+      { path: 'addedBy', select: 'nick' },
+      { path: 'case' },
+      { path: 'cpu' },
+      { path: 'mobo' },
+      { path: 'ram' },
+      { path: 'gpu' },
+      { path: 'psu' },
+      { path: 'driveOne' },
+      { path: 'driveTwo' },
+      { path: 'driveThree' },
+      { path: 'comments.addedBy', select: 'nick' },
+    ])
+    .select('-comments')
+    .exec()
 
   return res.status(200).send({ user: listedUser.nick, setups: listedUserSetups })
 }
@@ -25,12 +40,24 @@ const getLoggedUser = async (req, res) => {
 
   let likedSetupsFiltered = []
   for (let likedSetup of user.likedSetups) {
-    const creator = await User.findById(likedSetup.addedBy).select('nick').exec()
-    //likedSetupsFiltered.push({ ...likedSetup._doc, addedBy: creator.nick })
-    likedSetupsFiltered.push({ ...likedSetup, addedBy: creator.nick })
-    /*creator
-      ? likedSetupsFiltered.push({ ...likedSetup, addedBy: creator.nick })
-      : likedSetupsFiltered.push({ ...likedSetup, addedBy: undefined })*/
+    const setup = await Setup.findById(likedSetup.id)
+      .populate([
+        { path: 'addedBy', select: 'nick' },
+        { path: 'case' },
+        { path: 'cpu' },
+        { path: 'mobo' },
+        { path: 'ram' },
+        { path: 'gpu' },
+        { path: 'psu' },
+        { path: 'driveOne' },
+        { path: 'driveTwo' },
+        { path: 'driveThree' },
+        { path: 'comments.addedBy', select: 'nick' },
+      ])
+      .select('-comments')
+      .exec()
+
+    setup && likedSetupsFiltered.push(setup)
   }
 
   return res.status(200).send({ orders, likedSetups: likedSetupsFiltered })

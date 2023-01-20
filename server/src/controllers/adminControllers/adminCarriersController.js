@@ -35,7 +35,7 @@ const getCarrier = async (req, res) => {
   const listedCarrier = await Carrier.findById(req.params.id).exec()
   if (!listedCarrier) throw createError(404, 'Podany przewoźnik nie istnieje.')
 
-  return res.status(200).send({ component: listedComponent })
+  return res.status(200).send({ carrier: listedCarrier })
 }
 
 //POST - /admin/carriers/createCarrier

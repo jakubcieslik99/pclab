@@ -9,7 +9,7 @@ import { config } from '../config/utilities'
 import {
   registerValidation,
   loginValidation,
-  updateMeValidation,
+  updateAccountValidation,
   confirmAccountValidation,
   sendPasswordResetValidation,
   resetPasswordValidation,
@@ -95,7 +95,7 @@ const login = async (req, res) => {
 const updateAccount = async (req, res) => {
   const { authenticatedUser } = res.locals
 
-  const validationResult = await updateMeValidation.validateAsync({
+  const validationResult = await updateAccountValidation.validateAsync({
     email: req.body.email.toLowerCase(),
     nick: req.body.nick,
     password: req.body.password,
@@ -170,7 +170,7 @@ const deleteAccount = async (req, res) => {
   const unfinishedOrders = await Order.find({
     buyer: authenticatedUser.id,
     status: { $ne: 'returned' },
-    updatedAt: { $lt: new Date(new Date.getTime() - 14 * 24 * 3600 * 1000) }, //14 days back
+    updatedAt: { $lt: new Date(Date.now() - 14 * 24 * 3600 * 1000) }, //14 days back
   }).exec()
   if (unfinishedOrders.length > 0)
     throw createError(402, 'Posiadasz zamówienie w realizacji. Twoje konto będzie można usunąć po jego zakończeniu.')

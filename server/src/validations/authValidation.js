@@ -34,7 +34,7 @@ const loginValidation = Joi.object({
   password: Joi.string().required().min(8).max(60),
 })
 
-const updateMeValidation = Joi.object({
+const updateAccountValidation = Joi.object({
   email: Joi.string()
     .required()
     .max(60)
@@ -79,7 +79,7 @@ const resetPasswordValidation = Joi.object({
 export {
   registerValidation,
   loginValidation,
-  updateMeValidation,
+  updateAccountValidation,
   confirmAccountValidation,
   sendPasswordResetValidation,
   resetPasswordValidation,

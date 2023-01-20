@@ -13,7 +13,7 @@ import { placeOrderMessage, canceledOrderMessage, successfulPaymentMessage } fro
 const getOrder = async (req, res) => {
   const { authenticatedUser } = res.locals
 
-  const order = await Order.findById(req.params.id).populate('orderedComponents.componentId').select('-orderedSetup').exec()
+  const order = await Order.findById(req.params.id).select('-orderedSetup').exec()
   if (!order || order.buyer.toString() !== authenticatedUser.id) throw createError(404, 'Podane zamówienie nie istnieje.')
 
   let paymentKey = 'finalized'

@@ -12,7 +12,7 @@ const getAccessToken = (userId, userEmail, userNick, userIsAdmin) => {
         isAdmin: userIsAdmin,
       },
       config.JWT_ACCESS_TOKEN_SECRET,
-      { expiresIn: '15m' },
+      { expiresIn: '20m' },
       (error, token) => {
         if (error) {
           log.error(error.message)

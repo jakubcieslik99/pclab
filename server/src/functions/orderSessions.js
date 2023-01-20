@@ -2,6 +2,7 @@ import schedule from 'node-schedule'
 import stripe from '../config/stripeOptions'
 import Order from '../models/orderModel'
 import Component from '../models/componentModel'
+import Setup from '../models/setupModel'
 import { log } from '../config/utilities'
 import sendEmail from '../functions/sendEmail'
 import { canceledOrderMessage, successfulPaymentMessage } from '../messages/ordersMessages'
@@ -9,7 +10,7 @@ import { canceledOrderMessage, successfulPaymentMessage } from '../messages/orde
 const runOrderSession = async (orderId, paymentTime) => {
   const paymentDate = new Date(paymentTime)
 
-  log.info(`Ran payment session for order "${orderId}"`)
+  log.info(`Started payment session for order "${orderId}"`)
 
   schedule.scheduleJob(paymentDate, async () => {
     const order = await Order.findById(orderId)
@@ -48,6 +49,8 @@ const runOrderSession = async (orderId, paymentTime) => {
         await sendEmail(canceledOrderMessage(order.buyer.email.toLowerCase(), order.buyer.nick, order.id))
       }
     }
+
+    log.info(`Finished payment session for order "${orderId}"`)
   })
 }
 

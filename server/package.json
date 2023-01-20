@@ -1,6 +1,6 @@
 {
   "name": "pclab-server",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "PCLab",
   "main": "server.js",
   "scripts": {
@@ -12,9 +12,9 @@
   "author": "Jakub Cieślik",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.20.5",
-    "@babel/node": "^7.20.5",
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
     "nodemon": "^2.0.20"
   },
@@ -30,12 +30,12 @@
     "helmet": "^6.0.1",
     "http-errors": "^2.0.0",
     "joi": "^17.7.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.8.0",
-    "node-schedule": "^2.1.0",
-    "nodemailer": "^6.8.0",
-    "pino": "^8.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.3",
+    "node-schedule": "^2.1.1",
+    "nodemailer": "^6.9.0",
+    "pino": "^8.8.0",
     "pino-pretty": "^9.1.1",
-    "stripe": "^11.3.0"
+    "stripe": "^11.6.0"
   }
 }
