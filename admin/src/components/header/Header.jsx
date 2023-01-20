@@ -1,28 +1,26 @@
-import { useEffect, Fragment } from 'react'
+import { Fragment } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Transition, Menu } from '@headlessui/react'
 import { FaBars, FaCaretDown, FaDolly, FaTruckLoading, FaMemory, FaCog, FaUsers, FaDoorOpen } from 'react-icons/fa'
+import { useAppSelector, useAppDispatch } from '../../features/store'
+import { userInfoReset, logout } from '../../features/authSlices/manageAccount'
 import { BsCpuFill } from 'react-icons/bs'
 
 const Header = () => {
-  const userInfo = true
-
   //variables
+  const { userInfo } = useAppSelector(state => state.manageAccount)
+  const dispatch = useAppDispatch()
+
   const navigate = useNavigate()
-  const { pathname, state } = useLocation()
-  const locationLoginRequired = state?.loginRequired || false
+  const { pathname } = useLocation()
 
   //handlers
   const logoutHandler = () => {
-    console.log('logout')
-  }
+    dispatch(logout())
+    dispatch(userInfoReset())
 
-  //useEffects
-  useEffect(() => {
-    if (locationLoginRequired) {
-      navigate(pathname, { replace: true })
-    }
-  }, [pathname, locationLoginRequired, navigate])
+    navigate(pathname || '/login', { replace: true })
+  }
 
   return (
     <header className="sticky top-0 z-20 h-16 md:h-20">
@@ -44,7 +42,7 @@ const Header = () => {
               </div>
 
               <ul className="hidden md:flex">
-                {true && (
+                {userInfo && (
                   <>
                     <Link
                       to="/orders"
@@ -97,7 +95,7 @@ const Header = () => {
                 )}
               </ul>
 
-              {true && (
+              {userInfo && (
                 <Menu.Button className="relative w-9 h-9 md:hidden focus:outline-none">
                   <FaBars
                     className={`w-9 h-9 p-[6px] absolute inset-0 transition-nav ${
@@ -113,7 +111,7 @@ const Header = () => {
               )}
             </div>
 
-            {true && (
+            {userInfo && (
               <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"

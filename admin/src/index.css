@@ -57,6 +57,19 @@ body {
 /*-----COMPONENTS-----*/
 
 /*-----ELEMENTS-----*/
+.loading {
+  @apply border-[6px] rounded-[50%];
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .mobile-menu {
   width: calc(100% - 16px);
 }
