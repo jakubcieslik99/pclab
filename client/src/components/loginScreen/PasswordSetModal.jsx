@@ -29,10 +29,11 @@ const PasswordSetModal = props => {
   //handlers
   const closeHandler = useCallback(() => {
     props.setIsOpen(false)
-    reset()
     setTimeout(() => {
+      reset()
       if (resetPasswordAbort.current) {
         resetPasswordAbort.current()
+        resetPasswordAbort.current = undefined
         dispatch(successReset())
         dispatch(errorReset())
       }
@@ -57,6 +58,7 @@ const PasswordSetModal = props => {
     return () => {
       if (resetPasswordAbort.current) {
         resetPasswordAbort.current()
+        resetPasswordAbort.current = undefined
         dispatch(successReset())
         dispatch(errorReset())
       }

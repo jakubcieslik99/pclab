@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import { FaCube, FaCubes, FaHandPointer, FaCaretLeft, FaCaretRight, FaSearch } from 'react-icons/fa'
 import { BsCpuFill } from 'react-icons/bs'
 import { useAppSelector, useAppDispatch } from '../features/store'
-import { errorReset, getSetupReset, getSetup } from '../features/setupsSlices/getSetup'
+import { errorReset, getSetup } from '../features/setupsSlices/getSetup'
 import { errorReset as errorReset2, getComponentsReset, getComponents } from '../features/setupsSlices/getComponents'
 import { errorReset as errorReset3, idSavedReset, createSetup, updateSetup } from '../features/setupsSlices/saveSetup'
 import Component from '../components/component/Component'
@@ -217,7 +217,6 @@ const ComposeScreen = () => {
       if (getSetupAbort.current) {
         getSetupAbort.current()
         dispatch(errorReset())
-        dispatch(getSetupReset())
       }
     }
   }, [dispatch])

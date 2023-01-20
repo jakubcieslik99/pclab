@@ -27,8 +27,8 @@ const Header = () => {
 
     dispatch(getLoggedUserReset())
 
-    dispatch(userInfoReset())
     dispatch(logout())
+    dispatch(userInfoReset())
 
     navigate(pathname || '/', { replace: true })
   }

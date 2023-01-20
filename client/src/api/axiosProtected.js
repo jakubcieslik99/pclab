@@ -65,8 +65,8 @@ const resIntercept = axiosProtected.interceptors.response.use(
 
         store.dispatch(getLoggedUserReset())
 
-        store.dispatch(userInfoReset())
         store.dispatch(logout())
+        store.dispatch(userInfoReset())
         return Promise.reject(payload)
       }
     }

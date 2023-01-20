@@ -29,13 +29,13 @@ export const getSetupSlice = createSlice({
       state.setup = null
     },*/
     addLike: (state, action) => {
-      if (state.setup._id === action.payload) state.setup.likes += 1
+      if (state.setup?._id === action.payload) state.setup.likes += 1
     },
     removeLike: (state, action) => {
-      if (state.setup._id === action.payload) state.setup.likes -= 1
+      if (state.setup?._id === action.payload) state.setup.likes -= 1
     },
     addComment: (state, action) => {
-      if (state.setup._id === action.payload._id) state.setup.comments = action.payload.comments
+      if (state.setup?._id === action.payload._id) state.setup.comments = action.payload.comments
     },
   },
   extraReducers: builder => {
