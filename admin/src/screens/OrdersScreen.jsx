@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react'
+import { useRef, useState, useEffect, Fragment } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Listbox, Combobox, Transition } from '@headlessui/react'
 import { FaSearch, FaAngleDown } from 'react-icons/fa'
@@ -31,7 +31,10 @@ const filteringOptions = [
 
 const OrdersScreen = () => {
   //variables
+  const getOrdersAbort = useRef()
+
   const { loading, count, orders, error, errorMessage } = useAppSelector(state => state.getOrders)
+  const { success } = useAppSelector(state => state.saveOrder)
   const dispatch = useAppDispatch()
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -110,9 +113,24 @@ const OrdersScreen = () => {
     )
     return () => {
       getOrdersPromise.abort()
+      getOrdersAbort.current && getOrdersAbort.current()
       dispatch(errorReset())
     }
   }, [searchParams, dispatch])
+
+  useEffect(() => {
+    if (success) {
+      const getOrdersPromise = dispatch(
+        getOrders({
+          searching: searchParams.get('searching') || '',
+          sorting: searchParams.get('sorting') || 'newest',
+          filtering: searchParams.get('filtering') || 'all',
+          page: searchParams.get('page') || '',
+        })
+      )
+      getOrdersAbort.current = getOrdersPromise.abort
+    }
+  }, [success, searchParams, dispatch])
 
   return (
     <main className="flex-1">
