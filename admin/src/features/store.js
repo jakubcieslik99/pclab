@@ -5,7 +5,6 @@ import getOrdersReducer from './ordersSlices/getOrders'
 import getOrderReducer from './ordersSlices/getOrder'
 import saveOrderReducer from './ordersSlices/saveOrder'
 import getCarriersReducer from './carriersSlices/getCarriers'
-import getCarrierReducer from './carriersSlices/getCarrier'
 import saveCarrierReducer from './carriersSlices/saveCarrier'
 import deleteCarrierReducer from './carriersSlices/deleteCarrier'
 import getComponentsReducer from './componentsSlices/getComponents'
@@ -29,7 +28,6 @@ const store = configureStore({
     saveOrder: saveOrderReducer,
     //carriersSlices
     getCarriers: getCarriersReducer,
-    getCarrier: getCarrierReducer,
     saveCarrier: saveCarrierReducer,
     deleteCarrier: deleteCarrierReducer,
     //componentsSlices
