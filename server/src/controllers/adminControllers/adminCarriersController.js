@@ -30,13 +30,6 @@ const getCarriers = async (req, res) => {
 
   return res.status(200).send({ count, carriers: listedCarriers })
 }
-//GET - /admin/carriers/getCarrier/:id
-const getCarrier = async (req, res) => {
-  const listedCarrier = await Carrier.findById(req.params.id).exec()
-  if (!listedCarrier) throw createError(404, 'Podany przewoźnik nie istnieje.')
-
-  return res.status(200).send({ carrier: listedCarrier })
-}
 
 //POST - /admin/carriers/createCarrier
 const createCarrier = async (req, res) => {
@@ -79,4 +72,4 @@ const deleteCarrier = async (req, res) => {
   })
 }
 
-export { getCarriers, getCarrier, createCarrier, updateCarrier, deleteCarrier }
+export { getCarriers, createCarrier, updateCarrier, deleteCarrier }

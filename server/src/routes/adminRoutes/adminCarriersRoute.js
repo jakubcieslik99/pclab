@@ -6,7 +6,6 @@ import { isAdmin } from '../../middlewares/permissionsMiddleware'
 import { errorHandler } from '../../middlewares/errorMiddleware'
 import {
   getCarriers,
-  getCarrier,
   createCarrier,
   updateCarrier,
   deleteCarrier,
@@ -15,7 +14,6 @@ import {
 const router = express.Router()
 
 router.get('/getCarriers', isAuth, isAdmin, isPageLimit(20), errorHandler(getCarriers))
-router.get('/getCarrier/:id', isAuth, isAdmin, isValidId('id', null), errorHandler(getCarrier))
 
 router.post('/createCarrier', isAuth, isAdmin, errorHandler(createCarrier))
 
