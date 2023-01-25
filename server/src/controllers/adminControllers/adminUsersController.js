@@ -38,7 +38,7 @@ const getUsers = async (req, res) => {
 
   const count = await User.find(query).countDocuments().exec()
   const listedUsers = await User.find(query)
-    .select('-password -token -refreshTokens')
+    .select('-password -token -refreshTokens -refreshTokensAdmin')
     .sort(sort)
     .limit(limit * 1)
     .skip((page - 1) * limit)
@@ -58,7 +58,7 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const validationResult = await updateUserValidation.validateAsync(req.body)
 
-  const updatedUser = await User.findById(req.params.id).exec()
+  const updatedUser = await User.findById(req.params.id).select('-password -token -refreshTokens -refreshTokensAdmin').exec()
   if (!updatedUser) throw createError(404, 'Podany użytkownik nie istnieje.')
 
   updatedUser.isAdmin = validationResult.isAdmin === 'yes' ? true : false

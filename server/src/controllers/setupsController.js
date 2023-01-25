@@ -177,6 +177,10 @@ const createComment = async (req, res) => {
 
   await setup.save()
 
+  const user = await User.findById(authenticatedUser.id).exec()
+  user.commentsCount = user.commentsCount + 1
+  await user.save()
+
   const setupComments = await Setup.findById(req.params.id)
     .populate([{ path: 'comments.addedBy', select: 'nick' }])
     .select('comments')
@@ -329,6 +333,10 @@ const createSetup = async (req, res) => {
 
   await newSetup.save()
 
+  const user = await User.findById(authenticatedUser.id).exec()
+  user.setupsCount = user.setupsCount + 1
+  await user.save()
+
   return res.status(201).send({ message: 'Dodano nową konfigurację.', setup: newSetup })
 }
 
@@ -441,6 +449,10 @@ const deleteSetup = async (req, res) => {
   }
 
   await deletedSetup.remove()
+
+  const user = await User.findById(authenticatedUser.id).exec()
+  user.setupsCount = user.setupsCount - 1
+  await user.save()
 
   return res.status(200).send({ message: 'Usunięto konfigurację.' })
 }

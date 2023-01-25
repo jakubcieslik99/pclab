@@ -96,6 +96,12 @@ const deleteSetup = async (req, res) => {
     }
   }
 
+  const user = await User.findById(deletedSetup.addedBy).exec()
+  if (user) {
+    user.setupsCount = user.setupsCount - 1
+    await user.save()
+  }
+
   await deletedSetup.remove()
 
   return res.status(200).send({ message: 'Usunięto konfigurację.' })
