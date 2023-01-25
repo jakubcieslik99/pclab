@@ -99,8 +99,10 @@ const DeleteCarrierModal = props => {
 
                   {/*modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-gray-800 text-center">
-                    <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
-                    <Success isOpen={success && successMessage !== '' ? true : false} message={successMessage} />
+                    <div className="w-full text-left">
+                      <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
+                      <Success isOpen={success && successMessage !== '' ? true : false} message={successMessage} />
+                    </div>
 
                     <div>
                       Czy na pewno chcesz całkowicie usunąć wybranego przewoźnika{' '}

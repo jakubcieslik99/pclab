@@ -14,7 +14,6 @@ import deleteComponentReducer from './componentsSlices/deleteComponent'
 import getSetupsReducer from './setupsSlices/getSetups'
 import deleteSetupReducer from './setupsSlices/deleteSetup'
 import getUsersReducer from './usersSlices/getUsers'
-import getUserReducer from './usersSlices/getUser'
 import saveUserReducer from './usersSlices/saveUser'
 import deleteUserReducer from './usersSlices/deleteUser'
 
@@ -40,7 +39,6 @@ const store = configureStore({
     deleteSetup: deleteSetupReducer,
     //usersSlices
     getUsers: getUsersReducer,
-    getUser: getUserReducer,
     saveUser: saveUserReducer,
     deleteUser: deleteUserReducer,
   },

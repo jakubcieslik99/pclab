@@ -113,7 +113,7 @@ const CarriersScreen = () => {
     <main className="flex-1">
       <div className="content">
         <div className="px-3 pt-2 pb-3 mt-3 mb-3 bg-gray-800 rounded-xl">
-          <h2 className="mb-2 text-xl font-bold">
+          <h2 className="relative mb-2 text-xl font-bold">
             Przewoźnicy
             <Loading
               isOpen={loading}
