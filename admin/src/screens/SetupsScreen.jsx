@@ -1,9 +1,16 @@
-import { useState, Fragment } from 'react'
+import { useRef, useState, useEffect, Fragment } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Listbox, Transition } from '@headlessui/react'
 import { FaSearch, FaAngleDown } from 'react-icons/fa'
+import { useAppSelector, useAppDispatch } from '../features/store'
+import { errorReset, getSetups } from '../features/setupsSlices/getSetups'
 import Setup from '../components/setupsScreen/Setup'
-import DeleteModal from '../components/universal/DeleteModal'
+import DeleteSetupModal from '../components/setupsScreen/DeleteSetupModal'
 import Paginator from '../components/universal/Paginator'
+import Loading from '../components/alerts/Loading'
+import Error from '../components/alerts/Error'
+
+let URL = {}
 
 const sortingOptions = [
   { id: 1, name: 'Ostatnio dodane', value: 'newest' },
@@ -18,28 +25,96 @@ const sortingOptions = [
 
 const SetupsScreen = () => {
   //variables
-  const [searching, setSearching] = useState('')
-  const [sorting, setSorting] = useState(sortingOptions[0])
+  const getSetupsAbort = useRef()
+
+  const { loading, count, setups, error, errorMessage } = useAppSelector(state => state.getSetups)
+  const { success } = useAppSelector(state => state.deleteSetup)
+  const dispatch = useAppDispatch()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searching, setSearching] = useState(searchParams.get('searching') || '')
+  const [sorting, setSorting] = useState(searchParams.get('sorting') || sortingOptions[0].value)
+  const [sortingOption, setSortingOption] = useState(sortingOptions[0])
+  const [page, setPage] = useState(searchParams.get('page') || 1)
 
   const [deleteSetup, setDeleteSetup] = useState(null)
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
 
   //handlers
+  const filterURL = (searchingFilter, sortingFilter, pageFilter) => {
+    if (searchingFilter !== '') URL.searching = searchingFilter
+    else if (URL.searching) delete URL.searching
+
+    if (sortingFilter !== 'newest') URL.sorting = sortingFilter
+    else if (URL.sorting) delete URL.sorting
+
+    if (pageFilter !== 1) URL.page = pageFilter
+    else if (URL.page) delete URL.page
+
+    setSearchParams({ ...URL })
+  }
+
   const searchingHandler = e => {
     e.preventDefault()
-    console.log('searching')
-    console.log(searching)
+    setPage(1)
+    filterURL(searching, sorting, 1)
   }
+  const sortingHandler = option => {
+    setSorting(option.value)
+    setSortingOption(option)
+    filterURL(searching, option.value, page)
+  }
+  const pageHandler = page => {
+    setPage(page)
+    filterURL(searching, sorting, page)
+  }
+
   const deleteSetupHandler = setup => {
     setDeleteSetup(setup)
     setDeleteModalIsOpen(true)
   }
 
+  //useEffects
+  useEffect(() => {
+    const getSetupsPromise = dispatch(
+      getSetups({
+        searching: searchParams.get('searching') || '',
+        sorting: searchParams.get('sorting') || 'newest',
+        page: searchParams.get('page') || '',
+      })
+    )
+    return () => {
+      getSetupsPromise.abort()
+      getSetupsAbort.current && getSetupsAbort.current()
+      dispatch(errorReset())
+    }
+  }, [searchParams, dispatch])
+
+  useEffect(() => {
+    if (success) {
+      const getSetupsPromise = dispatch(
+        getSetups({
+          searching: searchParams.get('searching') || '',
+          sorting: searchParams.get('sorting') || 'newest',
+          page: searchParams.get('page') || '',
+        })
+      )
+      getSetupsAbort.current = getSetupsPromise.abort
+    }
+  }, [success, searchParams, dispatch])
+
   return (
     <main className="flex-1">
       <div className="content">
         <div className="px-3 pt-2 pb-3 mt-3 mb-3 bg-gray-800 rounded-xl">
-          <h2 className="mb-2 text-xl font-bold">Zestawy</h2>
+          <h2 className="relative mb-2 text-xl font-bold">
+            Zestawy
+            <Loading
+              isOpen={loading}
+              customStyle="top-[3px] left-[95px]"
+              customLoadingStyle="w-[22px] h-[22px] border-white/20 border-t-white"
+            />
+          </h2>
 
           <div className="flex flex-col gap-4 md:items-center md:flex-row md:justify-between md:gap-0">
             <div className="flex flex-col gap-2 md:grow md:items-center md:flex-row md:gap-4">
@@ -61,10 +136,10 @@ const SetupsScreen = () => {
                 </button>
               </form>
 
-              <Listbox value={sorting} onChange={setSorting}>
+              <Listbox value={sortingOption} onChange={option => sortingHandler(option)}>
                 <div name="sorting" className="relative h-9 md:w-full md:max-w-[234px]">
                   <Listbox.Button className="absolute flex items-center justify-between w-full py-1 pl-3 border-2 rounded-xl">
-                    <div className="truncate">{sorting.name}</div>
+                    <div className="truncate">{sortingOption.name}</div>
                     <div className="flex items-center justify-center flex-none transition w-9 active:scale-90">
                       <FaAngleDown className="text-xl ml-[1px] mt-[1px]" />
                     </div>
@@ -91,7 +166,7 @@ const SetupsScreen = () => {
               </Listbox>
             </div>
 
-            <DeleteModal
+            <DeleteSetupModal
               deleteElement={deleteSetup}
               setDeleteElement={setDeleteSetup}
               isOpen={deleteModalIsOpen}
@@ -100,43 +175,35 @@ const SetupsScreen = () => {
           </div>
         </div>
 
+        <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} customStyle="w-full mb-3" />
+
         <div className="pb-[2px] mb-6 overflow-x-auto bg-gray-800 rounded-xl">
-          <table className="w-full border-b border-gray-600">
-            <thead>
-              <tr className="text-gray-300 bg-gray-600">
-                <th className="py-2 pl-3 pr-3 text-center">Nr</th>
-                <th className="py-2 pr-3 text-left">Dane</th>
-                <th className="py-2 pr-3 text-center">Dostępność</th>
-                <th className="py-2 pr-3 text-center">Zarządzaj</th>
-              </tr>
-            </thead>
+          {setups.length ? (
+            <>
+              <table className="w-full border-b border-gray-600">
+                <thead>
+                  <tr className="text-gray-300 bg-gray-600">
+                    <th className="py-2 pl-3 pr-3 text-center">Nr</th>
+                    <th className="py-2 pr-3 text-left">Dane</th>
+                    <th className="py-2 pr-3 text-center">Dostępność</th>
+                    <th className="py-2 pr-3 text-center">Zarządzaj</th>
+                  </tr>
+                </thead>
 
-            {
-              <tbody>
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-                <Setup deleteHandler={deleteSetupHandler} />
-              </tbody>
-            }
-          </table>
+                <tbody>
+                  {setups.map((setup, index) => (
+                    <Setup key={setup._id} index={index} setup={setup} deleteHandler={deleteSetupHandler} />
+                  ))}
+                </tbody>
+              </table>
 
-          {/*<div className="flex justify-center w-full pt-5 pb-[9px]">Ładowanie...</div>*/}
-
-          <div className="flex justify-center pt-[11px] pb-2">
-            <Paginator />
-          </div>
+              <div className="flex justify-center pt-[11px] pb-2">
+                <Paginator count={count} page={page} pageHandler={pageHandler} />
+              </div>
+            </>
+          ) : (
+            <div className="flex justify-center w-full pt-5 pb-[18px]">Brak zestawów</div>
+          )}
         </div>
       </div>
     </main>
