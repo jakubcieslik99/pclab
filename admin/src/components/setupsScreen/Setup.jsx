@@ -38,7 +38,7 @@ const Setup = props => {
           <div className="flex gap-1 text-[13px] md:text-[14px] text-gray-400">
             <p>Twórca:</p>
             <a
-              href={setup?.addedBy?._id ? `http://localhost:3000/profile/${setup.addedBy._id}` : '#'}
+              href={setup?.addedBy?._id ? `${import.meta.env.VITE_APP_WEBAPP_URL}/profile/${setup.addedBy._id}` : '#'}
               target="_blank"
               rel="noreferrer"
               className="-mt-[2px] text-base font-semibold text-gray-200 underline truncate"
@@ -51,7 +51,7 @@ const Setup = props => {
             <div className="flex gap-1">
               <p>Zestaw:</p>
               <a
-                href={`http://localhost:3000/setup/${setup?._id}`}
+                href={`${import.meta.env.VITE_APP_WEBAPP_URL}/setup/${setup?._id}`}
                 target="_blank"
                 rel="noreferrer"
                 className="-mt-[2px] text-base font-semibold text-gray-200 underline"

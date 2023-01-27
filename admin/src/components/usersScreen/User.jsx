@@ -23,7 +23,7 @@ const User = props => {
               <span>:</span>
             </p>
             <a
-              href={`http://localhost:3000/profile/${user?._id}`}
+              href={`${import.meta.env.VITE_APP_WEBAPP_URL}/profile/${user?._id}`}
               target="_blank"
               rel="noreferrer"
               className="-mt-[2px] text-base font-semibold text-gray-200 underline truncate"

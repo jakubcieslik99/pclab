@@ -23,7 +23,7 @@ const Order = props => {
             <div className="flex gap-1">
               <p>Zestaw:</p>
               <a
-                href={'http://localhost:3000/setups/507f1f77bcf86cd799439011'}
+                href={`${import.meta.env.VITE_APP_WEBAPP_URL}/setups/${order?.orderedSetup}`}
                 target="_blank"
                 rel="noreferrer"
                 className="text-gray-200 underline"
