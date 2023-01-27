@@ -64,7 +64,7 @@ const LoginScreen = () => {
             <h1 className="relative text-3xl font-semibold">
               Logowanie
               <Loading
-                isOpen={true}
+                isOpen={loading}
                 customStyle="top-[3px] -right-[20px]"
                 customLoadingStyle="w-[30px] h-[30px] border-white/20 border-t-white"
               />

@@ -8,7 +8,6 @@ import getCarriersReducer from './carriersSlices/getCarriers'
 import saveCarrierReducer from './carriersSlices/saveCarrier'
 import deleteCarrierReducer from './carriersSlices/deleteCarrier'
 import getComponentsReducer from './componentsSlices/getComponents'
-import getComponentReducer from './componentsSlices/getComponent'
 import saveComponentReducer from './componentsSlices/saveComponent'
 import deleteComponentReducer from './componentsSlices/deleteComponent'
 import getSetupsReducer from './setupsSlices/getSetups'
@@ -31,7 +30,6 @@ const store = configureStore({
     deleteCarrier: deleteCarrierReducer,
     //componentsSlices
     getComponents: getComponentsReducer,
-    getComponent: getComponentReducer,
     saveComponent: saveComponentReducer,
     deleteComponent: deleteComponentReducer,
     //setupsSlice
