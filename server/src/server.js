@@ -31,8 +31,8 @@ app.use(bodyParser)
 app.use(cookieParser())
 app.use(helmet())
 app.use(cors(corsOptions))
-//app.use(rateLimit(rateLimiter))
-//app.use(slowDown(speedLimiter))
+app.use(rateLimit(rateLimiter))
+app.use(slowDown(speedLimiter))
 
 //static files
 app.use('/static/components/', express.static('uploads/components'))

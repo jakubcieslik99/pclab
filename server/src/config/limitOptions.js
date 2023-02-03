@@ -2,7 +2,7 @@ import createError from 'http-errors'
 
 const rateLimiter = {
   windowMs: 60 * 1000,
-  max: 20,
+  max: 25,
   handler: () => {
     throw createError(429, 'Zbyt dużo zapytań do serwera.')
   },
@@ -10,7 +10,7 @@ const rateLimiter = {
 
 const speedLimiter = {
   windowMs: 60 * 1000,
-  delayAfter: 5,
+  delayAfter: 10,
   delayMs: 200,
 }
 
