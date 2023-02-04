@@ -135,6 +135,30 @@ const updateComponent = async (req, res) => {
   const updatedComponent = await Component.findById(req.params.id).exec()
   if (!updatedComponent) throw createError(404, 'Podany komponent nie istnieje.')
 
+  const setupsUsing = await Setup.find({
+    $or: [
+      { case: req.params.id },
+      { cpu: req.params.id },
+      { mobo: req.params.id },
+      { ram: req.params.id },
+      { gpu: req.params.id },
+      { psu: req.params.id },
+      { driveOne: req.params.id },
+      { driveTwo: req.params.id },
+      { driveThree: req.params.id },
+    ],
+  }).exec()
+
+  if (
+    setupsUsing.length > 0 &&
+    (validationResult.type !== updatedComponent.type ||
+      validationResult.moboCompat !== updatedComponent.moboCompat ||
+      validationResult.cpuCompat !== updatedComponent.cpuCompat ||
+      validationResult.caseCompat !== updatedComponent.caseCompat ||
+      validationResult.ramCompat !== updatedComponent.ramCompat)
+  )
+    throw createError(400, 'Nie można zmienić typu lub kompatybilności komponentu, ponieważ jest w użyciu w zestawach.')
+
   if (validationResult.type === 'case') {
     if (validationResult.moboCompat === '') throw createError(400, 'Kompatybilność z płytą główną jest wymagana.')
     validationResult.cpuCompat = ''

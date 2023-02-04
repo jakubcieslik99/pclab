@@ -31,7 +31,7 @@ router.post(
   fileUpload({ parseNested: true }),
   isProperAmount(0, 1),
   isProperExtension(['.jpg', '.jpeg', '.png']),
-  isProperSize(2),
+  isProperSize(3),
   errorHandler(createComponent)
 )
 
@@ -43,7 +43,7 @@ router.put(
   fileUpload({ parseNested: true }),
   isProperAmountUpdated(0, 1, 'images'),
   isProperExtension(['.jpg', '.jpeg', '.png']),
-  isProperSize(2),
+  isProperSize(3),
   errorHandler(updateComponent)
 )
 
