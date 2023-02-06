@@ -127,7 +127,7 @@ const SetupScreen = () => {
             <div className="flex flex-col mx-2 mb-2 sm:flex-row sm:items-center sm:justify-center">
               <div className="text-gray-400 truncate">
                 <span className="mr-2 font-semibold">Autor:</span>
-                <Link to={`/user/${setup.addedBy._id}`} className="underline">
+                <Link to={`/profile/${setup.addedBy._id}`} className="underline">
                   {setup.addedBy.nick}
                 </Link>
               </div>

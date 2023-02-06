@@ -64,7 +64,7 @@ const Setup = props => {
   return (
     <div className="overflow-hidden border border-white/[0.25] rounded-xl max-w-[479.5px]">
       <div className="grid grid-cols-3 bg-white/[0.25]">
-        <div className="aspect-[4/3] flex justify-center items-center">
+        <div className="aspect-[4/3] flex justify-center items-end">
           <img
             crossOrigin="anonymous"
             src={
@@ -76,7 +76,7 @@ const Setup = props => {
             className="object-contain w-full h-full"
           />
         </div>
-        <div className="aspect-[4/3] flex justify-center items-center">
+        <div className="aspect-[4/3] flex justify-center items-end">
           <img
             crossOrigin="anonymous"
             src={
@@ -88,7 +88,7 @@ const Setup = props => {
             className="object-contain w-full h-full"
           />
         </div>
-        <div className="aspect-[4/3] flex justify-center items-center">
+        <div className="aspect-[4/3] flex justify-center items-end">
           <img
             crossOrigin="anonymous"
             src={
@@ -100,7 +100,7 @@ const Setup = props => {
             className="object-contain w-full h-full"
           />
         </div>
-        <div className="aspect-[4/3] flex justify-center items-center">
+        <div className="aspect-[4/3] flex justify-center items-start">
           <img
             crossOrigin="anonymous"
             src={
@@ -112,7 +112,7 @@ const Setup = props => {
             className="object-contain w-full h-full"
           />
         </div>
-        <div className="aspect-[4/3] flex justify-center items-center">
+        <div className="aspect-[4/3] flex justify-center items-start">
           <img
             crossOrigin="anonymous"
             src={
@@ -124,7 +124,7 @@ const Setup = props => {
             className="object-contain w-full h-full"
           />
         </div>
-        <div className="aspect-[4/3] flex justify-center items-center">
+        <div className="aspect-[4/3] flex justify-center items-start">
           <img
             crossOrigin="anonymous"
             src={

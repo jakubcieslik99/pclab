@@ -255,7 +255,7 @@ const ComposeScreen = () => {
           getComponents({
             searching: searchParams.get('searching') || '',
             type: 'case',
-            moboCompat: moboCompat.current,
+            caseCompat: caseCompat.current,
             page: searchParams.get('page') || '',
           })
         )
@@ -277,7 +277,7 @@ const ComposeScreen = () => {
             searching: searchParams.get('searching') || '',
             type: 'mobo',
             cpuCompat: cpuCompat.current,
-            caseCompat: caseCompat.current,
+            moboCompat: moboCompat.current,
             ramCompat: ramCompat.current,
             page: searchParams.get('page') || '',
           })
@@ -548,7 +548,7 @@ const ComposeScreen = () => {
                     buttonClickHandler={() => setPsuComponent(null)}
                   />
                 ) : step === 7 && (driveOneComponent || driveTwoComponent || driveThreeComponent) ? (
-                  <>
+                  <div className="flex flex-col gap-3">
                     {driveOneComponent && (
                       <Component
                         component={driveOneComponent}
@@ -570,7 +570,7 @@ const ComposeScreen = () => {
                         buttonClickHandler={() => setDriveThreeComponent(null)}
                       />
                     )}
-                  </>
+                  </div>
                 ) : (
                   <div className="flex items-center justify-center gap-[6px] mt-5 mb-2">
                     <span>Brak</span>

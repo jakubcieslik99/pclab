@@ -131,14 +131,16 @@ const Component = props => {
           )}
           {props.component?.type === 'ram' && (
             <div className="flex gap-[3px] ml-3 items-baseline">
-              <span className="text-xs font-light">rozmiar:</span>
+              <span className="text-xs font-light">typ:</span>
               <span className="text-sm font-semibold uppercase">{props.component.ramCompat}</span>
             </div>
           )}
         </h3>
 
         <h4
-          className={`px-2 pb-[1px] ${props.order ? 'text-base leading-[1.34rem]' : 'text-lg leading-[1.39rem]'} break-all`}
+          className={`px-2 pb-[1px] ${
+            props.order ? 'text-base leading-[1.34rem]' : 'text-lg leading-[1.39rem]'
+          } break-words`}
         >
           {props.component?.title}
         </h4>

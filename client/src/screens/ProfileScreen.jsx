@@ -182,7 +182,7 @@ const ProfileScreen = () => {
                   <Setup
                     key={setup._id}
                     setup={setup}
-                    setButton="delete"
+                    setButton={userInfo?.id === params.id && 'delete'}
                     buttonClickHandler={() => {
                       setDeleteSetupModalIsOpen(true)
                       setSetupId(setup._id)
