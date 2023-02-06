@@ -8,7 +8,22 @@ import { getAccessToken, getRefreshToken } from '../../functions/generateTokens'
 
 //POST - /admin/auth/login
 const login = async (req, res) => {
-  if (req.cookies?.refreshTokenAdmin) throw createError(409, 'Użytkownik jest zalogowany.')
+  if (req.cookies?.refreshTokenAdmin) {
+    const checkedAdmin = await User.findOne({
+      'refreshTokensAdmin.refreshToken': req.cookies.refreshTokenAdmin,
+      isAdmin: true,
+    }).exec()
+
+    if (checkedAdmin) {
+      checkedAdmin.refreshTokensAdmin = checkedAdmin.refreshTokensAdmin.filter(
+        element => element.refreshToken !== req.cookies.refreshTokenAdmin
+      )
+      await checkedAdmin.save()
+    }
+
+    res.clearCookie('refreshTokenAdmin', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
+    throw createError(409, 'Użytkownik jest zalogowany. Wyloguj się lub spróbuj ponownie.')
+  }
 
   const validationResult = await loginValidation.validateAsync(req.body)
 
@@ -79,15 +94,13 @@ const logout = async (req, res) => {
     'refreshTokensAdmin.refreshToken': req.cookies.refreshTokenAdmin,
     isAdmin: true,
   }).exec()
-  if (!checkedAdmin)
-    return res
-      .clearCookie('refreshTokenAdmin', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
-      .sendStatus(204)
 
-  checkedAdmin.refreshTokensAdmin = checkedAdmin.refreshTokensAdmin.filter(
-    element => element.refreshToken !== req.cookies.refreshTokenAdmin
-  )
-  await checkedAdmin.save()
+  if (checkedAdmin) {
+    checkedAdmin.refreshTokensAdmin = checkedAdmin.refreshTokensAdmin.filter(
+      element => element.refreshToken !== req.cookies.refreshTokenAdmin
+    )
+    await checkedAdmin.save()
+  }
 
   return res
     .clearCookie('refreshTokenAdmin', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })

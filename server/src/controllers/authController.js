@@ -50,7 +50,19 @@ const register = async (req, res) => {
 }
 //POST - /auth/login
 const login = async (req, res) => {
-  if (req.cookies?.refreshToken) throw createError(409, 'Użytkownik jest zalogowany.')
+  if (req.cookies?.refreshToken) {
+    const checkedUser = await User.findOne({ 'refreshTokens.refreshToken': req.cookies.refreshToken }).exec()
+
+    if (checkedUser) {
+      checkedUser.refreshTokens = checkedUser.refreshTokens.filter(
+        element => element.refreshToken !== req.cookies.refreshToken
+      )
+      await checkedUser.save()
+    }
+
+    res.clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
+    throw createError(409, 'Użytkownik jest zalogowany. Wyloguj się lub spróbuj ponownie.')
+  }
 
   const validationResult = await loginValidation.validateAsync(req.body)
 
@@ -223,13 +235,13 @@ const logout = async (req, res) => {
   if (!req.cookies?.refreshToken) return res.sendStatus(204)
 
   const checkedUser = await User.findOne({ 'refreshTokens.refreshToken': req.cookies.refreshToken }).exec()
-  if (!checkedUser)
-    return res
-      .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
-      .sendStatus(204)
 
-  checkedUser.refreshTokens = checkedUser.refreshTokens.filter(element => element.refreshToken !== req.cookies.refreshToken)
-  await checkedUser.save()
+  if (checkedUser) {
+    checkedUser.refreshTokens = checkedUser.refreshTokens.filter(
+      element => element.refreshToken !== req.cookies.refreshToken
+    )
+    await checkedUser.save()
+  }
 
   return res
     .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
