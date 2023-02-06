@@ -8,7 +8,7 @@ import createError from 'http-errors'
 import { config, log } from './config/utilities'
 import databaseConnect from './config/databaseConnect'
 import corsOptions from './config/corsOptions'
-import { rateLimiter, speedLimiter } from './config/limitOptions'
+import { rateLimiter, speedLimiter, adminRateLimiter, adminSpeedLimiter } from './config/limitOptions'
 import bodyParser from './middlewares/parserMiddleware'
 import { isError } from './middlewares/errorMiddleware'
 import adminAuthRoute from './routes/adminRoutes/adminAuthRoute'
@@ -31,12 +31,11 @@ app.use(bodyParser)
 app.use(cookieParser())
 app.use(helmet())
 app.use(cors(corsOptions))
-app.use(rateLimit(rateLimiter))
-app.use(slowDown(speedLimiter))
 
 //static files
 app.use('/static/components/', express.static('uploads/components'))
 //admin routes
+app.use('/admin/*', rateLimit(adminRateLimiter), slowDown(adminSpeedLimiter))
 app.use('/admin/auth', adminAuthRoute)
 app.use('/admin/orders', adminOrdersRoute)
 app.use('/admin/carriers', adminCarriersRoute)
@@ -44,10 +43,10 @@ app.use('/admin/components', adminComponentsRoute)
 app.use('/admin/setups', adminSetupsRoute)
 app.use('/admin/users', adminUsersRoute)
 //routes
-app.use('/auth', authRoute)
-app.use('/user', userRoute)
-app.use('/setups', setupsRoute)
-app.use('/orders', ordersRoute)
+app.use('/auth', rateLimit(rateLimiter), slowDown(speedLimiter), authRoute)
+app.use('/user', rateLimit(rateLimiter), slowDown(speedLimiter), userRoute)
+app.use('/setups', rateLimit(rateLimiter), slowDown(speedLimiter), setupsRoute)
+app.use('/orders', rateLimit(rateLimiter), slowDown(speedLimiter), ordersRoute)
 
 //404 error
 app.all('*', (_req, _res, next) => next(createError(404, 'Podany zasób nie istnieje.')))

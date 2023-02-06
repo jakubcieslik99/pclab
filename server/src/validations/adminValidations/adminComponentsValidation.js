@@ -27,7 +27,7 @@ const createComponentValidation = Joi.object({
     .required()
     .max(300)
     .pattern(
-      new RegExp(/^((https?:\/\/)?)[a-zA-Z0-9]{1}[a-zA-Z0-9-.]{0,}\.[a-z]{2,13}[a-zA-Z0-9:/?#[\]@!$%&'()*+,;=\-.]{0,}$/)
+      new RegExp(/^((https?:\/\/)?)[a-zA-Z0-9]{1}[a-zA-Z0-9-.]{0,}\.[a-z]{2,13}[a-zA-Z0-9:/?#[\]@!$%&'()*+,;=\-._]{0,}$/)
     ),
   price: Joi.number().required().integer().min(0).max(9999999),
   amount: Joi.number().required().integer().min(0).max(999),
