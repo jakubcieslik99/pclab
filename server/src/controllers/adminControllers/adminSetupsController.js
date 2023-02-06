@@ -91,14 +91,20 @@ const deleteSetup = async (req, res) => {
   if (deletedSetup.likes > 0) {
     const users = await User.find({ likedSetups: deletedSetup.id }).exec()
     for (const user of users) {
+      const countUserComments = deletedSetup.comments.filter(comment => comment.addedBy.toString() === user.id).length
+
       user.likedSetups = user.likedSetups.filter(setup => setup.toString() !== deletedSetup.id)
+      user.commentsCount = user.commentsCount - countUserComments
       await user.save()
     }
   }
 
   const user = await User.findById(deletedSetup.addedBy).exec()
   if (user) {
+    const countUserComments = deletedSetup.comments.filter(comment => comment.addedBy.toString() === user.id).length
+
     user.setupsCount = user.setupsCount - 1
+    user.commentsCount = user.commentsCount - countUserComments
     await user.save()
   }
 

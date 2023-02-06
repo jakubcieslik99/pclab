@@ -229,14 +229,26 @@ const getComponents = async (req, res) => {
   }
 
   const validationResult = await getComponentsValidation.validateAsync({
-    moboCompat: req.query.moboCompat || '',
-    cpuCompat: req.query.cpuCompat || '',
     caseCompat: req.query.caseCompat || '',
+    cpuCompat: req.query.cpuCompat || '',
+    moboCompat: req.query.moboCompat || '',
     ramCompat: req.query.ramCompat || '',
   })
-  if (validationResult.moboCompat) query = { ...query, ...{ moboCompat: validationResult.moboCompat } }
+  if (validationResult.caseCompat) {
+    if (validationResult.caseCompat === 'atx') query = { ...query, ...{ moboCompat: 'atx' } }
+    else if (validationResult.caseCompat === 'matx')
+      query = { ...query, ...{ $or: [{ moboCompat: 'atx' }, { moboCompat: 'matx' }] } }
+    else if (validationResult.caseCompat === 'itx')
+      query = { ...query, ...{ $or: [{ moboCompat: 'atx' }, { moboCompat: 'matx' }, { moboCompat: 'itx' }] } }
+  }
   if (validationResult.cpuCompat) query = { ...query, ...{ cpuCompat: validationResult.cpuCompat } }
-  if (validationResult.caseCompat) query = { ...query, ...{ caseCompat: validationResult.caseCompat } }
+  if (validationResult.moboCompat) {
+    if (validationResult.moboCompat === 'itx') query = { ...query, ...{ caseCompat: 'itx' } }
+    else if (validationResult.moboCompat === 'matx')
+      query = { ...query, ...{ $or: [{ caseCompat: 'itx' }, { caseCompat: 'matx' }] } }
+    else if (validationResult.moboCompat === 'atx')
+      query = { ...query, ...{ $or: [{ caseCompat: 'itx' }, { caseCompat: 'matx' }, { caseCompat: 'atx' }] } }
+  }
   if (validationResult.ramCompat) query = { ...query, ...{ ramCompat: validationResult.ramCompat } }
 
   const count = await Component.find(query).countDocuments().exec()
@@ -443,7 +455,10 @@ const deleteSetup = async (req, res) => {
   if (deletedSetup.likes > 0) {
     const users = await User.find({ likedSetups: deletedSetup.id }).exec()
     for (const user of users) {
+      const countUserComments = deletedSetup.comments.filter(comment => comment.addedBy.toString() === user.id).length
+
       user.likedSetups = user.likedSetups.filter(setup => setup.toString() !== deletedSetup.id)
+      user.commentsCount = user.commentsCount - countUserComments
       await user.save()
     }
   }
@@ -451,6 +466,7 @@ const deleteSetup = async (req, res) => {
   await deletedSetup.remove()
 
   const user = await User.findById(authenticatedUser.id).exec()
+  //filter if user commented deleted setup
   user.setupsCount = user.setupsCount - 1
   await user.save()
 
