@@ -102,7 +102,7 @@ const EditComponentModal = props => {
           updateComponent({
             id: props.editElement._id,
             title: data.componentTitle,
-            type: data.componentType,
+            type,
             moboCompat,
             cpuCompat,
             caseCompat,

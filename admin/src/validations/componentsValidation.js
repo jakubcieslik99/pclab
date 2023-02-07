@@ -19,7 +19,7 @@ const saveComponentErrors = {
       message: 'Maksymalna długość URL to 300 znaków.',
     },
     pattern: {
-      value: /^((https?:\/\/)?)[a-zA-Z0-9]{1}[a-zA-Z0-9-.]{0,}\.[a-z]{2,13}[a-zA-Z0-9:/?#[\]@!$%&'()*+,;=\-.]{0,}$/,
+      value: /^((https?:\/\/)?)[a-zA-Z0-9]{1}[a-zA-Z0-9-.]{0,}\.[a-z]{2,13}[a-zA-Z0-9:/?#[\]@!$%&'()*+,;=\-._]{0,}$/,
       message: 'Niepoprawny format URL.',
     },
   },
