@@ -3,7 +3,10 @@ import axiosProtected from '../../api/axiosProtected'
 
 const getLoggedUser = createAsyncThunk('/user/getLoggedUser', async (_sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.get(`/user/getLoggedUser`)
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
+    const { data } = await axiosProtected.get(`/user/getLoggedUser`, { signal: controller.signal })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()

@@ -3,7 +3,10 @@ import axiosPublic from '../../api/axiosPublic'
 
 const getSetup = createAsyncThunk('/setups/getSetup', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosPublic.get(`/setups/getSetup/${sendData.id}`)
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
+    const { data } = await axiosPublic.get(`/setups/getSetup/${sendData.id}`, { signal: controller.signal })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()

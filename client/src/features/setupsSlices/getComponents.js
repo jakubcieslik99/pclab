@@ -3,6 +3,9 @@ import axiosProtected from '../../api/axiosProtected'
 
 const getComponents = createAsyncThunk('/setups/getComponents', async (sendData, thunkAPI) => {
   try {
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
     const searching = `?searching=${sendData.searching}`
     const type = `&type=${sendData.type}`
     const page = `&page=${sendData.page}`
@@ -14,6 +17,7 @@ const getComponents = createAsyncThunk('/setups/getComponents', async (sendData,
         caseCompat: sendData.caseCompat || '',
         ramCompat: sendData.ramCompat || '',
       },
+      signal: controller.signal,
     })
     return data
   } catch (error) {

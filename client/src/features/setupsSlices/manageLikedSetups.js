@@ -3,7 +3,10 @@ import axiosProtected from '../../api/axiosProtected'
 
 const getLikedSetups = createAsyncThunk('/setups/getLikedSetups', async (_sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.get(`/setups/getLikedSetups`)
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
+    const { data } = await axiosProtected.get(`/setups/getLikedSetups`, { signal: controller.signal })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()

@@ -3,6 +3,9 @@ import axiosPublic from '../../api/axiosPublic'
 
 const getSetups = createAsyncThunk('/setups/getSetups', async (sendData, thunkAPI) => {
   try {
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
     const searching = `?searching=${sendData.searching}`
     const sorting = `&sorting=${sendData.sorting}`
     const priceFrom = `&priceFrom=${sendData.priceFrom}`
@@ -10,7 +13,9 @@ const getSetups = createAsyncThunk('/setups/getSetups', async (sendData, thunkAP
     const page = `&page=${sendData.page}`
     const limit = `&limit=${sendData.limit || 12}`
 
-    const { data } = await axiosPublic.get(`/setups/getSetups${searching}${sorting}${priceFrom}${priceTo}${page}${limit}`)
+    const { data } = await axiosPublic.get(`/setups/getSetups${searching}${sorting}${priceFrom}${priceTo}${page}${limit}`, {
+      signal: controller.signal,
+    })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()
@@ -20,12 +25,19 @@ const getSetups = createAsyncThunk('/setups/getSetups', async (sendData, thunkAP
 
 const getHomeScreenSetups = createAsyncThunk('/setups/getHomeScreenSetups', async (_sendData, thunkAPI) => {
   try {
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
     const sortingTopRated = '?sorting=best_rating'
     const sortingMostPopular = '?sorting=most_popular'
     const limit = '&limit=4'
 
-    const { data: dataTopRated } = await axiosPublic.get(`/setups/getSetups${sortingTopRated}${limit}`)
-    const { data: dataMostPopular } = await axiosPublic.get(`/setups/getSetups${sortingMostPopular}${limit}`)
+    const { data: dataTopRated } = await axiosPublic.get(`/setups/getSetups${sortingTopRated}${limit}`, {
+      signal: controller.signal,
+    })
+    const { data: dataMostPopular } = await axiosPublic.get(`/setups/getSetups${sortingMostPopular}${limit}`, {
+      signal: controller.signal,
+    })
 
     return { dataTopRated: dataTopRated.setups, dataMostPopular: dataMostPopular.setups }
   } catch (error) {
