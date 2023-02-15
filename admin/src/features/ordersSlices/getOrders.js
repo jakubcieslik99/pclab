@@ -3,13 +3,18 @@ import axiosProtected from '../../api/axiosProtected'
 
 const getOrders = createAsyncThunk('/orders/getOrders', async (sendData, thunkAPI) => {
   try {
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
     const searching = `?searching=${sendData.searching}`
     const sorting = `&sorting=${sendData.sorting}`
     const filtering = `&filtering=${sendData.filtering}`
     const page = `&page=${sendData.page}`
     const limit = `&limit=${sendData.limit || 15}`
 
-    const { data } = await axiosProtected.get(`/admin/orders/getOrders${searching}${sorting}${filtering}${page}${limit}`)
+    const { data } = await axiosProtected.get(`/admin/orders/getOrders${searching}${sorting}${filtering}${page}${limit}`, {
+      signal: controller.signal,
+    })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()

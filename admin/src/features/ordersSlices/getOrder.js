@@ -3,7 +3,10 @@ import axiosProtected from '../../api/axiosProtected'
 
 const getOrder = createAsyncThunk('/orders/getOrder', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.get(`/admin/orders/getOrder/${sendData.id}`)
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
+    const { data } = await axiosProtected.get(`/admin/orders/getOrder/${sendData.id}`, { signal: controller.signal })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()

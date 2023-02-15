@@ -3,6 +3,9 @@ import axiosProtected from '../../api/axiosProtected'
 
 const getComponents = createAsyncThunk('/components/getComponents', async (sendData, thunkAPI) => {
   try {
+    const controller = new AbortController()
+    thunkAPI.signal.addEventListener('abort', () => controller.abort())
+
     const searching = `?searching=${sendData.searching}`
     const sorting = `&sorting=${sendData.sorting}`
     const filtering = `&filtering=${sendData.filtering}`
@@ -10,7 +13,8 @@ const getComponents = createAsyncThunk('/components/getComponents', async (sendD
     const limit = `&limit=${sendData.limit || 15}`
 
     const { data } = await axiosProtected.get(
-      `/admin/components/getComponents${searching}${sorting}${filtering}${page}${limit}`
+      `/admin/components/getComponents${searching}${sorting}${filtering}${page}${limit}`,
+      { signal: controller.signal }
     )
     return data
   } catch (error) {
