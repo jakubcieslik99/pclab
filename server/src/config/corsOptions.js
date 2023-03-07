@@ -10,6 +10,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   optionsSuccessStatus: 200,
   credentials: true,
+  maxAge: 3600,
 }
 
 export default corsOptions
