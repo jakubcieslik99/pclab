@@ -76,7 +76,7 @@ const deleteUser = async (req, res) => {
   const unfinishedOrders = await Order.find({
     buyer: req.params.id,
     status: { $ne: 'returned' },
-    updatedAt: { $lt: new Date(new Date.getTime() - 14 * 24 * 3600 * 1000) }, //14 days back
+    updatedAt: { $lt: new Date(new Date().getTime() - 14 * 24 * 3600 * 1000) },
   }).exec()
   if (unfinishedOrders.length > 0) throw createError(402, 'Podany użytkownik posiada zamówienie w realizacji.')
 

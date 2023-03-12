@@ -182,7 +182,7 @@ const deleteAccount = async (req, res) => {
   const unfinishedOrders = await Order.find({
     buyer: authenticatedUser.id,
     status: { $ne: 'returned' },
-    updatedAt: { $lt: new Date(Date.now() - 14 * 24 * 3600 * 1000) }, //14 days back
+    updatedAt: { $lt: new Date(new Date().now() - 14 * 24 * 3600 * 1000) }, //14 days back
   }).exec()
   if (unfinishedOrders.length > 0)
     throw createError(402, 'Posiadasz zamówienie w realizacji. Twoje konto będzie można usunąć po jego zakończeniu.')
