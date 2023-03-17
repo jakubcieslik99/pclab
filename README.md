@@ -51,7 +51,6 @@ administrator panel.
 
 ```bash
   npm run dev
-  npm run dev-win   //only on Windows
 ```
 
 - Last recommended step is to run locally Stripe development webhook service
