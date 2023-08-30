@@ -17,7 +17,7 @@
   /*color-scheme: dark; /*Dark theme*/
 }
 html {
-  @apply overflow-x-hidden overflow-y-hidden;
+  @apply overflow-x-hidden overflow-y-hidden light:text-gray-900 dark:text-gray-100;
   height: -webkit-fill-available;
 }
 body {
