@@ -12,12 +12,12 @@
 }
 
 :root {
-  color-scheme: light dark; /*Device dependent theme*/
+  /*color-scheme: light dark; /*Device dependent theme*/
   /*color-scheme: light; /*Light theme*/
-  /*color-scheme: dark; /*Dark theme*/
+  color-scheme: dark; /*Dark theme*/
 }
 html {
-  @apply overflow-x-hidden overflow-y-hidden light:text-gray-900 dark:text-gray-100;
+  @apply overflow-x-hidden overflow-y-hidden text-gray-100;
   height: -webkit-fill-available;
 }
 body {
