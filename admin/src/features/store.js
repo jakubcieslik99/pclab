@@ -40,7 +40,7 @@ const store = configureStore({
     saveUser: saveUserReducer,
     deleteUser: deleteUserReducer,
   },
-  devTools: import.meta.env.VITE_APP_ENV === 'prod' ? false : true,
+  devTools: import.meta.env.VITE_APP_ENV === 'production' ? false : true,
 })
 
 export const useAppDispatch = () => useDispatch()
