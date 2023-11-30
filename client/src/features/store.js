@@ -40,7 +40,7 @@ const store = configureStore({
     getUser: getUserReducer,
     getLoggedUser: getLoggedUserReducer,
   },
-  devTools: import.meta.env.VITE_APP_ENV === 'prod' ? false : true,
+  devTools: import.meta.env.VITE_APP_ENV === 'production' ? false : true,
 })
 
 export const useAppDispatch = () => useDispatch()
