@@ -16,11 +16,11 @@ const isError = (error, _req, res, _next) => {
   }
   //client validation error handling
   if (error.isJoi) {
-    config.ENV !== 'prod' && log.error('CLIENT - 422: Przeslano bledne dane.')
+    config.ENV !== 'production' && log.error('CLIENT - 422: Przeslano bledne dane.')
     return res.status(422).send({ message: 'Przesłano błędne dane.' })
   }
   //any other client error handling
-  config.ENV !== 'prod' &&
+  config.ENV !== 'production' &&
     log.error(`CLIENT - ${error.status}: ${error.message ? parseString(error.message) : 'Blad serwera.'}`)
   return res.status(error.status).send({ message: error.message || 'Błąd serwera.' })
 }

@@ -60,7 +60,7 @@ const login = async (req, res) => {
       await checkedUser.save()
     }
 
-    res.clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
+    res.clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV === 'production' ? true : false })
     throw createError(409, 'Użytkownik jest zalogowany. Wyloguj się lub spróbuj ponownie.')
   }
 
@@ -87,7 +87,7 @@ const login = async (req, res) => {
     .cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
-      secure: config.ENV !== 'test' ? true : false,
+      secure: config.ENV === 'production' ? true : false,
       maxAge: 90 * 24 * 3600 * 1000, //90 days
     })
     .status(200)
@@ -156,7 +156,7 @@ const updateAccount = async (req, res) => {
     .cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
-      secure: config.ENV !== 'test' ? true : false,
+      secure: config.ENV === 'production' ? true : false,
       maxAge: 90 * 24 * 3600 * 1000, //90 days
     })
     .status(200)
@@ -209,7 +209,7 @@ const deleteAccount = async (req, res) => {
 
   if (!req.cookies?.refreshToken) return res.status(200).send({ message: 'Usunięto konto z serwisu.' })
   return res
-    .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
+    .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV === 'production' ? true : false })
     .status(200)
     .send({ message: 'Usunięto konto z serwisu.' })
 }
@@ -244,7 +244,7 @@ const logout = async (req, res) => {
   }
 
   return res
-    .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV !== 'test' ? true : false })
+    .clearCookie('refreshToken', { httpOnly: true, sameSite: 'none', secure: config.ENV === 'production' ? true : false })
     .sendStatus(204)
 }
 

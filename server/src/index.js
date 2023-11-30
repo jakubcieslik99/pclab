@@ -23,7 +23,7 @@ import setupsRoute from './routes/setupsRoute'
 import ordersRoute from './routes/ordersRoute'
 
 const app = express()
-app.set('trust proxy', `loopback, ${config.IP}`)
+app.set('trust proxy', `loopback, ${config.HOST}`)
 databaseConnect(app)
 
 app.use(express.urlencoded({ extended: true }))
