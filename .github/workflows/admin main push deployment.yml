@@ -1,0 +1,44 @@
+name: Deployment on "main" branch admin folder push
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'admin/**'
+      - '!.github/**'
+      - '!**/.gitignore'
+      - '!**/.prettierrc'
+      - '!**/*.md'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: CI/CD
+    env:
+      VITE_APP_ENV: production
+      VITE_APP_API_URL: ${{ vars.API_URL }}
+      VITE_APP_PANEL_URL: ${{ vars.ADMINPANEL_URL }}
+      VITE_APP_WEBAPP_URL: ${{ vars.WEBAPP_URL }}
+
+    steps:
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          envs: VITE_APP_ENV,VITE_APP_API_URL,VITE_APP_PANEL_URL,VITE_APP_WEBAPP_URL
+          script: |
+            cd /var/www/javascript/pclab-admin/pclab/admin
+            git pull origin main
+            npm ci
+            echo -e "\
+              VITE_APP_ENV=$VITE_APP_ENV\n\
+              VITE_APP_API_URL=$VITE_APP_API_URL\n\
+              VITE_APP_PANEL_URL=$VITE_APP_PANEL_URL\n\
+              VITE_APP_WEBAPP_URL=$VITE_APP_WEBAPP_URL\n\
+            " > .env
+            rm -r dist
+            npm run build
+            exit
