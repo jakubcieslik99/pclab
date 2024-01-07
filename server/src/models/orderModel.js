@@ -51,7 +51,7 @@ const orderSchema = new Schema(
     totalPrice: { type: Number, required: true },
     paymentTime: { type: Number, required: true },
     paymentIntent: { type: String, required: true },
-    status: { type: String, default: 'unpaid' }, //unpaid / paying / canceled / awaiting / sent / returned
+    status: { type: String, default: 'unpaid' }, // unpaid / paying / canceled / awaiting / sent / returned
   },
   {
     timestamps: true,

@@ -8,9 +8,9 @@ const config = {
   // Node.js
   HOST: process.env.HOST || 'localhost',
   PORT: process.env.PORT || 3002,
-  API_URL: process.env.API_URL || 'http://localhost:3002',
-  WEBAPP_URL: process.env.WEBAPP_URL || 'http://localhost:3000',
-  ADMINPANEL_URL: process.env.ADMINPANEL_URL || 'http://localhost:3001',
+  API_URL: process.env.API_URL || 'http:// localhost:3002',
+  WEBAPP_URL: process.env.WEBAPP_URL || 'http:// localhost:3000',
+  ADMINPANEL_URL: process.env.ADMINPANEL_URL || 'http:// localhost:3001',
   // MongoDB
   MONGO_HOST: process.env.MONGO_HOST || 'localhost',
   MONGO_PORT: process.env.MONGO_PORT || 27017,

@@ -3,7 +3,7 @@ import User from '../models/userModel'
 import Order from '../models/orderModel'
 import Setup from '../models/setupModel'
 
-//GET - /user/getUser/:id
+// GET - /user/getUser/:id
 const getUser = async (req, res) => {
   const listedUser = await User.findById(req.params.id).select('nick').exec()
   if (!listedUser) throw createError(404, 'Podany użytkownik nie istnieje.')
@@ -27,7 +27,7 @@ const getUser = async (req, res) => {
 
   return res.status(200).send({ user: listedUser.nick, setups: listedUserSetups })
 }
-//GET - /user/getLoggedUser
+// GET - /user/getLoggedUser
 const getLoggedUser = async (req, res) => {
   const { authenticatedUser } = res.locals
 

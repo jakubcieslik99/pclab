@@ -9,7 +9,7 @@ import { runOrderSession } from '../functions/orderSessions'
 import sendEmail from '../functions/sendEmail'
 import { placeOrderMessage, canceledOrderMessage, successfulPaymentMessage } from '../messages/ordersMessages'
 
-//GET - /orders/getOrder/:id
+// GET - /orders/getOrder/:id
 const getOrder = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -58,14 +58,14 @@ const getOrder = async (req, res) => {
   return res.status(200).send({ order, paymentKey })
 }
 
-//GET - /orders/getCarriers
+// GET - /orders/getCarriers
 const getCarriers = async (req, res) => {
   const listedCarriers = await Carrier.find().select('name price').exec()
 
   return res.status(200).send({ carriers: listedCarriers })
 }
 
-//POST - /orders/placeOrder
+// POST - /orders/placeOrder
 const placeOrder = async (req, res) => {
   const { authenticatedUser } = res.locals
 

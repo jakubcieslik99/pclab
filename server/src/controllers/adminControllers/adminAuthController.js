@@ -6,7 +6,7 @@ import { config } from '../../config/utilities'
 import { loginValidation } from '../../validations/adminValidations/adminAuthValidation'
 import { getAccessToken, getRefreshToken } from '../../functions/generateTokens'
 
-//POST - /admin/auth/login
+// POST - /admin/auth/login
 const login = async (req, res) => {
   if (req.cookies?.refreshTokenAdmin) {
     const checkedAdmin = await User.findOne({
@@ -56,7 +56,7 @@ const login = async (req, res) => {
       httpOnly: true,
       sameSite: 'none',
       secure: config.ENV === 'production' ? true : false,
-      maxAge: 90 * 24 * 3600 * 1000, //90 days
+      maxAge: 90 * 24 * 3600 * 1000, // 90 days
     })
     .status(200)
     .send({
@@ -71,7 +71,7 @@ const login = async (req, res) => {
     })
 }
 
-//GET - /admin/auth/refreshAccessToken
+// GET - /admin/auth/refreshAccessToken
 const refreshAccessToken = async (req, res) => {
   if (!req.cookies?.refreshTokenAdmin) throw createError(401, 'Błąd autoryzacji.')
 
@@ -90,7 +90,7 @@ const refreshAccessToken = async (req, res) => {
     return res.status(201).send({ accessToken })
   })
 }
-//GET - /admin/auth/logout
+// GET - /admin/auth/logout
 const logout = async (req, res) => {
   if (!req.cookies?.refreshTokenAdmin) return res.sendStatus(204)
 

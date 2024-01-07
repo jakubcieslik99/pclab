@@ -7,7 +7,7 @@ import stripe from '../../config/stripeOptions'
 import { config, log } from '../../config/utilities'
 import handleOrder from '../../functions/stripeWebhook'
 
-//GET - /admin/orders/getOrders
+// GET - /admin/orders/getOrders
 const getOrders = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
   const limit = req.query.limit ? req.query.limit : 15
@@ -58,7 +58,7 @@ const getOrders = async (req, res) => {
 
   return res.status(200).send({ count, orders: listedOrders })
 }
-//GET - /admin/orders/getOrder/:id
+// GET - /admin/orders/getOrder/:id
 const getOrder = async (req, res) => {
   const listedOrder = await Order.findById(req.params.id)
     .populate([{ path: 'buyer', select: 'email' }])
@@ -68,7 +68,7 @@ const getOrder = async (req, res) => {
   return res.status(200).send({ order: listedOrder })
 }
 
-//PUT - /admin/orders/updateOrder
+// PUT - /admin/orders/updateOrder
 const updateOrder = async (req, res) => {
   const validationResult = await updateOrderValidation.validateAsync(req.body)
 
@@ -88,7 +88,7 @@ const updateOrder = async (req, res) => {
   return res.status(200).send({ message: 'Zaktualizowano zamówienie.', order: updatedOrder })
 }
 
-//POST - /admin/orders/stripeWebhook
+// POST - /admin/orders/stripeWebhook
 const stripeWebhook = (req, res) => {
   let event = req.body
 

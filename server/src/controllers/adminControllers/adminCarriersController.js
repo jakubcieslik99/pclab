@@ -2,7 +2,7 @@ import createError from 'http-errors'
 import Carrier from '../../models/carrierModel'
 import { createCarrierValidation, updateCarrierValidation } from '../../validations/adminValidations/adminCarriersValidation'
 
-//GET - /admin/carriers/getCarriers
+// GET - /admin/carriers/getCarriers
 const getCarriers = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
   const limit = req.query.limit ? req.query.limit : 15
@@ -31,7 +31,7 @@ const getCarriers = async (req, res) => {
   return res.status(200).send({ count, carriers: listedCarriers })
 }
 
-//POST - /admin/carriers/createCarrier
+// POST - /admin/carriers/createCarrier
 const createCarrier = async (req, res) => {
   const validationResult = await createCarrierValidation.validateAsync(req.body)
 
@@ -45,7 +45,7 @@ const createCarrier = async (req, res) => {
   return res.status(201).send({ message: 'Dodano nowego przewoźnika.', carrier: newCarrier })
 }
 
-//PUT - /admin/carriers/updateCarrier/:id
+// PUT - /admin/carriers/updateCarrier/:id
 const updateCarrier = async (req, res) => {
   const validationResult = await updateCarrierValidation.validateAsync(req.body)
 
@@ -60,7 +60,7 @@ const updateCarrier = async (req, res) => {
   return res.status(200).send({ message: 'Zaktualizowano przewoźnika.', carrier: updatedCarrier })
 }
 
-//DELETE - /admin/carriers/deleteCarrier/:id
+// DELETE - /admin/carriers/deleteCarrier/:id
 const deleteCarrier = async (req, res) => {
   const deletedCarrier = await Carrier.findById(req.params.id).exec()
   if (!deletedCarrier) throw createError(404, 'Podany przewoźnik nie istnieje.')

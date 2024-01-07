@@ -2,7 +2,7 @@ import createError from 'http-errors'
 import fs from 'fs'
 import path from 'path'
 
-//directory related promises
+// directory related promises
 const createDirectory = folder => {
   return new Promise((resolve, reject) => {
     fs.mkdir(path.join(__dirname, `/../../uploads/${folder}`), { recursive: true }, err => {
@@ -21,7 +21,7 @@ const removeDirectory = folder => {
   })
 }
 
-//files related promises
+// files related promises
 const getFiles = folder => {
   return new Promise((resolve, reject) => {
     fs.readdir(path.join(__dirname, `/../../uploads/${folder}`), (err, files) => {
@@ -49,7 +49,7 @@ const removeFile = (folder, file) => {
   })
 }
 
-//files related functions
+// files related functions
 const saveFiles = async (uploads, folder) => {
   const uploaded = []
   for (let file of uploads) {

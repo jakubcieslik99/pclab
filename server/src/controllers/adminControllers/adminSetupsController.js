@@ -5,7 +5,7 @@ import User from '../../models/userModel.js'
 import Component from '../../models/componentModel.js'
 import { setupsPriceComparision } from '../../functions/getSetups.js'
 
-//GET - /admin/setups/getSetups
+// GET - /admin/setups/getSetups
 const getSetups = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
   const limit = req.query.limit ? req.query.limit : 15
@@ -83,7 +83,7 @@ const getSetups = async (req, res) => {
   return res.status(200).send({ count, setups: listedSetups.slice((page - 1) * limit, (page - 1) * limit + limit) })
 }
 
-//DELETE - /admin/setups/deleteSetup/:id
+// DELETE - /admin/setups/deleteSetup/:id
 const deleteSetup = async (req, res) => {
   const deletedSetup = await Setup.findById(req.params.id).exec()
   if (!deletedSetup) throw createError(404, 'Podana konfiguracja nie istnieje.')

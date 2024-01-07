@@ -18,7 +18,7 @@ import { getAccessToken, getRefreshToken } from '../functions/generateTokens'
 import sendEmail from '../functions/sendEmail'
 import { registerMessage, sendPasswordResetMessage } from '../messages/authMessages'
 
-//POST - /auth/register
+// POST - /auth/register
 const register = async (req, res) => {
   if (req.cookies?.refreshToken) throw createError(409, 'Inny użytkownik jest zalogowany.')
 
@@ -48,7 +48,7 @@ const register = async (req, res) => {
       'Zarejestrowano pomyślnie. Teraz potwierdź rejestrację za pomocą otrzymanej wiadomości email, aby się zalogować.',
   })
 }
-//POST - /auth/login
+// POST - /auth/login
 const login = async (req, res) => {
   if (req.cookies?.refreshToken) {
     const checkedUser = await User.findOne({ 'refreshTokens.refreshToken': req.cookies.refreshToken }).exec()
@@ -88,7 +88,7 @@ const login = async (req, res) => {
       httpOnly: true,
       sameSite: 'none',
       secure: config.ENV === 'production' ? true : false,
-      maxAge: 90 * 24 * 3600 * 1000, //90 days
+      maxAge: 90 * 24 * 3600 * 1000, // 90 days
     })
     .status(200)
     .send({
@@ -103,7 +103,7 @@ const login = async (req, res) => {
     })
 }
 
-//PUT - /auth/updateAccount
+// PUT - /auth/updateAccount
 const updateAccount = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -157,7 +157,7 @@ const updateAccount = async (req, res) => {
       httpOnly: true,
       sameSite: 'none',
       secure: config.ENV === 'production' ? true : false,
-      maxAge: 90 * 24 * 3600 * 1000, //90 days
+      maxAge: 90 * 24 * 3600 * 1000, // 90 days
     })
     .status(200)
     .send({
@@ -172,7 +172,7 @@ const updateAccount = async (req, res) => {
     })
 }
 
-//DELETE - /auth/deleteAccount
+// DELETE - /auth/deleteAccount
 const deleteAccount = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -182,7 +182,7 @@ const deleteAccount = async (req, res) => {
   const unfinishedOrders = await Order.find({
     buyer: authenticatedUser.id,
     status: { $ne: 'returned' },
-    updatedAt: { $lt: new Date(new Date().now() - 14 * 24 * 3600 * 1000) }, //14 days back
+    updatedAt: { $lt: new Date(new Date().now() - 14 * 24 * 3600 * 1000) }, // 14 days back
   }).exec()
   if (unfinishedOrders.length > 0)
     throw createError(402, 'Posiadasz zamówienie w realizacji. Twoje konto będzie można usunąć po jego zakończeniu.')
@@ -214,7 +214,7 @@ const deleteAccount = async (req, res) => {
     .send({ message: 'Usunięto konto z serwisu.' })
 }
 
-//GET - /auth/refreshAccessToken
+// GET - /auth/refreshAccessToken
 const refreshAccessToken = async (req, res) => {
   if (!req.cookies?.refreshToken) throw createError(401, 'Błąd autoryzacji.')
 
@@ -230,7 +230,7 @@ const refreshAccessToken = async (req, res) => {
     return res.status(201).send({ accessToken })
   })
 }
-//GET - /auth/logout
+// GET - /auth/logout
 const logout = async (req, res) => {
   if (!req.cookies?.refreshToken) return res.sendStatus(204)
 
@@ -248,7 +248,7 @@ const logout = async (req, res) => {
     .sendStatus(204)
 }
 
-//POST - /auth/confirmAccount
+// POST - /auth/confirmAccount
 const confirmAccount = async (req, res) => {
   if (req.cookies?.refreshToken) throw createError(409, 'Użytkownik jest zalogowany.')
 
@@ -263,7 +263,7 @@ const confirmAccount = async (req, res) => {
 
   return res.status(200).send({ message: 'Potwierdzono konto pomyślnie. Teraz możesz się zalogować.' })
 }
-//POST - /auth/sendPasswordReset
+// POST - /auth/sendPasswordReset
 const sendPasswordReset = async (req, res) => {
   if (req.cookies?.refreshToken) throw createError(409, 'Użytkownik jest zalogowany.')
 
@@ -287,7 +287,7 @@ const sendPasswordReset = async (req, res) => {
 
   return res.status(200).send({ message: 'Wysłano wiadomość z linkiem do resetowania hasła.' })
 }
-//POST - /auth/resetPassword
+// POST - /auth/resetPassword
 const resetPassword = async (req, res) => {
   if (req.cookies?.refreshToken) throw createError(409, 'Użytkownik jest zalogowany.')
 

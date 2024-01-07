@@ -11,7 +11,7 @@ import {
 } from '../validations/setupsValidation'
 import { setupsAggregation, setupsPriceComparision } from '../functions/getSetups'
 
-//GET - /setups/getSetups
+// GET - /setups/getSetups
 const getSetups = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
   const limit = req.query.limit ? req.query.limit : 12
@@ -63,7 +63,7 @@ const getSetups = async (req, res) => {
     matchSetups = await Setup.aggregate(setupsAggregation(req.query.priceFrom, req.query.priceTo))
 
     query = { ...query, ...{ _id: { $in: matchSetups } } }
-    //query = { ...query, ...{ _id: { $in: matchSetups.map(setup => setup._id) } } }
+    // query = { ...query, ...{ _id: { $in: matchSetups.map(setup => setup._id) } } }
   }
 
   let listedSetups = await Setup.find(query)
@@ -91,7 +91,7 @@ const getSetups = async (req, res) => {
 
   return res.status(200).send({ count, setups: listedSetups.slice((page - 1) * limit, (page - 1) * limit + limit) })
 }
-//GET - /setups/getSetup/:id
+// GET - /setups/getSetup/:id
 const getSetup = async (req, res) => {
   const setup = await Setup.findById(req.params.id)
     .populate([
@@ -113,7 +113,7 @@ const getSetup = async (req, res) => {
   return res.status(200).send({ setup })
 }
 
-//GET - /setups/getLikedSetups
+// GET - /setups/getLikedSetups
 const getLikedSetups = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -122,7 +122,7 @@ const getLikedSetups = async (req, res) => {
   return res.status(200).send({ likedSetups: user.likedSetups })
 }
 
-//POST - /setups/likeSetup/:id
+// POST - /setups/likeSetup/:id
 const likeSetup = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -141,7 +141,7 @@ const likeSetup = async (req, res) => {
   return res.status(200).send({ likedSetups: authenticatedUser.likedSetups })
 }
 
-//DELETE - /setups/unlikeSetup/:id
+// DELETE - /setups/unlikeSetup/:id
 const unlikeSetup = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -161,7 +161,7 @@ const unlikeSetup = async (req, res) => {
   return res.status(200).send({ likedSetups: authenticatedUser.likedSetups })
 }
 
-//POST - /setups/createComment/:id
+// POST - /setups/createComment/:id
 const createComment = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -189,7 +189,7 @@ const createComment = async (req, res) => {
   return res.status(200).send({ setupComments })
 }
 
-//GET - /setups/getComponents
+// GET - /setups/getComponents
 const getComponents = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
   const limit = 10
@@ -261,7 +261,7 @@ const getComponents = async (req, res) => {
   return res.status(200).send({ count, components: listedComponents })
 }
 
-//POST - /setups/createSetup
+// POST - /setups/createSetup
 const createSetup = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -290,7 +290,7 @@ const createSetup = async (req, res) => {
     if (ramComponent.amount <= 0) throw createError(403, 'Podana pamięć RAM nie jest aktualnie dostępna.')
   }
 
-  //check compatibility
+  // check compatibility
   if (moboComponent) {
     if (caseComponent.moboCompat === 'matx' && moboComponent.caseCompat === 'atx') createError(422, 'Przesłano błędne dane.')
     if (caseComponent.moboCompat === 'itx' && moboComponent.caseCompat === 'atx') createError(422, 'Przesłano błędne dane.')
@@ -352,7 +352,7 @@ const createSetup = async (req, res) => {
   return res.status(201).send({ message: 'Dodano nową konfigurację.', setup: newSetup })
 }
 
-//PUT - /setups/updateSetup/:id
+// PUT - /setups/updateSetup/:id
 const updateSetup = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -387,7 +387,7 @@ const updateSetup = async (req, res) => {
     if (ramComponent.amount <= 0) throw createError(403, 'Podana pamięć RAM nie jest aktualnie dostępna.')
   }
 
-  //check compatibility
+  // check compatibility
   if (moboComponent) {
     if (caseComponent.moboCompat === 'matx' && moboComponent.caseCompat === 'atx') createError(422, 'Przesłano błędne dane.')
     if (caseComponent.moboCompat === 'itx' && moboComponent.caseCompat === 'atx') createError(422, 'Przesłano błędne dane.')
@@ -442,7 +442,7 @@ const updateSetup = async (req, res) => {
   res.status(200).json({ message: 'Zaktualizowano konfigurację.', setup: updatedSetup })
 }
 
-//DELETE - /setups/deleteSetup/:id
+// DELETE - /setups/deleteSetup/:id
 const deleteSetup = async (req, res) => {
   const { authenticatedUser } = res.locals
 
@@ -466,7 +466,7 @@ const deleteSetup = async (req, res) => {
   await deletedSetup.remove()
 
   const user = await User.findById(authenticatedUser.id).exec()
-  //filter if user commented deleted setup
+  // filter if user commented deleted setup
   user.setupsCount = user.setupsCount - 1
   await user.save()
 

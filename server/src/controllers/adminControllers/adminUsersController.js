@@ -4,7 +4,7 @@ import Setup from '../../models/setupModel.js'
 import Order from '../../models/orderModel.js'
 import { updateUserValidation } from '../../validations/adminValidations/adminUsersValidation.js'
 
-//GET - /admin/users/getUsers
+// GET - /admin/users/getUsers
 const getUsers = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
   const limit = req.query.limit ? req.query.limit : 15
@@ -46,7 +46,7 @@ const getUsers = async (req, res) => {
 
   return res.status(200).send({ count, users: listedUsers })
 }
-//GET - /admin/users/getUser/:id
+// GET - /admin/users/getUser/:id
 const getUser = async (req, res) => {
   const listedUser = await User.findById(req.params.id).select('-password -token -refreshTokens -refreshTokensAdmin').exec()
   if (!listedUser) throw createError(404, 'Podany użytkownik nie istnieje.')
@@ -54,7 +54,7 @@ const getUser = async (req, res) => {
   return res.status(200).send({ user: listedUser })
 }
 
-//PUT - /admin/users/updateUser/:id
+// PUT - /admin/users/updateUser/:id
 const updateUser = async (req, res) => {
   const validationResult = await updateUserValidation.validateAsync(req.body)
 
@@ -68,7 +68,7 @@ const updateUser = async (req, res) => {
   return res.status(200).send({ message: 'Zaktualizowano użytkownika.', user: updatedUser })
 }
 
-//DELETE - /admin/users/deleteUser/:id
+// DELETE - /admin/users/deleteUser/:id
 const deleteUser = async (req, res) => {
   const deletedUser = await User.findById(req.params.id).exec()
   if (!deletedUser) throw createError(404, 'Podany użytkownik nie istnieje.')

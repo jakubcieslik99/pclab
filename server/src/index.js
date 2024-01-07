@@ -23,7 +23,7 @@ import setupsRoute from './routes/setupsRoute'
 import ordersRoute from './routes/ordersRoute'
 
 const app = express()
-app.set('trust proxy', `loopback, ${config.HOST}`)
+app.set('trust proxy', `loopback, ${config.HOST === 'localhost' ? '127.0.0.1' : config.HOST}`)
 databaseConnect(app)
 
 app.use(express.urlencoded({ extended: true }))
@@ -32,9 +32,9 @@ app.use(cookieParser())
 app.use(helmet())
 app.use(cors(corsOptions))
 
-//static files
+// static files
 app.use('/static/components/', express.static('uploads/components'))
-//admin routes
+// admin routes
 app.use('/admin/*', rateLimit(adminRateLimiter), slowDown(adminSpeedLimiter))
 app.use('/admin/auth', adminAuthRoute)
 app.use('/admin/orders', adminOrdersRoute)
@@ -42,15 +42,15 @@ app.use('/admin/carriers', adminCarriersRoute)
 app.use('/admin/components', adminComponentsRoute)
 app.use('/admin/setups', adminSetupsRoute)
 app.use('/admin/users', adminUsersRoute)
-//routes
+// routes
 app.use('/auth', rateLimit(rateLimiter), slowDown(speedLimiter), authRoute)
 app.use('/user', rateLimit(rateLimiter), slowDown(speedLimiter), userRoute)
 app.use('/setups', rateLimit(rateLimiter), slowDown(speedLimiter), setupsRoute)
 app.use('/orders', rateLimit(rateLimiter), slowDown(speedLimiter), ordersRoute)
 
-//404 error
+// 404 error
 app.all('*', (_req, _res, next) => next(createError(404, 'Podany zasób nie istnieje.')))
-//errors handling middleware
+// errors handling middleware
 app.use(isError)
 
 app.on('ready', () => {

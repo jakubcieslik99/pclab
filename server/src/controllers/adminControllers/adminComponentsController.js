@@ -9,7 +9,7 @@ import {
   updateComponentValidation,
 } from '../../validations/adminValidations/adminComponentsValidation'
 
-//GET - /admin/components/getComponents
+// GET - /admin/components/getComponents
 const getComponents = async (req, res) => {
   const page = req.query.page ? req.query.page : 1
   const limit = req.query.limit ? req.query.limit : 15
@@ -44,7 +44,7 @@ const getComponents = async (req, res) => {
 
   return res.status(200).send({ count, components: listedComponents })
 }
-//GET - /admin/components/getComponent/:id
+// GET - /admin/components/getComponent/:id
 const getComponent = async (req, res) => {
   const listedComponent = await Component.findById(req.params.id).exec()
   if (!listedComponent) throw createError(404, 'Podany komponent nie istnieje.')
@@ -52,7 +52,7 @@ const getComponent = async (req, res) => {
   return res.status(200).send({ component: listedComponent })
 }
 
-//POST - /admin/components/createComponent
+// POST - /admin/components/createComponent
 const createComponent = async (req, res) => {
   const { uploads } = res.locals
 
@@ -69,7 +69,7 @@ const createComponent = async (req, res) => {
   })
 
   if (validationResult.type === 'case') {
-    if (validationResult.moboCompat === '') throw createError(400, 'Rozmiar obudowy jest wymagany.') //Compatibility with a mobo size is required.
+    if (validationResult.moboCompat === '') throw createError(400, 'Rozmiar obudowy jest wymagany.') // Compatibility with a mobo size is required.
     validationResult.cpuCompat = ''
     validationResult.caseCompat = ''
     validationResult.ramCompat = ''
@@ -80,7 +80,7 @@ const createComponent = async (req, res) => {
     validationResult.caseCompat = ''
   } else if (validationResult.type === 'mobo') {
     if (validationResult.cpuCompat === '') throw createError(400, 'Zgodność z socketem procesora jest wymagana.')
-    if (validationResult.caseCompat === '') throw createError(400, 'Rozmiar płyty głównej jest wymagany.') //Compatibility with a case size is required.
+    if (validationResult.caseCompat === '') throw createError(400, 'Rozmiar płyty głównej jest wymagany.') // Compatibility with a case size is required.
     if (validationResult.ramCompat === '') throw createError(400, 'Zgodność z pamięcią RAM jest wymagana.')
     validationResult.moboCompat = ''
   } else if (validationResult.type === 'ram') {
@@ -116,7 +116,7 @@ const createComponent = async (req, res) => {
   return res.status(201).send({ message: 'Dodano nowy komponent.', component: newComponent })
 }
 
-//PUT - /admin/components/updateComponent/:id
+// PUT - /admin/components/updateComponent/:id
 const updateComponent = async (req, res) => {
   const { modifiedFiles, uploads } = res.locals
 
@@ -203,12 +203,12 @@ const updateComponent = async (req, res) => {
   return res.status(200).send({ message: 'Zaktualizowano komponent.', component: updatedComponent })
 }
 
-//DELETE - /admin/components/deleteComponent/:id
+// DELETE - /admin/components/deleteComponent/:id
 const deleteComponent = async (req, res) => {
   const deletedComponent = await Component.findById(req.params.id).exec()
   if (!deletedComponent) throw createError(404, 'Podany komponent nie istnieje.')
 
-  //find and delete every setup containing deleted component
+  // find and delete every setup containing deleted component
   switch (deletedComponent.type) {
     case 'case': {
       const deletedSetups = await Setup.find({ case: deletedComponent.id }).exec()
