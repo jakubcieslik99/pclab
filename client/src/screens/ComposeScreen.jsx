@@ -385,20 +385,20 @@ const ComposeScreen = () => {
                   {step === 1
                     ? 'Wybierz obudowę*:'
                     : step === 2
-                    ? 'Wybierz procesor'
-                    : step === 3
-                    ? 'Wybierz płytę główną'
-                    : step === 4
-                    ? 'Wybierz pamięć RAM'
-                    : step === 5
-                    ? 'Wybierz kartę graficzną'
-                    : step === 6
-                    ? 'Wybierz zasilacz'
-                    : step === 7
-                    ? 'Wybierz dyski'
-                    : step === 8
-                    ? 'Podsumowanie'
-                    : ''}
+                      ? 'Wybierz procesor'
+                      : step === 3
+                        ? 'Wybierz płytę główną'
+                        : step === 4
+                          ? 'Wybierz pamięć RAM'
+                          : step === 5
+                            ? 'Wybierz kartę graficzną'
+                            : step === 6
+                              ? 'Wybierz zasilacz'
+                              : step === 7
+                                ? 'Wybierz dyski'
+                                : step === 8
+                                  ? 'Podsumowanie'
+                                  : ''}
                 </div>
               </div>
             </div>
@@ -482,18 +482,18 @@ const ComposeScreen = () => {
                   {step === 1
                     ? 'Wybrana obudowa:'
                     : step === 2
-                    ? 'Wybrany procesor:'
-                    : step === 3
-                    ? 'Wybrana płyta główna:'
-                    : step === 4
-                    ? 'Wybrana pamięć RAM:'
-                    : step === 5
-                    ? 'Wybrana karta graficzna:'
-                    : step === 6
-                    ? 'Wybrany zasilacz:'
-                    : step === 7
-                    ? 'Wybrane dyski:'
-                    : ''}
+                      ? 'Wybrany procesor:'
+                      : step === 3
+                        ? 'Wybrana płyta główna:'
+                        : step === 4
+                          ? 'Wybrana pamięć RAM:'
+                          : step === 5
+                            ? 'Wybrana karta graficzna:'
+                            : step === 6
+                              ? 'Wybrany zasilacz:'
+                              : step === 7
+                                ? 'Wybrane dyski:'
+                                : ''}
                 </label>
 
                 {step === 1 && caseComponent ? (
@@ -589,20 +589,20 @@ const ComposeScreen = () => {
                   {step === 1
                     ? 'Obudowy:'
                     : step === 2
-                    ? 'Procesory:'
-                    : step === 3
-                    ? 'Płyty główne:'
-                    : step === 4
-                    ? 'Pamięci RAM:'
-                    : step === 5
-                    ? 'Karty graficzne:'
-                    : step === 6
-                    ? 'Zasilacze:'
-                    : step === 7
-                    ? 'Dyski:'
-                    : step === 8
-                    ? 'Wybrane komponenty:'
-                    : ''}
+                      ? 'Procesory:'
+                      : step === 3
+                        ? 'Płyty główne:'
+                        : step === 4
+                          ? 'Pamięci RAM:'
+                          : step === 5
+                            ? 'Karty graficzne:'
+                            : step === 6
+                              ? 'Zasilacze:'
+                              : step === 7
+                                ? 'Dyski:'
+                                : step === 8
+                                  ? 'Wybrane komponenty:'
+                                  : ''}
                 </span>
 
                 <div className="relative w-[24px] h-[24px] ml-1">

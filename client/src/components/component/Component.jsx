@@ -69,18 +69,18 @@ const Component = props => {
             {props.component?.type === 'case'
               ? 'Obudowa'
               : props.component?.type === 'cpu'
-              ? 'CPU'
-              : props.component?.type === 'mobo'
-              ? 'MOBO'
-              : props.component?.type === 'ram'
-              ? 'RAM'
-              : props.component?.type === 'gpu'
-              ? 'GPU'
-              : props.component?.type === 'psu'
-              ? 'Zasilacz'
-              : props.component?.type === 'drive'
-              ? 'Dysk'
-              : 'Komponent'}
+                ? 'CPU'
+                : props.component?.type === 'mobo'
+                  ? 'MOBO'
+                  : props.component?.type === 'ram'
+                    ? 'RAM'
+                    : props.component?.type === 'gpu'
+                      ? 'GPU'
+                      : props.component?.type === 'psu'
+                        ? 'Zasilacz'
+                        : props.component?.type === 'drive'
+                          ? 'Dysk'
+                          : 'Komponent'}
           </div>
 
           {props.component?.type === 'case' && (
@@ -102,18 +102,18 @@ const Component = props => {
                 {props.component.cpuCompat === 'lga2066'
                   ? 'LGA 2066'
                   : props.component.cpuCompat === 'lga1700'
-                  ? 'LGA 1700'
-                  : props.component.cpuCompat === 'lga1200'
-                  ? 'LGA 1200'
-                  : props.component.cpuCompat === 'lga1156'
-                  ? 'LGA 1156'
-                  : props.component.cpuCompat === 'lga1155'
-                  ? 'LGA 1155'
-                  : props.component.cpuCompat === 'lga1151'
-                  ? 'LGA 1151'
-                  : props.component.cpuCompat === 'lga1150'
-                  ? 'LGA 1150'
-                  : props.component.cpuCompat}
+                    ? 'LGA 1700'
+                    : props.component.cpuCompat === 'lga1200'
+                      ? 'LGA 1200'
+                      : props.component.cpuCompat === 'lga1156'
+                        ? 'LGA 1156'
+                        : props.component.cpuCompat === 'lga1155'
+                          ? 'LGA 1155'
+                          : props.component.cpuCompat === 'lga1151'
+                            ? 'LGA 1151'
+                            : props.component.cpuCompat === 'lga1150'
+                              ? 'LGA 1150'
+                              : props.component.cpuCompat}
               </span>
             </div>
           )}
@@ -153,10 +153,10 @@ const Component = props => {
                 {props.component.moboCompat === 'atx'
                   ? 'ATX i mniejsze'
                   : props.component.moboCompat === 'matx'
-                  ? 'mATX i mniejsze'
-                  : props.component.moboCompat === 'itx'
-                  ? 'ITX'
-                  : '-'}
+                    ? 'mATX i mniejsze'
+                    : props.component.moboCompat === 'itx'
+                      ? 'ITX'
+                      : '-'}
               </span>
             </div>
           )}
@@ -169,18 +169,18 @@ const Component = props => {
                   {props.component.cpuCompat === 'lga2066'
                     ? 'LGA 2066'
                     : props.component.cpuCompat === 'lga1700'
-                    ? 'LGA 1700'
-                    : props.component.cpuCompat === 'lga1200'
-                    ? 'LGA 1200'
-                    : props.component.cpuCompat === 'lga1156'
-                    ? 'LGA 1156'
-                    : props.component.cpuCompat === 'lga1155'
-                    ? 'LGA 1155'
-                    : props.component.cpuCompat === 'lga1151'
-                    ? 'LGA 1151'
-                    : props.component.cpuCompat === 'lga1150'
-                    ? 'LGA 1150'
-                    : props.component.cpuCompat}
+                      ? 'LGA 1700'
+                      : props.component.cpuCompat === 'lga1200'
+                        ? 'LGA 1200'
+                        : props.component.cpuCompat === 'lga1156'
+                          ? 'LGA 1156'
+                          : props.component.cpuCompat === 'lga1155'
+                            ? 'LGA 1155'
+                            : props.component.cpuCompat === 'lga1151'
+                              ? 'LGA 1151'
+                              : props.component.cpuCompat === 'lga1150'
+                                ? 'LGA 1150'
+                                : props.component.cpuCompat}
                 </span>
               </div>
 
@@ -198,20 +198,20 @@ const Component = props => {
                   {props.component.cpuCompat === 'lga2066'
                     ? 'LGA 2066'
                     : props.component.cpuCompat === 'lga1700'
-                    ? 'LGA 1700'
-                    : props.component.cpuCompat === 'lga1200'
-                    ? 'LGA 1200'
-                    : props.component.cpuCompat === 'lga1156'
-                    ? 'LGA 1156'
-                    : props.component.cpuCompat === 'lga1155'
-                    ? 'LGA 1155'
-                    : props.component.cpuCompat === 'lga1151'
-                    ? 'LGA 1151'
-                    : props.component.cpuCompat === 'lga1150'
-                    ? 'LGA 1150'
-                    : props.component.cpuCompat
-                    ? props.component.cpuCompat
-                    : '-'}
+                      ? 'LGA 1700'
+                      : props.component.cpuCompat === 'lga1200'
+                        ? 'LGA 1200'
+                        : props.component.cpuCompat === 'lga1156'
+                          ? 'LGA 1156'
+                          : props.component.cpuCompat === 'lga1155'
+                            ? 'LGA 1155'
+                            : props.component.cpuCompat === 'lga1151'
+                              ? 'LGA 1151'
+                              : props.component.cpuCompat === 'lga1150'
+                                ? 'LGA 1150'
+                                : props.component.cpuCompat
+                                  ? props.component.cpuCompat
+                                  : '-'}
                 </span>
               </div>
 
@@ -221,10 +221,10 @@ const Component = props => {
                   {props.component.caseCompat === 'itx'
                     ? 'ITX i większe'
                     : props.component.caseCompat === 'matx'
-                    ? 'mATX i większe'
-                    : props.component.caseCompat === 'atx'
-                    ? 'ATX'
-                    : '-'}
+                      ? 'mATX i większe'
+                      : props.component.caseCompat === 'atx'
+                        ? 'ATX'
+                        : '-'}
                 </span>
               </div>
 
