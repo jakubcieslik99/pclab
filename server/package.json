@@ -1,6 +1,6 @@
 {
   "name": "pclab-server",
-  "version": "1.3.8",
+  "version": "1.3.9",
   "description": "PCLab",
   "main": "index.js",
   "scripts": {
@@ -26,18 +26,18 @@
     "http-errors": "^2.0.0",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.12.3",
+    "mongoose": "^6.12.5",
     "node-schedule": "^2.1.1",
-    "nodemailer": "^6.9.7",
-    "pino": "^8.16.2",
+    "nodemailer": "^6.9.8",
+    "pino": "^8.17.2",
     "pino-pretty": "^9.4.1",
     "stripe": "^11.18.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
-    "@babel/core": "^7.23.5",
+    "@babel/core": "^7.23.7",
     "@babel/node": "^7.22.19",
-    "@babel/preset-env": "^7.23.5",
+    "@babel/preset-env": "^7.23.7",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "nodemon": "^2.0.22",
