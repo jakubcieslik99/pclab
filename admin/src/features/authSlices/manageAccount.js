@@ -24,7 +24,9 @@ const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
 
 const logout = createAsyncThunk('/auth/logout', async (_sendData, thunkAPI) => {
   try {
-    const { data } = await axiosPublic.get(`/admin/auth/logout`, { withCredentials: true })
+    const { data } = await axiosPublic.get(`/admin/auth/logout`, {
+      withCredentials: true,
+    })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()
