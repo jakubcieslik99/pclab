@@ -15,5 +15,8 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    semi: ['error', 'never'],
+    quotes: ['error', 'single'],
+    'arrow-parens': ['error', 'as-needed'],
   },
 }
