@@ -1,6 +1,8 @@
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
+  env: {
+    es2023: true,
+    browser: true,
+  },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -8,9 +10,10 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
   plugins: ['react-refresh'],
   rules: {
     'react/prop-types': 'off',
@@ -18,5 +21,9 @@ module.exports = {
     semi: ['error', 'never'],
     quotes: ['error', 'single'],
     'arrow-parens': ['error', 'as-needed'],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
   },
+  root: true,
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  settings: { react: { version: '18.2' } },
 }
