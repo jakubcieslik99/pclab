@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       backgroundImage: {
-        heropattern: "url('./assets/pattern-hero.png')",
+        heropattern: 'url("./assets/pattern-hero.png")',
       },
       colors: {
         'pclab-400': '#850b45',
