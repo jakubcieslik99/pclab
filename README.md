@@ -123,9 +123,9 @@ administrator panel.
 
 ⚙️ To run server app, you will need to add the following environment variables to your .env file
 
-- `DIR`
+- `DIR` _(default already set for development)_
 
-- `ENV`
+- `ENV` _(default already set for development)_
 
 - `MONGO_VER`
 
@@ -135,7 +135,7 @@ administrator panel.
 
 - `API_URL`
 
-- `WEBAPP_URL`
+- `APP_URL`
 
 - `ADMINPANEL_URL`
 
@@ -169,25 +169,21 @@ administrator panel.
 
 ⚙️ To build client app, you will need to add the following environment variables to your .env file
 
-- `VITE_APP_ENV`
-
 - `VITE_API_STRIPE`
 
-- `VITE_APP_API_URL`
+- `VITE_API_URL`
 
-- `VITE_APP_WEBAPP_URL`
+- `VITE_APP_URL`
 
 ( ℹ️ - sample .env config file is provided in the client app directory under the name `.env.sample` )
 
 ⚙️ To build admin panel, you will need to add the following environment variables to your .env file
 
-- `VITE_APP_ENV`
+- `VITE_API_URL`
 
-- `VITE_APP_API_URL`
+- `VITE_ADMINPANEL_URL`
 
-- `VITE_APP_PANEL_URL`
-
-- `VITE_APP_WEBAPP_URL`
+- `VITE_APP_URL`
 
 ( ℹ️ - sample .env config file is provided in the admin panel directory under the name `.env.sample` )
 
