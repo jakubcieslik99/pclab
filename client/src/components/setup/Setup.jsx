@@ -32,7 +32,7 @@ const Setup = props => {
 
   const setupLiked = userInfo && likedSetups.includes(props.setup?._id) ? true : false
 
-  const setupComponentImage = `${import.meta.env.VITE_APP_API_URL}/static/components`
+  const setupComponentImage = `${import.meta.env.VITE_API_URL}/static/components`
 
   //handlers
   const likeHandler = () => {

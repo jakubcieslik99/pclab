@@ -22,7 +22,7 @@ const PaymentForm = props => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${import.meta.env.VITE_APP_WEBAPP_URL}/order/${props.orderId}`,
+        return_url: `${import.meta.env.VITE_APP_URL}/order/${props.orderId}`,
       },
     })
     setPaymentLoading(false)

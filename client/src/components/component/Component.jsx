@@ -2,7 +2,7 @@ import { FaLink, FaBoxOpen } from 'react-icons/fa'
 import noPhoto from '../../assets/no-photo.png'
 
 const Component = props => {
-  const componentImage = `${import.meta.env.VITE_APP_API_URL}/static/components/${
+  const componentImage = `${import.meta.env.VITE_API_URL}/static/components/${
     !props.order ? props.component?._id : props.component?.componentId
   }`
   const componentPrice = (props.component?.price / 100).toFixed(2) || (0 / 100).toFixed(2)

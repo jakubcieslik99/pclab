@@ -3,7 +3,7 @@ import Moment from 'moment'
 import noPhoto from '../../assets/no-photo.png'
 
 const OrderedSetup = props => {
-  const orderedSetupComponentImage = `${import.meta.env.VITE_APP_API_URL}/static/components`
+  const orderedSetupComponentImage = `${import.meta.env.VITE_API_URL}/static/components`
 
   const caseComponent = props.orderedSetup.orderedComponents.find(component => component.type === 'case')
   const cpuComponent = props.orderedSetup.orderedComponents.find(component => component.type === 'cpu')
