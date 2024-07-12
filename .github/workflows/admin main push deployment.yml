@@ -33,7 +33,7 @@ jobs:
           script: |
             cd /var/www/javascript/pclab-admin/pclab/admin
             git pull origin main
-            npm ci
+            npm install
             echo -e "\
               VITE_API_URL=$VITE_API_URL\n\
               VITE_ADMINPANEL_URL=$VITE_ADMINPANEL_URL\n\

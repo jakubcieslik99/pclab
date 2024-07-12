@@ -53,7 +53,7 @@ jobs:
             cd /var/www/javascript/pclab-server/pclab/server
             pm2 stop pclab-server:$PORT
             git pull origin main
-            npm ci
+            npm install
             rm -r dist
             npm run build
             cd dist

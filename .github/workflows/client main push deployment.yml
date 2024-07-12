@@ -33,7 +33,7 @@ jobs:
           script: |
             cd /var/www/javascript/pclab-client/pclab/client
             git pull origin main
-            npm ci
+            npm install
             echo -e "\
               VITE_API_STRIPE=$VITE_API_STRIPE\n\
               VITE_API_URL=$VITE_API_URL\n\
