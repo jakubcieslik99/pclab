@@ -3,7 +3,7 @@ import axiosProtected from '../../api/axiosProtected'
 
 const placeOrder = createAsyncThunk('/orders/placeOrder', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.post(`/orders/placeOrder`, {
+    const { data } = await axiosProtected.post('/orders/placeOrder', {
       setupId: sendData.setupId,
       carrierId: sendData.carrierId,
       shippingDetails: sendData.shippingDetails,

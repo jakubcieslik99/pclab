@@ -23,5 +23,6 @@ const Footer = forwardRef((_props, ref) => {
     </footer>
   )
 })
+Footer.displayName = 'Footer'
 
 export default Footer

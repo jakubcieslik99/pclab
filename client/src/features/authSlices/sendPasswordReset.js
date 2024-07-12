@@ -3,7 +3,7 @@ import axiosPublic from '../../api/axiosPublic'
 
 const sendPasswordReset = createAsyncThunk('/auth/sendPasswordReset', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosPublic.post(`/auth/sendPasswordReset`, { email: sendData.email })
+    const { data } = await axiosPublic.post('/auth/sendPasswordReset', { email: sendData.email })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()

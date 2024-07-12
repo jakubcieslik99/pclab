@@ -18,7 +18,7 @@ const axiosProtected = axios.create({
 
 const refreshAccessToken = async () => {
   try {
-    const { data } = await axiosPublic.get(`/auth/refreshAccessToken`, { withCredentials: true })
+    const { data } = await axiosPublic.get('/auth/refreshAccessToken', { withCredentials: true })
     data?.accessToken && localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
     return { type: 'data', payload: data }
   } catch (error) {

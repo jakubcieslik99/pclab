@@ -115,9 +115,10 @@ const ComposeScreen = () => {
         break
       case 3:
         if (component.type === 'mobo') {
-          if (component.caseCompat === 'matx' && caseComponent?.moboCompat === 'itx') {
+          /*if (component.caseCompat === 'matx' && caseComponent?.moboCompat === 'itx') {
           } else if (component.caseCompat === 'atx' && caseComponent?.moboCompat !== 'atx') {
-          } else {
+          } else {*/
+          if (component.caseCompat !== 'matx' && component.caseCompat !== 'atx' && caseComponent?.moboCompat !== 'itx') {
             setMoboComponent(component)
             cpuCompat.current = component.cpuCompat
             caseCompat.current = component.caseCompat
@@ -186,7 +187,7 @@ const ComposeScreen = () => {
           driveTwo: driveTwoComponent?._id || null,
           driveThree: driveThreeComponent?._id || null,
           description,
-        })
+        }),
       )
     } else {
       dispatch(
@@ -201,7 +202,7 @@ const ComposeScreen = () => {
           driveTwo: driveTwoComponent?._id || null,
           driveThree: driveThreeComponent?._id || null,
           description,
-        })
+        }),
       )
     }
   }
@@ -257,7 +258,7 @@ const ComposeScreen = () => {
             type: 'case',
             caseCompat: caseCompat.current,
             page: searchParams.get('page') || '',
-          })
+          }),
         )
         break
       case 2:
@@ -268,7 +269,7 @@ const ComposeScreen = () => {
             cpuCompat: cpuCompat.current,
             ramCompat: ramCompat.current,
             page: searchParams.get('page') || '',
-          })
+          }),
         )
         break
       case 3:
@@ -280,7 +281,7 @@ const ComposeScreen = () => {
             moboCompat: moboCompat.current,
             ramCompat: ramCompat.current,
             page: searchParams.get('page') || '',
-          })
+          }),
         )
         break
       case 4:
@@ -290,7 +291,7 @@ const ComposeScreen = () => {
             type: 'ram',
             ramCompat: ramCompat.current,
             page: searchParams.get('page') || '',
-          })
+          }),
         )
         break
       case 5:
@@ -299,7 +300,7 @@ const ComposeScreen = () => {
             searching: searchParams.get('searching') || '',
             type: 'gpu',
             page: searchParams.get('page') || '',
-          })
+          }),
         )
         break
       case 6:
@@ -308,7 +309,7 @@ const ComposeScreen = () => {
             searching: searchParams.get('searching') || '',
             type: 'psu',
             page: searchParams.get('page') || '',
-          })
+          }),
         )
         break
       case 7:
@@ -317,7 +318,7 @@ const ComposeScreen = () => {
             searching: searchParams.get('searching') || '',
             type: 'drive',
             page: searchParams.get('page') || '',
-          })
+          }),
         )
         break
       default:

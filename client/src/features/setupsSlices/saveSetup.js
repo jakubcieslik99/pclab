@@ -3,7 +3,7 @@ import axiosProtected from '../../api/axiosProtected'
 
 const createSetup = createAsyncThunk('/setups/createSetup', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.post(`/setups/createSetup`, {
+    const { data } = await axiosProtected.post('/setups/createSetup', {
       case: sendData.case,
       cpu: sendData.cpu,
       mobo: sendData.mobo,

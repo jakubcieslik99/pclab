@@ -5,7 +5,7 @@ import axiosProtected from '../../api/axiosProtected'
 const registerAccount = createAsyncThunk('/auth/register', async (sendData, thunkAPI) => {
   try {
     const { data } = await axiosPublic.post(
-      `/auth/register`,
+      '/auth/register',
       {
         email: sendData.email,
         nick: sendData.nick,
@@ -13,7 +13,7 @@ const registerAccount = createAsyncThunk('/auth/register', async (sendData, thun
         repassword: sendData.repassword,
         terms: sendData.terms,
       },
-      { withCredentials: true }
+      { withCredentials: true },
     )
     return data
   } catch (error) {
@@ -24,12 +24,12 @@ const registerAccount = createAsyncThunk('/auth/register', async (sendData, thun
 const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
   try {
     const { data } = await axiosPublic.post(
-      `/auth/login`,
+      '/auth/login',
       {
         email: sendData.email,
         password: sendData.password,
       },
-      { withCredentials: true }
+      { withCredentials: true },
     )
 
     data?.userInfo && localStorage.setItem('userInfo', JSON.stringify(data.userInfo))
@@ -44,7 +44,7 @@ const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
 
 const updateAccount = createAsyncThunk('/auth/updateAccount', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.put(`/auth/updateAccount`, {
+    const { data } = await axiosProtected.put('/auth/updateAccount', {
       email: sendData.email,
       nick: sendData.nick,
       password: sendData.password,
@@ -63,7 +63,7 @@ const updateAccount = createAsyncThunk('/auth/updateAccount', async (sendData, t
 
 const deleteAccount = createAsyncThunk('/auth/deleteAccount', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.delete(`/auth/deleteAccount`, { id: sendData.id })
+    const { data } = await axiosProtected.delete('/auth/deleteAccount', { id: sendData.id })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()
@@ -73,7 +73,7 @@ const deleteAccount = createAsyncThunk('/auth/deleteAccount', async (sendData, t
 
 const logout = createAsyncThunk('/auth/logout', async (_sendData, thunkAPI) => {
   try {
-    const { data } = await axiosPublic.get(`/auth/logout`, { withCredentials: true })
+    const { data } = await axiosPublic.get('/auth/logout', { withCredentials: true })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()

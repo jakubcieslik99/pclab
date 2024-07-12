@@ -3,7 +3,7 @@ import axiosPublic from '../../api/axiosPublic'
 
 const confirmAccount = createAsyncThunk('/auth/confirmAccount', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosPublic.post(`/auth/confirmAccount`, { token: sendData.token })
+    const { data } = await axiosPublic.post('/auth/confirmAccount', { token: sendData.token })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()
