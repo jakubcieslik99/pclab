@@ -8,7 +8,7 @@ export const injectStore = _store => {
 }
 
 const axiosProtected = axios.create({
-  baseURL: import.meta.env.VITE_APP_API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
 })

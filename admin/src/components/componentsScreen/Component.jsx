@@ -3,7 +3,7 @@ import noPhoto from '../../assets/no-photo.png'
 const Component = props => {
   const component = props.component
 
-  const componentImage = `${import.meta.env.VITE_APP_API_URL}/static/components/${props.component?._id}`
+  const componentImage = `${import.meta.env.VITE_API_URL}/static/components/${props.component?._id}`
 
   const componentPrice = (props.component?.price / 100).toFixed(2)
 

@@ -15,7 +15,7 @@ const createComponent = createAsyncThunk('/components/createComponent', async (s
     formSendData.append('amount', sendData.amount)
     sendData.selectedFiles.forEach(selectedFile => formSendData.append('uploads', selectedFile))
 
-    const { data } = await axiosProtected.post(`/admin/components/createComponent`, formSendData, {
+    const { data } = await axiosProtected.post('/admin/components/createComponent', formSendData, {
       onUploadProgress: progressEvent => {
         const { loaded, total } = progressEvent
         const progress = Math.floor((loaded * 100) / total)

@@ -3,7 +3,7 @@ import axiosProtected from '../../api/axiosProtected'
 
 const createCarrier = createAsyncThunk('/carriers/createCarrier', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.post(`/admin/carriers/createCarrier`, {
+    const { data } = await axiosProtected.post('/admin/carriers/createCarrier', {
       name: sendData.name,
       price: sendData.price,
     })

@@ -4,12 +4,12 @@ import axiosPublic from '../../api/axiosPublic'
 const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
   try {
     const { data } = await axiosPublic.post(
-      `/admin/auth/login`,
+      '/admin/auth/login',
       {
         email: sendData.email,
         password: sendData.password,
       },
-      { withCredentials: true }
+      { withCredentials: true },
     )
 
     data?.userInfo && localStorage.setItem('userInfo', JSON.stringify(data.userInfo))
@@ -24,7 +24,7 @@ const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
 
 const logout = createAsyncThunk('/auth/logout', async (_sendData, thunkAPI) => {
   try {
-    const { data } = await axiosPublic.get(`/admin/auth/logout`, {
+    const { data } = await axiosPublic.get('/admin/auth/logout', {
       withCredentials: true,
     })
     return data

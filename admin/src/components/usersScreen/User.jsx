@@ -23,7 +23,7 @@ const User = props => {
               <span>:</span>
             </p>
             <a
-              href={`${import.meta.env.VITE_APP_WEBAPP_URL}/profile/${user?._id}`}
+              href={`${import.meta.env.VITE_APP_URL}/profile/${user?._id}`}
               target="_blank"
               rel="noreferrer"
               className="-mt-[2px] text-base font-semibold text-gray-200 underline truncate"
@@ -53,7 +53,9 @@ const User = props => {
 
       <td className="pr-3">
         <div className="flex flex-col items-center mx-auto -mb-1 gap-[4px] min-w-[142px]">
-          <div className={`flex gap-1 mb-1 text-[10px] md:text-[12px] ${true ? 'text-white-400' : 'text-gray-400'}`}>
+          <div
+            className={`flex gap-1 mb-1 text-[10px] md:text-[12px] ${user?.setupsCount ? 'text-white-400' : 'text-gray-400'}`}
+          >
             <p className="text-sm">Zestawy:</p>
             <p className="-mt-[2px] text-[17px] font-semibold text-gray-200">{user?.setupsCount}</p>
           </div>

@@ -172,7 +172,7 @@ const EditComponentModal = props => {
             <div className="aspect-[4/3] flex items-center justify-center w-[135px] p-0 border-2 border-gray-400/70 cursor-pointer rounded-xl overflow-hidden">
               <img
                 crossOrigin="anonymous"
-                src={`${import.meta.env.VITE_APP_API_URL}/static/components/${props.editElement?._id}/${fetchedFiles[i]}`}
+                src={`${import.meta.env.VITE_API_URL}/static/components/${props.editElement?._id}/${fetchedFiles[i]}`}
                 alt=""
                 onClick={() => deleteImageHandler(i)}
                 className="w-auto h-auto max-w-full max-h-full"
