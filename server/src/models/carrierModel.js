@@ -7,7 +7,7 @@ const carrierSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 const carrierModel = model('Carrier', carrierSchema)

@@ -7,7 +7,7 @@ const commentSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 const setupSchema = new Schema(
@@ -29,7 +29,7 @@ const setupSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 const setupModel = model('Setup', setupSchema)

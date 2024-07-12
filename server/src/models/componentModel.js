@@ -15,7 +15,7 @@ const componentSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 const componentModel = model('Component', componentSchema)

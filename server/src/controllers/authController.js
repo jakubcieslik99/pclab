@@ -55,7 +55,7 @@ const login = async (req, res) => {
 
     if (checkedUser) {
       checkedUser.refreshTokens = checkedUser.refreshTokens.filter(
-        element => element.refreshToken !== req.cookies.refreshToken
+        element => element.refreshToken !== req.cookies.refreshToken,
       )
       await checkedUser.save()
     }
@@ -141,12 +141,12 @@ const updateAccount = async (req, res) => {
     updateUser.id,
     validationResult.email,
     validationResult.nick,
-    updateUser.isAdmin
+    updateUser.isAdmin,
   )
   if (!refreshToken) throw createError(500, 'Błąd serwera.')
 
   updateUser.refreshTokens = updateUser.refreshTokens.filter(
-    element => element.expirationDate > Date.now() && element.refreshToken !== req.cookies.refreshToken
+    element => element.expirationDate > Date.now() && element.refreshToken !== req.cookies.refreshToken,
   )
   updateUser.refreshTokens.push({ refreshToken, expirationDate: Date.now() + 90 * 24 * 3600 * 1000 })
 
@@ -238,7 +238,7 @@ const logout = async (req, res) => {
 
   if (checkedUser) {
     checkedUser.refreshTokens = checkedUser.refreshTokens.filter(
-      element => element.refreshToken !== req.cookies.refreshToken
+      element => element.refreshToken !== req.cookies.refreshToken,
     )
     await checkedUser.save()
   }
@@ -281,8 +281,8 @@ const sendPasswordReset = async (req, res) => {
     sendPasswordResetMessage(
       validationResult.email.toLowerCase(),
       passwordResetRequestedUser.nick,
-      passwordResetRequestedUser.token
-    )
+      passwordResetRequestedUser.token,
+    ),
   )
 
   return res.status(200).send({ message: 'Wysłano wiadomość z linkiem do resetowania hasła.' })

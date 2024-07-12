@@ -32,7 +32,7 @@ router.post(
   isProperAmount(0, 1),
   isProperExtension(['.jpg', '.jpeg', '.png']),
   isProperSize(3),
-  errorHandler(createComponent)
+  errorHandler(createComponent),
 )
 
 router.put(
@@ -44,7 +44,7 @@ router.put(
   isProperAmountUpdated(0, 1, 'images'),
   isProperExtension(['.jpg', '.jpeg', '.png']),
   isProperSize(3),
-  errorHandler(updateComponent)
+  errorHandler(updateComponent),
 )
 
 router.delete('/deleteComponent/:id', isValidId('id', null), isAuth, isAdmin, errorHandler(deleteComponent))

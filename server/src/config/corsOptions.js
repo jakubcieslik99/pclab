@@ -1,6 +1,6 @@
 import { config } from './utilities'
 
-const allowedOrigins = [config.API_URL, config.WEBAPP_URL, config.ADMINPANEL_URL]
+const allowedOrigins = [config.API_URL, config.APP_URL, config.ADMINPANEL_URL]
 
 const corsOptions = {
   origin: (origin, callback) => {

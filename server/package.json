@@ -1,18 +1,20 @@
 {
   "name": "pclab-server",
-  "version": "1.3.13",
+  "version": "1.4.0",
   "description": "PCLab",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "docker": "docker-compose -p pclab-server up --force-recreate",
-    "dev": "nodemon --watch src --exec babel-node src/index.js",
+    "docker": "cross-env DIR=pclab-server docker-compose -p pclab-server up --force-recreate",
+    "dev": "cross-env ENV=development nodemon --watch src --exec babel-node src/index.js",
     "build": "babel src -d dist",
     "lint": "eslint . --ignore-path ../.gitignore --ext .js",
-    "format": "prettier --ignore-path ../.gitignore --write \"**/*.+(js)\""
+    "format": "prettier --ignore-path ../.gitignore --write \"**/*.+(js)\"",
+    "update:all": "corepack up && pnpm update"
   },
   "author": "Jakub Cieślik",
   "license": "UNLICENSED",
+  "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -24,23 +26,24 @@
     "express-slow-down": "^1.6.0",
     "helmet": "^6.2.0",
     "http-errors": "^2.0.0",
-    "joi": "^17.13.1",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.12.9",
+    "mongoose": "^6.13.0",
     "node-schedule": "^2.1.1",
-    "nodemailer": "^6.9.13",
+    "nodemailer": "^6.9.14",
     "pino": "^8.21.0",
     "pino-pretty": "^9.4.1",
     "stripe": "^11.18.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.6",
-    "@babel/core": "^7.24.6",
-    "@babel/node": "^7.24.6",
-    "@babel/preset-env": "^7.24.6",
-    "eslint": "^8.57.0",
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.8",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
+    "cross-env": "^7.0.3",
+    "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "nodemon": "^2.0.22",
-    "prettier": "^3.2.5"
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.2"
   }
 }

@@ -19,7 +19,7 @@ const getAccessToken = (userId, userEmail, userNick, userIsAdmin) => {
           return reject(createError(500, 'Błąd serwera.'))
         }
         return resolve(token)
-      }
+      },
     )
   })
 }
@@ -41,7 +41,7 @@ const getRefreshToken = (userId, userEmail, userNick, userIsAdmin) => {
           return reject(createError(500, 'Błąd serwera.'))
         }
         return resolve(token)
-      }
+      },
     )
   })
 }

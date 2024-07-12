@@ -13,7 +13,7 @@ const orderedComponentSchema = new Schema(
     price: { type: Number, required: true },
     images: [{ type: String }],
   },
-  { _id: false }
+  { _id: false },
 )
 
 const selectedCarrierSchema = new Schema(
@@ -23,7 +23,7 @@ const selectedCarrierSchema = new Schema(
     price: { type: Number, required: true },
     tracking: { type: String, default: '' },
   },
-  { _id: false }
+  { _id: false },
 )
 
 const shippingDetailsSchema = new Schema(
@@ -37,7 +37,7 @@ const shippingDetailsSchema = new Schema(
     postal: { type: String, required: true },
     city: { type: String, required: true },
   },
-  { _id: false }
+  { _id: false },
 )
 
 const orderSchema = new Schema(
@@ -55,7 +55,7 @@ const orderSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 const orderModel = model('Order', orderSchema)

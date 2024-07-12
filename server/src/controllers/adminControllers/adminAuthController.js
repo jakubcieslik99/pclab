@@ -16,7 +16,7 @@ const login = async (req, res) => {
 
     if (checkedAdmin) {
       checkedAdmin.refreshTokensAdmin = checkedAdmin.refreshTokensAdmin.filter(
-        element => element.refreshToken !== req.cookies.refreshTokenAdmin
+        element => element.refreshToken !== req.cookies.refreshTokenAdmin,
       )
       await checkedAdmin.save()
     }
@@ -101,7 +101,7 @@ const logout = async (req, res) => {
 
   if (checkedAdmin) {
     checkedAdmin.refreshTokensAdmin = checkedAdmin.refreshTokensAdmin.filter(
-      element => element.refreshToken !== req.cookies.refreshTokenAdmin
+      element => element.refreshToken !== req.cookies.refreshTokenAdmin,
     )
     await checkedAdmin.save()
   }

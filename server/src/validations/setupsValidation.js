@@ -17,7 +17,7 @@ const getComponentsValidation = Joi.object({
     'lga1156',
     'lga1155',
     'lga1151',
-    'lga1150'
+    'lga1150',
   ),
   caseCompat: Joi.string().valid('', 'itx', 'matx', 'atx'),
   ramCompat: Joi.string().valid('', 'ddr5', 'ddr4', 'ddr3', 'ddr2'),

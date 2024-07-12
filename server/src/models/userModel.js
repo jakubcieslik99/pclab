@@ -5,7 +5,7 @@ const refreshTokenSchema = new Schema(
     refreshToken: { type: String, required: true },
     expirationDate: { type: Date, required: true },
   },
-  { _id: false }
+  { _id: false },
 )
 
 const userSchema = new Schema(
@@ -24,7 +24,7 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 const userModel = model('User', userSchema)
