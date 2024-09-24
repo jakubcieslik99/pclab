@@ -25,5 +25,4 @@ module.exports = {
   },
   root: true,
   ignorePatterns: ['dist', '.eslintrc.cjs'],
-  settings: { react: { version: '18.2' } },
 }
