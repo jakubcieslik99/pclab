@@ -44,14 +44,14 @@ administrator panel.
 
 ```bash
   cd pclab/server
-  npm install
+  pnpm install
 ```
 
 - Run server app in development mode
 
 ```bash
-  npm run docker
-  npm run dev
+  pnpm run docker
+  pnpm run dev
 ```
 
 - Last recommended step is to run locally Stripe development webhook service
@@ -62,13 +62,13 @@ administrator panel.
 
 ```bash
   cd pclab/client
-  npm install
+  pnpm install
 ```
 
 - Run client app in development mode
 
 ```bash
-  npm run dev
+  pnpm run dev
 ```
 
 ℹ️ Instructions for running admin panel locally:
@@ -77,13 +77,13 @@ administrator panel.
 
 ```bash
   cd pclab/admin
-  npm install
+  pnpm install
 ```
 
 - Run admin panel in development mode
 
 ```bash
-  npm run dev
+  pnpm run dev
 ```
 
 ## Deployment
@@ -93,30 +93,42 @@ administrator panel.
 - Convert to production build
 
 ```bash
-  npm run build
+  pnpm run build
 ```
 
 - Run server app in production mode
 
 ```bash
-  npm install --omit=dev
-  npm run start
+  pnpm install --prod
+  pnpm run start
 ```
 
-ℹ️ Instructions for building client app to production
+ℹ️ Instructions for building and running client app in production
 
 - Create production build
 
 ```bash
-  npm run build
+  pnpm run build
 ```
 
-ℹ️ Instructions for building admin panel to production
+- Run client app in production mode
+
+```bash
+  pnpm run preview
+```
+
+ℹ️ Instructions for building and running admin panel in production
 
 - Create production build
 
 ```bash
-  npm run build
+  pnpm run build
+```
+
+- Run admin panel app in production mode
+
+```bash
+  pnpm run preview
 ```
 
 ## Environment Variables
@@ -124,66 +136,48 @@ administrator panel.
 ⚙️ To run server app, you will need to add the following environment variables to your .env file
 
 - `DIR` _(default already set for development)_
-
 - `ENV` _(default already set for development)_
 
 - `MONGO_VER`
 
 - `HOST`
-
 - `PORT`
-
 - `API_URL`
-
 - `APP_URL`
-
 - `ADMINPANEL_URL`
 
 - `MONGO_HOST`
-
 - `MONGO_PORT`
-
 - `MONGO_DB`
-
 - `MONGO_USER`
-
 - `MONGO_PASSWORD`
 
 - `JWT_ACCESS_TOKEN_SECRET`
-
 - `JWT_REFRESH_TOKEN_SECRET`
-
 - `CRYPTO_SECRET`
-
 - `STRIPE_SECRET`
-
 - `STRIPE_ENDPOINT_SECRET`
-
 - `GMAIL_ADDRESS`
-
 - `GMAIL_PASSWORD`
-
 - `NOREPLY_ADDRESS`
 
 ( ℹ️ - sample .env config file is provided in the server directory under the name `.env.sample` )
 
 ⚙️ To build client app, you will need to add the following environment variables to your .env file
 
-- `VITE_API_STRIPE`
-
+- `VITE_PREVIEW_PORT`
 - `VITE_API_URL`
-
 - `VITE_APP_URL`
+- `VITE_API_STRIPE`
 
 ( ℹ️ - sample .env config file is provided in the client app directory under the name `.env.sample` )
 
 ⚙️ To build admin panel, you will need to add the following environment variables to your .env file
 
+- `VITE_PREVIEW_PORT_2`
 - `VITE_API_URL`
-
-- `VITE_ADMINPANEL_URL`
-
 - `VITE_APP_URL`
+- `VITE_ADMINPANEL_URL`
 
 ( ℹ️ - sample .env config file is provided in the admin panel directory under the name `.env.sample` )
 
