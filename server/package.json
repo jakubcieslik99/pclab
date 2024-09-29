@@ -1,6 +1,6 @@
 {
   "name": "pclab-server",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "PCLab",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
     "http-errors": "^2.0.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.13.2",
+    "mongoose": "^6.13.3",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.15",
     "pino": "^8.21.0",
