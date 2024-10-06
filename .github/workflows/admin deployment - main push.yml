@@ -40,7 +40,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
+          key: ${{ secrets.VPS_KEY }}
           port: 22
           source: 'admin/*,.env,!**/node_modules,!.git,!.github,!**/.env.sample'
           target: '/data/services/${{ env.DIR }}'
@@ -49,7 +49,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
+          key: ${{ secrets.VPS_KEY }}
           port: 22
           envs: DIR
           script: |
