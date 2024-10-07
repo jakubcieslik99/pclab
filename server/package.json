@@ -1,6 +1,6 @@
 {
   "name": "pclab-server",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "PCLab",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "author": "Jakub Cieślik",
   "license": "UNLICENSED",
-  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b",
+  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -36,10 +36,10 @@
     "stripe": "^11.18.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.6",
-    "@babel/core": "^7.25.2",
-    "@babel/node": "^7.25.0",
-    "@babel/preset-env": "^7.25.4",
+    "@babel/cli": "^7.25.7",
+    "@babel/core": "^7.25.7",
+    "@babel/node": "^7.25.7",
+    "@babel/preset-env": "^7.25.7",
     "cross-env": "^7.0.3",
     "eslint": "8.57.1",
     "eslint-config-prettier": "^9.1.0",
