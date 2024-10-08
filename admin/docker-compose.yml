@@ -9,9 +9,9 @@ services:
     env_file:
       - .env # attached by the GitHub Actions deployment action (contains DIR aswell)
     ports:
-      - ${VITE_PREVIEW_PORT}:${VITE_PREVIEW_PORT}
+      - ${VITE_PREVIEW_PORT_2}:${VITE_PREVIEW_PORT_2}
     expose:
-      - ${VITE_PREVIEW_PORT}
+      - ${VITE_PREVIEW_PORT_2}
     networks:
       - proxy # your custom Docker network in production
 networks:

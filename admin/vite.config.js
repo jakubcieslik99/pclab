@@ -14,7 +14,7 @@ export default defineConfig({
   },
   preview: {
     // eslint-disable-next-line no-undef
-    port: process.env.VITE_PREVIEW_PORT ? parseInt(process.env.VITE_PREVIEW_PORT) : 3001,
+    port: process.env.VITE_PREVIEW_PORT_2 ? parseInt(process.env.VITE_PREVIEW_PORT_2) : 3001,
     strictPort: true,
   },
 })
