@@ -1,6 +1,6 @@
 {
   "name": "pclab-server",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "PCLab",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "author": "Jakub Cieślik",
   "license": "UNLICENSED",
-  "packageManager": "pnpm@9.13.1+sha512.5ac37545851c55ec58521b6c285db6f848f93ca70889beb4145f5b40fe234e4ea4faee4dad12ac5c139e494374c65d9c3a6ec9a25954378fa286a250e68d2f20",
+  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
@@ -28,7 +28,7 @@
     "http-errors": "^2.0.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.13.3",
+    "mongoose": "^6.13.4",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.16",
     "pino": "^8.21.0",
