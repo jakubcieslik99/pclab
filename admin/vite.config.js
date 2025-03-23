@@ -13,8 +13,11 @@ export default defineConfig({
     strictPort: true,
   },
   preview: {
-    // eslint-disable-next-line no-undef
+    /* eslint-disable no-undef */
     port: process.env.VITE_PREVIEW_PORT_2 ? parseInt(process.env.VITE_PREVIEW_PORT_2) : 3001,
     strictPort: true,
+    allowedHosts: [
+      process.env.VITE_ADMINPANEL_URL ? process.env.VITE_ADMINPANEL_URL.replace(/https?:\/\//, '') : 'localhost',
+    ],
   },
 })
