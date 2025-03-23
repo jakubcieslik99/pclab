@@ -72,7 +72,7 @@ const config = {
   SMTP_USERNAME: process.env.SMTP_USERNAME,
   NOREPLY_ADDRESS: process.env.NOREPLY_ADDRESS,
   // Secrets
-  ...(await loadSecrets()),
+  ...loadSecrets(),
 }
 
 const log = logger({
