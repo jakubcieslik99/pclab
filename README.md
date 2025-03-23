@@ -135,6 +135,8 @@ administrator panel.
 
 ⚙️ To run server app, you will need to add the following environment variables to your .env file
 
+Vars:
+
 - `DIR` _(default already set for development)_
 - `ENV` _(default already set for development)_
 
@@ -150,16 +152,27 @@ administrator panel.
 - `MONGO_PORT`
 - `MONGO_DB`
 - `MONGO_USER`
-- `MONGO_PASSWORD`
 
+- `SMTP_HOST`
+- `SMTP_USERNAME`
+- `NOREPLY_ADDRESS`
+
+Secrets:
+
+- `MONGO_PASSWORD`
 - `JWT_ACCESS_TOKEN_SECRET`
 - `JWT_REFRESH_TOKEN_SECRET`
 - `CRYPTO_SECRET`
 - `STRIPE_SECRET`
 - `STRIPE_ENDPOINT_SECRET`
-- `GMAIL_ADDRESS`
-- `GMAIL_PASSWORD`
-- `NOREPLY_ADDRESS`
+- `SMTP_PASSWORD`
+
+Optional secrets for Infisical secrets manager:
+
+- `INFISICAL_URL` _(used for production)_
+- `INFISICAL_CLIENT_ID` _(used for production)_
+- `INFISICAL_CLIENT_SECRET` _(used for production)_
+- `INFISICAL_PROJECT_ID` _(used for production)_
 
 ( ℹ️ - sample .env config file is provided in the server directory under the name `.env.sample` )
 
