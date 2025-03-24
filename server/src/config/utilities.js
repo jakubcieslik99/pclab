@@ -4,57 +4,7 @@ import logger from 'pino'
 
 dotenv.config()
 
-const loadSecrets = async () => {
-  const infisicalCredentials = {
-    siteUrl: process.env.INFISICAL_URL,
-    clientId: process.env.INFISICAL_CLIENT_ID,
-    clientSecret: process.env.INFISICAL_CLIENT_SECRET,
-    projectId: process.env.INFISICAL_PROJECT_ID,
-  }
-
-  if (process.env.ENV !== 'production') {
-    return {
-      MONGO_PASSWORD: process.env.MONGO_PASSWORD || 'Passw0rd!',
-      JWT_ACCESS_TOKEN_SECRET: process.env.JWT_ACCESS_TOKEN_SECRET || 'JWT_ACCESS_TOKEN_SECRET',
-      JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET || 'JWT_REFRESH_TOKEN_SECRET',
-      CRYPTO_SECRET: process.env.CRYPTO_SECRET || 'CRYPTO_SECRET',
-      STRIPE_SECRET: process.env.STRIPE_SECRET,
-      STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET,
-      SMTP_PASSWORD: process.env.SMTP_PASSWORD,
-    }
-  }
-
-  const client = new InfisicalSDK({ siteUrl: infisicalCredentials.siteUrl })
-
-  await client
-    .auth()
-    .universalAuth.login({
-      clientId: infisicalCredentials.clientId,
-      clientSecret: infisicalCredentials.clientSecret,
-    })
-    .catch(error => {
-      throw new Error(`Failed to log in to Infisical: ${error}`)
-    })
-
-  const { secrets } = await client
-    .secrets()
-    .listSecrets({
-      environment: process.env.ENV,
-      projectId: infisicalCredentials.projectId,
-      recursive: false,
-      secretPath: '/server',
-    })
-    .catch(error => {
-      throw new Error(`Failed to fetch secrets from Infisical: ${error}`)
-    })
-
-  return secrets.reduce((acc, item) => {
-    acc[item.secretKey] = item.secretValue
-    return acc
-  }, {})
-}
-
-const config = {
+let config = {
   ENV: process.env.ENV || 'development',
   // Node.js
   HOST: process.env.HOST || 'localhost',
@@ -71,8 +21,65 @@ const config = {
   SMTP_HOST: process.env.SMTP_HOST,
   SMTP_USERNAME: process.env.SMTP_USERNAME,
   NOREPLY_ADDRESS: process.env.NOREPLY_ADDRESS,
-  // Secrets
-  ...loadSecrets(),
+}
+
+const loadConfig = async () => {
+  const loadSecrets = async () => {
+    const infisicalCredentials = {
+      siteUrl: process.env.INFISICAL_URL,
+      clientId: process.env.INFISICAL_CLIENT_ID,
+      clientSecret: process.env.INFISICAL_CLIENT_SECRET,
+      projectId: process.env.INFISICAL_PROJECT_ID,
+    }
+
+    if (process.env.ENV !== 'production') {
+      return {
+        MONGO_PASSWORD: process.env.MONGO_PASSWORD || 'Passw0rd!',
+        JWT_ACCESS_TOKEN_SECRET: process.env.JWT_ACCESS_TOKEN_SECRET || 'JWT_ACCESS_TOKEN_SECRET',
+        JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET || 'JWT_REFRESH_TOKEN_SECRET',
+        CRYPTO_SECRET: process.env.CRYPTO_SECRET || 'CRYPTO_SECRET',
+        STRIPE_SECRET: process.env.STRIPE_SECRET,
+        STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET,
+        SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+      }
+    }
+
+    const client = new InfisicalSDK({ siteUrl: infisicalCredentials.siteUrl })
+
+    await client
+      .auth()
+      .universalAuth.login({
+        clientId: infisicalCredentials.clientId,
+        clientSecret: infisicalCredentials.clientSecret,
+      })
+      .catch(error => {
+        throw new Error(`Failed to log in to Infisical: ${error}`)
+      })
+
+    const { secrets } = await client
+      .secrets()
+      .listSecrets({
+        environment: process.env.ENV,
+        projectId: infisicalCredentials.projectId,
+        recursive: false,
+        secretPath: '/server',
+      })
+      .catch(error => {
+        throw new Error(`Failed to fetch secrets from Infisical: ${error}`)
+      })
+
+    return secrets.reduce((acc, item) => {
+      acc[item.secretKey] = item.secretValue
+      return acc
+    }, {})
+  }
+
+  const secrets = await loadSecrets()
+
+  config = {
+    ...config,
+    ...secrets,
+  }
 }
 
 const log = logger({
@@ -85,4 +92,4 @@ const log = logger({
   },
 })
 
-export { config, log }
+export { loadConfig, config, log }

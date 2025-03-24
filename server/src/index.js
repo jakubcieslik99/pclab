@@ -5,7 +5,7 @@ import cors from 'cors'
 import rateLimit from 'express-rate-limit'
 import slowDown from 'express-slow-down'
 import createError from 'http-errors'
-import { config, log } from './config/utilities'
+import { loadConfig, config, log } from './config/utilities'
 import databaseConnect from './config/databaseConnect'
 import corsOptions from './config/corsOptions'
 import { rateLimiter, speedLimiter, adminRateLimiter, adminSpeedLimiter } from './config/limitOptions'
@@ -22,37 +22,41 @@ import userRoute from './routes/userRoute'
 import setupsRoute from './routes/setupsRoute'
 import ordersRoute from './routes/ordersRoute'
 
-const app = express()
-app.set('trust proxy', `loopback, ${config.HOST === 'localhost' ? '127.0.0.1' : config.HOST}`)
-databaseConnect(app)
+;(async () => {
+  await loadConfig()
 
-app.use(express.urlencoded({ extended: true }))
-app.use(bodyParser)
-app.use(cookieParser())
-app.use(helmet())
-app.use(cors(corsOptions))
+  const app = express()
+  app.set('trust proxy', `loopback, ${config.HOST === 'localhost' ? '127.0.0.1' : config.HOST}`)
+  databaseConnect(app)
 
-// static files
-app.use('/static/components/', express.static('uploads/components'))
-// admin routes
-app.use('/admin/*', rateLimit(adminRateLimiter), slowDown(adminSpeedLimiter))
-app.use('/admin/auth', adminAuthRoute)
-app.use('/admin/orders', adminOrdersRoute)
-app.use('/admin/carriers', adminCarriersRoute)
-app.use('/admin/components', adminComponentsRoute)
-app.use('/admin/setups', adminSetupsRoute)
-app.use('/admin/users', adminUsersRoute)
-// routes
-app.use('/auth', rateLimit(rateLimiter), slowDown(speedLimiter), authRoute)
-app.use('/user', rateLimit(rateLimiter), slowDown(speedLimiter), userRoute)
-app.use('/setups', rateLimit(rateLimiter), slowDown(speedLimiter), setupsRoute)
-app.use('/orders', rateLimit(rateLimiter), slowDown(speedLimiter), ordersRoute)
+  app.use(express.urlencoded({ extended: true }))
+  app.use(bodyParser)
+  app.use(cookieParser())
+  app.use(helmet())
+  app.use(cors(corsOptions))
 
-// 404 error
-app.all('*', (_req, _res, next) => next(createError(404, 'Podany zasób nie istnieje.')))
-// errors handling middleware
-app.use(isError)
+  // static files
+  app.use('/static/components/', express.static('uploads/components'))
+  // admin routes
+  app.use('/admin/*', rateLimit(adminRateLimiter), slowDown(adminSpeedLimiter))
+  app.use('/admin/auth', adminAuthRoute)
+  app.use('/admin/orders', adminOrdersRoute)
+  app.use('/admin/carriers', adminCarriersRoute)
+  app.use('/admin/components', adminComponentsRoute)
+  app.use('/admin/setups', adminSetupsRoute)
+  app.use('/admin/users', adminUsersRoute)
+  // routes
+  app.use('/auth', rateLimit(rateLimiter), slowDown(speedLimiter), authRoute)
+  app.use('/user', rateLimit(rateLimiter), slowDown(speedLimiter), userRoute)
+  app.use('/setups', rateLimit(rateLimiter), slowDown(speedLimiter), setupsRoute)
+  app.use('/orders', rateLimit(rateLimiter), slowDown(speedLimiter), ordersRoute)
 
-app.on('ready', () => {
-  app.listen(config.PORT, () => log.info(`Server started on port ${config.PORT}`))
-})
+  // 404 error
+  app.all('*', (_req, _res, next) => next(createError(404, 'Podany zasób nie istnieje.')))
+  // errors handling middleware
+  app.use(isError)
+
+  app.on('ready', () => {
+    app.listen(config.PORT, () => log.info(`Server started on port ${config.PORT}`))
+  })
+})()
