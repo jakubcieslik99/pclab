@@ -21,7 +21,6 @@ import authRoute from './routes/authRoute'
 import userRoute from './routes/userRoute'
 import setupsRoute from './routes/setupsRoute'
 import ordersRoute from './routes/ordersRoute'
-
 ;(async () => {
   await loadConfig()
 
@@ -38,7 +37,7 @@ import ordersRoute from './routes/ordersRoute'
   // static files
   app.use('/static/components/', express.static('uploads/components'))
   // admin routes
-  app.use('/admin/*', rateLimit(adminRateLimiter), slowDown(adminSpeedLimiter))
+  app.use('/admin/*splat', rateLimit(adminRateLimiter), slowDown(adminSpeedLimiter))
   app.use('/admin/auth', adminAuthRoute)
   app.use('/admin/orders', adminOrdersRoute)
   app.use('/admin/carriers', adminCarriersRoute)
@@ -52,7 +51,7 @@ import ordersRoute from './routes/ordersRoute'
   app.use('/orders', rateLimit(rateLimiter), slowDown(speedLimiter), ordersRoute)
 
   // 404 error
-  app.all('*', (_req, _res, next) => next(createError(404, 'Podany zasób nie istnieje.')))
+  app.all('/{*splat}', (_req, _res, next) => next(createError(404, 'Podany zasób nie istnieje.')))
   // errors handling middleware
   app.use(isError)
 

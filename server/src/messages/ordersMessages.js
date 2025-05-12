@@ -44,7 +44,7 @@ const successfulPaymentMessage = (to, nick, orderId) => {
   return {
     from: `PCLab 🖥️ <${config.NOREPLY_ADDRESS}>`,
     to,
-    subject: `✔️ Opłacono zamówienie w serwisie PCLab 🖥️`,
+    subject: '✔️ Opłacono zamówienie w serwisie PCLab 🖥️',
     text: `
       Witaj ${nick}! 
       Dziękujemy za opłacenie zamówienia w PCLab.

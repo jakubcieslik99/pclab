@@ -1,13 +1,8 @@
 import { Schema, model } from 'mongoose'
 
 const commentSchema = new Schema(
-  {
-    addedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    comment: { type: String, required: true },
-  },
-  {
-    timestamps: true,
-  },
+  { addedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }, comment: { type: String, required: true } },
+  { timestamps: true },
 )
 
 const setupSchema = new Schema(
@@ -27,9 +22,7 @@ const setupSchema = new Schema(
     comments: [commentSchema],
     bought: { type: Number, default: 0 },
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 )
 
 const setupModel = model('Setup', setupSchema)

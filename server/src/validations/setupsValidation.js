@@ -1,8 +1,6 @@
 import Joi from 'joi'
 
-const createCommentValidation = Joi.object({
-  comment: Joi.string().required().max(500),
-})
+const createCommentValidation = Joi.object({ comment: Joi.string().required().max(500) })
 
 const getComponentsValidation = Joi.object({
   moboCompat: Joi.string().valid('', 'atx', 'matx', 'itx'),
@@ -23,12 +21,8 @@ const getComponentsValidation = Joi.object({
   ramCompat: Joi.string().valid('', 'ddr5', 'ddr4', 'ddr3', 'ddr2'),
 })
 
-const createSetupValidation = Joi.object({
-  description: Joi.string().allow('').max(1000),
-})
+const createSetupValidation = Joi.object({ description: Joi.string().allow('').max(1000) })
 
-const updateSetupValidation = Joi.object({
-  description: Joi.string().allow('').max(1000),
-})
+const updateSetupValidation = Joi.object({ description: Joi.string().allow('').max(1000) })
 
 export { createCommentValidation, getComponentsValidation, createSetupValidation, updateSetupValidation }

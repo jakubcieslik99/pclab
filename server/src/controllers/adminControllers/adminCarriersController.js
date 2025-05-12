@@ -35,10 +35,7 @@ const getCarriers = async (req, res) => {
 const createCarrier = async (req, res) => {
   const validationResult = await createCarrierValidation.validateAsync(req.body)
 
-  const newCarrier = new Carrier({
-    name: validationResult.name,
-    price: validationResult.price,
-  })
+  const newCarrier = new Carrier({ name: validationResult.name, price: validationResult.price })
 
   await newCarrier.save()
 
@@ -65,11 +62,13 @@ const deleteCarrier = async (req, res) => {
   const deletedCarrier = await Carrier.findById(req.params.id).exec()
   if (!deletedCarrier) throw createError(404, 'Podany przewoźnik nie istnieje.')
 
-  await deletedCarrier.remove()
+  await deletedCarrier.deleteOne(deletedCarrier.id)
 
-  return res.status(200).send({
-    message: 'Usunięto przewoźnika. Wcześniejsze zamówienia zawierające dostawę z jego użyciem pozostaną bez zmian.',
-  })
+  return res
+    .status(200)
+    .send({
+      message: 'Usunięto przewoźnika. Wcześniejsze zamówienia zawierające dostawę z jego użyciem pozostaną bez zmian.',
+    })
 }
 
 export { getCarriers, createCarrier, updateCarrier, deleteCarrier }

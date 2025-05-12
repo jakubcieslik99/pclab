@@ -11,7 +11,7 @@ const login = async (req, res) => {
   if (req.cookies?.refreshTokenAdmin) {
     const checkedAdmin = await User.findOne({
       'refreshTokensAdmin.refreshToken': req.cookies.refreshTokenAdmin,
-      isAdmin: true,
+      'isAdmin': true,
     }).exec()
 
     if (checkedAdmin) {
@@ -61,12 +61,7 @@ const login = async (req, res) => {
     .status(200)
     .send({
       message: 'Zalogowano pomyślnie. Nastąpi przekierowanie do panelu administratora.',
-      userInfo: {
-        id: loggedAdmin.id,
-        email: loggedAdmin.email,
-        nick: loggedAdmin.nick,
-        isAdmin: loggedAdmin.isAdmin,
-      },
+      userInfo: { id: loggedAdmin.id, email: loggedAdmin.email, nick: loggedAdmin.nick, isAdmin: loggedAdmin.isAdmin },
       accessToken: accessToken,
     })
 }
@@ -77,7 +72,7 @@ const refreshAccessToken = async (req, res) => {
 
   const checkedAdmin = await User.findOne({
     'refreshTokensAdmin.refreshToken': req.cookies.refreshTokenAdmin,
-    isAdmin: true,
+    'isAdmin': true,
   }).exec()
   if (!checkedAdmin) throw createError(401, 'Błąd autoryzacji.')
 
@@ -96,7 +91,7 @@ const logout = async (req, res) => {
 
   const checkedAdmin = await User.findOne({
     'refreshTokensAdmin.refreshToken': req.cookies.refreshTokenAdmin,
-    isAdmin: true,
+    'isAdmin': true,
   }).exec()
 
   if (checkedAdmin) {

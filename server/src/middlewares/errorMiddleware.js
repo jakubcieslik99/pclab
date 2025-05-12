@@ -3,7 +3,6 @@ import parseString from '../functions/parseString'
 
 const errorHandler = controller => (req, res, next) => Promise.resolve(controller(req, res, next)).catch(next)
 
-// eslint-disable-next-line no-unused-vars
 const isError = (error, _req, res, _next) => {
   // internal error handling
   if (!error.status && !error.isJoi) {

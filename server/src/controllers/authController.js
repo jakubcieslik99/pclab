@@ -43,10 +43,12 @@ const register = async (req, res) => {
 
   await sendEmail(registerMessage(validationResult.email.toLowerCase(), validationResult.nick, token))
 
-  return res.status(201).send({
-    message:
-      'Zarejestrowano pomyślnie. Teraz potwierdź rejestrację za pomocą otrzymanej wiadomości email, aby się zalogować.',
-  })
+  return res
+    .status(201)
+    .send({
+      message:
+        'Zarejestrowano pomyślnie. Teraz potwierdź rejestrację za pomocą otrzymanej wiadomości email, aby się zalogować.',
+    })
 }
 // POST - /auth/login
 const login = async (req, res) => {
@@ -93,12 +95,7 @@ const login = async (req, res) => {
     .status(200)
     .send({
       message: 'Zalogowano pomyślnie. Nastąpi automatyczne przekierowanie.',
-      userInfo: {
-        id: loggedUser.id,
-        email: loggedUser.email,
-        nick: loggedUser.nick,
-        isAdmin: loggedUser.isAdmin,
-      },
+      userInfo: { id: loggedUser.id, email: loggedUser.email, nick: loggedUser.nick, isAdmin: loggedUser.isAdmin },
       accessToken: accessToken,
     })
 }
@@ -162,12 +159,7 @@ const updateAccount = async (req, res) => {
     .status(200)
     .send({
       message: 'Zaktualizowano profil.',
-      userInfo: {
-        id: updatedUser.id,
-        email: updatedUser.email,
-        nick: updatedUser.nick,
-        isAdmin: updatedUser.isAdmin,
-      },
+      userInfo: { id: updatedUser.id, email: updatedUser.email, nick: updatedUser.nick, isAdmin: updatedUser.isAdmin },
       accessToken: accessToken,
     })
 }
@@ -202,10 +194,10 @@ const deleteAccount = async (req, res) => {
         await user.save()
       }
     }
-    await deletedSetup.remove()
+    await deletedSetup.deleteOne(deletedSetup.id)
   }
 
-  await deletedUser.remove()
+  await deletedUser.deleteOne(deletedUser.id)
 
   if (!req.cookies?.refreshToken) return res.status(200).send({ message: 'Usunięto konto z serwisu.' })
   return res

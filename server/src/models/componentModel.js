@@ -13,9 +13,7 @@ const componentSchema = new Schema(
     amount: { type: Number, required: true },
     images: [{ type: String }],
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 )
 
 const componentModel = model('Component', componentSchema)

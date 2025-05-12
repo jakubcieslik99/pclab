@@ -24,14 +24,15 @@ const getUsers = async (req, res) => {
   }
 
   let sort = {}
+  // let isAdmin = {}
   if (req.query.sorting && req.query.sorting === 'least_setups') sort = { setupsCount: 1 }
   else if (req.query.sorting && req.query.sorting === 'most_setups') sort = { setupsCount: -1 }
   else if (req.query.sorting && req.query.sorting === 'least_comments') sort = { commentsCount: 1 }
   else if (req.query.sorting && req.query.sorting === 'most_comments') sort = { commentsCount: -1 }
   else if (req.query.sorting && req.query.sorting === 'z_a') sort = { nick: -1 }
   else if (req.query.sorting && req.query.sorting === 'a_z') sort = { nick: -1 }
-  else if (req.query.sorting && req.query.sorting === 'from_users') isAdmin = { amount: -1 }
-  else if (req.query.sorting && req.query.sorting === 'from_admins') isAdmin = { amount: 1 }
+  // else if (req.query.sorting && req.query.sorting === 'from_users') isAdmin = { amount: -1 }
+  // else if (req.query.sorting && req.query.sorting === 'from_admins') isAdmin = { amount: 1 }
   else if (req.query.sorting && req.query.sorting === 'oldest') sort = { createdAt: 1 }
   else if (req.query.sorting && req.query.sorting === 'newest') sort = { createdAt: -1 }
   else sort = { createdAt: -1 }
@@ -95,10 +96,10 @@ const deleteUser = async (req, res) => {
         await user.save()
       }
     }
-    await deletedSetup.remove()
+    await deletedSetup.deleteOne(deletedSetup.id)
   }
 
-  await deletedUser.remove()
+  await deletedUser.deleteOne(deletedUser.id)
 
   return res.status(200).send({ message: 'Usunięto użytkownika oraz wszystkie stworzone przez niego zestawy.' })
 }

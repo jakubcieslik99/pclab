@@ -170,10 +170,7 @@ const createComment = async (req, res) => {
   const setup = await Setup.findById(req.params.id).select('comments').exec()
   if (!setup) throw createError(404, 'Podana konfiguracja nie istnieje.')
 
-  setup.comments.push({
-    addedBy: authenticatedUser.id,
-    comment: validationResult.comment,
-  })
+  setup.comments.push({ addedBy: authenticatedUser.id, comment: validationResult.comment })
 
   await setup.save()
 
@@ -463,7 +460,7 @@ const deleteSetup = async (req, res) => {
     }
   }
 
-  await deletedSetup.remove()
+  await deletedSetup.deleteOne(deletedSetup.id)
 
   const user = await User.findById(authenticatedUser.id).exec()
   // filter if user commented deleted setup

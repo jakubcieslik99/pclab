@@ -77,12 +77,7 @@ const placeOrder = async (req, res) => {
   const carrier = await Carrier.findById(req.body.carrierId).select('name price').exec()
   if (!carrier) throw createError(404, 'Podany przewoźnik nie istnieje.')
 
-  const selectedCarrier = {
-    carrier: carrier.id,
-    name: carrier.name,
-    price: carrier.price,
-    tracking: '',
-  }
+  const selectedCarrier = { carrier: carrier.id, name: carrier.name, price: carrier.price, tracking: '' }
 
   const setup = await Setup.findById(req.body.setupId).select('-addedBy -description -likes -comments').exec()
   if (!setup) throw createError(404, 'Podany zestaw nie istnieje.')

@@ -220,7 +220,7 @@ const deleteComponent = async (req, res) => {
             await user.save()
           }
         }
-        await deletedSetup.remove()
+        await deletedSetup.deleteOne(deletedSetup.id)
       }
       break
     }
@@ -287,7 +287,7 @@ const deleteComponent = async (req, res) => {
 
   await removeDirectory(`components/${deletedComponent.id}`)
 
-  await deletedComponent.remove()
+  await deletedComponent.deleteOne(deletedComponent.id)
 
   return res.status(200).send({ message: 'Usunięto komponent i zaktualizowano odpowiednie zestawy.' })
 }

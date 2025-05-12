@@ -55,9 +55,7 @@ const updateAccountValidation = Joi.object({
   newpassword: Joi.string().allow('').min(8).max(60),
 })
 
-const confirmAccountValidation = Joi.object({
-  token: Joi.string().required(),
-})
+const confirmAccountValidation = Joi.object({ token: Joi.string().required() })
 
 const sendPasswordResetValidation = Joi.object({
   email: Joi.string()

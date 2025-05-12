@@ -1,10 +1,7 @@
 import { Schema, model } from 'mongoose'
 
 const refreshTokenSchema = new Schema(
-  {
-    refreshToken: { type: String, required: true },
-    expirationDate: { type: Date, required: true },
-  },
+  { refreshToken: { type: String, required: true }, expirationDate: { type: Date, required: true } },
   { _id: false },
 )
 
@@ -22,9 +19,7 @@ const userSchema = new Schema(
     refreshTokens: [refreshTokenSchema],
     refreshTokensAdmin: [refreshTokenSchema],
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 )
 
 const userModel = model('User', userSchema)

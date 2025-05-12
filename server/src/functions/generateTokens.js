@@ -5,12 +5,7 @@ import { config, log } from '../config/utilities'
 const getAccessToken = (userId, userEmail, userNick, userIsAdmin) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      {
-        id: userId,
-        email: userEmail,
-        nick: userNick,
-        isAdmin: userIsAdmin,
-      },
+      { id: userId, email: userEmail, nick: userNick, isAdmin: userIsAdmin },
       config.JWT_ACCESS_TOKEN_SECRET,
       { expiresIn: '20m' },
       (error, token) => {
@@ -27,12 +22,7 @@ const getAccessToken = (userId, userEmail, userNick, userIsAdmin) => {
 const getRefreshToken = (userId, userEmail, userNick, userIsAdmin) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      {
-        id: userId,
-        email: userEmail,
-        nick: userNick,
-        isAdmin: userIsAdmin,
-      },
+      { id: userId, email: userEmail, nick: userNick, isAdmin: userIsAdmin },
       config.JWT_REFRESH_TOKEN_SECRET,
       { expiresIn: '90d' },
       (error, token) => {

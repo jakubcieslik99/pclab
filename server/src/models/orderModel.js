@@ -53,9 +53,7 @@ const orderSchema = new Schema(
     paymentIntent: { type: String, required: true },
     status: { type: String, default: 'unpaid' }, // unpaid / paying / canceled / awaiting / sent / returned
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 )
 
 const orderModel = model('Order', orderSchema)

@@ -15,15 +15,7 @@ const adminRateLimiter = {
   },
 }
 
-const speedLimiter = {
-  windowMs: 30 * 1000,
-  delayAfter: 25,
-  delayMs: 200,
-}
-const adminSpeedLimiter = {
-  windowMs: 30 * 1000,
-  delayAfter: 80,
-  delayMs: 200,
-}
+const speedLimiter = { windowMs: 30 * 1000, delayAfter: 25, delayMs: () => 200 }
+const adminSpeedLimiter = { windowMs: 30 * 1000, delayAfter: 80, delayMs: () => 200 }
 
 export { rateLimiter, adminRateLimiter, speedLimiter, adminSpeedLimiter }
