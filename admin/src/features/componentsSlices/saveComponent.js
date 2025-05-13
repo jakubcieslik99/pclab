@@ -85,7 +85,7 @@ const saveComponentSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //createComponent
+    // createComponent
     builder.addCase(createComponent.pending, state => {
       state.loading = true
       state.progress = 0
@@ -107,7 +107,7 @@ const saveComponentSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //updateComponent
+    // updateComponent
     builder.addCase(updateComponent.pending, state => {
       state.loading = true
       state.progress = 0

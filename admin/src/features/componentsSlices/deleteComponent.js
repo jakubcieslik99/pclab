@@ -15,13 +15,7 @@ export { deleteComponent }
 
 const deleteComponentSlice = createSlice({
   name: 'deleteCarrier',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false
@@ -31,7 +25,7 @@ const deleteComponentSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //deleteComponent
+    // deleteComponent
     builder.addCase(deleteComponent.pending, state => {
       state.loading = true
       state.success = false

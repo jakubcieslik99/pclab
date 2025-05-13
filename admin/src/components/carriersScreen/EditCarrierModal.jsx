@@ -10,7 +10,7 @@ import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
 const EditCarrierModal = props => {
-  //variables
+  // variables
   const createCarrierAbort = useRef()
   const updateCarrierAbort = useRef()
 
@@ -23,27 +23,18 @@ const EditCarrierModal = props => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: { carrierName: '', carrierPrice: '' },
-  })
+  } = useForm({ defaultValues: { carrierName: '', carrierPrice: '' } })
 
-  //handlers
+  // handlers
   const submitHandler = data => {
     if (!props.editElement) {
       const createCarrierPromise = dispatch(
-        createCarrier({
-          name: data.carrierName,
-          price: parseInt(data.carrierPrice * 100),
-        })
+        createCarrier({ name: data.carrierName, price: parseInt(data.carrierPrice * 100) }),
       )
       createCarrierAbort.current = createCarrierPromise.abort
     } else {
       const updateCarrierPromise = dispatch(
-        updateCarrier({
-          id: props.editElement._id,
-          name: data.carrierName,
-          price: parseInt(data.carrierPrice * 100),
-        })
+        updateCarrier({ id: props.editElement._id, name: data.carrierName, price: parseInt(data.carrierPrice * 100) }),
       )
       updateCarrierAbort.current = updateCarrierPromise.abort
     }
@@ -69,7 +60,7 @@ const EditCarrierModal = props => {
     }, 200)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (props.editElement && props.isOpen) {
       setValue('carrierName', props.editElement.name)
@@ -129,7 +120,7 @@ const EditCarrierModal = props => {
                   onSubmit={handleSubmit(submitHandler)}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="text-xl font-semibold text-gray-800">
                     <div className="flex items-center justify-between w-full gap-4">
                       <h2 className="relative flex flex-col">
@@ -155,7 +146,7 @@ const EditCarrierModal = props => {
                     )}
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-gray-800">
                     <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
                     <Success isOpen={success && successMessage !== '' ? true : false} message={successMessage} />
@@ -218,7 +209,7 @@ const EditCarrierModal = props => {
                     </div>
                   </div>
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     {!success && (
                       <button

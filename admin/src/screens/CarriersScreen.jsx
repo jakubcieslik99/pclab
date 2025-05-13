@@ -23,7 +23,7 @@ const sortingOptions = [
 ]
 
 const CarriersScreen = () => {
-  //variables
+  // variables
   const getCarriersAbort = useRef()
 
   const { loading, count, carriers, error, errorMessage } = useAppSelector(state => state.getCarriers)
@@ -42,7 +42,7 @@ const CarriersScreen = () => {
   const [deleteCarrier, setDeleteCarrier] = useState(null)
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
 
-  //handlers
+  // handlers
   const filterURL = (searchingFilter, sortingFilter, pageFilter) => {
     if (searchingFilter !== '') URL.searching = searchingFilter
     else if (URL.searching) delete URL.searching
@@ -80,14 +80,14 @@ const CarriersScreen = () => {
     setDeleteModalIsOpen(true)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getCarriersPromise = dispatch(
       getCarriers({
         searching: searchParams.get('searching') || '',
         sorting: searchParams.get('sorting') || 'newest',
         page: searchParams.get('page') || '',
-      })
+      }),
     )
     return () => {
       getCarriersPromise.abort()
@@ -103,7 +103,7 @@ const CarriersScreen = () => {
           searching: searchParams.get('searching') || '',
           sorting: searchParams.get('sorting') || 'newest',
           page: searchParams.get('page') || '',
-        })
+        }),
       )
       getCarriersAbort.current = getCarriersPromise.abort
     }

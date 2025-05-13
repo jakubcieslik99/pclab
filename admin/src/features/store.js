@@ -18,24 +18,24 @@ import deleteUserReducer from './usersSlices/deleteUser'
 
 const store = configureStore({
   reducer: {
-    //authSlices
+    // authSlices
     manageAccount: manageAccountReducer,
-    //ordersSlices
+    // ordersSlices
     getOrders: getOrdersReducer,
     getOrder: getOrderReducer,
     saveOrder: saveOrderReducer,
-    //carriersSlices
+    // carriersSlices
     getCarriers: getCarriersReducer,
     saveCarrier: saveCarrierReducer,
     deleteCarrier: deleteCarrierReducer,
-    //componentsSlices
+    // componentsSlices
     getComponents: getComponentsReducer,
     saveComponent: saveComponentReducer,
     deleteComponent: deleteComponentReducer,
-    //setupsSlice
+    // setupsSlice
     getSetups: getSetupsReducer,
     deleteSetup: deleteSetupReducer,
-    //usersSlices
+    // usersSlices
     getUsers: getUsersReducer,
     saveUser: saveUserReducer,
     deleteUser: deleteUserReducer,

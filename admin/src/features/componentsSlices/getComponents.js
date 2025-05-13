@@ -14,7 +14,7 @@ const getComponents = createAsyncThunk('/components/getComponents', async (sendD
 
     const { data } = await axiosProtected.get(
       `/admin/components/getComponents${searching}${sorting}${filtering}${page}${limit}`,
-      { signal: controller.signal }
+      { signal: controller.signal },
     )
     return data
   } catch (error) {
@@ -27,20 +27,14 @@ export { getComponents }
 
 export const getComponentsSlice = createSlice({
   name: 'getComponents',
-  initialState: {
-    loading: false,
-    count: 0,
-    components: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, count: 0, components: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
     },
   },
   extraReducers: builder => {
-    //getComponents
+    // getComponents
     builder.addCase(getComponents.pending, state => {
       state.loading = true
       state.error = false

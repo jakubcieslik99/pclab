@@ -30,14 +30,7 @@ export { createCarrier, updateCarrier }
 
 const saveCarrierSlice = createSlice({
   name: 'saveCarrier',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    carrierSaved: null,
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', carrierSaved: null, error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false
@@ -48,7 +41,7 @@ const saveCarrierSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //createCarrier
+    // createCarrier
     builder.addCase(createCarrier.pending, state => {
       state.loading = true
       state.success = false
@@ -67,7 +60,7 @@ const saveCarrierSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //updateCarrier
+    // updateCarrier
     builder.addCase(updateCarrier.pending, state => {
       state.loading = true
       state.success = false

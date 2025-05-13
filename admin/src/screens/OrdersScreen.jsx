@@ -30,7 +30,7 @@ const filteringOptions = [
 ]
 
 const OrdersScreen = () => {
-  //variables
+  // variables
   const getOrdersAbort = useRef()
 
   const { loading, count, orders, error, errorMessage } = useAppSelector(state => state.getOrders)
@@ -48,7 +48,7 @@ const OrdersScreen = () => {
   const [editOrderId, setEditOrderId] = useState('')
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
-  //handlers
+  // handlers
   const filterURL = (searchingFilter, sortingFilter, filteringFilter, pageFilter) => {
     if (searchingFilter !== '') URL.searching = searchingFilter
     else if (URL.searching) delete URL.searching
@@ -101,7 +101,7 @@ const OrdersScreen = () => {
     setEditModalIsOpen(true)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getOrdersPromise = dispatch(
       getOrders({
@@ -109,7 +109,7 @@ const OrdersScreen = () => {
         sorting: searchParams.get('sorting') || 'newest',
         filtering: searchParams.get('filtering') || 'all',
         page: searchParams.get('page') || '',
-      })
+      }),
     )
     return () => {
       getOrdersPromise.abort()
@@ -126,7 +126,7 @@ const OrdersScreen = () => {
           sorting: searchParams.get('sorting') || 'newest',
           filtering: searchParams.get('filtering') || 'all',
           page: searchParams.get('page') || '',
-        })
+        }),
       )
       getOrdersAbort.current = getOrdersPromise.abort
     }

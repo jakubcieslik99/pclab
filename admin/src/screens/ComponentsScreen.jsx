@@ -34,7 +34,7 @@ const filteringOptions = [
 ]
 
 const ComponentsScreen = () => {
-  //variables
+  // variables
   const getComponentsAbort = useRef()
 
   const { loading, count, components, error, errorMessage } = useAppSelector(state => state.getComponents)
@@ -55,7 +55,7 @@ const ComponentsScreen = () => {
   const [deleteComponent, setDeleteComponent] = useState(null)
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
 
-  //handlers
+  // handlers
   const filterURL = (searchingFilter, sortingFilter, filteringFilter, pageFilter) => {
     if (searchingFilter !== '') URL.searching = searchingFilter
     else if (URL.searching) delete URL.searching
@@ -112,7 +112,7 @@ const ComponentsScreen = () => {
     setDeleteModalIsOpen(true)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getComponentsPromise = dispatch(
       getComponents({
@@ -120,7 +120,7 @@ const ComponentsScreen = () => {
         sorting: searchParams.get('sorting') || 'newest',
         filtering: searchParams.get('filtering') || 'all',
         page: searchParams.get('page') || '',
-      })
+      }),
     )
     return () => {
       getComponentsPromise.abort()
@@ -137,7 +137,7 @@ const ComponentsScreen = () => {
           sorting: searchParams.get('sorting') || 'newest',
           filtering: searchParams.get('filtering') || 'all',
           page: searchParams.get('page') || '',
-        })
+        }),
       )
       getComponentsAbort.current = getComponentsPromise.abort
     }

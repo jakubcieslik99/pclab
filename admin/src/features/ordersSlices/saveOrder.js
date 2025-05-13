@@ -18,14 +18,7 @@ export { updateOrder }
 
 const saveOrderSlice = createSlice({
   name: 'saveOrder',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    orderSaved: null,
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', orderSaved: null, error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false
@@ -36,7 +29,7 @@ const saveOrderSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //updateOrder
+    // updateOrder
     builder.addCase(updateOrder.pending, state => {
       state.loading = true
       state.success = false

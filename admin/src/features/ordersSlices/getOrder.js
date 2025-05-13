@@ -18,12 +18,7 @@ export { getOrder }
 
 export const getOrderSlice = createSlice({
   name: 'getOrder',
-  initialState: {
-    loading: false,
-    order: null,
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, order: null, error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
@@ -36,7 +31,7 @@ export const getOrderSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //getOrder
+    // getOrder
     builder.addCase(getOrder.pending, state => {
       state.loading = true
       state.error = false

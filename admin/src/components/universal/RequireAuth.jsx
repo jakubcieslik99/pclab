@@ -2,7 +2,7 @@ import { useLocation, Navigate, Outlet } from 'react-router-dom'
 import { useAppSelector } from '../../features/store'
 
 const RequireAuth = () => {
-  //variables
+  // variables
   const { userInfo } = useAppSelector(state => state.manageAccount)
 
   const { pathname } = useLocation()

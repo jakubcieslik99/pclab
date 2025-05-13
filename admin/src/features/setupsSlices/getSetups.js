@@ -25,20 +25,14 @@ export { getSetups }
 
 export const getSetupsSlice = createSlice({
   name: 'getSetups',
-  initialState: {
-    loading: false,
-    count: 0,
-    setups: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, count: 0, setups: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
     },
   },
   extraReducers: builder => {
-    //getSetups
+    // getSetups
     builder.addCase(getSetups.pending, state => {
       state.loading = true
       state.error = false

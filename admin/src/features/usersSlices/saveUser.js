@@ -3,9 +3,7 @@ import axiosProtected from '../../api/axiosProtected'
 
 const updateUser = createAsyncThunk('/users/updateUser', async (sendData, thunkAPI) => {
   try {
-    const { data } = await axiosProtected.put(`/admin/users/updateUser/${sendData.id}`, {
-      isAdmin: sendData.isAdmin,
-    })
+    const { data } = await axiosProtected.put(`/admin/users/updateUser/${sendData.id}`, { isAdmin: sendData.isAdmin })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()
@@ -17,14 +15,7 @@ export { updateUser }
 
 const saveUserSlice = createSlice({
   name: 'saveUser',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    userSaved: null,
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', userSaved: null, error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false
@@ -35,7 +26,7 @@ const saveUserSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //updateUser
+    // updateUser
     builder.addCase(updateUser.pending, state => {
       state.loading = true
       state.success = false

@@ -9,7 +9,7 @@ import Success from '../components/alerts/Success'
 import Error from '../components/alerts/Error'
 
 const LoginScreen = () => {
-  //variables
+  // variables
   const loginAbort = useRef()
 
   const { loading, success, successMessage, error, errorMessage, userInfo } = useAppSelector(state => state.manageAccount)
@@ -18,26 +18,21 @@ const LoginScreen = () => {
   const {
     register,
     handleSubmit,
-    //reset,
+    // reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      loginEmail: '',
-      loginPassword: '',
-    },
-  })
+  } = useForm({ defaultValues: { loginEmail: '', loginPassword: '' } })
 
   const navigate = useNavigate()
   const { state } = useLocation()
   const locationFrom = state?.from || '/'
 
-  //handlers
+  // handlers
   const submitHandler = data => {
     const loginPromise = dispatch(login({ email: data.loginEmail, password: data.loginPassword }))
     loginAbort.current = loginPromise.abort
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (!success && userInfo) navigate(locationFrom, { replace: true })
     else if (success && userInfo) setTimeout(() => dispatch(successReset()), 3000)

@@ -15,13 +15,7 @@ export { deleteUser }
 
 const deleteUserSlice = createSlice({
   name: 'deleteUser',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false
@@ -31,7 +25,7 @@ const deleteUserSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //deleteUser
+    // deleteUser
     builder.addCase(deleteUser.pending, state => {
       state.loading = true
       state.success = false

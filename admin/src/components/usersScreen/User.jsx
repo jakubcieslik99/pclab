@@ -2,7 +2,7 @@ import { useAppSelector } from '../../features/store'
 import Moment from 'moment'
 
 const User = props => {
-  //variables
+  // variables
   const { userInfo } = useAppSelector(state => state.manageAccount)
 
   const user = props.user

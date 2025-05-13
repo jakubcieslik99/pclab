@@ -10,7 +10,7 @@ import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
 const EditUserModal = props => {
-  //variables
+  // variables
   const updateUserAbort = useRef()
 
   const { loading, success, successMessage, userSaved, error, errorMessage } = useAppSelector(state => state.saveUser)
@@ -24,14 +24,9 @@ const EditUserModal = props => {
     formState: { errors },
   } = useForm({ defaultValues: { userIsAdmin: 'no' } })
 
-  //handlers
+  // handlers
   const submitHandler = data => {
-    const updateUserPromise = dispatch(
-      updateUser({
-        id: props.editElement._id,
-        isAdmin: data.userIsAdmin,
-      })
-    )
+    const updateUserPromise = dispatch(updateUser({ id: props.editElement._id, isAdmin: data.userIsAdmin }))
     updateUserAbort.current = updateUserPromise.abort
   }
 
@@ -49,7 +44,7 @@ const EditUserModal = props => {
     }, 250)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (props.editElement && props.isOpen) setValue('userIsAdmin', props.editElement.isAdmin ? 'yes' : 'no')
   }, [props, setValue])
@@ -100,7 +95,7 @@ const EditUserModal = props => {
                   onSubmit={handleSubmit(submitHandler)}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="text-xl font-semibold text-gray-800">
                     <div className="flex items-center justify-between w-full gap-4">
                       <h2 className="relative flex flex-col">
@@ -126,7 +121,7 @@ const EditUserModal = props => {
                     )}
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-gray-800">
                     <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
                     <Success isOpen={success && successMessage !== '' ? true : false} message={successMessage} />
@@ -158,7 +153,7 @@ const EditUserModal = props => {
                     </div>
                   </div>
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     {!success && (
                       <button

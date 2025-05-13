@@ -15,13 +15,7 @@ export { deleteSetup }
 
 const deleteSetupSlice = createSlice({
   name: 'deleteSetup',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false
@@ -31,7 +25,7 @@ const deleteSetupSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //deleteSetup
+    // deleteSetup
     builder.addCase(deleteSetup.pending, state => {
       state.loading = true
       state.success = false

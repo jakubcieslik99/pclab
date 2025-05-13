@@ -25,20 +25,14 @@ export { getUsers }
 
 export const getUsersSlice = createSlice({
   name: 'getUsers',
-  initialState: {
-    loading: false,
-    count: 0,
-    users: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, count: 0, users: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
     },
   },
   extraReducers: builder => {
-    //getUsers
+    // getUsers
     builder.addCase(getUsers.pending, state => {
       state.loading = true
       state.error = false

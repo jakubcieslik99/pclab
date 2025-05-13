@@ -5,10 +5,7 @@ const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
   try {
     const { data } = await axiosPublic.post(
       '/admin/auth/login',
-      {
-        email: sendData.email,
-        password: sendData.password,
-      },
+      { email: sendData.email, password: sendData.password },
       { withCredentials: true },
     )
 
@@ -24,9 +21,7 @@ const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
 
 const logout = createAsyncThunk('/auth/logout', async (_sendData, thunkAPI) => {
   try {
-    const { data } = await axiosPublic.get('/admin/auth/logout', {
-      withCredentials: true,
-    })
+    const { data } = await axiosPublic.get('/admin/auth/logout', { withCredentials: true })
     return data
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || error.toString()
@@ -62,7 +57,7 @@ export const manageAccountSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //login
+    // login
     builder.addCase(login.pending, state => {
       state.loading = true
       state.success = false
@@ -82,7 +77,7 @@ export const manageAccountSlice = createSlice({
       }
       state.userInfo = null
     })
-    //logout
+    // logout
     builder.addCase(logout.pending, state => {
       state.loading = true
       state.success = false

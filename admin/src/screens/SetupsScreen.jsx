@@ -24,7 +24,7 @@ const sortingOptions = [
 ]
 
 const SetupsScreen = () => {
-  //variables
+  // variables
   const getSetupsAbort = useRef()
 
   const { loading, count, setups, error, errorMessage } = useAppSelector(state => state.getSetups)
@@ -40,7 +40,7 @@ const SetupsScreen = () => {
   const [deleteSetup, setDeleteSetup] = useState(null)
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
 
-  //handlers
+  // handlers
   const filterURL = (searchingFilter, sortingFilter, pageFilter) => {
     if (searchingFilter !== '') URL.searching = searchingFilter
     else if (URL.searching) delete URL.searching
@@ -74,14 +74,14 @@ const SetupsScreen = () => {
     setDeleteModalIsOpen(true)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getSetupsPromise = dispatch(
       getSetups({
         searching: searchParams.get('searching') || '',
         sorting: searchParams.get('sorting') || 'newest',
         page: searchParams.get('page') || '',
-      })
+      }),
     )
     return () => {
       getSetupsPromise.abort()
@@ -97,7 +97,7 @@ const SetupsScreen = () => {
           searching: searchParams.get('searching') || '',
           sorting: searchParams.get('sorting') || 'newest',
           page: searchParams.get('page') || '',
-        })
+        }),
       )
       getSetupsAbort.current = getSetupsPromise.abort
     }

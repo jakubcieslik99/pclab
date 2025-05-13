@@ -46,7 +46,11 @@ const Component = props => {
               <div className="flex items-baseline gap-[3px]">
                 <p className="text-[10px] font-light">Rozmiar case:</p>
                 <p className="text-[11px] font-semibold">
-                  {component?.moboCompat === 'matx' ? 'mATX' : <span className="uppercase">{component?.moboCompat}</span>}{' '}
+                  {component?.moboCompat === 'matx' ? (
+                    'mATX'
+                  ) : (
+                    <span className="uppercase">{component?.moboCompat}</span>
+                  )}{' '}
                 </p>
               </div>
             )}
@@ -54,7 +58,11 @@ const Component = props => {
               <div className="flex items-baseline gap-[3px]">
                 <p className="text-[10px] font-light">Rozmiar MOBO:</p>
                 <p className="text-[11px] font-semibold">
-                  {component?.caseCompat === 'matx' ? 'mATX' : <span className="uppercase">{component?.caseCompat}</span>}{' '}
+                  {component?.caseCompat === 'matx' ? (
+                    'mATX'
+                  ) : (
+                    <span className="uppercase">{component?.caseCompat}</span>
+                  )}{' '}
                 </p>
               </div>
             )}

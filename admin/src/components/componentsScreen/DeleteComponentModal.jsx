@@ -8,13 +8,13 @@ import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
 const DeleteComponentModal = props => {
-  //variables
+  // variables
   const deleteComponentAbort = useRef()
 
   const { loading, success, successMessage, error, errorMessage } = useAppSelector(state => state.deleteComponent)
   const dispatch = useAppDispatch()
 
-  //handlers
+  // handlers
   const submitHandler = e => {
     e.preventDefault()
     const deleteComponentPromise = dispatch(deleteComponent({ id: props.deleteElement._id }))
@@ -34,7 +34,7 @@ const DeleteComponentModal = props => {
     }, 200)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     return () => {
       if (deleteComponentAbort.current) {
@@ -77,7 +77,7 @@ const DeleteComponentModal = props => {
                   onSubmit={submitHandler}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-gray-800">
                     <h2 className="relative w-[134px] sm:w-auto">
                       Usuwanie komponentu
@@ -97,7 +97,7 @@ const DeleteComponentModal = props => {
                     </button>
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-gray-800 text-center">
                     <div className="w-full text-left">
                       <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
@@ -113,7 +113,7 @@ const DeleteComponentModal = props => {
                     </div>
                   </div>
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     {!success && (
                       <button

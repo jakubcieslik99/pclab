@@ -13,12 +13,12 @@ import Success from '../alerts/Success'
 const maxFilesAmount = 1
 
 const EditComponentModal = props => {
-  //variables
+  // variables
   const createComponentAbort = useRef()
   const updateComponentAbort = useRef()
 
   const { loading, success, successMessage, componentSaved, error, errorMessage } = useAppSelector(
-    state => state.saveComponent
+    state => state.saveComponent,
   )
   const dispatch = useAppDispatch()
 
@@ -28,14 +28,7 @@ const EditComponentModal = props => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      componentTitle: '',
-      componentURL: '',
-      componentPrice: '',
-      componentAmount: '',
-    },
-  })
+  } = useForm({ defaultValues: { componentTitle: '', componentURL: '', componentPrice: '', componentAmount: '' } })
 
   const [type, setType] = useState('')
   const [typeError, setTypeError] = useState(false)
@@ -54,16 +47,12 @@ const EditComponentModal = props => {
     noClick: true,
     noKeyboard: true,
     onDrop: acceptedFiles => {
-      let preparedFiles = acceptedFiles.map(file =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })
-      )
+      let preparedFiles = acceptedFiles.map(file => Object.assign(file, { preview: URL.createObjectURL(file) }))
       setSelectedFiles(selectedFiles.concat(preparedFiles))
     },
   })
 
-  //handlers
+  // handlers
   const submitHandler = data => {
     if (!type) {
       setTypeErrorMessage('Pole wymagane.')
@@ -94,7 +83,7 @@ const EditComponentModal = props => {
             price: parseInt(data.componentPrice * 100),
             amount: parseInt(data.componentAmount),
             selectedFiles,
-          })
+          }),
         )
         createComponentAbort.current = createComponentPromise.abort
       } else {
@@ -112,7 +101,7 @@ const EditComponentModal = props => {
             amount: parseInt(data.componentAmount),
             fetchedFiles,
             selectedFiles,
-          })
+          }),
         )
         updateComponentAbort.current = updateComponentPromise.abort
       }
@@ -178,7 +167,7 @@ const EditComponentModal = props => {
                 className="w-auto h-auto max-w-full max-h-full"
               />
             </div>
-          </div>
+          </div>,
         )
       } else {
         for (let j = 0; j < maxFilesAmount - i; j++) {
@@ -193,7 +182,7 @@ const EditComponentModal = props => {
                     className="w-auto h-auto max-w-full max-h-full"
                   />
                 </div>
-              </div>
+              </div>,
             )
           } else {
             thumbs.push(
@@ -204,7 +193,7 @@ const EditComponentModal = props => {
                 >
                   +
                 </div>
-              </div>
+              </div>,
             )
           }
         }
@@ -214,7 +203,7 @@ const EditComponentModal = props => {
     return <>{thumbs}</>
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (props.editElement && props.isOpen) {
       setValue('componentTitle', props.editElement.title)
@@ -283,7 +272,7 @@ const EditComponentModal = props => {
                   onSubmit={handleSubmit(submitHandler)}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="text-xl font-semibold text-gray-800">
                     <div className="flex items-center justify-between w-full gap-4">
                       <h2 className="flex flex-col">
@@ -309,7 +298,7 @@ const EditComponentModal = props => {
                     )}
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-gray-800">
                     <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
                     <Success isOpen={success && successMessage !== '' ? true : false} message={successMessage} />
@@ -633,7 +622,7 @@ const EditComponentModal = props => {
                     </div>
                   </div>
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     {!success && (
                       <button

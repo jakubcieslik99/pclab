@@ -12,7 +12,7 @@ import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
 const EditOrderModal = props => {
-  //variables
+  // variables
   const getOrderAbort = useRef()
   const updateOrderAbort = useRef()
 
@@ -34,18 +34,12 @@ const EditOrderModal = props => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: { orderStatus: 'unpaid', orderTracking: '' },
-  })
+  } = useForm({ defaultValues: { orderStatus: 'unpaid', orderTracking: '' } })
 
-  //handlers
+  // handlers
   const submitHandler = data => {
     const updateOrderPromise = dispatch(
-      updateOrder({
-        id: order._id,
-        status: data.orderStatus,
-        tracking: data.orderTracking,
-      })
+      updateOrder({ id: order._id, status: data.orderStatus, tracking: data.orderTracking }),
     )
     updateOrderAbort.current = updateOrderPromise.abort
   }
@@ -70,7 +64,7 @@ const EditOrderModal = props => {
     }, 200)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     order && setValue('orderStatus', order.status)
     order?.selectedCarrier.tracking && setValue('orderTracking', order.selectedCarrier.tracking)
@@ -132,7 +126,7 @@ const EditOrderModal = props => {
                   onSubmit={handleSubmit(submitHandler)}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="text-xl font-semibold text-gray-800">
                     <div className="relative flex items-center justify-between w-full gap-4">
                       <h2 className="flex flex-col">Zarządzaj zamówieniem</h2>
@@ -160,7 +154,7 @@ const EditOrderModal = props => {
                     </div>
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   {order && (
                     <div className="flex flex-col w-full gap-[10px] mt-[14px] mb-4 overflow-y-auto text-gray-800">
                       <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
@@ -300,7 +294,7 @@ const EditOrderModal = props => {
                     </div>
                   )}
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     {!success && (
                       <button

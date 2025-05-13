@@ -1,7 +1,7 @@
 import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from 'react-icons/fa'
 
 const Paginator = props => {
-  //variables
+  // variables
   const listPagesHandler = () => {
     const limit = 15
     const pages = Math.ceil(props.count / limit)
@@ -17,7 +17,7 @@ const Paginator = props => {
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleDoubleLeft />
-          </button>
+          </button>,
         )
       props.page > 1 &&
         elements.push(
@@ -28,7 +28,7 @@ const Paginator = props => {
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleLeft />
-          </button>
+          </button>,
         )
       if (props.page < 3) {
         for (let i = 1; i <= 5; i++) {
@@ -41,7 +41,7 @@ const Paginator = props => {
               className={i === props.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
             >
               {i}
-            </button>
+            </button>,
           )
         }
       } else if (props.page >= 3 && props.page <= pages - 2) {
@@ -55,7 +55,7 @@ const Paginator = props => {
               className={i === props.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
             >
               {i}
-            </button>
+            </button>,
           )
         }
       } else {
@@ -69,7 +69,7 @@ const Paginator = props => {
               className={i === props.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
             >
               {i}
-            </button>
+            </button>,
           )
         }
       }
@@ -82,7 +82,7 @@ const Paginator = props => {
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleRight />
-          </button>
+          </button>,
         )
       props.page < pages - 2 &&
         elements.push(
@@ -93,7 +93,7 @@ const Paginator = props => {
             className="flex items-center justify-center w-6 h-full transition active:scale-90"
           >
             <FaAngleDoubleRight />
-          </button>
+          </button>,
         )
     } else {
       for (let i = 1; i <= pages; i++) {
@@ -106,7 +106,7 @@ const Paginator = props => {
             className={i === props.page ? 'w-6 underline' : 'w-6 transition active:scale-90'}
           >
             {i}
-          </button>
+          </button>,
         )
       }
     }

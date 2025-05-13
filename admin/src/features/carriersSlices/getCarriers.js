@@ -25,20 +25,14 @@ export { getCarriers }
 
 export const getCarriersSlice = createSlice({
   name: 'getCarriers',
-  initialState: {
-    loading: false,
-    count: 0,
-    carriers: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, count: 0, carriers: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
     },
   },
   extraReducers: builder => {
-    //getCarriers
+    // getCarriers
     builder.addCase(getCarriers.pending, state => {
       state.loading = true
       state.error = false
