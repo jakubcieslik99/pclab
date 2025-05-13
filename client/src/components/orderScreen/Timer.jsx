@@ -4,12 +4,12 @@ import { useAppDispatch } from '../../features/store'
 import { getOrder } from '../../features/ordersSlices/getOrder'
 
 const Timer = props => {
-  //variables
+  // variables
   const getOrderAbort = useRef()
 
   const dispatch = useAppDispatch()
 
-  //handlers
+  // handlers
   const countdownRenderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       setTimeout(() => {
@@ -29,7 +29,7 @@ const Timer = props => {
       )
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     return () => getOrderAbort.current && getOrderAbort.current()
   }, [])

@@ -14,7 +14,7 @@ import Error from '../components/alerts/Error'
 let URL = {}
 
 const ComposeScreen = () => {
-  //variables
+  // variables
   const getSetupAbort = useRef()
   const getComponentsAbort = useRef()
 
@@ -55,7 +55,7 @@ const ComposeScreen = () => {
 
   const navigate = useNavigate()
 
-  //handlers
+  // handlers
   const filterURL = (searchingFilter, pageFilter) => {
     if (id.current) URL.id = id.current
     else if (URL.id) delete URL.id
@@ -115,7 +115,7 @@ const ComposeScreen = () => {
         break
       case 3:
         if (component.type === 'mobo') {
-          /*if (component.caseCompat === 'matx' && caseComponent?.moboCompat === 'itx') {
+          /* if (component.caseCompat === 'matx' && caseComponent?.moboCompat === 'itx') {
           } else if (component.caseCompat === 'atx' && caseComponent?.moboCompat !== 'atx') {
           } else {*/
           if (component.caseCompat !== 'matx' && component.caseCompat !== 'atx' && caseComponent?.moboCompat !== 'itx') {
@@ -207,7 +207,7 @@ const ComposeScreen = () => {
     }
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (id.current) {
       const getSetupPromise = dispatch(getSetup({ id: id.current }))

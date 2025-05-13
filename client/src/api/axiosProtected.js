@@ -74,7 +74,7 @@ const resIntercept = axiosProtected.interceptors.response.use(
   },
 )
 
-/*const axiosProtectedEject = () => {
+/* const axiosProtectedEject = () => {
   axiosProtected.interceptors.request.eject(reqIntercept)
   axiosProtected.interceptors.response.eject(resIntercept)
 }*/

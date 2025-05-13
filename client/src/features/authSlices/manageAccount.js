@@ -25,10 +25,7 @@ const login = createAsyncThunk('/auth/login', async (sendData, thunkAPI) => {
   try {
     const { data } = await axiosPublic.post(
       '/auth/login',
-      {
-        email: sendData.email,
-        password: sendData.password,
-      },
+      { email: sendData.email, password: sendData.password },
       { withCredentials: true },
     )
 
@@ -109,7 +106,7 @@ export const manageAccountSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //register
+    // register
     builder.addCase(registerAccount.pending, state => {
       state.loading = true
       state.success = false
@@ -127,7 +124,7 @@ export const manageAccountSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //login
+    // login
     builder.addCase(login.pending, state => {
       state.loading = true
       state.success = false
@@ -147,7 +144,7 @@ export const manageAccountSlice = createSlice({
       }
       state.userInfo = null
     })
-    //updateAccount
+    // updateAccount
     builder.addCase(updateAccount.pending, state => {
       state.loading = true
       state.success = false
@@ -167,7 +164,7 @@ export const manageAccountSlice = createSlice({
       }
       state.userInfo = null
     })
-    //deleteAccount
+    // deleteAccount
     builder.addCase(deleteAccount.pending, state => {
       state.loading = true
       state.success = false
@@ -185,7 +182,7 @@ export const manageAccountSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //logout
+    // logout
     builder.addCase(logout.pending, state => {
       state.loading = true
       state.success = false

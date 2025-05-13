@@ -10,14 +10,14 @@ import { setupCommentsReset } from '../../features/setupsSlices/createComment'
 import { BsCpuFill } from 'react-icons/bs'
 
 const Header = () => {
-  //variables
+  // variables
   const { userInfo } = useAppSelector(state => state.manageAccount)
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  //handlers
+  // handlers
   const logoutHandler = () => {
     dispatch(setupCommentsReset())
 

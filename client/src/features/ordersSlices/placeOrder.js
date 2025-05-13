@@ -19,12 +19,7 @@ export { placeOrder }
 
 export const placeOrderSlice = createSlice({
   name: 'placeOrder',
-  initialState: {
-    loading: false,
-    orderId: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, orderId: '', error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false

@@ -38,14 +38,7 @@ export { getLikedSetups, likeSetup, unlikeSetup }
 
 const manageLikedSetupsSlice = createSlice({
   name: 'manageLikedSetups',
-  initialState: {
-    loading: false,
-    likedSetups: [],
-    like: '',
-    unlike: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, likedSetups: [], like: '', unlike: '', error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
@@ -61,7 +54,7 @@ const manageLikedSetupsSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //getLikedSetups
+    // getLikedSetups
     builder.addCase(getLikedSetups.pending, state => {
       state.loading = true
       state.error = false
@@ -77,7 +70,7 @@ const manageLikedSetupsSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //likeSetup
+    // likeSetup
     builder.addCase(likeSetup.pending, state => {
       state.loading = true
       state.error = false
@@ -95,7 +88,7 @@ const manageLikedSetupsSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //unlikeSetup
+    // unlikeSetup
     builder.addCase(unlikeSetup.pending, state => {
       state.loading = true
       state.error = false

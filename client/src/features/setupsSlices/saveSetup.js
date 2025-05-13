@@ -47,12 +47,7 @@ export { createSetup, updateSetup }
 
 const saveSetupSlice = createSlice({
   name: 'saveSetup',
-  initialState: {
-    loading: false,
-    idSaved: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, idSaved: '', error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
@@ -62,7 +57,7 @@ const saveSetupSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //createSetup
+    // createSetup
     builder.addCase(createSetup.pending, state => {
       state.loading = true
       state.error = false
@@ -78,7 +73,7 @@ const saveSetupSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //updateSetup
+    // updateSetup
     builder.addCase(updateSetup.pending, state => {
       state.loading = true
       state.error = false

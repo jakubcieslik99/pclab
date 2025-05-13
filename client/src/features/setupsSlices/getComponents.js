@@ -30,13 +30,7 @@ export { getComponents }
 
 export const getComponentsSlice = createSlice({
   name: 'getComponents',
-  initialState: {
-    loading: false,
-    count: 0,
-    components: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, count: 0, components: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false

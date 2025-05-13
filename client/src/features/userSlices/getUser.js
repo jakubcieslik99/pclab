@@ -18,13 +18,7 @@ export { getUser }
 
 export const getUserSlice = createSlice({
   name: 'getUser',
-  initialState: {
-    loading: false,
-    user: '',
-    setups: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, user: '', setups: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false

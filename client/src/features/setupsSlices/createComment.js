@@ -15,12 +15,7 @@ export { createComment }
 
 const createCommentSlice = createSlice({
   name: 'createComment',
-  initialState: {
-    loading: false,
-    setupComments: null,
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, setupComments: null, error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false

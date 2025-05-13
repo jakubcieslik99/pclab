@@ -2,12 +2,12 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const ScrollTop = props => {
-  //variables
+  // variables
   const location = useLocation()
 
-  //useEffects
+  // useEffects
   useEffect(() => {
-    //window.scrollTo(0, 0, 'smooth')
+    // window.scrollTo(0, 0, 'smooth')
     document.body.scrollTo(0, 0, 'instant')
   }, [location])
 

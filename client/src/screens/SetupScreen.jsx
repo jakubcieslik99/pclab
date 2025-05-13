@@ -12,7 +12,7 @@ import Loading from '../components/alerts/Loading'
 import Error from '../components/alerts/Error'
 
 const SetupScreen = () => {
-  //variables
+  // variables
   const likeSetupAbort = useRef()
   const unlikeSetupAbort = useRef()
 
@@ -32,7 +32,7 @@ const SetupScreen = () => {
   const { pathname } = useLocation()
   const params = useParams()
 
-  //handlers
+  // handlers
   const renderSetupCreatedAtHandler = () => {
     return Moment(setup?.createdAt).format('DD.MM.YYYY, HH:mm')
   }
@@ -69,7 +69,7 @@ const SetupScreen = () => {
     comment && dispatch(createComment({ id: setup._id, comment }))
   }
 
-  //useEffect
+  // useEffect
   useEffect(() => {
     const getSetupPromise = dispatch(getSetup({ id: params.id }))
     return () => {
@@ -153,7 +153,7 @@ const SetupScreen = () => {
               )}
             </div>
 
-            {/*<div className="flex flex-col items-center gap-4 mx-2 mb-4 md:mb-6">*/}
+            {/* <div className="flex flex-col items-center gap-4 mx-2 mb-4 md:mb-6">*/}
             <div className="grid gap-4 mx-2 mb-4 sm:grid-cols-2 lg:grid-cols-3">
               {setup.case && <Component component={setup.case} />}
               {setup.cpu && <Component component={setup.cpu} />}

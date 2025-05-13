@@ -18,17 +18,12 @@ export { getSetup }
 
 export const getSetupSlice = createSlice({
   name: 'getSetup',
-  initialState: {
-    loading: false,
-    setup: null,
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, setup: null, error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false
     },
-    /*getSetupReset: state => {
+    /* getSetupReset: state => {
       state.setup = null
     },*/
     addLike: (state, action) => {

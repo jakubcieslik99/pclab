@@ -63,7 +63,7 @@ export const getSetupsSlice = createSlice({
     errorReset: state => {
       state.error = false
     },
-    /*getSetupsReset: state => {
+    /* getSetupsReset: state => {
       state.count = 0
       state.setups = []
     },
@@ -113,7 +113,7 @@ export const getSetupsSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    //getSetups
+    // getSetups
     builder.addCase(getSetups.pending, state => {
       state.loading = true
       state.error = false
@@ -130,7 +130,7 @@ export const getSetupsSlice = createSlice({
         state.errorMessage = action.payload
       }
     })
-    //getHomeScreenSetups
+    // getHomeScreenSetups
     builder.addCase(getHomeScreenSetups.pending, state => {
       state.loading = true
       state.error = false

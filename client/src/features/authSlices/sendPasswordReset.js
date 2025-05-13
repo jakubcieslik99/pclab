@@ -15,13 +15,7 @@ export { sendPasswordReset }
 
 const sendPasswordResetSlice = createSlice({
   name: 'sendPasswordReset',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false

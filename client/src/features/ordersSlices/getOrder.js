@@ -18,13 +18,7 @@ export { getOrder }
 
 export const getOrderSlice = createSlice({
   name: 'getOrder',
-  initialState: {
-    loading: false,
-    order: null,
-    paymentKey: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, order: null, paymentKey: '', error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false

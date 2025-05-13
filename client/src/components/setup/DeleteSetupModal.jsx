@@ -10,7 +10,7 @@ import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
 const DeleteModal = props => {
-  //variables
+  // variables
   const deleteSetupAbort = useRef()
   const getUserAbort = useRef()
 
@@ -19,7 +19,7 @@ const DeleteModal = props => {
 
   const params = useParams()
 
-  //handlers
+  // handlers
   const submitHandler = e => {
     e.preventDefault()
     const deleteSetupPromise = dispatch(deleteSetup({ id: props.setupId }))
@@ -39,7 +39,7 @@ const DeleteModal = props => {
     }, 200)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     return () => {
       if (deleteSetupAbort.current) {
@@ -90,7 +90,7 @@ const DeleteModal = props => {
                   onSubmit={submitHandler}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-pclab-600">
                     <h2 className="relative">
                       Usuwanie zestawu
@@ -109,7 +109,7 @@ const DeleteModal = props => {
                     </button>
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-pclab-600 text-center">
                     <Error
                       isOpen={error && errorMessage !== '' ? true : false}
@@ -135,7 +135,7 @@ const DeleteModal = props => {
                     </div>
                   </div>
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     {!success && (
                       <button

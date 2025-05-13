@@ -12,7 +12,7 @@ import Loading from '../components/alerts/Loading'
 import Error from '../components/alerts/Error'
 
 const PlaceOrderScreen = () => {
-  //variables
+  // variables
   const getSetupAbort = useRef()
   const getCarriersAbort = useRef()
   const placeOrderAbort = useRef()
@@ -39,7 +39,7 @@ const PlaceOrderScreen = () => {
     getValues,
     setValue,
     handleSubmit,
-    //reset,
+    // reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -58,7 +58,7 @@ const PlaceOrderScreen = () => {
   const navigate = useNavigate()
   const params = useParams()
 
-  //handlers
+  // handlers
   const renderSetupPriceHandler = () => {
     let setupPrice = setup?.case.price
     setupPrice += setup?.cpu?.price || 0
@@ -87,12 +87,12 @@ const PlaceOrderScreen = () => {
           postal: data.placeOrderPostal,
           city: data.placeOrderCity,
         },
-      })
+      }),
     )
     placeOrderAbort.current = placeOrderPromise.abort
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (!setup || setup._id !== params.id) {
       const getSetupPromise = dispatch(getSetup({ id: params.id }))

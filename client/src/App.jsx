@@ -23,7 +23,7 @@ import OrderScreen from './screens/OrderScreen'
 const stripePromise = loadStripe(import.meta.env.VITE_API_STRIPE)
 
 const App = () => {
-  //variables
+  // variables
   const getLikedSetupsAbort = useRef()
 
   const { userInfo } = useAppSelector(state => state.manageAccount)
@@ -32,7 +32,7 @@ const App = () => {
   const location = window.location.href.substring(window.location.href.lastIndexOf('/'))
   const { ref: footerRef, inView: isFooterVisible } = useInView()
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (userInfo) {
       const getLikedSetupsPromise = dispatch(getLikedSetups())

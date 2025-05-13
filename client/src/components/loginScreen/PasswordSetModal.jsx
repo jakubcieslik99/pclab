@@ -10,7 +10,7 @@ import Success from '../alerts/Success'
 import Error from '../alerts/Error'
 
 const PasswordSetModal = props => {
-  //variables
+  // variables
   const resetPasswordAbort = useRef()
 
   const { loading, success, successMessage, error, errorMessage } = useAppSelector(state => state.resetPassword)
@@ -22,11 +22,9 @@ const PasswordSetModal = props => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: { setPassword: '', setRepassword: '' },
-  })
+  } = useForm({ defaultValues: { setPassword: '', setRepassword: '' } })
 
-  //handlers
+  // handlers
   const closeHandler = useCallback(() => {
     props.setIsOpen(false)
     setTimeout(() => {
@@ -43,13 +41,13 @@ const PasswordSetModal = props => {
   const submitHandler = data => {
     if (props.token) {
       const resetPasswordPromise = dispatch(
-        resetPassword({ password: data.setPassword, repassword: data.setRepassword, token: props.token })
+        resetPassword({ password: data.setPassword, repassword: data.setRepassword, token: props.token }),
       )
       resetPasswordAbort.current = resetPasswordPromise.abort
     }
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     success && setTimeout(() => closeHandler(), 3000)
   }, [success, closeHandler])
@@ -96,7 +94,7 @@ const PasswordSetModal = props => {
                   onSubmit={handleSubmit(submitHandler)}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-pclab-600">
                     <h2 className="relative">
                       Ustaw hasło
@@ -115,7 +113,7 @@ const PasswordSetModal = props => {
                     </button>
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-pclab-600">
                     <Success isOpen={success && successMessage !== '' ? true : false} message={successMessage} />
                     <Error isOpen={error && errorMessage !== '' ? true : false} message={errorMessage} />
@@ -181,7 +179,7 @@ const PasswordSetModal = props => {
                     </div>
                   </div>
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     <button
                       disabled={loading}

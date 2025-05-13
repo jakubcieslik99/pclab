@@ -18,12 +18,7 @@ export { getCarriers }
 
 export const getCarriersSlice = createSlice({
   name: 'getCarriers',
-  initialState: {
-    loading: false,
-    carriers: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, carriers: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false

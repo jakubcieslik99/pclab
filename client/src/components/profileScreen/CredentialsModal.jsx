@@ -10,7 +10,7 @@ import Error from '../alerts/Error'
 import Success from '../alerts/Success'
 
 const CredentialsModal = props => {
-  //variables
+  // variables
   const updateAccountAbort = useRef()
 
   const { loading, success, successMessage, userInfo, error, errorMessage } = useAppSelector(state => state.manageAccount)
@@ -25,7 +25,7 @@ const CredentialsModal = props => {
     defaultValues: { profileEmail: userInfo.email, profileNick: userInfo.nick, profilePassword: '', profileNewpassword: '' },
   })
 
-  //handlers
+  // handlers
   const submitHandler = data => {
     const updateAccountPromise = dispatch(
       updateAccount({
@@ -33,7 +33,7 @@ const CredentialsModal = props => {
         nick: data.profileNick,
         password: data.profilePassword,
         newpassword: data.profileNewpassword,
-      })
+      }),
     )
     updateAccountAbort.current = updateAccountPromise.abort
   }
@@ -51,7 +51,7 @@ const CredentialsModal = props => {
     }, 200)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     return () => {
       if (updateAccountAbort.current) {
@@ -94,7 +94,7 @@ const CredentialsModal = props => {
                   onSubmit={handleSubmit(submitHandler)}
                   className="flex flex-col w-full col-start-1 row-start-1 px-5 py-4 overflow-hidden bg-gray-200 rounded-lg shadow-md"
                 >
-                  {/*modal header*/}
+                  {/* modal header*/}
                   <div className="flex items-center justify-between w-full gap-4 text-xl font-semibold text-pclab-600">
                     <h2 className="relative">
                       Zmiana adresu email lub hasła
@@ -113,7 +113,7 @@ const CredentialsModal = props => {
                     </button>
                   </div>
 
-                  {/*modal body*/}
+                  {/* modal body*/}
                   <div className="flex flex-col w-full gap-[10px] my-4 overflow-y-auto text-pclab-600">
                     <Error
                       isOpen={error && errorMessage !== '' ? true : false}
@@ -246,7 +246,7 @@ const CredentialsModal = props => {
                     </div>
                   </div>
 
-                  {/*modal footer*/}
+                  {/* modal footer*/}
                   <div className="flex justify-center w-full gap-2 mb-1 text-white">
                     {!success && (
                       <button

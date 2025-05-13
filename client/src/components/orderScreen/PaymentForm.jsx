@@ -5,14 +5,14 @@ import Loading from '../alerts/Loading'
 import Error from '../alerts/Error'
 
 const PaymentForm = props => {
-  //variables
+  // variables
   const [paymentLoading, setPaymentLoading] = useState(false)
   const [paymentErrorMessage, setPaymentErrorMessage] = useState(null)
 
   const stripe = useStripe()
   const elements = useElements()
 
-  //handlers
+  // handlers
   const submitHandler = async e => {
     e.preventDefault()
 
@@ -21,9 +21,7 @@ const PaymentForm = props => {
     setPaymentLoading(true)
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        return_url: `${import.meta.env.VITE_APP_URL}/order/${props.orderId}`,
-      },
+      confirmParams: { return_url: `${import.meta.env.VITE_APP_URL}/order/${props.orderId}` },
     })
     setPaymentLoading(false)
 

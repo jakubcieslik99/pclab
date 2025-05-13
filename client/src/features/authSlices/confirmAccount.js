@@ -15,13 +15,7 @@ export { confirmAccount }
 
 const confirmAccountSlice = createSlice({
   name: 'confirmAccount',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false

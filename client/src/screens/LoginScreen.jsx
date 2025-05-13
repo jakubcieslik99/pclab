@@ -16,7 +16,7 @@ import Success from '../components/alerts/Success'
 import Error from '../components/alerts/Error'
 
 const LoginScreen = () => {
-  //variables
+  // variables
   const loginAbort = useRef()
   const confirmAccountAbort = useRef()
 
@@ -36,21 +36,16 @@ const LoginScreen = () => {
   const {
     register,
     handleSubmit,
-    //reset,
+    // reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      loginEmail: '',
-      loginPassword: '',
-    },
-  })
+  } = useForm({ defaultValues: { loginEmail: '', loginPassword: '' } })
 
   const navigate = useNavigate()
   const { state } = useLocation()
   const locationFrom = state?.from || '/'
   const [searchParams] = useSearchParams()
 
-  //handlers
+  // handlers
   const submitHandler = data => {
     success2 && dispatch(successReset2())
     error2 && dispatch(errorReset2())
@@ -59,7 +54,7 @@ const LoginScreen = () => {
     loginAbort.current = loginPromise.abort
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     if (!success && userInfo) navigate(locationFrom, { replace: true })
     else if (success && userInfo) setTimeout(() => dispatch(successReset()), 3000)

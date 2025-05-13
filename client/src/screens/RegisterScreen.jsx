@@ -9,7 +9,7 @@ import Success from '../components/alerts/Success'
 import Error from '../components/alerts/Error'
 
 const RegisterScreen = () => {
-  //variables
+  // variables
   const registerAccountAbort = useRef()
 
   const { loading, success, successMessage, error, errorMessage, userInfo } = useAppSelector(state => state.manageAccount)
@@ -19,7 +19,7 @@ const RegisterScreen = () => {
     register,
     watch,
     handleSubmit,
-    //reset,
+    // reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -35,7 +35,7 @@ const RegisterScreen = () => {
   const { state } = useLocation()
   const locationFrom = state?.from || '/'
 
-  //handlers
+  // handlers
   const submitHandler = data => {
     const registerAccountPromise = dispatch(
       registerAccount({
@@ -44,12 +44,12 @@ const RegisterScreen = () => {
         password: data.registerPassword,
         repassword: data.registerRepassword,
         terms: data.registerTerms,
-      })
+      }),
     )
     registerAccountAbort.current = registerAccountPromise.abort
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     userInfo && navigate(locationFrom, { replace: true })
   }, [userInfo, locationFrom, navigate])

@@ -19,16 +19,16 @@ import getLoggedUserReducer from './userSlices/getLoggedUser'
 
 const store = configureStore({
   reducer: {
-    //authSlices
+    // authSlices
     manageAccount: manageAccountReducer,
     confirmAccount: confirmAccountReducer,
     sendPasswordReset: sendPasswordResetReducer,
     resetPassword: resetPasswordReducer,
-    //ordersSlices
+    // ordersSlices
     getOrder: getOrderReducer,
     getCarriers: getCarriersReducer,
     placeOrder: placeOrderReducer,
-    //setupsSlice
+    // setupsSlice
     getSetups: getSetupsReducer,
     getSetup: getSetupReducer,
     manageLikedSetups: manageLikedSetupsReducer,
@@ -36,7 +36,7 @@ const store = configureStore({
     getComponents: getComponentsReducer,
     saveSetup: saveSetupReducer,
     deleteSetup: deleteSetupReducer,
-    //userSlice
+    // userSlice
     getUser: getUserReducer,
     getLoggedUser: getLoggedUserReducer,
   },

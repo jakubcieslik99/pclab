@@ -12,12 +12,12 @@ import Loading from '../components/alerts/Loading'
 import Error from '../components/alerts/Error'
 
 const HomeScreen = () => {
-  //variables
+  // variables
   const { loading, topRatedSetups, mostPopularSetups, error, errorMessage } = useAppSelector(state => state.getSetups)
   const { like, unlike } = useAppSelector(state => state.manageLikedSetups)
   const dispatch = useAppDispatch()
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getHomeScreenSetupsPromise = dispatch(getHomeScreenSetups())
     return () => getHomeScreenSetupsPromise.abort()

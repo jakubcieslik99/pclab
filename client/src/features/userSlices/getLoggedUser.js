@@ -18,13 +18,7 @@ export { getLoggedUser }
 
 export const getLoggedUserSlice = createSlice({
   name: 'getLoggedUser',
-  initialState: {
-    loading: false,
-    orders: [],
-    likedSetups: [],
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, orders: [], likedSetups: [], error: false, errorMessage: '' },
   reducers: {
     errorReset: state => {
       state.error = false

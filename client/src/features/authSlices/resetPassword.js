@@ -19,13 +19,7 @@ export { resetPassword }
 
 const resetPasswordSlice = createSlice({
   name: 'resetPassword',
-  initialState: {
-    loading: false,
-    success: false,
-    successMessage: '',
-    error: false,
-    errorMessage: '',
-  },
+  initialState: { loading: false, success: false, successMessage: '', error: false, errorMessage: '' },
   reducers: {
     successReset: state => {
       state.success = false

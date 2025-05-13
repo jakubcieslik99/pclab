@@ -13,7 +13,7 @@ import Loading from '../components/alerts/Loading'
 import Error from '../components/alerts/Error'
 
 const OrderScreen = props => {
-  //variables
+  // variables
   const { loading, order, paymentKey, error, errorMessage } = useAppSelector(state => state.getOrder)
   const dispatch = useAppDispatch()
 
@@ -21,7 +21,7 @@ const OrderScreen = props => {
 
   const params = useParams()
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getOrderPromise = dispatch(getOrder({ id: params.id }))
     return () => {

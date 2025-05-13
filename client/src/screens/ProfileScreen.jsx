@@ -13,7 +13,7 @@ import Loading from '../components/alerts/Loading'
 import Error from '../components/alerts/Error'
 
 const ProfileScreen = () => {
-  //variables
+  // variables
   const getLoggedUserAbort = useRef()
 
   const { userInfo } = useAppSelector(state => state.manageAccount)
@@ -35,7 +35,7 @@ const ProfileScreen = () => {
 
   const params = useParams()
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getUserPromise = dispatch(getUser({ id: params.id }))
     return () => getUserPromise.abort()

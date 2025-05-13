@@ -3,30 +3,12 @@ const stripeOptions = {
   fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap' }],
   appearance: {
     theme: 'none',
-    variables: {
-      fontFamily: 'Poppins, sans-serif',
-      colorIcon: '#ffffff',
-      colorIconTabSelected: '#ffffff',
-    },
+    variables: { fontFamily: 'Poppins, sans-serif', colorIcon: '#ffffff', colorIconTabSelected: '#ffffff' },
     rules: {
-      '.Tab': {
-        color: '#ffffff',
-        border: '2px solid #ffffff',
-        borderRadius: '12px',
-        backgroundColor: '#4b335a',
-      },
-      '.Tab--selected': {
-        color: '#ffffff',
-        border: '2px solid #ffffff',
-        backgroundColor: '#594567',
-      },
-      '.Tab:focus': {
-        outline: 'none',
-      },
-      '.Label': {
-        color: '#ffffff',
-        fontSize: '14px',
-      },
+      '.Tab': { color: '#ffffff', border: '2px solid #ffffff', borderRadius: '12px', backgroundColor: '#4b335a' },
+      '.Tab--selected': { color: '#ffffff', border: '2px solid #ffffff', backgroundColor: '#594567' },
+      '.Tab:focus': { outline: 'none' },
+      '.Label': { color: '#ffffff', fontSize: '14px' },
       '.Input': {
         color: '#ffffff',
         border: '2px solid #ffffff',
@@ -37,15 +19,9 @@ const stripeOptions = {
         paddingLeft: '12px',
         paddingRight: '12px',
       },
-      '.Input::placeholder': {
-        color: '#9ca3a6',
-      },
-      '.Input:focus': {
-        outline: 'none',
-      },
-      '.Input--invalid': {
-        color: '#ffffff',
-      },
+      '.Input::placeholder': { color: '#9ca3a6' },
+      '.Input:focus': { outline: 'none' },
+      '.Input--invalid': { color: '#ffffff' },
       '.Error': {
         color: '#b91c1c',
         fontWeight: '600',
@@ -59,10 +35,7 @@ const stripeOptions = {
         paddingLeft: '12px',
         paddingRight: '12px',
       },
-      '.RedirectText': {
-        color: '#9ca3a6',
-        fontSize: '12px',
-      },
+      '.RedirectText': { color: '#9ca3a6', fontSize: '12px' },
     },
   },
 }

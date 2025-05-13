@@ -23,7 +23,7 @@ const sortingOptions = [
 ]
 
 const StoreScreen = () => {
-  //variables
+  // variables
   const { loading, count, setups, error, errorMessage } = useAppSelector(state => state.getSetups)
   const { like, unlike } = useAppSelector(state => state.manageLikedSetups)
   const dispatch = useAppDispatch()
@@ -38,7 +38,7 @@ const StoreScreen = () => {
   })
   const [page, setPage] = useState(searchParams.get('page') || 1)
 
-  //handlers
+  // handlers
   const filterURL = (searchingFilter, sortingFilter, priceFilteringFilter, pageFilter) => {
     if (searchingFilter !== '') URL.searching = searchingFilter
     else if (URL.searching) delete URL.searching
@@ -78,7 +78,7 @@ const StoreScreen = () => {
     filterURL(searching, sorting, priceFiltering, page)
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     const getSetupsPromise = dispatch(
       getSetups({
@@ -87,7 +87,7 @@ const StoreScreen = () => {
         priceFrom: searchParams.get('minPrice') || '',
         priceTo: searchParams.get('maxPrice') || '',
         page: searchParams.get('page') || '',
-      })
+      }),
     )
     return () => getSetupsPromise.abort()
   }, [searchParams, dispatch])

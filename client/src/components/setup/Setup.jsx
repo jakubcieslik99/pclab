@@ -7,7 +7,7 @@ import { likeSetup, unlikeSetup } from '../../features/setupsSlices/manageLikedS
 import noPhoto from '../../assets/no-photo.png'
 
 const Setup = props => {
-  //variables
+  // variables
   const likeSetupAbort = useRef()
   const unlikeSetupAbort = useRef()
 
@@ -34,7 +34,7 @@ const Setup = props => {
 
   const setupComponentImage = `${import.meta.env.VITE_API_URL}/static/components`
 
-  //handlers
+  // handlers
   const likeHandler = () => {
     if (userInfo && !likedSetups.includes(props.setup?._id)) {
       const likeSetupPromise = dispatch(likeSetup({ id: props.setup?._id }))
@@ -53,7 +53,7 @@ const Setup = props => {
     props.buttonClickHandler()
   }
 
-  //useEffects
+  // useEffects
   useEffect(() => {
     return () => {
       likeSetupAbort.current && likeSetupAbort.current()
