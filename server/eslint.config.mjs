@@ -22,7 +22,6 @@ export default defineConfig([
         { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' },
       ],
       'no-console': ['error', { allow: ['log', 'info', 'warn', 'error'] }],
-      '@stylistic/spaced-comment': ['warn', 'always'],
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
       '@stylistic/arrow-parens': ['error', 'as-needed'],
