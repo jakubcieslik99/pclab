@@ -8,9 +8,11 @@ const databaseConnect = async app => {
   mongoose.set('strictQuery', false)
 
   try {
-    const URI = `mongodb://${config.MONGO_USER}:${config.MONGO_PASSWORD}@${config.MONGO_HOST}:${config.MONGO_PORT}/${config.MONGO_DB}`
+    const environment = ['development', 'testing'].includes(config.ENV) ? '?authSource=admin' : ''
+    const URI = `mongodb://${config.MONGO_USER}:${config.MONGO_PASSWORD}@${config.MONGO_HOST}:${config.MONGO_PORT}/${config.MONGO_DB}${environment}`
     await mongoose.connect(URI)
-    app.emit('ready')
+
+    app.listen(config.PORT, () => log.info(`Server started on port ${config.PORT}`))
   } catch (error) {
     log.error(error)
   }

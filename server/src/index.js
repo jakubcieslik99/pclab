@@ -5,7 +5,7 @@ import cors from 'cors'
 import rateLimit from 'express-rate-limit'
 import slowDown from 'express-slow-down'
 import createError from 'http-errors'
-import { loadConfig, config, log } from './config/utilities'
+import { loadConfig, config } from './config/utilities'
 import databaseConnect from './config/databaseConnect'
 import corsOptions from './config/corsOptions'
 import { rateLimiter, speedLimiter, adminRateLimiter, adminSpeedLimiter } from './config/limitOptions'
@@ -26,7 +26,6 @@ import ordersRoute from './routes/ordersRoute'
 
   const app = express()
   app.set('trust proxy', `loopback, ${config.HOST === 'localhost' ? '127.0.0.1' : config.HOST}`)
-  databaseConnect(app)
 
   app.use(express.urlencoded({ extended: true }))
   app.use(bodyParser)
@@ -55,7 +54,5 @@ import ordersRoute from './routes/ordersRoute'
   // errors handling middleware
   app.use(isError)
 
-  app.on('ready', () => {
-    app.listen(config.PORT, () => log.info(`Server started on port ${config.PORT}`))
-  })
+  databaseConnect(app)
 })()
