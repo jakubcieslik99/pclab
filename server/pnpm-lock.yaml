@@ -48,7 +48,7 @@ importers:
         specifier: ^9.0.3
         version: 9.0.3
       mongoose:
-        specifier: ^8.20.2
+        specifier: 8.20.2
         version: 8.20.2(@aws-sdk/credential-providers@3.888.0)
       node-schedule:
         specifier: ^2.1.1
