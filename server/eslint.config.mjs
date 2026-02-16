@@ -1,9 +1,9 @@
-import { defineConfig } from 'eslint/config'
-import { includeIgnoreFile } from '@eslint/compat'
 import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'eslint/config'
 import globals from 'globals'
 import js from '@eslint/js'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
+import { includeIgnoreFile } from '@eslint/compat'
 import stylistic from '@stylistic/eslint-plugin'
 
 const gitignorePath = fileURLToPath(new URL('../.gitignore', import.meta.url))
@@ -11,11 +11,11 @@ const gitignorePath = fileURLToPath(new URL('../.gitignore', import.meta.url))
 export default defineConfig([
   { files: ['**/*.{js,mjs,cjs,ts}'] },
   { files: ['**/*.{js,mjs,cjs}'], languageOptions: { globals: globals.node } },
-  { files: ['**/*.{js,mjs,cjs}'], plugins: { js }, extends: ['js/recommended'] },
+  js.configs.recommended,
   eslintPluginPrettier,
   includeIgnoreFile(gitignorePath),
-  { plugins: { '@stylistic': stylistic } },
   {
+    plugins: { '@stylistic': stylistic },
     rules: {
       'no-unused-vars': [
         'warn',
