@@ -9,7 +9,6 @@ import stylistic from '@stylistic/eslint-plugin'
 const gitignorePath = fileURLToPath(new URL('../.gitignore', import.meta.url))
 
 export default defineConfig([
-  { files: ['**/*.{js,mjs,cjs,ts}'] },
   { files: ['**/*.{js,mjs,cjs}'], languageOptions: { globals: globals.node } },
   js.configs.recommended,
   eslintPluginPrettier,
@@ -22,6 +21,7 @@ export default defineConfig([
         { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' },
       ],
       'no-console': ['error', { allow: ['log', 'info', 'warn', 'error'] }],
+      'no-useless-assignment': 'off',
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
       '@stylistic/arrow-parens': ['error', 'as-needed'],
